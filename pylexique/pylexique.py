@@ -3,7 +3,13 @@
 """Main module."""
 
 from collections import OrderedDict, defaultdict
+import pickle
+import pkg_resources
 
+
+_RESOURCE_PACKAGE = __name__
+
+LEXIQUE382_PATH = '/'.join(('Lexique382', 'lexique382.pickle'))
 
 LEXIQUE382_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres', 'freqfilms2',
                           'freqlivres', 'infover', 'nbhomogr', 'nbhomoph', 'islem', 'nblettres', 'nbphons', 'cvcv', 'p_cvcv',
@@ -22,6 +28,11 @@ class Lexique382(object):
         self.lexique = OrderedDict
         if lexique_path:
             self.lexique = self.parse_lexique(self.lexique_path)
+        else:
+            file_path = pkg_resources.resource_filename(_RESOURCE_PACKAGE, LEXIQUE382_PATH)
+            with open(file_path, 'rb') as file:
+                self.lexique = pickle.load(file)
+
 
     def __repr__(self):
         return '{0}.{1}'.format(__name__, self.__class__.__name__)
@@ -80,6 +91,7 @@ class LexEntry(object):
 
 
 if __name__ == "__main__":
-    test = Lexique382('C:/Users/Utilisateur/PycharmProjects/pylexique/pylexique/Lexique382/Lexique382.txt')
+    # test = Lexique382('C:/Users/Utilisateur/PycharmProjects/pylexique/pylexique/Lexique382/Lexique382.txt')
+    test1 = Lexique382()
     print('ok')
     pass
