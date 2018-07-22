@@ -2,8 +2,7 @@
 
 """Main module."""
 
-from collections import OrderedDict, defaultdict
-import pickle
+from collections import OrderedDict
 import pkg_resources
 import tables
 
@@ -20,6 +19,10 @@ LEXIQUE382_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
 
 
 class LexEntry(tables.IsDescription):
+    """
+    Schema for the Lexique382 database table.
+
+    """
     ortho = tables.StringCol(64)
     phon = tables.StringCol(64)
     lemme = tables.StringCol(64)
@@ -59,8 +62,10 @@ class LexEntry(tables.IsDescription):
 
 class Lexique382(object):
     """
+    This is the class handling the lexique database.
 
-    :param lexique:
+    :param lexique_path: string.
+        Path to the lexuique csv file.
     """
 
     def __init__(self, lexique_path=None):
@@ -75,7 +80,7 @@ class Lexique382(object):
             # file_path = pkg_resources.resource_filename(_RESOURCE_PACKAGE, LEXIQUE382_PATH)
             # with open(file_path, 'rb') as file:
             #     self.lexique = pickle.load(file)
-
+        return
 
     def __repr__(self):
         return '{0}.{1}'.format(__name__, self.__class__.__name__)
@@ -83,27 +88,13 @@ class Lexique382(object):
     def __len__(self):
         return len(self.lexique)
 
-    # def __iter__(self):
-    #     return self
-    #
-    # def __next__(self):
-    #     self.__idx__ += 1
-    #     try:
-    #         return self.lexique[self.__idx__ - 1]
-    #     except IndexError:
-    #         self.__idx__ = 0
-    #         raise StopIteration
-    #
-    # def __reversed__(self):
-    #     return reversed(self.lexique)
-    #
-    # next = __next__  # Python 2.7 compatibility for iterator protocol
-
     def parse_lexique(self, lexique_path):
         """
+        Parses the given lexique csv file and creates a hdf5 table to store the data.
 
-        :param lexique_path:
-        :return:
+        :param lexique_path: string.
+            Path to the lexuique csv file.
+        :return: PyTables.Table
         """
         with open(lexique_path, 'r', encoding='utf-8') as csv_file:
             content = csv_file.readlines()
@@ -113,15 +104,16 @@ class Lexique382(object):
             if fields[24] == 'cv-cv':
                 fields[17] = 'cv_cv'
             lexique382_db = self.create_table(content[1:])
-            # lexique382_dict = defaultdict(list)
-        #     for row in content[1:]:
-        #         row_fields = row.strip().split('\t')
-        #         lexique382_dict[row_fields[0]].append(LexItem(row_fields))
-        #         pass
-        # return lexique382_dict
         return lexique382_db
 
     def create_table(self, lexique):
+        """
+        Creates an hdf5 table populated with the entries in lexique.
+
+        :param lexique: Iterable.
+            Iterable containing the lexique382 entries.
+        :return: PyTables.Table
+        """
         file_name = pkg_resources.resource_filename(_RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)
         h5file = tables.open_file(file_name, mode="w", title="pylexique")
         group = h5file.create_group("/", 'lexique382', 'Lexique382')
@@ -148,9 +140,9 @@ class Lexique382(object):
         return table
 
 
-
 class LexItem(object):
     """
+    This class defines the lexical items in Lexique382.
 
     :param row_fields:
     """
@@ -159,11 +151,10 @@ class LexItem(object):
     def __init__(self, row_fields):
         for attr, value in zip(LEXIQUE382_FIELD_NAMES, row_fields):
             setattr(self, attr, value)
+        return
 
     def __repr__(self):
         return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.ortho, self.lemme, self.cgram)
-
-    pass
 
 
 
