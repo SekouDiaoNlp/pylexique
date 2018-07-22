@@ -114,8 +114,9 @@ class Lexique382(object):
             Iterable containing the lexique382 entries.
         :return: PyTables.Table
         """
+        FILTERS = tables.Filters(complib='zlib', complevel=5)
         file_name = pkg_resources.resource_filename(_RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)
-        h5file = tables.open_file(file_name, mode="w", title="pylexique")
+        h5file = tables.open_file(file_name, mode="w", title="pylexique", filters=FILTERS)
         group = h5file.create_group("/", 'lexique382', 'Lexique382')
         table = h5file.create_table(group, 'data', LexEntry, "Lexique382 Database")
         lex_item = table.row
@@ -161,9 +162,9 @@ class LexItem(object):
 
 
 if __name__ == "__main__":
-    # test = Lexique382('C:/Users/Utilisateur/PycharmProjects/pylexique/pylexique/Lexique382/Lexique382.txt')
-    test1 = Lexique382()
-    auxes = [x[:] for x in test1.lexique.iterrows() if x['cgram'].decode('utf-8') == 'AUX']
-    verbs = [x[:] for x in test1.lexique.iterrows() if x['cgram'].decode('utf-8') == 'VER']
+    test = Lexique382('C:/Users/Utilisateur/PycharmProjects/pylexique/pylexique/Lexique382/Lexique382.txt')
+    # test1 = Lexique382()
+    auxes = [x[:] for x in test.lexique.iterrows() if x['cgram'].decode('utf-8') == 'AUX']
+    verbs = [x[:] for x in test.lexique.iterrows() if x['cgram'].decode('utf-8') == 'VER']
     print('ok')
     pass
