@@ -55,7 +55,7 @@ setup(
                   'tests': ['tests/*'],
                   'translations': ['pylexique/locale/*'],
                   'type_stubs': ['pylexique/py.typed', 'pylexique/*'],
-                  'pylexique38': ['pylexique/Lexique383/*']},
+                  'pylexique383': ['pylexique/Lexique383/*']},
     keywords='pylexique',
     name='pylexique',
     packages=find_packages(include=['pylexique']),
