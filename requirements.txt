@@ -12,7 +12,7 @@ libcblas==3.9.0
 libcurl==7.76.1
 liblapack==3.9.0
 libssh2==1.9.0
-mkl==2021.1.1
+mkl==2021.2.0
 mock==4.0.3
 numexpr==2.7.3
 numpy==1.20.2
