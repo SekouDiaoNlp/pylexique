@@ -181,15 +181,4 @@ class LexItem(object):
 
 
 if __name__ == "__main__":
-    test = Lexique383('Lexique383/Lexique383.xlsb')
-    # test1 = Lexique383()  # Use only if the hdf5 file exists.
-    others = []
-    verbs = []
-    for x in Lexique_dict.values():
-        if x.cgram == 'VER':
-            verbs.append(x)
-        else:
-            others.append(x)
-    atexit.register(my_close_open_files, False)
-    print('Test Ok')
     pass
