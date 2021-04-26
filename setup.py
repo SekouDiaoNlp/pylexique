@@ -41,7 +41,7 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
     ],
-    description="Pylexique est une interface python pour Lexique382",
+    description="Pylexique is a Python wrapper around Lexique83",
     entry_points={
         'console_scripts': [
             'pylexique=pylexique.cli:main',
