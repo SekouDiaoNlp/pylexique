@@ -25,6 +25,7 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
 
 Lexique_dict = OrderedDict()
 
+
 class LexEntry(tables.IsDescription):
     """
     Schema for the Lexique383 database table in HDF5 format.
@@ -75,7 +76,7 @@ class Lexique383(object):
     All the lexical items are then stored in an Ordered Dict called
 
     :param lexique_path: string.
-        Path to the lexuique csv file.
+        Path to the lexique csv file.
     """
 
     file_name = pkg_resources.resource_filename(_RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)
@@ -101,7 +102,7 @@ class Lexique383(object):
         | Parses the given lexique file and creates a hdf5 table to store the data.
 
         :param lexique_path: string.
-            Path to the lexuique csv file.
+            Path to the lexique csv file.
         :return: PyTables.Table
         """
         with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
@@ -139,8 +140,8 @@ class Lexique383(object):
                         lex_row[field] = int(value)
                     except ValueError:
                         print(
-                            'There was an error  at row {3} in the world {0} with the field {1} having value {2}.\n'.format(
-                                row_fields[0], field, value, i + 1))
+                            'There was an error  at row {3} in the world {0} with the field {1} having value {2}.\n'.
+                            format(row_fields[0], field, value, i + 1))
                         lex_row[field] = 9000
                         errors[i + 1] = row_fields
                 elif field in ('ortho', 'phon', 'orthosyll', 'syll', 'orthrenv', 'phonrenv', 'lemme', 'morphoder'):
@@ -148,8 +149,9 @@ class Lexique383(object):
                 else:
                     lex_row[field] = value
                 lex_info = LexItem(row)
+                Lexique_dict[lex_info.ortho] = lex_info
             lex_row.append()
-            Lexique_dict[LexItem.ortho] = lex_info
+
         table.flush()
         with open('errors/parsing_errors.json', 'w', encoding='utf-8') as file:
             json.dump(errors, file, indent=4)
@@ -177,19 +179,14 @@ class LexItem(object):
 
 if __name__ == "__main__":
     test = Lexique383('Lexique383/Lexique383.txt')
-    # test1 = Lexique383()
+    # test1 = Lexique383()  # Use only if the hdf5 file exists.
     others = []
-    verbs  = []
-    auxes = []
+    verbs = []
     for x in Lexique_dict.values():
-        if x.cgram  == 'AUX':
-            auxes.append(x)
-        elif x.cgram  == 'VER':
+        if x.cgram == 'VER':
             verbs.append(x)
         else:
             others.append(x)
-    # auxes = [x for x in Lexique_dict.values() if x.cgram == 'AUX']
-    # verbs = [x for x in Lexique_dict.values() if x.cgram == 'VER']
     atexit.register(my_close_open_files, False)
-    print('ok')
+    print('Test Ok')
     pass
