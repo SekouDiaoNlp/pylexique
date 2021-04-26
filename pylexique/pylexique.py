@@ -5,22 +5,29 @@
 from collections import OrderedDict
 import pkg_resources
 import tables
-
+import json
+import atexit
+from utils import my_close_open_files
+from dataclasses import dataclass
 
 _RESOURCE_PACKAGE = __name__
 
-LEXIQUE382_PATH = '/'.join(('Lexique382', 'lexique382.pickle'))
-PYLEXIQUE_DATABASE = '/'.join(('Lexique382', 'lexique382.h5'))
+PYLEXIQUE_DATABASE = '/'.join(('Lexique383', 'lexique383.h5'))
+HOME_PATH = '/'.join(('Lexique', ''))
 
-LEXIQUE382_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres', 'freqfilms2',
-                          'freqlivres', 'infover', 'nbhomogr', 'nbhomoph', 'islem', 'nblettres', 'nbphons', 'cvcv', 'p_cvcv',
+LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
+                          'freqfilms2',
+                          'freqlivres', 'infover', 'nbhomogr', 'nbhomoph', 'islem', 'nblettres', 'nbphons', 'cvcv',
+                          'p_cvcv',
                           'voisorth', 'voisphon', 'puorth', 'puphon', 'syll', 'nbsyll', 'cv_cv', 'orthrenv', 'phonrenv',
                           'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20', 'morphoder', 'nbmorph']
 
 
+Lexique_dict = OrderedDict()
+
 class LexEntry(tables.IsDescription):
     """
-    Schema for the Lexique382 database table.
+    Schema for the Lexique383 database table in HDF5 format.
 
     """
     ortho = tables.StringCol(64)
@@ -60,13 +67,18 @@ class LexEntry(tables.IsDescription):
     nbmorph = tables.Int8Col()
 
 
-class Lexique382(object):
+class Lexique383(object):
     """
     This is the class handling the lexique database.
+    It provides method for interacting with the Lexique DB
+    and retrieve lexical items.
+    All the lexical items are then stored in an Ordered Dict called
 
     :param lexique_path: string.
         Path to the lexuique csv file.
     """
+
+    file_name = pkg_resources.resource_filename(_RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)
 
     def __init__(self, lexique_path=None):
         self.lexique_path = lexique_path
@@ -74,12 +86,8 @@ class Lexique382(object):
         if lexique_path:
             self.lexique = self.parse_lexique(self.lexique_path)
         else:
-            file_name = pkg_resources.resource_filename(_RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)
-            h5file = tables.open_file(file_name, mode="r", title="pylexique")
-            self.lexique = h5file.root.lexique382.data
-            # file_path = pkg_resources.resource_filename(_RESOURCE_PACKAGE, LEXIQUE382_PATH)
-            # with open(file_path, 'rb') as file:
-            #     self.lexique = pickle.load(file)
+            h5file = tables.open_file(__class__.file_name, mode="r", title="pylexique")
+            self.lexique = h5file.root.lexique383.data
         return
 
     def __repr__(self):
@@ -90,67 +98,76 @@ class Lexique382(object):
 
     def parse_lexique(self, lexique_path):
         """
-        Parses the given lexique csv file and creates a hdf5 table to store the data.
+        | Parses the given lexique file and creates a hdf5 table to store the data.
 
         :param lexique_path: string.
             Path to the lexuique csv file.
         :return: PyTables.Table
         """
-        with open(lexique_path, 'r', encoding='utf-8') as csv_file:
+        with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
             content = csv_file.readlines()
-            fields = [field.split('_')[-1] for field in content[0].strip().split('\t')]
-            if fields[17] == 'cvcv':
-                fields[17] = 'p_cvcv'
-            if fields[24] == 'cv-cv':
-                fields[17] = 'cv_cv'
-            lexique382_db = self.create_table(content[1:])
-        return lexique382_db
+            lexique383_db = self.create_table(content[1:])
+        return lexique383_db
 
     def create_table(self, lexique):
         """
-        Creates an hdf5 table populated with the entries in lexique.
+        | Creates an hdf5 table populated with the entries in lexique if it does not exist yet.
+        | It stores the hdf5 database for fast access.
 
         :param lexique: Iterable.
-            Iterable containing the lexique382 entries.
+            Iterable containing the lexique383 entries.
         :return: PyTables.Table
         """
-        FILTERS = tables.Filters(complib='zlib', complevel=5)
-        file_name = pkg_resources.resource_filename(_RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)
-        h5file = tables.open_file(file_name, mode="w", title="pylexique", filters=FILTERS)
-        group = h5file.create_group("/", 'lexique382', 'Lexique382')
-        table = h5file.create_table(group, 'data', LexEntry, "Lexique382 Database")
-        lex_item = table.row
-        for row in lexique:
+        filters = tables.Filters(complib='zlib', complevel=5)
+        h5file = tables.open_file(self.file_name, mode="w", title="pylexique", filters=filters)
+        group = h5file.create_group("/", 'lexique383', 'Lexique383')
+        table = h5file.create_table(group, 'data', LexEntry, "Lexique383 Database")
+        lex_row = table.row
+        errors = {}
+        for i, row in enumerate(lexique):
             row_fields = row.strip().split('\t')
-            for field, value in zip(LEXIQUE382_FIELD_NAMES, row_fields):
+            for field, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
                 if field in ('freqlemfilms2', 'freqlemlivres', 'freqfilms2', 'freqlivres', 'deflem', 'old20', 'pld20'):
                     if value == '':
                         value = 'nan'
-                    lex_item[field] = float(value)
+                    lex_row[field] = float(value.replace(',', '.'))
                 elif field in ('nbhomogr', 'nbhomoph', 'nblettres', 'nbphons', 'voisorth', 'voisphon',
                                'puorth', 'puphon', 'nbsyll', 'defobs', 'nbmorph'):
                     if value == '':
                         value = '0'
-                    lex_item[field] = int(value)
+                    try:
+                        lex_row[field] = int(value)
+                    except ValueError:
+                        print(
+                            'There was an error  at row {3} in the world {0} with the field {1} having value {2}.\n'.format(
+                                row_fields[0], field, value, i + 1))
+                        lex_row[field] = 9000
+                        errors[i + 1] = row_fields
                 elif field in ('ortho', 'phon', 'orthosyll', 'syll', 'orthrenv', 'phonrenv', 'lemme', 'morphoder'):
-                    lex_item[field] = value.encode('utf-8')
+                    lex_row[field] = value.encode('utf-8')
                 else:
-                    lex_item[field] = value
-            lex_item.append()
+                    lex_row[field] = value
+                lex_info = LexItem(row)
+            lex_row.append()
+            Lexique_dict[LexItem.ortho] = lex_info
         table.flush()
+        with open('errors/parsing_errors.json', 'w', encoding='utf-8') as file:
+            json.dump(errors, file, indent=4)
         return table
 
 
+@dataclass
 class LexItem(object):
     """
-    This class defines the lexical items in Lexique382.
+    | This class defines the lexical items in Lexique383.
+    | It uses slots for memory efficiency.
 
     :param row_fields:
     """
-    __slots__ = LEXIQUE382_FIELD_NAMES
+    __slots__ = LEXIQUE383_FIELD_NAMES
 
     def __init__(self, row_fields):
-        for attr, value in zip(LEXIQUE382_FIELD_NAMES, row_fields):
+        for attr, value in zip(LEXIQUE383_FIELD_NAMES, row_fields.strip().split('\t')):
             setattr(self, attr, value)
         return
 
@@ -158,13 +175,21 @@ class LexItem(object):
         return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
 
-
-
-
 if __name__ == "__main__":
-    test = Lexique382('C:/Users/Utilisateur/PycharmProjects/pylexique/pylexique/Lexique382/Lexique382.txt')
-    # test1 = Lexique382()
-    auxes = [x[:] for x in test.lexique.iterrows() if x['cgram'].decode('utf-8') == 'AUX']
-    verbs = [x[:] for x in test.lexique.iterrows() if x['cgram'].decode('utf-8') == 'VER']
+    test = Lexique383('Lexique383/Lexique383.txt')
+    # test1 = Lexique383()
+    others = []
+    verbs  = []
+    auxes = []
+    for x in Lexique_dict.values():
+        if x.cgram  == 'AUX':
+            auxes.append(x)
+        elif x.cgram  == 'VER':
+            verbs.append(x)
+        else:
+            others.append(x)
+    # auxes = [x for x in Lexique_dict.values() if x.cgram == 'AUX']
+    # verbs = [x for x in Lexique_dict.values() if x.cgram == 'VER']
+    atexit.register(my_close_open_files, False)
     print('ok')
     pass
