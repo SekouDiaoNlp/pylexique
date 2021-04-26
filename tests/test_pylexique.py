@@ -4,27 +4,26 @@
 """Tests for `pylexique` package."""
 
 import pytest
-
+from collections import OrderedDict
 from click.testing import CliRunner
 
-from pylexique import pylexique
-from pylexique import cli
+from pylexique import Lexique383
+
+from pylexique import pylexique, cli
 
 
-@pytest.fixture
-def response():
-    """Sample pytest fixture.
-
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
-
-
-def test_content(response):
-    """Sample pytest test function with the pytest fixture as an argument."""
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
+def test_content():
+    """Sample pytest test of pylexique."""
+    Lexique_dict = OrderedDict()
+    test = Lexique383('Lexique383/Lexique383.xlsb')
+    # test1 = Lexique383()  # Use only if the hdf5 file exists.
+    others = []
+    verbs = []
+    for x in Lexique_dict.values():
+        if x.cgram == 'VER':
+            assert x.cgram == 'VER'
+        else:
+            others.append(x)
 
 
 def test_command_line_interface():
