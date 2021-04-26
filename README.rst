@@ -6,8 +6,6 @@ pylexique
 .. image:: https://img.shields.io/pypi/v/pylexique.svg
         :target: https://pypi.python.org/pypi/pylexique
 
-.. image:: https://img.shields.io/travis/SekouDiaoNlp/pylexique.svg
-        :target: https://travis-ci.org/SekouDiaoNlp/pylexique
 
 .. image:: https://readthedocs.org/projects/pylexique/badge/?version=latest
         :target: https://pylexique.readthedocs.io/en/latest/?badge=latest
