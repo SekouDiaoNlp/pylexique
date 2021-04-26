@@ -142,8 +142,11 @@ class Lexique383(object):
                         print(
                             'There was an error  at row {3} in the world {0} with the field {1} having value {2}.\n'.
                             format(row_fields[0], field, value, i + 1))
-                        lex_row[field] = 9000
+                        value = '0'
                         errors[i + 1] = row_fields
+                        continue
+                        # lex_row[field] = value
+
                 elif field in ('ortho', 'phon', 'orthosyll', 'syll', 'orthrenv', 'phonrenv', 'lemme', 'morphoder'):
                     lex_row[field] = value.encode('utf-8')
                 else:
@@ -178,7 +181,7 @@ class LexItem(object):
 
 
 if __name__ == "__main__":
-    test = Lexique383('Lexique383/Lexique383.txt')
+    test = Lexique383('Lexique383/Lexique383.xlsb')
     # test1 = Lexique383()  # Use only if the hdf5 file exists.
     others = []
     verbs = []

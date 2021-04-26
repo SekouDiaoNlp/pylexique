@@ -48,8 +48,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'pylexique'
-copyright = u"2018, SekouD"
-author = u"SekouD"
+copyright = u"2018, SekouDiaoNlp"
+author = u"SekouDiaoNlp"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -130,7 +130,7 @@ latex_elements = {
 latex_documents = [
     (master_doc, 'pylexique.tex',
      u'pylexique Documentation',
-     u'SekouD', 'manual'),
+     u'SekouDiaoNlp', 'manual'),
 ]
 
 

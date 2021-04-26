@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* SekouD <sekoud.python@gmail.com>
+* SekouDiaoNlp <diao.sekou.nlp@gmail.com>
 
 Contributors
 ------------

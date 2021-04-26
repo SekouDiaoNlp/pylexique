@@ -6,21 +6,23 @@ pylexique
 .. image:: https://img.shields.io/pypi/v/pylexique.svg
         :target: https://pypi.python.org/pypi/pylexique
 
-.. image:: https://img.shields.io/travis/SekouD/pylexique.svg
-        :target: https://travis-ci.org/SekouD/pylexique
+.. image:: https://img.shields.io/travis/SekouDiaoNlp/pylexique.svg
+        :target: https://travis-ci.org/SekouDiaoNlp/pylexique
 
 .. image:: https://readthedocs.org/projects/pylexique/badge/?version=latest
         :target: https://pylexique.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
 
-.. image:: https://pyup.io/repos/github/SekouD/pylexique/shield.svg
-     :target: https://pyup.io/repos/github/SekouD/pylexique/
+.. image:: https://pyup.io/repos/github/SekouDiaoNlp/pylexique/shield.svg
+     :target: https://pyup.io/repos/github/SekouDiaoNlp/pylexique/
      :alt: Updates
 
 
 
-Pylexique est une interface python pour Lexique382
+Pylexique is a Python wrapper around Lexique83_.
+
+It allows to extract lexical information from more than 140 000 French words in an Object Oriented way.
 
 
 * Free software: MIT license
@@ -30,12 +32,42 @@ Pylexique est une interface python pour Lexique382
 Features
 --------
 
-* TODO
+* Extract oll lexical information from a French  word.
+* Easy to use Api.
+* Easily integrate pylexique in your own projects as an imported library.
+* Can be used as a command line tool.
 
 Credits
 -------
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+Main developer SekouDiaoNlp_.
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+Lexique38x has been developed by:
+
+.. code:: bibtex
+
+    @article{npbf04,
+    author = {New, B. and Pallier, C. and Brysbaert, M. and Ferrand, L.},
+    journal = {ehavior Research Methods, Instruments, & Computers},
+    number = {3},
+    pages = {516-524},
+    title = {Lexique 2 : A New French Lexical Database},
+    volume = {36},
+    year = {2004},
+    eprint = {http://www.lexique.org/?page_id=294},
+    }
+
+.. code:: bibtex
+
+    @article{npfm01,
+    author = {New, B. and Pallier, C. and Ferrand, L. and Matos, R.},
+    journal = {L'Ann{\'e}e Pschologique},
+    number = {447-462},
+    pages = {1396-2},
+    title = {Une base de donn{\'e}es lexicales du fran\c{c}ais contemporain sur internet: LEXIQUE},
+    volume = {101},
+    year = {2001},
+    }
+
+.. _Lexique83: http://www.lexique.org/
+.. _SekouDiaoNlp: https://github.com/SekouDiaoNlp
