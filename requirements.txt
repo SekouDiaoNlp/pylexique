@@ -4,7 +4,7 @@ ca-certificates==2020.12.5
 certifi==2020.12.5
 Click>=7.1
 cython
-hdf5==1.10.6
+h5py
 intel-openmp==2021.2.0
 krb5==1.17.2
 libblas==3.9.0
