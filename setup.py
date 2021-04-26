@@ -19,6 +19,13 @@ test_requirements = [
     'pytest-runner',
     'pytest',
     'pytest-cov',
+    'cython',
+    'blosc',
+    'numexpr',
+    'numpy',
+    'hdf5',
+    'pytables==3.6.1',
+    'Click>=7.1',
 ]
 
 setup(
@@ -63,6 +70,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/SekouDiaoNlp/pylexique',
-    version='1.0.3',
+    version='1.0.4',
     zip_safe=False,
 )
