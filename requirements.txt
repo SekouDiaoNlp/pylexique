@@ -30,3 +30,4 @@ vs2015_runtime==14.28.29325
 wheel==0.36.2
 wincertstore==0.2
 zlib==1.2.11
+
