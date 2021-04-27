@@ -10,5 +10,3 @@ twine
 
 pytest
 pytest-runner
-
-pytables
