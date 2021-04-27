@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['tables', 'cython', 'numexpr', 'numpy', 'blosc', 'hf5py', 'Click>=7.1', ]
+requirements = ['tables', 'cython', 'numexpr', 'numpy', 'blosc', 'h5py', 'Click>=7.1', ]
 
 setup_requirements = ['pytest-runner', ]
 
