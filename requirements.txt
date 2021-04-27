@@ -1,4 +1,3 @@
-blosc
 ca-certificates
 certifi
 Click>=7.1
