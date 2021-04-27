@@ -8,5 +8,5 @@ coverage
 Sphinx
 twine
 
-pytest
-pytest-runner
+pytest==6.2.3
+pytest-runner==5.3.0

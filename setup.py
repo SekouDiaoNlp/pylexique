@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['tables', 'cython', 'numexpr', 'numpy', 'blosc', 'h5py', 'Click>=7.1', ]
+requirements = ['cython', 'blosc', 'numexpr', 'numpy', 'h5py', 'tables', 'Click>=7.1', ]
 
 setup_requirements = ['pytest-runner', ]
 
@@ -19,6 +19,13 @@ test_requirements = [
     'pytest-runner',
     'pytest',
     'pytest-cov',
+    'cython',
+    'blosc',
+    'numexpr',
+    'numpy',
+    'h5py',
+    'tables',
+    'Click>=7.1',
 ]
 
 setup(
@@ -63,6 +70,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/SekouDiaoNlp/pylexique',
-    version='1.0.1',
+    version='1.0.7',
     zip_safe=False,
 )
