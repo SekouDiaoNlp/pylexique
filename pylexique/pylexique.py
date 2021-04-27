@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-"""Main module."""
+"""Main module of pylexique."""
 
 from collections import OrderedDict
 import pkg_resources
 import tables
 import json
 import atexit
-from utils import my_close_open_files
+from .utils import my_close_open_files
 from dataclasses import dataclass
 
 _RESOURCE_PACKAGE = __name__
@@ -23,7 +23,7 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20', 'morphoder', 'nbmorph']
 
 
-Lexique_dict = OrderedDict()
+LEXIQUE = OrderedDict()
 
 
 class LexEntry(tables.IsDescription):
@@ -68,7 +68,7 @@ class LexEntry(tables.IsDescription):
     nbmorph = tables.Int8Col()
 
 
-class Lexique383(object):
+class Lexique383():
     """
     This is the class handling the lexique database.
     It provides method for interacting with the Lexique DB
@@ -142,27 +142,23 @@ class Lexique383(object):
                         print(
                             'There was an error  at row {3} in the world {0} with the field {1} having value {2}.\n'.
                             format(row_fields[0], field, value, i + 1))
-                        value = '0'
                         errors[i + 1] = row_fields
                         continue
-                        # lex_row[field] = value
-
                 elif field in ('ortho', 'phon', 'orthosyll', 'syll', 'orthrenv', 'phonrenv', 'lemme', 'morphoder'):
                     lex_row[field] = value.encode('utf-8')
                 else:
                     lex_row[field] = value
                 lex_info = LexItem(row)
-                Lexique_dict[lex_info.ortho] = lex_info
+                LEXIQUE[lex_info.ortho] = lex_info
             lex_row.append()
 
         table.flush()
-        with open('errors/parsing_errors.json', 'w', encoding='utf-8') as file:
-            json.dump(errors, file, indent=4)
-        return table
+        json.dumps(errors, file, indent=4)
+        return table, LEXIQUE
 
 
 @dataclass
-class LexItem(object):
+class LexItem():
     """
     | This class defines the lexical items in Lexique383.
     | It uses slots for memory efficiency.
