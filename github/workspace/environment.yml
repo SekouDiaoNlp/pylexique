@@ -1,0 +1,55 @@
+name: pylexique_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - blosc=1.21.0=h0e60522_0
+  - bzip2=1.0.8=h8ffe710_4
+  - ca-certificates=2020.12.5=h5b45459_0
+  - cached-property=1.5.2=hd8ed1ab_1
+  - cached_property=1.5.2=pyha770c72_1
+  - certifi=2020.12.5=py38haa244fe_1
+  - h5py=3.2.1=nompi_py38he6c2248_100
+  - hdf5=1.10.6=nompi_h5268f04_1114
+  - intel-openmp=2021.2.0=h57928b3_616
+  - krb5=1.17.2=hbae68bd_0
+  - libblas=3.9.0=8_mkl
+  - libcblas=3.9.0=8_mkl
+  - libcurl=7.76.1=hf1763fc_1
+  - liblapack=3.9.0=8_mkl
+  - libssh2=1.9.0=h680486a_6
+  - mkl=2020.4=hb70f87d_311
+  - mock=4.0.3=py38haa244fe_1
+  - numexpr=2.7.3=py38h4c96930_0
+  - numpy=1.20.2=py38h09042cb_0
+  - openssl=1.1.1k=h8ffe710_0
+  - pip=21.1=pyhd8ed1ab_0
+  - pyreadline=2.1=py38haa244fe_1003
+  - pytables=3.6.1=py38h153c448_3
+  - python=3.8.8=h7840368_0_cpython
+  - python-blosc=1.10.2=py38hfe942cb_0
+  - python_abi=3.8=1_cp38
+  - setuptools=49.6.0=py38haa244fe_3
+  - six=1.15.0=pyh9f0ad1d_0
+  - sqlite=3.35.5=h8ffe710_0
+  - tk=8.6.10=h8ffe710_1
+  - vc=14.2=hb210afc_4
+  - vs2015_runtime=14.28.29325=h5e1d092_4
+  - wheel=0.36.2=pyhd3deb0d_0
+  - wincertstore=0.2=py38haa244fe_1006
+  - zlib=1.2.11=h62dcd97_1010
+  - pip:
+    - atomicwrites==1.4.0
+    - attrs==20.3.0
+    - click==7.1.2
+    - colorama==0.4.4
+    - iniconfig==1.1.1
+    - packaging==20.9
+    - pluggy==0.13.1
+    - py==1.10.0
+    - pyparsing==2.4.7
+    - pytest==6.2.3
+    - pytest-runner==5.3.0
+    - toml==0.10.2
+prefix: C:\Users\user\anaconda3\envs\pylexique_env
+
