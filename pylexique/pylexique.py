@@ -153,7 +153,7 @@ class Lexique383():
             lex_row.append()
 
         table.flush()
-        json.dumps(errors, file, indent=4)
+        json.dumps(errors, indent=4)
         return table, LEXIQUE
 
 
