@@ -21,7 +21,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
-
+import sphinx_rtd_theme
 import pylexique
 
 # -- General configuration ---------------------------------------------
@@ -30,9 +30,18 @@ import pylexique
 #
 # needs_sphinx = '1.0'
 
+# Get the project root dir, which is the parent dir of this
+cwd = os.getcwd()
+project_root = os.path.dirname(cwd)
+
+# Insert the project root dir as the first element in the PYTHONPATH.
+# This lets us ensure that the source package is imported, and that its
+# version is used.
+sys.path.insert(0, project_root)
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode', "sphinx_rtd_theme"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -48,7 +57,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'pylexique'
-copyright = u"2018, SekouDiaoNlp"
+copyright = u"2021, SekouDiaoNlp"
 author = u"SekouDiaoNlp"
 
 # The version info for the project you're documenting, acts as replacement
@@ -67,10 +76,20 @@ release = pylexique.__version__
 # Usually you set "language" from the command line for these cases.
 language = None
 
+# There are two options for replacing |today|: either, you set today to
+# some non-false value, then it is used:
+#today = ''
+# Else, today_fmt is used as the format for a strftime call.
+today_fmt = '%B %d, %Y'
+
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+
+# If true, sectionauthor and moduleauthor directives will be shown in the
+# output. They are ignored by default.
+show_authors = True
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -78,13 +97,16 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
+# Localization settings
+locale_dirs = ['locale/']
+gettext_compact = False
 
 # -- Options for HTML output -------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.  For a list of options available for each theme, see the
@@ -92,11 +114,67 @@ html_theme = 'alabaster'
 #
 # html_theme_options = {}
 
+# Add any paths that contain custom themes here, relative to this directory.
+#html_theme_path = []
+
+# The name for this set of Sphinx documents.  If None, it defaults to
+# "<project> v<release> documentation".
+#html_title = None
+
+# A shorter title for the navigation bar.  Default is the same as
+# html_title.
+html_short_title = 'pylexique'
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+# If not '', a 'Last updated on:' timestamp is inserted at every page
+# bottom, using the given strftime format.
+html_last_updated_fmt = '%b %d, %Y'
+
+# If true, SmartyPants will be used to convert quotes and dashes to
+# typographically correct entities.
+#html_use_smartypants = True
+
+# Custom sidebar templates, maps document names to template names.
+#html_sidebars = {}
+
+# Additional templates that should be rendered to pages, maps page names
+# to template names.
+#html_additional_pages = {}
+
+# If false, no module index is generated.
+#html_domain_indices = True
+
+# If false, no index is generated.
+#html_use_index = True
+
+# If true, the index is split into individual pages for each letter.
+#html_split_index = False
+
+# If true, links to the reST sources are added to the pages.
+#html_show_sourcelink = True
+
+# If true, "Created using Sphinx" is shown in the HTML footer.
+# Default is True.
+#html_show_sphinx = True
+
+# If true, "(C) Copyright ..." is shown in the HTML footer.
+# Default is True.
+html_show_copyright = True
+
+# If true, an OpenSearch description file will be output, and all pages
+# will contain a <link> tag referring to it.  The value of this option
+# must be the base URL from which the finished HTML is served.
+html_use_opensearch = 'https://pylexique.readthedocs.io/en/latest/'
+
+# This is the file name suffix for HTML files (e.g. ".xhtml").
+#html_file_suffix = None
+
+# Output file base name for HTML help builder.
+htmlhelp_basename = 'pylexiqueoc'
 
 # -- Options for HTMLHelp output ---------------------------------------
 
