@@ -1,10 +1,10 @@
-blosc==1.21.0
+blosc
 bzip2==1.0.8
 ca-certificates==2020.12.5
 certifi==2020.12.5
 Click>=7.1
 cython==0.29.23
-hdf5==1.10.6
+h5py
 intel-openmp==2021.2.0
 krb5==1.17.2
 libblas==3.9.0
@@ -18,7 +18,7 @@ numexpr==2.7.3
 numpy==1.20.2
 openssl==1.1.1k
 pip==21.1
-pytables==3.6.1
+pytables
 python==3.8.8
 python_abi==3.8
 setuptools==56.0.0
