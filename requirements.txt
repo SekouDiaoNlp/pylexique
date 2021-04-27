@@ -1,11 +1,11 @@
 blosc
-ca-certificates==2020.12.5
-certifi==2020.12.5
+ca-certificates
+certifi
 Click>=7.1
 cython
 h5py
-intel-openmp==2021.2.0
-krb5==1.17.2
+intel-openmp
+krb5
 libblas==3.9.0
 libcblas==3.9.0
 libcurl==7.76.1
