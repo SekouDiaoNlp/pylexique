@@ -19,13 +19,6 @@ test_requirements = [
     'pytest-runner',
     'pytest',
     'pytest-cov',
-    'cython',
-    'blosc',
-    'numexpr',
-    'numpy',
-    'h5py',
-    'pytables',
-    'Click>=7.1',
 ]
 
 setup(
