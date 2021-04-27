@@ -23,7 +23,7 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20', 'morphoder', 'nbmorph']
 
 
-Lexique_dict = OrderedDict()
+LEXIQUE = OrderedDict()
 
 
 class LexEntry(tables.IsDescription):
@@ -68,7 +68,7 @@ class LexEntry(tables.IsDescription):
     nbmorph = tables.Int8Col()
 
 
-class Lexique383(object):
+class Lexique383():
     """
     This is the class handling the lexique database.
     It provides method for interacting with the Lexique DB
@@ -152,17 +152,17 @@ class Lexique383(object):
                 else:
                     lex_row[field] = value
                 lex_info = LexItem(row)
-                Lexique_dict[lex_info.ortho] = lex_info
+                LEXIQUE[lex_info.ortho] = lex_info
             lex_row.append()
 
         table.flush()
         with open('errors/parsing_errors.json', 'w', encoding='utf-8') as file:
             json.dump(errors, file, indent=4)
-        return table
+        return table, LEXIQUE
 
 
 @dataclass
-class LexItem(object):
+class LexItem():
     """
     | This class defines the lexical items in Lexique383.
     | It uses slots for memory efficiency.

@@ -7,19 +7,15 @@ import pytest
 from collections import OrderedDict
 from click.testing import CliRunner
 
-from pylexique import Lexique383
+from pylexique import Lexique383, LEXIQUE
 
 from pylexique import pylexique, cli
 
 
 def test_content():
     """Sample pytest test of pylexique."""
-    Lexique_dict = OrderedDict()
-    test = Lexique383('Lexique383/Lexique383.xlsb')
-    # test1 = Lexique383()  # Use only if the hdf5 file exists.
     others = []
-    verbs = []
-    for x in Lexique_dict.values():
+    for x in LEXIQUE .values():
         if x.cgram == 'VER':
             assert x.cgram == 'VER'
         else:
