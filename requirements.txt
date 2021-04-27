@@ -1,5 +1,4 @@
 blosc
-bzip2
 ca-certificates==2020.12.5
 certifi==2020.12.5
 Click>=7.1
