@@ -1,6 +1,5 @@
 import sys
 from distutils.version import StrictVersion
-import tables
 from dataclasses import dataclass
 
 
