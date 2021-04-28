@@ -7,7 +7,7 @@ import pkg_resources
 import tables
 import json
 import atexit
-from .utils import my_close_open_files
+from .utils import my_close_open_files, dataclass_with_default_init
 from dataclasses import dataclass
 
 _RESOURCE_PACKAGE = __name__
@@ -67,6 +67,46 @@ class LexEntry(tables.IsDescription):
     morphoder = tables.StringCol(64)
     nbmorph = tables.Int8Col()
 
+class LexEntryTypes:
+    """
+    Hint type information.
+
+    """
+    ortho = str
+    phon = str
+    lemme = str
+    cgram = str
+    genre = str
+    nombre = str
+    freqlemfilms2 = float
+    freqlemlivres = float
+    freqfilms2 = float
+    freqlivres = float
+    infover = str
+    nbhomogr = int
+    nbhomoph = int
+    islem = bool
+    nblettres = int
+    nbphons = int
+    cvcv = str
+    p_cvcv = str
+    voisorth = int
+    voisphon = int
+    puorth = int
+    puphon = int
+    syll = str
+    nbsyll = int
+    cv_cv = str
+    orthrenv = str
+    phonrenv = str
+    orthosyll = str
+    cgramortho = str
+    deflem = float
+    defobs = int
+    old20 = float
+    pld20 = float
+    morphoder = str
+    nbmorph = int
 
 class Lexique383():
     """
@@ -157,23 +197,26 @@ class Lexique383():
         return table, LEXIQUE
 
 
-@dataclass
-class LexItem():
+@dataclass(init=False, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False)
+class LexItem:
     """
     | This class defines the lexical items in Lexique383.
     | It uses slots for memory efficiency.
 
     :param row_fields:
     """
-    __slots__ = LEXIQUE383_FIELD_NAMES
+    __slots__ = LEXIQUE383_FIELD_NAMES + ['_name_']
+
+    _name_: str
+    for attr in LEXIQUE383_FIELD_NAMES:
+        attr: LexEntryTypes
 
     def __init__(self, row_fields):
-        for attr, value in zip(LEXIQUE383_FIELD_NAMES, row_fields.strip().split('\t')):
+        fields = row_fields.strip().split('\t')
+        setattr(self, '_name_', fields[0])
+        for attr, value in zip(LEXIQUE383_FIELD_NAMES, fields):
             setattr(self, attr, value)
         return
-
-    def __repr__(self):
-        return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
 
 if __name__ == "__main__":
