@@ -24,7 +24,5 @@ from .pylexique import Lexique383
 _RESOURCE_PACKAGE = 'pylexique'
 _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
 
-LEXIQUE = Lexique383(_RESOURCE_PATH).lexique
+# LEXIQUE = Lexique383(_RESOURCE_PATH).lexique
 # lexique383, LEXIQUE = Lexique383()  # Use only if the hdf5 file exists.
-
-print('Lexique8 has been successfully loaded.\n')
