@@ -5,7 +5,6 @@
 from collections import OrderedDict
 import pkg_resources
 import json
-import joblib
 from zipfile import ZipFile
 import atexit
 from dataclasses import dataclass
