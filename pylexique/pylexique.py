@@ -131,13 +131,13 @@ class Lexique383:
             self.parse_lexique(self.lexique_path)
             with ZipFile(pkg_resources.resource_stream(
                     _RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)) as content:
-                with content.open('Lexique383.pickle', 'wb') as archive:
+                with content.open('Lexique383.pickle', 'w') as archive:
                     joblib.dump(self.lexique , archive)
         else:
             self.parse_lexique(self.lexique_path)
             with ZipFile(pkg_resources.resource_stream(
                     _RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)) as content:
-                with content.open('Lexique383.pickle', 'rb') as archive:
+                with content.open('Lexique383.pickle', 'r') as archive:
                     joblib.load(archive)
         print('Lexique 383 loaded successfully')
         return
