@@ -9,6 +9,7 @@ import json
 import atexit
 from .utils import my_close_open_files, dataclass_with_default_init
 from dataclasses import dataclass
+from typing import ClassVar
 
 _RESOURCE_PACKAGE = __name__
 
@@ -184,7 +185,7 @@ class Lexique383():
                             format(row_fields[0], field, value, i + 1))
                         errors[i + 1] = row_fields
                         continue
-                elif field in ('ortho', 'phon', 'orthosyll', 'syll', 'orthrenv', 'phonrenv', 'lemme', 'morphoder'):
+                elif field in ('cgram', 'cgramortho', 'ortho', 'phon', 'orthosyll', 'syll', 'orthrenv', 'phonrenv', 'lemme', 'morphoder'):
                     lex_row[field] = value.encode('utf-8')
                 else:
                     lex_row[field] = value
@@ -205,8 +206,8 @@ class LexItem:
 
     :param row_fields:
     """
-    __slots__ = LEXIQUE383_FIELD_NAMES + ['_name_']
-
+    _s: ClassVar[list] = LEXIQUE383_FIELD_NAMES + ['_name_']
+    __slots__ = _s
     _name_: str
     for attr in LEXIQUE383_FIELD_NAMES:
         attr: LexEntryTypes
