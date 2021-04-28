@@ -2,7 +2,7 @@ ca-certificates
 certifi
 Click>=7.1
 cython
-h5py
+joblib
 intel-openmp
 krb5
 libblas==3.9.0
@@ -16,7 +16,6 @@ numexpr==2.7.3
 numpy==1.20.2
 openssl==1.1.1k
 pip==21.1
-tables
 python==3.8.8
 python_abi==3.8
 setuptools==56.0.0
