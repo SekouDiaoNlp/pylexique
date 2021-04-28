@@ -129,16 +129,17 @@ class Lexique383:
         if lexique_path:
             print('parsing Lexique383')
             self.parse_lexique(self.lexique_path)
-            with ZipFile(pkg_resources.resource_stream(
-                    _RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)) as content:
-                with content.open('Lexique383.pickle', 'w') as archive:
-                    joblib.dump(self.lexique , archive)
+            # with ZipFile(pkg_resources.resource_stream(
+            #         _RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)) as content:
+            #     with content.open('Lexique383.pickle', mode='w') as archive:
+            #         joblib.dump(self.lexique , archive)
         else:
-            self.parse_lexique(self.lexique_path)
-            with ZipFile(pkg_resources.resource_stream(
-                    _RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)) as content:
-                with content.open('Lexique383.pickle', 'r') as archive:
-                    joblib.load(archive)
+            # self.parse_lexique(self.lexique_path)
+            # with ZipFile(pkg_resources.resource_stream(
+            #         _RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)) as content:
+            #     with content.open('Lexique383.pickle', mode='r') as archive:
+            #         joblib.load(archive)
+            pass
         print('Lexique 383 loaded successfully')
         return
 
@@ -174,6 +175,7 @@ class Lexique383:
         errors = {}
         for i, row in enumerate(lexicon):
             row_fields = row.strip().split('\t')
+            formatted_row_fields = []
             for field, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
                 if getattr(LexEntryTypes, field) == float:
                     value = value.replace(',', '.')
@@ -183,7 +185,8 @@ class Lexique383:
                     errors[value] = field
                     formatted_value = value
                 finally:
-                    self.lexique[row_fields[0]] = formatted_value
+                    formatted_row_fields.append(formatted_value)
+                self.lexique[row_fields[0]] = LexItem(formatted_row_fields)
         return
 
 
@@ -289,7 +292,7 @@ class LexItem:
         attr: LexEntryTypes
 
     def __init__(self, row_fields):
-        fields = row_fields.strip().split('\t')
+        fields = row_fields
         setattr(self, '_name_', fields[0])
         for attr, value in zip(LEXIQUE383_FIELD_NAMES, fields):
             setattr(self, attr, value)
