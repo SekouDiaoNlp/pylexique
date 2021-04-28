@@ -186,6 +186,14 @@ class Lexique383:
                     formatted_value = value
                 finally:
                     formatted_row_fields.append(formatted_value)
+            if row_fields[0] in self.lexique and not isinstance(self.lexique[row_fields[0]], list):
+                temp = []
+                temp.append([self.lexique[row_fields[0]]])
+                temp.append(LexItem(formatted_row_fields))
+                self.lexique[row_fields[0]] = temp
+            elif row_fields[0] in self.lexique and isinstance(self.lexique[row_fields[0]], list):
+                self.lexique[row_fields[0]].append(LexItem(formatted_row_fields))
+            else:
                 self.lexique[row_fields[0]] = LexItem(formatted_row_fields)
         return
 
