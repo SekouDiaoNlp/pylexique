@@ -3,7 +3,8 @@ Usage
 =====
 
 .. NOTE:: The language of the lexical entries is French.
-    The cLexical Corpus is based on `Lexique383`_.
+    | The cLexical Corpus is based on `Lexique383`_.
+    | Also note that pylexique only works on Python 3.X
 
 
 To use pylexique from the command line:
@@ -23,11 +24,31 @@ To use pylexique  as a library in your own projects:
 
     from pylexique import LEXIQUE
 
-    for x in LEXIQUE .values():
-        if x.cgram == 'VER':
-            assert x.cgram == 'VER'
+    LEXIQUE['abaissait']
+
+
+    LEXIQUE['a']
+
+    verbs = []
+    for x in LEXIQUE.values():
+        if isinstance(x, list):
+            for y in x:
+                if not isinstance(y, list) and y.cgram == 'VER':
+                    verbs.append(y)
+                    if isinstance(y, list):
+                        for z in y:
+                            if not isinstance(z, list) and y.cgram == 'VER':
+                                try:
+                                    verbs.append(z)
+                                except AttributeError:
+                                    print("Yo Dawg, I heard you like verbs, so I put verbs inside verbs!")
+                                    continue
+        elif x.cgram == 'VER':
+            verbs.append(x)
         else:
-            others.append(x)
+            continue
+    print(verbs)
+
 
 Documentation for
 _`Lexique383`: http://www.lexique.or
