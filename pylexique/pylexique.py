@@ -115,7 +115,7 @@ class Lexique383:
 
         :param lexique_path: string.
             Path to the lexique csv file.
-        :return: PyTables.Table
+        :return:
         """
         with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
             content = csv_file.readlines()
@@ -130,7 +130,7 @@ class Lexique383:
 
         :param lexicon: Iterable.
             Iterable containing the lexique383 entries.
-        :return: PyTables.Table
+        :return:
         """
         errors = {}
         for i, row in enumerate(lexicon):
