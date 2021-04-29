@@ -4,16 +4,18 @@
 
 from collections import OrderedDict
 import pkg_resources
-import json
+import joblib
 from zipfile import ZipFile
 import atexit
 from dataclasses import dataclass
 from typing import ClassVar
+from time import time
 
 _RESOURCE_PACKAGE = __name__
 
 PYLEXIQUE_DATABASE = '/'.join(('Lexique383', 'lexique383.xlsb'))
 HOME_PATH = '/'.join(('Lexique', ''))
+PICKLE_PATH = '/'.join(('Lexique383', 'lexique383.zip'))
 
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
                           'freqfilms2',
@@ -85,9 +87,12 @@ class Lexique383:
     def __init__(self, lexique_path=None):
         self.lexique_path = lexique_path
         self.lexique = OrderedDict()
+        print('Parsing Lexique383\n')
         if lexique_path:
-            print('parsing Lexique383')
+            t0 = time()
             self.parse_lexique(self.lexique_path)
+            t1 = round(time() - t0, 2)
+            print("Parsing too {] seconds\n.".format(t1))
             # with ZipFile(pkg_resources.resource_stream(
             #         _RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)) as content:
             #     with content.open('Lexique383.pickle', mode='w') as archive:
@@ -95,9 +100,17 @@ class Lexique383:
         else:
             # self.parse_lexique(self.lexique_path)
             # with ZipFile(pkg_resources.resource_stream(
-            #         _RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)) as content:
-            #     with content.open('Lexique383.pickle', mode='r') as archive:
+            #         _RESOURCE_PACKAGE, PICKLE_PATH) as content:
+            #     with content.open('Lexique383.pickle', mode='rb') as archive:
             #         joblib.load(archive)
+            print('Loading from compressed archive.\n')
+            t2 = time()
+            with ZipFile(pkg_resources.resource_stream(
+                    _RESOURCE_PACKAGE, PICKLE_PATH)) as content:
+                with content.open('Lexique383.pkl', 'r') as archive:
+                    self.lexique = joblib.load(archive)
+            t3 = round(time() - t2, 2)
+            print("Parsing too {] seconds\n.").format(t3)
             pass
         print('Lexique 383 loaded successfully')
         return

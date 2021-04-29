@@ -1,3 +1,7 @@
 colorama
 tqdm
 Click>=7.1
+
+setuptools~=49.6.0
+pytest~=6.2.3
+joblib~=1.0.1
