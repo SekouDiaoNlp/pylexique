@@ -16,6 +16,7 @@ _RESOURCE_PACKAGE = __name__
 PYLEXIQUE_DATABASE = '/'.join(('Lexique383', 'lexique383.xlsb'))
 HOME_PATH = '/'.join(('Lexique', ''))
 PICKLE_PATH = '/'.join(('Lexique383', 'lexique383.zip'))
+_RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
 
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
                           'freqfilms2',
@@ -23,10 +24,6 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'p_cvcv',
                           'voisorth', 'voisphon', 'puorth', 'puphon', 'syll', 'nbsyll', 'cv_cv', 'orthrenv', 'phonrenv',
                           'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20', 'morphoder', 'nbmorph']
-
-
-LEXIQUE = OrderedDict()
-
 
 
 class LexEntryTypes:
@@ -69,6 +66,7 @@ class LexEntryTypes:
     pld20 = float
     morphoder = str
     nbmorph = int
+    id = int
 
 
 class Lexique383:
@@ -92,22 +90,16 @@ class Lexique383:
             t0 = time()
             self._parse_lexique(self.lexique_path)
             t1 = round(time() - t0, 2)
-            print("Parsing took {] seconds\n.".format(t1))
-            # Create a compressed version of Lexique38X
-            # with ZipFile(pkg_resources.resource_stream(
-            #         _RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)) as content:
-            #     with content.open('Lexique383.pickle', mode='w') as archive:
-            #         joblib.dump(self.lexique , archive)
+            print("Parsing took  {} seconds\n.".format(t1))
         else:
-            print('Loading from compressed archive.\n')
-            t2 = time()
-            with ZipFile(pkg_resources.resource_stream(
-                    _RESOURCE_PACKAGE, PICKLE_PATH)) as content:
-                with content.open('Lexique383.pkl', 'r') as archive:
-                    self.lexique = joblib.load(archive)
-            t3 = round(time() - t2, 2)
-            print("Parsing took {] seconds\n.").format(t3)
-            pass
+            try:
+                # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
+                self._parse_lexique(_RESOURCE_PATH)
+            except FileNotFoundError:
+                if isinstance(lexique_path, str):
+                    raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
+                if not isinstance(lexique_path, str):
+                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(lexique_path)}")
         print('Lexique 383 loaded successfully')
         return
 
@@ -154,9 +146,10 @@ class Lexique383:
                     formatted_value = value
                 finally:
                     formatted_row_fields.append(formatted_value)
+                    formatted_row_fields.append(i + 1)
             if row_fields[0] in self.lexique and not isinstance(self.lexique[row_fields[0]], list):
-                self.lexique[row_fields[0]]= [self.lexique[row_fields[0]]]
-                self.lexique[row_fields[0]].append(formatted_row_fields)
+                self.lexique[row_fields[0]] = [self.lexique[row_fields[0]]]
+                self.lexique[row_fields[0]].append(LexItem(formatted_row_fields))
             elif row_fields[0] in self.lexique and isinstance(self.lexique[row_fields[0]], list):
                 self.lexique[row_fields[0]].append(LexItem(formatted_row_fields))
             else:
@@ -164,7 +157,7 @@ class Lexique383:
         return
 
 
-@dataclass(init=False, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False)
+@dataclass(init=False, repr=False, eq=True, order=False, unsafe_hash=False, frozen=False)
 class LexItem:
     """
     | This class defines the lexical items in Lexique383.
@@ -184,6 +177,9 @@ class LexItem:
         for attr, value in zip(LEXIQUE383_FIELD_NAMES, fields):
             setattr(self, attr, value)
         return
+
+    def __repr__(self):
+        return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
 
 if __name__ == "__main__":

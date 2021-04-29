@@ -15,7 +15,7 @@ from collections import OrderedDict
 import pkg_resources
 import json
 import pkg_resources
-from .utils import my_close_open_files
+from .utils import my_close_open_files, vdir
 from .pylexique import Lexique383
 
 # PYLEXIQUE_DATABASE = '/'.join(('Lexique383', 'lexique383.h5'))
