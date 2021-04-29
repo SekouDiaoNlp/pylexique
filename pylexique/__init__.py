@@ -12,7 +12,7 @@ __maintainer__ = "SekouDiaoNlp"
 __status__ = "Production"
 
 import pkg_resources
-from .utils import vdir
+from .utils import vdir, print_attributes
 from .pylexique import Lexique383
 
 _RESOURCE_PACKAGE = 'pylexique'

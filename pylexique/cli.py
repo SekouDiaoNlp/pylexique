@@ -6,7 +6,7 @@ import click
 import json
 import logging
 from pylexique import Lexique383
-from pylexique.utils import vdir
+from pylexique.utils import vdir, print_attributes
 from pprint import pprint
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -40,10 +40,11 @@ def main(words, output):
         results[word] = LEXIQUE.lexique[word]
     if output:
         with open(output, 'w', encoding='utf-8') as file:
-            pprint(vdir(results, file))
+            print(results)
             pprint('The Lexical Items have been successfully saved to {0} by pylexique.cli.main.'.format(output))
     else:
-        pprint(vdir(results))
+        for result in results:
+            print_attributes(result)
     return
 
 
