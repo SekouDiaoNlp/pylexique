@@ -12,6 +12,10 @@ def attributes(obj):
       name: getattr(obj, name) for name in dir(obj)
         if name[0:1] != '_' and name not in disallowed_names and hasattr(obj, name)}
 
+def show_attributes(object):
+    temp = vars(object)
+    for item in temp:
+        print(item, ':', temp[item])
 
 def print_attributes(obj):
     pprint(attributes(obj))

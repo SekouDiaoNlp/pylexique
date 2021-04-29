@@ -4,10 +4,13 @@
 import sys
 import click
 import json
+import joblib
 import logging
-from pylexique import Lexique383
-from pylexique.utils import vdir, print_attributes
+from pylexique import Lexique383, LexItem
+from utils import vdir, show_attributes
 from pprint import pprint
+from dataclasses import asdict
+
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.argument('words', nargs=-1)
@@ -38,13 +41,19 @@ def main(words, output):
     results = {}
     for word in words:
         results[word] = LEXIQUE.lexique[word]
+        show_attributes(word)
     if output:
         with open(output, 'w', encoding='utf-8') as file:
-            print(results)
+            joblib.dump(results, file)
             pprint('The Lexical Items have been successfully saved to {0} by pylexique.cli.main.'.format(output))
     else:
-        for result in results:
-            print_attributes(result)
+        if isinstance(word, list):
+            for elmt in word:
+                pprint(asdict(word))
+                print('\n\n')
+        elif isinstance(word, LexItem):
+            pprint(asdict(word))
+            print('\n\n')
     return
 
 

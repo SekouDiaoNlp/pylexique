@@ -12,8 +12,8 @@ __maintainer__ = "SekouDiaoNlp"
 __status__ = "Production"
 
 import pkg_resources
-from .utils import vdir, print_attributes
-from .pylexique import Lexique383
+from .utils import vdir, print_attributes, show_attributes
+from .pylexique import Lexique383, LexItem
 
 _RESOURCE_PACKAGE = 'pylexique'
 _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')

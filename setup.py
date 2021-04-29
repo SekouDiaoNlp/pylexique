@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['colorama', 'tqdm', 'Click>=7.1', 'joblib']
+requirements = ['joblib', 'colorama', 'tqdm', 'Click>=7.1', 'joblib', 'pandas']
 
 setup_requirements = ['pytest-runner', ]
 
