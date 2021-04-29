@@ -3,6 +3,10 @@ from distutils.version import StrictVersion
 from dataclasses import dataclass
 
 
+def vdir(obj):
+    return [x for x in dir(obj) if not x.startswith('__')]
+
+
 def my_close_open_files(verbose):
     """
 
