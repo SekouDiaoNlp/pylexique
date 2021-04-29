@@ -13,8 +13,8 @@ API Reference for the classes in pylexique.pylexique.py
     :show-inheritance:
 
 
-API Reference for the classes in mlconjug3.PyVerbiste.py
---------------------------------------------------------
+API Reference for the classes in pylexique.utils.py
+---------------------------------------------------
 
 .. automodule:: pylexique.utils
     :member-order: bysource
