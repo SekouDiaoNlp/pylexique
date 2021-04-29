@@ -4,47 +4,20 @@ from dataclasses import dataclass
 
 
 def vdir(obj):
+    """
+    | This function pretty-display the lexical items in Lexique383.
+
+    :param obj:
+    :return:
+    """
     return [x for x in dir(obj) if not x.startswith('__')]
-
-
-def my_close_open_files(verbose):
-    """
-
-    :param verbose:
-    """
-    open_files = tables.file._open_files
-
-    are_open_files = len(open_files) > 0
-
-    if verbose and are_open_files:
-        sys.stderr.write("Closing remaining open files:")
-
-    if StrictVersion(tables.__version__) >= StrictVersion("3.1.0"):
-        # make a copy of the open_files.handlers container for the iteration
-        handlers = list(open_files.handlers)
-    else:
-        # for older versions of pytables, setup the handlers list from the
-        # keys
-        keys = open_files.keys()
-        handlers = []
-        for key in keys:
-            handlers.append(open_files[key])
-
-    for fileh in handlers:
-        if verbose:
-            sys.stderr.write("%s..." % fileh.filename)
-
-        fileh.close()
-
-        if verbose:
-            sys.stderr.write("done")
-
-    if verbose and are_open_files:
-        sys.stderr.write("\n")
 
 
 def dataclass_with_default_init(_cls=None, *args, **kwargs):
     """
+    | This class allows to define Frozen Dataclasses by bypassing the __init__.
+    | It is useful when the attributes of the Dataclass are dynamically generated,
+    | while still allowing the attributes of the class to be frozen after initialisation.
 
     :rtype: object
     """
