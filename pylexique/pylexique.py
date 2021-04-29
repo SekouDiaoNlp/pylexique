@@ -90,19 +90,15 @@ class Lexique383:
         print('Parsing Lexique383\n')
         if lexique_path:
             t0 = time()
-            self.parse_lexique(self.lexique_path)
+            self._parse_lexique(self.lexique_path)
             t1 = round(time() - t0, 2)
-            print("Parsing too {] seconds\n.".format(t1))
+            print("Parsing took {] seconds\n.".format(t1))
+            # Create a compressed version of Lexique38X
             # with ZipFile(pkg_resources.resource_stream(
             #         _RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)) as content:
             #     with content.open('Lexique383.pickle', mode='w') as archive:
             #         joblib.dump(self.lexique , archive)
         else:
-            # self.parse_lexique(self.lexique_path)
-            # with ZipFile(pkg_resources.resource_stream(
-            #         _RESOURCE_PACKAGE, PICKLE_PATH) as content:
-            #     with content.open('Lexique383.pickle', mode='rb') as archive:
-            #         joblib.load(archive)
             print('Loading from compressed archive.\n')
             t2 = time()
             with ZipFile(pkg_resources.resource_stream(
@@ -110,7 +106,7 @@ class Lexique383:
                 with content.open('Lexique383.pkl', 'r') as archive:
                     self.lexique = joblib.load(archive)
             t3 = round(time() - t2, 2)
-            print("Parsing too {] seconds\n.").format(t3)
+            print("Parsing took {] seconds\n.").format(t3)
             pass
         print('Lexique 383 loaded successfully')
         return
@@ -121,7 +117,7 @@ class Lexique383:
     def __len__(self):
         return len(self.lexique)
 
-    def parse_lexique(self, lexique_path):
+    def _parse_lexique(self, lexique_path):
         """
         | Parses the given lexique file and creates a hdf5 table to store the data.
 
@@ -132,10 +128,10 @@ class Lexique383:
         with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
             content = csv_file.readlines()
             lexique383_db = (content[1:])
-            self.create_db(lexique383_db)
+            self._create_db(lexique383_db)
         return
 
-    def create_db(self, lexicon):
+    def _create_db(self, lexicon):
         """
         | Creates an hdf5 table populated with the entries in lexique if it does not exist yet.
         | It stores the hdf5 database for fast access.
