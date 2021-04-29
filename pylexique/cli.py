@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
-"""Console script for pylexique."""
+"""Console CLI script for pylexique."""
 import sys
 import click
 import json
 import logging
-from pylexique.pylexique import Lexique383
-
+from pylexique import Lexique383
+from pprint import pprint
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.argument('words', nargs=-1)
 @click.option('-o', '--output',
               default=None,
-              help=_("Path of the filename for storing the lexical entries"),
+              help=("Path of the filename for storing the lexical entries"),
               type=click.STRING)
 def main(words, output):
     """Pylexique is a Python wrapper around Lexique83_.
@@ -40,9 +40,9 @@ def main(words, output):
     if output:
         with open(output, 'w', encoding='utf-8') as file:
             json.dump(results, file, ensure_ascii=False, indent=4)
-            print('The Lexical Items have been successfully saved to {0}.'.format(output))
+            pprint('The Lexical Items have been successfully saved to {0}.'.format(output))
     else:
-        print(json.dumps(results, ensure_ascii=False, indent=4))
+        pprint(json.dumps(results, ensure_ascii=False, indent=4))
     return
 
 
