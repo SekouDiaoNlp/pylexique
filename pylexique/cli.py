@@ -6,6 +6,7 @@ import click
 import json
 import logging
 from pylexique import Lexique383
+from pylexique.utils import vdir
 from pprint import pprint
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -15,7 +16,7 @@ from pprint import pprint
               help=("Path of the filename for storing the lexical entries"),
               type=click.STRING)
 def main(words, output):
-    """Pylexique is a Python wrapper around Lexique83_.
+    """Pylexique is a Python wrapper around Lexique83.
     It allows to extract lexical information from more than 140 000 French words in an Object Oriented way.
 
 
@@ -39,10 +40,10 @@ def main(words, output):
         results[word] = LEXIQUE.lexique[word]
     if output:
         with open(output, 'w', encoding='utf-8') as file:
-            json.dump(results, file, ensure_ascii=False, indent=4)
-            pprint('The Lexical Items have been successfully saved to {0}.'.format(output))
+            pprint(vdir(results, file))
+            pprint('The Lexical Items have been successfully saved to {0} by pylexique.cli.main.'.format(output))
     else:
-        pprint(json.dumps(results, ensure_ascii=False, indent=4))
+        pprint(vdir(results))
     return
 
 

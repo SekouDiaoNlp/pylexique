@@ -82,12 +82,10 @@ class Lexique383:
     def __init__(self, lexique_path=None):
         self.lexique_path = lexique_path
         self.lexique = OrderedDict()
-        print('Parsing Lexique383\n')
         if lexique_path:
             t0 = time()
             self._parse_lexique(self.lexique_path)
             t1 = round(time() - t0, 2)
-            print("Parsing took  {} seconds\n.".format(t1))
         else:
             try:
                 # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
@@ -97,7 +95,6 @@ class Lexique383:
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
                 if not isinstance(lexique_path, str):
                     raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(lexique_path)}")
-        print('Lexique 383 loaded successfully')
         return
 
     def __repr__(self):
@@ -136,6 +133,9 @@ class Lexique383:
             for field, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
                 if getattr(LexEntryTypes, field) == float:
                     value = value.replace(',', '.')
+                else:
+                    value = value
+
                 try:
                     formatted_value = getattr(LexEntryTypes, field)(value)
                 except ValueError:
