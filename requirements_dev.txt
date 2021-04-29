@@ -7,6 +7,6 @@ tox
 coverage
 Sphinx
 twine
-
+joblib
 pytest
 pytest-runner
