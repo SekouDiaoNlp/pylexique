@@ -5,7 +5,7 @@ import sys
 import click
 import json
 import logging
-from .pylexique import Lexique383
+from pylexique.pylexique import Lexique383
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
