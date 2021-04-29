@@ -1,5 +1,3 @@
-import sys
-from distutils.version import StrictVersion
 from dataclasses import dataclass
 
 
