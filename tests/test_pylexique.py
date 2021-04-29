@@ -5,6 +5,7 @@
 
 import pytest
 from collections import OrderedDict
+from dataclasses import asdict
 from click.testing import CliRunner
 
 from pylexique import Lexique383
@@ -18,8 +19,12 @@ def test_content():
     lexicon = Lexique383()
     x = 'a posteriori'
     if x in lexicon.lexique:
-        if lexicon.lexique[x].cgram == 'ADV':
-            assert lexicon.lexique[x].freqlemfim2== 'ADV'
+        if isinstance(lexicon.lexique[x], list ):
+            for elmnt in lexicon.lexique[x]:
+                if elmnt.cgram == 'ADV':
+                    assert elmnt.cgram == 'ADV'
+        elif lexicon.lexique[x].cgram == 'ADV':
+            assert lexicon.lexique[x].cgram == 'ADV'
         else:
             others.append(x)
 
