@@ -74,4 +74,4 @@ To use pylexique  as a library in your own projects:
         pass
 
 Documentation for
-_`Lexique383`: http://www.lexique.or
+_`Lexique383`: http://www.lexique.org
