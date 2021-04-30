@@ -6,7 +6,7 @@ from types import FunctionType
 
 def set_save_folder(folder):
     """
-    Sets the folder in which lyrics will be downloaded and saved.
+    Sets the folder in which the LexicalItems will be downloaded and saved.
 
     :param folder: string.
         Folder path.
