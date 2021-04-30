@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from pprint import pprint
 from inspect import getmembers
 from types import FunctionType
+import os
 
 
 def set_save_folder(folder):
