@@ -114,8 +114,7 @@ class Lexique383:
         """
         with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
             content = csv_file.readlines()
-            lexique383_db = content[1:]
-            self._create_db(lexique383_db)
+            self._create_db(content)
         return
 
     def _create_db(self, lexicon):
@@ -128,8 +127,14 @@ class Lexique383:
         :return:
         """
         errors = {}
-        for i, row in enumerate(lexicon):
+        name_fields = lexicon[0].strip().split('\t')
+        for i, row in enumerate(lexicon[1:]):
             row_fields = row.strip().split('\t')
+            for attr, value in zip(name_fields, row_fields):
+                # if attr in list of ints:
+                #  if attr in list of floats:
+                pass
+
             if row_fields[0] in self.lexique and not isinstance(self.lexique[row_fields[0]], list):
                 self.lexique[row_fields[0]] = [self.lexique[row_fields[0]]]
                 self.lexique[row_fields[0]].append(LexItem(row_fields))
@@ -138,6 +143,9 @@ class Lexique383:
             else:
                 self.lexique[row_fields[0]] = LexItem(row_fields)
         return
+
+    def _convert_entries(self, entry):
+        pass
 
 
 @dataclass(init=False, repr=False, eq=True, order=False, unsafe_hash=False, frozen=False)
