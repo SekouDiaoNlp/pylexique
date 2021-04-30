@@ -4,7 +4,6 @@
 import sys
 import click
 import json
-import joblib
 import logging
 from pylexique import Lexique383, LexItem
 from pprint import pprint
@@ -15,7 +14,7 @@ from collections import defaultdict
 @click.argument('words', nargs=-1)
 @click.option('-o', '--output',
               default=None,
-              help=("Path of the filename for storing the lexical entries"),
+              help="Path of the json filename for storing the lexical entries",
               type=click.STRING)
 def main(words, output):
     """Pylexique is a Python wrapper around Lexique83.
@@ -52,15 +51,7 @@ def main(words, output):
             json.dump(results, file, indent=4)
             print('The Lexical Items have been successfully saved to {0} by pylexique.cli.main.'.format(output))
     else:
-        if isinstance(words, tuple):
-            for word in words:
-                if isinstance(results[word], list):
-                    for elmt in results[word]:
-                        pprint(elmt.to_dict())
-                        print('\n\n')
-                else:
-                    pprint(results[word])
-                    print('\n\n')
+        print(json.dumps(results, indent=4))
     return
 
 
