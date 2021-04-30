@@ -141,6 +141,8 @@ class Lexique383:
     @staticmethod
     def _convert_entries(row_fields):
         """
+        | Convert entries from `strings` to `int` or `float` and generates
+        | a new list with typed entries.
 
         :param row_fields:
         :return: converted_row_fields:
