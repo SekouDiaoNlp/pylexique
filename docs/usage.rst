@@ -48,13 +48,12 @@ To use pylexique  as a library in your own projects:
         # LEXIQUE2 = Lexique383(_RESOURCE_PATH)
 
 
+There are 2 ways to access the lexical information of a word:
+Either use the utility method Lexique383.get_lex(item)
+Or you an directly access the lexicon directory through LEXIQUE.lexique[item] .
 
-::
-        There are 2 ways to access the lexical information of a word:
-        Either use the utility method Lexique383.get_lex(item)
-        Or you an directly access the lexicon directory through LEXIQUE.lexique[item] .
+Notice that item can be either a string or a sequence of strings when using Lexique383.get_lex(item) .
 
-        Notice that item can be either a string or a sequence of strings when using Lexique383.get_lex(item) .
 
  .. code-block:: python
 
@@ -66,12 +65,13 @@ To use pylexique  as a library in your own projects:
         var_1_equality = var_1 == var_1_bis['abaissait']
         print(var_1_equality)
 
-::
-        Because in French the world 'a' is very polysemic word, it has several entries in Lexique 383.
-        For this reason the LEXIQUE Dict has the value of the `ortho` property of its LexicalEntry.
-        In th case of 'abaissait' there is only one LexicalItem corresponding to this dist key.
-        But in the case of 'a' there are several LexItem objects corresponding to this key and then the LexItem objects
-        are stored in a list corresponding to th value of the key.
+
+
+Because in French the world 'a' is very polysemic word, it has several entries in Lexique 383.
+For this reason the LEXIQUE Dict has the value of the `ortho` property of its LexicalEntry.
+In th case of 'abaissait' there is only one LexicalItem corresponding to this dist key.
+But in the case of 'a' there are several LexItem objects corresponding to this key and then the LexItem objects
+are stored in a list corresponding to th value of the key.
 
  .. code-block:: python
 
