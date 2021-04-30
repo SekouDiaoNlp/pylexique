@@ -3,8 +3,8 @@ Usage
 =====
 
 .. NOTE:: The language of the lexical entries is French.
-    | The cLexical Corpus is based on `Lexique383`_.
-    | Also note that pylexique only works on Python 3.X
+    The cLexical Corpus is based on `Lexique383`_.
+    Also note that pylexique only works on Python 3.X.
 
 
 To use pylexique from the command line:

@@ -4,6 +4,21 @@ from inspect import getmembers
 from types import FunctionType
 
 
+def set_save_folder(folder):
+    """
+    Sets the folder in which lyrics will be downloaded and saved.
+
+    :param folder: string.
+        Folder path.
+    :return: string.
+        Folder path.
+    """
+    if not folder:
+        folder = os.path.join(os.path.expanduser("~"), 'Documents', 'pylexique')
+    else:
+        folder = os.path.join(folder, 'pylexique')
+    return folder
+
 def attributes(obj):
     disallowed_names = {
       name for name, value in getmembers(type(obj))
