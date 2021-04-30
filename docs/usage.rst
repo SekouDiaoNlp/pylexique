@@ -17,12 +17,21 @@ To use pylexique from the command line:
     $ pylexique boire
 
 
+You can also provide multiple words and specify an output file to save the lexical information in a json file.
+
+.. code-block:: bash
+
+    $ pylexique il mange une baguette
+
+    $ pylexique il boit du vin rouge -o path/to/the/output/json/file.json
+
+
 To use pylexique  as a library in your own projects:
 
 
 .. code-block:: python
 
-        from pylexique import Lexique383, vdir, show_attributes
+        from pylexique import Lexique383
         from pprint import pprint
         import pkg_resources
 
@@ -39,15 +48,46 @@ To use pylexique  as a library in your own projects:
         # LEXIQUE2 = Lexique383(_RESOURCE_PATH)
 
 
+
+::
+        There are 2 ways to access the lexical information of a word:
+        Either use the utility method Lexique383.get_lex(item)
+        Or you an directly access the lexicon directory through LEXIQUE.lexique[item] .
+
+        Notice that item can be either a string or a sequence of strings when using Lexique383.get_lex(item) .
+
+ .. code-block:: python
+
         #  Retrieves the lexical information of 'abaissait' and 'a'.
         var_1 = LEXIQUE.lexique['abaissait']
+        var_1_bis = LEXIQUE.get_lex('abaissait')
 
-        # Because in French the world 'a' is very polysemic word, it has several entries in Lexique 383.
-        # For this reason the LEXIQUE Dict has the value of the `ortho` property of its LexicalEntry.
-        # In th case of 'abaissait' there is only one LexicalItem corresponding to this dist key.
-        # But in the case of 'a' there are several LexixalEntry objects corresonding to this key and then LexicalEnty onjects
-        # are stored n a list corresponding to th value of the key.
+        # Check both objects are the same
+        var_1_equality = var_1 == var_1_bis['abaissait']
+        print(var_1_equality)
+
+::
+        Because in French the world 'a' is very polysemic word, it has several entries in Lexique 383.
+        For this reason the LEXIQUE Dict has the value of the `ortho` property of its LexicalEntry.
+        In th case of 'abaissait' there is only one LexicalItem corresponding to this dist key.
+        But in the case of 'a' there are several LexItem objects corresponding to this key and then the LexItem objects
+        are stored in a list corresponding to th value of the key.
+
+ .. code-block:: python
+
         var_2 = LEXIQUE.lexique['a']
+        var_2_bis = LEXIQUE.get_lex('a')
+
+        # Check both objects are the same
+        var_2_equality = var_2 == var_2_bis['a']
+        print(var_2_equality)
+
+        # Retrieving the lexical information of several words by passing a Sequence of strings
+
+        var_multiple = LEXIQUE.get_lex(('il', 'mange', 'une', 'baguette'))
+        pprint(var_multiple)
+
+        # You can use the method LexItem.to_dict() to produce a dictionary with key/value pairs corresponding to the LexItem
 
         print('\n\n')
         if isinstance(var_1, list):
@@ -68,7 +108,7 @@ To use pylexique  as a library in your own projects:
             print('\n\n')
 
         # Get all verbs in the DataSet. Because some words have the same orthography, some keys of the dictionary
-        # don't have a unique LexicalItem object as their value, but a list of those.
+        # don't have a unique LexItem object as their value, but a list of those.
         verbs = []
         for x in LEXIQUE.lexique.values():
             if isinstance(x, list):

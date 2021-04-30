@@ -3,6 +3,7 @@
 """Main module of pylexique."""
 
 from collections import OrderedDict, defaultdict
+from collections.abc import Sequence
 import pkg_resources
 # import faster_than_csv as csv
 from dataclasses import dataclass
@@ -22,49 +23,6 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'p_cvcv',
                           'voisorth', 'voisphon', 'puorth', 'puphon', 'syll', 'nbsyll', 'cv_cv', 'orthrenv', 'phonrenv',
                           'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20', 'morphoder', 'nbmorph']
-
-
-class LexEntryTypes:
-    """
-    Hint type information.
-
-    """
-    ortho = str
-    phon = str
-    lemme = str
-    cgram = str
-    genre = str
-    nombre = str
-    freqlemfilms2 = float
-    freqlemlivres = float
-    freqfilms2 = float
-    freqlivres = float
-    infover = str
-    nbhomogr = int
-    nbhomoph = int
-    islem = bool
-    nblettres = int
-    nbphons = int
-    cvcv = str
-    p_cvcv = str
-    voisorth = int
-    voisphon = int
-    puorth = int
-    puphon = int
-    syll = str
-    nbsyll = int
-    cv_cv = str
-    orthrenv = str
-    phonrenv = str
-    orthosyll = str
-    cgramortho = str
-    deflem = float
-    defobs = int
-    old20 = float
-    pld20 = float
-    morphoder = str
-    nbmorph = int
-    id = int
 
 
 class Lexique383:
@@ -166,6 +124,76 @@ class Lexique383:
         row_fields = converted_row_fields
         return row_fields
 
+    def get_lex(self, words):
+        """
+
+        :param words:
+        :return: Dictionary of LexItems:
+        """
+        results = OrderedDict()
+        if isinstance(words, str):
+            try:
+                results[words] = self.lexique[words]
+            except AttributeError:
+                print('the word {} is not in Lexique383'.format(words))
+        elif isinstance(words, Sequence):
+            for word in words:
+                if isinstance(word, str):
+                    try:
+                        results[word] = self.lexique[word]
+                    except AttributeError:
+                        print('The word {} is not in Lexique383\n'.format(word))
+                        continue
+                else:
+                    print('{} is not a valid string'.format(word))
+                    raise TypeError
+        else:
+            raise TypeError
+        return results
+
+
+class LexEntryTypes:
+    """
+    Type information about all the lexical attributes in a LexItem object.
+
+    """
+    ortho = str
+    phon = str
+    lemme = str
+    cgram = str
+    genre = str
+    nombre = str
+    freqlemfilms2 = float
+    freqlemlivres = float
+    freqfilms2 = float
+    freqlivres = float
+    infover = str
+    nbhomogr = int
+    nbhomoph = int
+    islem = bool
+    nblettres = int
+    nbphons = int
+    cvcv = str
+    p_cvcv = str
+    voisorth = int
+    voisphon = int
+    puorth = int
+    puphon = int
+    syll = str
+    nbsyll = int
+    cv_cv = str
+    orthrenv = str
+    phonrenv = str
+    orthosyll = str
+    cgramortho = str
+    deflem = float
+    defobs = int
+    old20 = float
+    pld20 = float
+    morphoder = str
+    nbmorph = int
+    id = int
+
 
 @dataclass(init=False, repr=False, eq=True, order=False, unsafe_hash=False, frozen=False)
 class LexItem:
@@ -196,7 +224,7 @@ class LexItem:
         """
         | Converts the LexItem to a dict containing its attributes and their values
 
-        :return: dict
+        :return: Dictionary with key/values correspo
         """
         attributes = []
         for attr in self.__slots__:
