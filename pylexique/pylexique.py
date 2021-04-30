@@ -5,7 +5,7 @@
 from collections import OrderedDict
 import pkg_resources
 
-from dataclasses import asdict? dataclasses
+from dataclasses import asdict, dataclass, astuple
 from typing import ClassVar
 from time import time
 
@@ -163,8 +163,8 @@ class LexItem:
 
     :param row_fields:
     """
-    # _s: ClassVar[list] = LEXIQUE383_FIELD_NAMES + ['_name_']
-    # __slots__ = _s
+    _s: ClassVar[list] = LEXIQUE383_FIELD_NAMES + ['_name_']
+    __slots__ = _s
     _name_: str
     for attr in LEXIQUE383_FIELD_NAMES:
         attr: LexEntryTypes
@@ -178,6 +178,10 @@ class LexItem:
 
     def __repr__(self):
         return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.ortho, self.lemme, self.cgram)
+
+    def to_dict(self):
+        result = {attr: getattr(self, attr) for attr in LEXIQUE383_FIELD_NAMES}
+        return result
 
 
 if __name__ == "__main__":
