@@ -5,9 +5,10 @@
 from collections import OrderedDict, defaultdict
 import pkg_resources
 
-from dataclasses import asdict, dataclass, astuple
+from dataclasses import dataclass
 from typing import ClassVar
 from time import time
+from .utils import set_save_folder
 
 _RESOURCE_PACKAGE = __name__
 
