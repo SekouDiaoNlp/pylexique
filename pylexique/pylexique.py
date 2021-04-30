@@ -4,7 +4,7 @@
 
 from collections import OrderedDict, defaultdict
 import pkg_resources
-
+import faster_than_csv as csv
 from dataclasses import dataclass
 from typing import ClassVar
 from time import time
@@ -114,7 +114,7 @@ class Lexique383:
         :return:
         """
         with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
-            content = csv_file.readlines()
+            content = csv.csv2list(csv_file)
             self._create_db(content)
         return
 
