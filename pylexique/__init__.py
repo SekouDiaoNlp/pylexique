@@ -11,18 +11,9 @@ __license__ = "MIT"
 __maintainer__ = "SekouDiaoNlp"
 __status__ = "Production"
 
-from collections import OrderedDict
 import pkg_resources
-import json
-import pkg_resources
-from .utils import vdir
-from .pylexique import Lexique383
-
-# PYLEXIQUE_DATABASE = '/'.join(('Lexique383', 'lexique383.h5'))
-# HOME_PATH = '/'.join(('Lexique', ''))
+from .utils import vdir, print_attributes, show_attributes
+from .pylexique import Lexique383, LexItem
 
 _RESOURCE_PACKAGE = 'pylexique'
 _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
-
-# LEXIQUE = Lexique383(_RESOURCE_PATH).lexique
-# lexique383, LEXIQUE = Lexique383()  # Use only if the hdf5 file exists.

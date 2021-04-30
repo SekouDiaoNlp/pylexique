@@ -5,29 +5,35 @@
 
 import pytest
 from collections import OrderedDict
+from dataclasses import asdict
 from click.testing import CliRunner
 
-from pylexique import Lexique383, LEXIQUE
+from pylexique import Lexique383
 
-from pylexique import pylexique, cli
+from pylexique import pylexique, cli, vdir
 
 
 def test_content():
     """Sample pytest test of pylexique."""
     others = []
-    for x in LEXIQUE .values():
-        if x.cgram == 'VER':
-            assert x.cgram == 'VER'
+    lexicon = Lexique383()
+    x = 'a posteriori'
+    if x in lexicon.lexique:
+        if isinstance(lexicon.lexique[x], list ):
+            for elmnt in lexicon.lexique[x]:
+                if elmnt.cgram == 'ADV':
+                    assert elmnt.cgram == 'ADV'
+        elif lexicon.lexique[x].cgram == 'ADV':
+            assert lexicon.lexique[x].cgram == 'ADV'
         else:
             others.append(x)
 
 
 def test_command_line_interface():
-    """Test the CLI."""
+    """Test the CLI for ."""
     runner = CliRunner()
     result = runner.invoke(cli.main)
     assert result.exit_code == 0
-    assert 'pylexique.cli.main' in result.output
     help_result = runner.invoke(cli.main, ['--help'])
     assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
+    assert 'Pylexique is a Python wrapper around Lexique83.' in help_result.output
