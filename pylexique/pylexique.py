@@ -4,11 +4,10 @@
 
 from collections import OrderedDict, defaultdict
 import pkg_resources
-
+# import faster_than_csv as csv
 from dataclasses import dataclass
 from typing import ClassVar
 from time import time
-from .utils import set_save_folder
 
 _RESOURCE_PACKAGE = __name__
 
@@ -161,9 +160,6 @@ class Lexique383:
                     try:
                         value = int(value)
                     except ValueError:
-                        print(
-                            "the value {} is of the wrong type for the attribute '{}'. Keeping value as string.\n".format(
-                                value, attr))
                         errors[row_fields[0]].append({attr: value})
                         value = value
             converted_row_fields.append(value)

@@ -1,49 +1,4 @@
 from dataclasses import dataclass
-from pprint import pprint
-from inspect import getmembers
-from types import FunctionType
-
-
-def set_save_folder(folder):
-    """
-    Sets the folder in which the LexicalItems will be downloaded and saved.
-
-    :param folder: string.
-        Folder path.
-    :return: string.
-        Folder path.
-    """
-    if not folder:
-        folder = os.path.join(os.path.expanduser("~"), 'Documents', 'pylexique')
-    else:
-        folder = os.path.join(folder, 'pylexique')
-    return folder
-
-def attributes(obj):
-    disallowed_names = {
-      name for name, value in getmembers(type(obj))
-        if isinstance(value, FunctionType)}
-    return {
-      name: getattr(obj, name) for name in dir(obj)
-        if name[0:1] != '_' and name not in disallowed_names and hasattr(obj, name)}
-
-def show_attributes(object):
-    temp = vars(object)
-    for item in temp:
-        print(item, ':', temp[item])
-
-def print_attributes(obj):
-    pprint(attributes(obj))
-
-
-def vdir(obj):
-    """
-    | This function pretty-display the lexical items in Lexique383.
-
-    :param obj:
-    :return:
-    """
-    return [x for x in dir(obj) if not x.startswith('__')]
 
 
 def dataclass_with_default_init(_cls=None, *args, **kwargs):
