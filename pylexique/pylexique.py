@@ -114,7 +114,7 @@ class Lexique383:
         """
         with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
             content = csv_file.readlines()
-            lexique383_db = (content[1:])
+            lexique383_db = content[1:]
             self._create_db(lexique383_db)
         return
 
@@ -130,28 +130,13 @@ class Lexique383:
         errors = {}
         for i, row in enumerate(lexicon):
             row_fields = row.strip().split('\t')
-            formatted_row_fields = []
-            for field, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
-                if getattr(LexEntryTypes, field) == float:
-                    value = value.replace(',', '.')
-                else:
-                    value = value
-
-                try:
-                    formatted_value = getattr(LexEntryTypes, field)(value)
-                except ValueError:
-                    errors[value] = field
-                    formatted_value = value
-                finally:
-                    formatted_row_fields.append(formatted_value)
-                    formatted_row_fields.append(i + 1)
             if row_fields[0] in self.lexique and not isinstance(self.lexique[row_fields[0]], list):
                 self.lexique[row_fields[0]] = [self.lexique[row_fields[0]]]
-                self.lexique[row_fields[0]].append(LexItem(formatted_row_fields))
+                self.lexique[row_fields[0]].append(LexItem(row_fields))
             elif row_fields[0] in self.lexique and isinstance(self.lexique[row_fields[0]], list):
-                self.lexique[row_fields[0]].append(LexItem(formatted_row_fields))
+                self.lexique[row_fields[0]].append(LexItem(row_fields))
             else:
-                self.lexique[row_fields[0]] = LexItem(formatted_row_fields)
+                self.lexique[row_fields[0]] = LexItem(row_fields)
         return
 
 
@@ -180,6 +165,11 @@ class LexItem:
         return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
     def to_dict(self):
+        """
+        | Converts the LexItem to a dict containing its attributes and their values
+
+        :return: dict
+        """
         result = OrderedDict((attr, getattr(self, attr)) for attr in LEXIQUE383_FIELD_NAMES)
         return result
 
