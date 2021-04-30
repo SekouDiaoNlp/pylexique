@@ -25,9 +25,6 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20', 'morphoder', 'nbmorph']
 
 
-
-
-
 class Lexique383:
     """
     This is the class handling the lexique database.
@@ -241,8 +238,6 @@ class LexItem:
         result = OrderedDict(attributes)
         # result = OrderedDict((attr, getattr(self, attr)) for attr in self.__slots__ if attr != 'attr')
         return result
-
-
 
 
 if __name__ == "__main__":
