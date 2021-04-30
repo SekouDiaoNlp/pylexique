@@ -126,26 +126,9 @@ class Lexique383:
             Iterable containing the lexique383 entries.
         :return:
         """
-        errors = defaultdict(list)
-        converted_row_fields = []
         for i, row in enumerate(lexicon[1:]):
             row_fields = row.strip().split('\t')
-            # for attr, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
-            #     if attr in {'freqlemfilms2', 'freqlemlivres', 'freqfilms2', 'freqlivres', 'old20', 'pld20'}:
-            #         if (value != '' or value != ' ') and ',' in value:
-            #             value = value.replace(',', '.')
-            #             value = float(value)
-            #     if attr in {'nbhomogr', 'nbhomoph', 'islem', 'nblettres', 'nbphons', 'voisorth', 'voisphon', 'puorth', 'puphon', 'nbsyll'}:
-            #         if value != '' or value != ' ':
-            #             try:
-            #                 value = int(value)
-            #             except ValueError:
-            #                 print("the value {} is of the wrong type for the attribute '{}'. Keeping value as string.\n".format(value, attr))
-            #                 errors[row_fields[0]].append({attr: value})
-            #             finally:
-            #                 value = value
-            #     converted_row_fields.append(value)
-            # row_fields = converted_row_fields
+            row_fields = self._convert_entries(row_fields)
             if row_fields[0] in self.lexique and not isinstance(self.lexique[row_fields[0]], list):
                 self.lexique[row_fields[0]] = [self.lexique[row_fields[0]]]
                 self.lexique[row_fields[0]].append(LexItem(row_fields))
@@ -157,6 +140,13 @@ class Lexique383:
 
     @staticmethod
     def _convert_entries(row_fields):
+        """
+
+        :param row_fields:
+        :return: converted_row_fields:
+        """
+        errors = defaultdict(list)
+        converted_row_fields = []
         for attr, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
             if attr in {'freqlemfilms2', 'freqlemlivres', 'freqfilms2', 'freqlivres', 'old20', 'pld20'}:
                 if (value != '' or value != ' ') and ',' in value:
@@ -172,8 +162,10 @@ class Lexique383:
                             "the value {} is of the wrong type for the attribute '{}'. Keeping value as string.\n".format(
                                 value, attr))
                         errors[row_fields[0]].append({attr: value})
+                        value = value
             converted_row_fields.append(value)
         row_fields = converted_row_fields
+        return row_fields
 
 
 @dataclass(init=False, repr=False, eq=True, order=False, unsafe_hash=False, frozen=False)
@@ -194,7 +186,8 @@ class LexItem:
         fields = row_fields
         setattr(self, '_name_', fields[0])
         for attr, value in zip(LEXIQUE383_FIELD_NAMES, fields):
-            setattr(self, attr, value)
+            if attr != 'attr':
+                setattr(self, attr, value)
         return
 
     def __repr__(self):
@@ -206,7 +199,17 @@ class LexItem:
 
         :return: dict
         """
-        result = OrderedDict((attr, getattr(self, attr)) for attr in LEXIQUE383_FIELD_NAMES)
+        attributes = []
+        for attr in self.__slots__:
+            if not attr == "_name_":
+                try:
+                    value = getattr(self, attr)
+                except AttributeError as e:
+                    print(e)
+                    pass
+                attributes.append((attr, value))
+        result = OrderedDict(attributes)
+        # result = OrderedDict((attr, getattr(self, attr)) for attr in self.__slots__ if attr != 'attr')
         return result
 
 
