@@ -35,7 +35,6 @@ pylexique
         :target: https://pylexique.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-
 .. image:: https://pyup.io/repos/github/SekouDiaoNlp/pylexique/shield.svg
      :target: https://pyup.io/repos/github/SekouDiaoNlp/pylexique/
      :alt: Updates
