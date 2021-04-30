@@ -180,7 +180,7 @@ class LexItem:
         return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
     def to_dict(self):
-        result = {attr: getattr(self, attr) for attr in LEXIQUE383_FIELD_NAMES}
+        result = OrderedDict((attr, getattr(self, attr)) for attr in LEXIQUE383_FIELD_NAMES)
         return result
 
 

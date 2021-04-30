@@ -7,9 +7,7 @@ import json
 import joblib
 import logging
 from pylexique import Lexique383, LexItem
-from utils import vdir, show_attributes
 from pprint import pprint
-from dataclasses import asdict
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -41,19 +39,20 @@ def main(words, output):
     results = {}
     for word in words:
         results[word] = LEXIQUE.lexique[word]
-        show_attributes(word)
     if output:
         with open(output, 'w', encoding='utf-8') as file:
-            joblib.dump(results, file)
+            json.dump(results, file, indent=4)
             pprint('The Lexical Items have been successfully saved to {0} by pylexique.cli.main.'.format(output))
     else:
-        if isinstance(word, list):
-            for elmt in word:
-                pprint(asdict(word))
-                print('\n\n')
-        elif isinstance(word, LexItem):
-            pprint(asdict(word))
-            print('\n\n')
+        if isinstance(words, tuple):
+            for word in words:
+                if isinstance(results[word], list):
+                    for elmt in results[word]:
+                        pprint(elmt.to_dict())
+                        print('\n\n')
+                else:
+                    pprint(results[word].to_dict())
+                    print('\n\n')
     return
 
 
