@@ -123,7 +123,7 @@ The meanings of the attributes of this object are as follow:
 * orthosyll: syllable orthographic form
 
 
-You can find all the revelation in the `official documentation of Lexique83`_
+You can find all the relevant information in the `official documentation of Lexique83`_
 
 * Free software: MIT license
 * Documentation: https://pylexique.readthedocs.io.
