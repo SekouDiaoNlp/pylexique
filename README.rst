@@ -53,7 +53,7 @@ It allows to extract lexical information from more than 140 000 French words in 
 Features
 --------
 
-* Extract oll lexical information from a French  word.
+* Extract all lexical information from a French  word.
 * Easy to use Api.
 * Easily integrate pylexique in your own projects as an imported library.
 * Can be used as a command line tool.
