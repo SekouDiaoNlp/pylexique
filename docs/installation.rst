@@ -19,8 +19,30 @@ This is the preferred method to install pylexique, as it will always install the
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide
 you through the process.
 
+You can also install pylexique by using Anaconda_ or Miniconda_ instead of `pip`_ .
+
+To install Anaconda_ or Miniconda_, please follow the installation instructions on their respective websites.
+After having installed Anaconda_ or Miniconda_, run these commands in your terminal:
+
+.. code-block:: console
+
+    $ conda config --add channels conda-forge
+    $ conda config --set channel_priority strict
+    $ conda install pylexique
+
+If you already have Anaconda_ or Miniconda_ available on your system, just type this in your terminal:
+
+.. code-block:: console
+
+    $ conda install -c conda-forge pylexique
+.. warning::
+    If you intend to install pylexique on a Apple Macbook with an Apple M1 processor,
+    it is advised that you install pylexique by using the conda installation method as all dependencies will be pre-compiled.
+
 .. _pip: https://pip.pypa.io
 .. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
+.. _Anaconda: https://www.anaconda.com/products/individual
+.. _Miniconda: https://docs.conda.io/en/latest/miniconda.html
 
 
 From sources

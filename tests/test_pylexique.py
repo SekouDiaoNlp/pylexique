@@ -10,7 +10,7 @@ from click.testing import CliRunner
 
 from pylexique import Lexique383
 
-from pylexique import pylexique, cli, vdir
+from pylexique import pylexique, cli
 
 
 def test_content():
