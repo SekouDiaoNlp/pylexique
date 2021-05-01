@@ -166,17 +166,17 @@ Publications
 ------------
 
 -  New, Boris, Christophe Pallier, Marc Brysbaert, and Ludovic Ferrand.
-   2004. “Lexique 2: A New French Lexical Database.” *Behavior Research
-   Methods, Instruments, & Computers* 36 (3): 516–524. `pdf`_
+   2004. "Lexique 2: A New French Lexical Database." *Behavior Research
+   Methods, Instruments, & Computers* 36 (3): 516--524. `pdf`_
 
 -  New, Boris, Christophe Pallier, Ludovic Ferrand, and Rafael Matos.
-   2001. “Une Base de Données Lexicales Du Français Contemporain Sur
-   Internet: LEXIQUE” *L’Année Psychologique* 101 (3): 447–462.
+   2001. "Une Base de Données Lexicales Du Français Contemporain Sur
+   Internet: LEXIQUE" *L'Année Psychologique* 101 (3): 447--462.
    `pdf <New%20et%20al.%20-%202001%20-%20Une%20base%20de%20données%20lexicales%20du%20français%20contempo.pdf>`__
 
 -  Boris New, Marc Brysbaert, Jean Veronis, and Christophe Pallier.
-   2007. “The Use of Film Subtitles to Estimate Word Frequencies.”
-   Applied Psycholinguistics 28 (4): 661–77.
+   2007. "The Use of Film Subtitles to Estimate Word Frequencies."
+   Applied Psycholinguistics 28 (4): 661--77.
    https://doi.org/10.1017/S014271640707035X.
    (`pdf <New.Brysbaert.Veronis.Pallier.2007.APU.pdf>`__)
 
@@ -187,7 +187,7 @@ Contributors
 -  Ronald Peereman
 -  Sophie Dufour
 -  Christian Lachaud
--  and many others… (contact us to be listed)
+-  and many others... (contact us to be listed)
 
 License
 -------
@@ -199,7 +199,7 @@ License
 .. _CC BY SA40.0: LICENSE-CC-BY-SA4.0.txt
 
 
-Bibex Entry to cite publications about Lexique383:
+BibTex Entry to cite publications about Lexique383:
 
 
 .. code:: bibtex
