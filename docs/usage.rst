@@ -14,10 +14,181 @@ To use pylexique from the command line:
 
     $ pylexique manger
 
+The output will be a json representation of the LexItem objects:
+
+.. code-block:: json
+
+    {
+        "manger": [
+            [
+                {
+                    "ortho": "manger",
+                    "phon": "m@Ze",
+                    "lemme": "manger",
+                    "cgram": "NOM",
+                    "genre": "m",
+                    "nombre": "s",
+                    "freqlemfilms2": 5.62,
+                    "freqlemlivres": 4.05,
+                    "freqfilms2": 5.62,
+                    "freqlivres": 4.05,
+                    "infover": "",
+                    "nbhomogr": 2,
+                    "nbhomoph": 7,
+                    "islem": 1,
+                    "nblettres": 6,
+                    "nbphons": 4,
+                    "cvcv": "CVCCVC",
+                    "p_cvcv": "CVCV",
+                    "voisorth": 9,
+                    "voisphon": 12,
+                    "puorth": 6,
+                    "puphon": 4,
+                    "syll": "m@-Ze",
+                    "nbsyll": 2,
+                    "cv_cv": "CV-CV",
+                    "orthrenv": "regnam",
+                    "phonrenv": "eZ@m",
+                    "orthosyll": "man-ger",
+                    "cgramortho": "NOM,VER",
+                    "deflem": "100",
+                    "defobs": "33",
+                    "old20": 1.35,
+                    "pld20": 1.25,
+                    "morphoder": "manger",
+                    "nbmorph": "1"
+                },
+                {
+                    "ortho": "manger",
+                    "phon": "m@Ze",
+                    "lemme": "manger",
+                    "cgram": "VER",
+                    "genre": "",
+                    "nombre": "",
+                    "freqlemfilms2": 467.82,
+                    "freqlemlivres": 280.61,
+                    "freqfilms2": 207.63,
+                    "freqlivres": 134.26,
+                    "infover": "\"inf;;\"",
+                    "nbhomogr": 2,
+                    "nbhomoph": 7,
+                    "islem": 1,
+                    "nblettres": 6,
+                    "nbphons": 4,
+                    "cvcv": "CVCCVC",
+                    "p_cvcv": "CVCV",
+                    "voisorth": 9,
+                    "voisphon": 12,
+                    "puorth": 6,
+                    "puphon": 4,
+                    "syll": "m@-Ze",
+                    "nbsyll": 2,
+                    "cv_cv": "CV-CV",
+                    "orthrenv": "regnam",
+                    "phonrenv": "eZ@m",
+                    "orthosyll": "man-ger",
+                    "cgramortho": "NOM,VER",
+                    "deflem": "100",
+                    "defobs": "20",
+                    "old20": 1.35,
+                    "pld20": 1.25,
+                    "morphoder": "manger",
+                    "nbmorph": "1"
+                }
+            ]
+        ]
+    }
+
+
+.. code-block:: bash
+
     $ pylexique boire
 
 
-You can also provide multiple words and specify an output file to save the lexical information in a json file.
+.. code-block:: json
+
+    {
+        "boire": [
+            [
+                {
+                    "ortho": "boire",
+                    "phon": "bwaR",
+                    "lemme": "boire",
+                    "cgram": "NOM",
+                    "genre": "m",
+                    "nombre": "s",
+                    "freqlemfilms2": 2.67,
+                    "freqlemlivres": 2.03,
+                    "freqfilms2": 2.67,
+                    "freqlivres": 2.03,
+                    "infover": "",
+                    "nbhomogr": 2,
+                    "nbhomoph": 2,
+                    "islem": 1,
+                    "nblettres": 5,
+                    "nbphons": 4,
+                    "cvcv": "CVVCV",
+                    "p_cvcv": "CYVC",
+                    "voisorth": 9,
+                    "voisphon": 14,
+                    "puorth": 4,
+                    "puphon": 4,
+                    "syll": "bwaR",
+                    "nbsyll": 1,
+                    "cv_cv": "CYVC",
+                    "orthrenv": "eriob",
+                    "phonrenv": "Rawb",
+                    "orthosyll": "boi-re",
+                    "cgramortho": "NOM,VER",
+                    "deflem": "96",
+                    "defobs": "30",
+                    "old20": 1.4,
+                    "pld20": "1",
+                    "morphoder": "boire",
+                    "nbmorph": "1"
+                },
+                {
+                    "ortho": "boire",
+                    "phon": "bwaR",
+                    "lemme": "boire",
+                    "cgram": "VER",
+                    "genre": "",
+                    "nombre": "",
+                    "freqlemfilms2": 339.05,
+                    "freqlemlivres": 274.32,
+                    "freqfilms2": 142.15,
+                    "freqlivres": 100.27,
+                    "infover": "\"inf;;\"",
+                    "nbhomogr": 2,
+                    "nbhomoph": 2,
+                    "islem": 1,
+                    "nblettres": 5,
+                    "nbphons": 4,
+                    "cvcv": "CVVCV",
+                    "p_cvcv": "CYVC",
+                    "voisorth": 9,
+                    "voisphon": 14,
+                    "puorth": 4,
+                    "puphon": 4,
+                    "syll": "bwaR",
+                    "nbsyll": 1,
+                    "cv_cv": "CYVC",
+                    "orthrenv": "eriob",
+                    "phonrenv": "Rawb",
+                    "orthosyll": "boi-re",
+                    "cgramortho": "NOM,VER",
+                    "deflem": "100",
+                    "defobs": "30",
+                    "old20": 1.4,
+                    "pld20": "1",
+                    "morphoder": "boire",
+                    "nbmorph": "1"
+                }
+            ]
+        ]
+    }
+
+You can also provide multiple words and/or specify an output file to save the lexical information in a json file.
 
 .. code-block:: bash
 
@@ -25,6 +196,7 @@ You can also provide multiple words and specify an output file to save the lexic
 
     $ pylexique il boit du vin rouge -o path/to/the/output/json/file.json
 
+The output will be similar as previously, with a json entry for each word in the sequence.
 
 To use pylexique  as a library in your own projects:
 
