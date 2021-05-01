@@ -2,6 +2,16 @@
 History
 =======
 
+1.2.1 (2021-04-30)
+------------------
+
+* Implemented Type Hinting for main modue.
+* Added a new method to the class Lexique383. The method is Lexique383._save_errors() .
+* This new method checks that the value of each dield in a LexItem is of the right type.
+| If it finds errors it will recorf the mismatched value/type and save it in ./erros/errors.json
+* Expanded sample usage of the software in the docs.
+* Much better documentation inluding links to Lexique383 pages and manuals.
+
 1.2.0 (2021-04-30)
 ------------------
 
