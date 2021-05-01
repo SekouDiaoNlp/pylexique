@@ -157,8 +157,13 @@ class Lexique383:
         return results
 
     def _save_errors(self):
+        """
+        Saves the mismatched key/values in Lexique383 based on type coercion.
+
+        """
         with open(_ERRORS_PATH, 'w', encoding='utf-8') as json_file:
             json.dump(self.value_errors, json_file, indent=4)
+        return
 
 
 class LexEntryTypes:
