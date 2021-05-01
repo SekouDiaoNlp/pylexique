@@ -188,7 +188,7 @@ The output will be a json representation of the LexItem objects:
         ]
     }
 
-You can also provide multiple words and specify an output file to save the lexical information in a json file.
+You can also provide multiple words and/or specify an output file to save the lexical information in a json file.
 
 .. code-block:: bash
 
