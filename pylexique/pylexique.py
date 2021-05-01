@@ -5,6 +5,7 @@
 from collections import OrderedDict, defaultdict
 from collections.abc import Sequence
 import pkg_resources
+import json
 # import faster_than_csv as csv
 from dataclasses import dataclass
 from typing import List, Optional, Tuple, Union, ClassVar
@@ -16,6 +17,7 @@ PYLEXIQUE_DATABASE = '/'.join(('Lexique383', 'lexique383.xlsb'))
 HOME_PATH = '/'.join(('Lexique', ''))
 PICKLE_PATH = '/'.join(('Lexique383', 'lexique383.zip'))
 _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
+_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/errors.json')
 
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
                           'freqfilms2',
@@ -37,8 +39,9 @@ class Lexique383:
     """
 
     file_name = pkg_resources.resource_filename(_RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)
+    value_errors = []
 
-    def __init__(self, lexique_path: None=None) -> None:
+    def __init__(self, lexique_path: Optional[str]=None) -> None:
         self.lexique_path = lexique_path
         self.lexique = OrderedDict()
         if lexique_path:
@@ -73,6 +76,8 @@ class Lexique383:
         with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
             content = csv_file.readlines()
             self._create_db(content)
+            if self.value_errors:
+                self._save_errors()
         return
 
     def _create_db(self, lexicon: List[str]) -> None:
@@ -96,8 +101,7 @@ class Lexique383:
                 self.lexique[row_fields[0]] = LexItem(row_fields)
         return
 
-    @staticmethod
-    def _convert_entries(row_fields: List[str]) -> List[Union[str, float, int]]:
+    def _convert_entries(self, row_fields: List[str]) -> List[Union[str, float, int]]:
         """
         | Convert entries from `strings` to `int` or `float` and generates
         | a new list with typed entries.
@@ -120,6 +124,7 @@ class Lexique383:
                     except ValueError:
                         errors[row_fields[0]].append({attr: value})
                         value = value
+                        self.value_errors.append(errors)
             converted_row_fields.append(value)
         row_fields = converted_row_fields
         return row_fields
@@ -150,6 +155,10 @@ class Lexique383:
         else:
             raise TypeError
         return results
+
+    def _save_errors(self):
+        with open(_ERRORS_PATH, 'w', encoding='utf-8') as json_file:
+            json.dump(self.value_errors, json_file, indent=4)
 
 
 class LexEntryTypes:
@@ -233,10 +242,9 @@ class LexItem:
                     value = getattr(self, attr)
                 except AttributeError as e:
                     print(e)
-                    pass
+                    continue
                 attributes.append((attr, value))
         result = OrderedDict(attributes)
-        # result = OrderedDict((attr, getattr(self, attr)) for attr in self.__slots__ if attr != 'attr')
         return result
 
 
