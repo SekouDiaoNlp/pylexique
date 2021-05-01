@@ -7,7 +7,7 @@ from collections.abc import Sequence
 import pkg_resources
 # import faster_than_csv as csv
 from dataclasses import dataclass
-from typing import ClassVar
+from typing import List, Optional, Tuple, Union, ClassVar
 from time import time
 
 _RESOURCE_PACKAGE = __name__
@@ -38,7 +38,7 @@ class Lexique383:
 
     file_name = pkg_resources.resource_filename(_RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)
 
-    def __init__(self, lexique_path=None):
+    def __init__(self, lexique_path: None=None) -> None:
         self.lexique_path = lexique_path
         self.lexique = OrderedDict()
         if lexique_path:
@@ -62,7 +62,7 @@ class Lexique383:
     def __len__(self):
         return len(self.lexique)
 
-    def _parse_lexique(self, lexique_path):
+    def _parse_lexique(self, lexique_path: str) -> None:
         """
         | Parses the given lexique file and creates a hdf5 table to store the data.
 
@@ -75,7 +75,7 @@ class Lexique383:
             self._create_db(content)
         return
 
-    def _create_db(self, lexicon):
+    def _create_db(self, lexicon: List[str]) -> None:
         """
         | Creates an hdf5 table populated with the entries in lexique if it does not exist yet.
         | It stores the hdf5 database for fast access.
@@ -97,7 +97,7 @@ class Lexique383:
         return
 
     @staticmethod
-    def _convert_entries(row_fields):
+    def _convert_entries(row_fields: List[str]) -> List[Union[str, float, int]]:
         """
         | Convert entries from `strings` to `int` or `float` and generates
         | a new list with typed entries.
@@ -124,7 +124,7 @@ class Lexique383:
         row_fields = converted_row_fields
         return row_fields
 
-    def get_lex(self, words):
+    def get_lex(self, words: Union[Tuple[str, str, str, str], str]) -> OrderedDict:
         """
 
         :param words:
@@ -209,7 +209,7 @@ class LexItem:
     for attr in LEXIQUE383_FIELD_NAMES:
         attr: LexEntryTypes
 
-    def __init__(self, row_fields):
+    def __init__(self, row_fields: List[Union[str, float, int]]) -> None:
         fields = row_fields
         setattr(self, '_name_', fields[0])
         for attr, value in zip(LEXIQUE383_FIELD_NAMES, fields):
@@ -217,10 +217,10 @@ class LexItem:
                 setattr(self, attr, value)
         return
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
-    def to_dict(self):
+    def to_dict(self) -> OrderedDict:
         """
         | Converts the LexItem to a dict containing its attributes and their values
 
