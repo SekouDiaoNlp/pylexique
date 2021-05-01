@@ -144,8 +144,8 @@ Main developer SekouDiaoNlp_.
 
 Lexical corpus: Lexique83_
 
-AboutLexique383:
-================
+About Lexique383:
+=================
 
 Lexique3
 ========
@@ -182,8 +182,8 @@ Publications
     https://doi.org/10.1017/S014271640707035X.
     ([pdf](New.Brysbaert.Veronis.Pallier.2007.APU.pdf))
 
-Contributeurs
--------------
+Contributors
+------------
 
 -   Boris New & Christophe Pallier
 -   Ronald Peereman
@@ -195,6 +195,10 @@ License
 -------
 
 [CC BY SA40.0](LICENSE-CC-BY-SA4.0.txt)
+
+
+Bibex Entry to cite publications about Lexique383:
+
 
 .. code:: bibtex
 
