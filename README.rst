@@ -227,6 +227,17 @@ BibTex Entry to cite publications about Lexique383:
     year = {2001},
     }
 
+.. code:: bibtex
+
+    @article{new_brysbaert_veronis_pallier_2007,
+    author={NEW, BORIS and BRYSBAERT, MARC and VERONIS, JEAN and PALLIER, CHRISTOPHE},
+    title={The use of film subtitles to estimate word frequencies},
+    volume={28}, DOI={10.1017/S014271640707035X},
+    number={4}, journal={Applied Psycholinguistics},
+    publisher={Cambridge University Press},
+    year={2007},
+    pages={661–677}}
+
 .. _Lexique83: http://www.lexique.org/
 .. _SekouDiaoNlp: https://github.com/SekouDiaoNlp
 .. _`official documentation of Lexique83`: http://lexique.org/_documentation/Manuel_Lexique.3.2.pdf
