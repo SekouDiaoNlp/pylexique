@@ -2,6 +2,14 @@
 History
 =======
 
+1.2.2 (2021-05-04)
+------------------
+
+* Enhanced Type Hinting for main module.
+* Changed the property LexItem.islem to boolean instead of a binary choice 0/1.
+* Expanded sample usage of the software in the docs.
+* Updated dependencies.
+
 1.2.1 (2021-04-30)
 ------------------
 
