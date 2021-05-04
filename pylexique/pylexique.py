@@ -139,8 +139,9 @@ class Lexique383:
         row_fields = converted_row_fields
         return row_fields
 
-    def get_lex(self, words: Union[Tuple[str, str, str, str], str]) -> OrderedDict:
+    def get_lex(self, words: Union[Tuple[str], str]) -> OrderedDict:
         """
+        Recovers the lexical entries for the words in the sequence
 
         :param words:
         :return: Dictionary of LexItems:
