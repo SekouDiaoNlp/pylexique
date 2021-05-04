@@ -116,8 +116,18 @@ class Lexique383:
                 if (value != '' or value != ' ') and ',' in value:
                     value = value.replace(',', '.')
                     value = float(value)
-            if attr in {'nbhomogr', 'nbhomoph', 'islem', 'nblettres', 'nbphons', 'voisorth', 'voisphon', 'puorth',
-                        'puphon', 'nbsyll'}:
+            if attr == 'islem':
+                value = value.strip()
+                if value != '' and value not in ('0', '1'):
+                    value = 0
+                try:
+                    value = bool(int(value))
+                except ValueError:
+                    errors[row_fields[0]].append({attr: value})
+                    value = value
+                    self.value_errors.append(errors)
+            if attr in {'nbhomogr', 'nbhomoph', 'nblettres', 'nbphons',
+                        'voisorth', 'voisphon', 'puorth', 'puphon', 'nbsyll'}:
                 if value != '' or value != ' ':
                     try:
                         value = int(value)
