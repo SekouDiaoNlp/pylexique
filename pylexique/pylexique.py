@@ -10,6 +10,7 @@ import json
 from dataclasses import dataclass
 from typing import List, Optional, Tuple, Union, ClassVar
 from time import time
+from .utils import logger
 
 _RESOURCE_PACKAGE = __name__
 
@@ -151,17 +152,17 @@ class Lexique383:
             try:
                 results[words] = self.lexique[words]
             except AttributeError:
-                print('the word {} is not in Lexique383'.format(words))
+                logger.warning('the word {} is not in Lexique383'.format(words))
         elif isinstance(words, Sequence):
             for word in words:
                 if isinstance(word, str):
                     try:
                         results[word] = self.lexique[word]
                     except AttributeError:
-                        print('The word {} is not in Lexique383\n'.format(word))
+                        logger.warning('The word {} is not in Lexique383\n'.format(word))
                         continue
                 else:
-                    print('{} is not a valid string'.format(word))
+                    logger.warning('{} is not a valid string'.format(word))
                     raise TypeError
         else:
             raise TypeError
@@ -257,7 +258,7 @@ class LexItem:
                 try:
                     value = getattr(self, attr)
                 except AttributeError as e:
-                    print(e)
+                    logger.warning(e)
                     continue
                 attributes.append((attr, value))
         result = OrderedDict(attributes)
