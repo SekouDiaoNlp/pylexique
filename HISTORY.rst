@@ -2,6 +2,13 @@
 History
 =======
 
+1.2.3 (2021-05-04)
+------------------
+
+* Enhanced behaviour of output to stdout to not conflict with the logging strategy of users importing the library in their own projects.
+* Expanded sample usage of the software in the docs.
+* Updated dependencies.
+
 1.2.2 (2021-05-04)
 ------------------
 
