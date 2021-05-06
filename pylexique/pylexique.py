@@ -106,13 +106,15 @@ class Lexique383:
                 row_fields = self._convert_entries(row_fields)
             except ValueError as e:
                 continue
+            lexical_entry = LexItem(*row_fields)
+            self.lemmes[lexical_entry.lemme].append(lexical_entry)
             if row_fields[0] in self.lexique and not isinstance(self.lexique[row_fields[0]], list):
                 self.lexique[row_fields[0]] = [self.lexique[row_fields[0]]]
-                self.lexique[row_fields[0]].append(LexItem(*row_fields))
+                self.lexique[row_fields[0]].append(lexical_entry)
             elif row_fields[0] in self.lexique and isinstance(self.lexique[row_fields[0]], list):
-                self.lexique[row_fields[0]].append(LexItem(*row_fields))
+                self.lexique[row_fields[0]].append(lexical_entry)
             else:
-                self.lexique[row_fields[0]] = LexItem(*row_fields)
+                self.lexique[row_fields[0]] = lexical_entry
         return
 
     def _convert_entries(self, row_fields: List[str]) -> List[Union[str, float, int]]:
@@ -186,8 +188,24 @@ class Lexique383:
         return results
 
     def get_all_forms(self, word):
-        pass
-        return
+        """
+        Gets all lexical forms of a given word.
+
+        :param word:
+        :return: List of LexItem objects sharing the same root lemma.
+        """
+        try:
+            lex_entry = self.lexique[word]
+        except ValueError as e:
+            logger.warning('The word {} is not in Lexique383\n'.format(word))
+            raise ValueError
+        if isinstance(lex_entry, LexItem):
+            lemmes = self.lemmes[lex_entry.lemme]
+        elif isinstance(lex_entry, list):
+            lemmes = self.lemmes[lex_entry[0].lemme]
+        else:
+            raise TypeError
+        return lemmes
 
     @staticmethod
     def _save_errors(errors, errors_path):
