@@ -2,6 +2,15 @@
 History
 =======
 
+1.2.4 (2021-05-06)
+------------------
+
+* Now all the attributes of the LexItem objects are immutable for consistency.
+* Added new method Lexique383.get_all_forms(word) to get all the lexical variations of a word.
+* This new method returns a list of LexItems having the same root lemma.
+* Expanded sample usage of the software in the docs.
+* Updated dependencies.
+
 1.2.3 (2021-05-04)
 ------------------
 
