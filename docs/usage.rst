@@ -239,9 +239,9 @@ Notice that item can be either a string or a sequence of strings when using Lexi
 
 
 
-Because in French the world 'a' is very polysemic word, it has several entries in Lexique 383.
+Because in French the world 'a' is a very polysemic word, it has several entries in Lexique 383.
 For this reason the LEXIQUE Dict has the value of the `ortho` property of its LexicalEntry.
-In th case of 'abaissait' there is only one LexicalItem corresponding to this dist key.
+In th case of 'abaissait' there is only one LexicalItem corresponding to this dict key.
 But in the case of 'a' there are several LexItem objects corresponding to this key and then the LexItem objects
 are stored in a list corresponding to th value of the key.
 
@@ -259,7 +259,23 @@ are stored in a list corresponding to th value of the key.
         var_multiple = LEXIQUE.get_lex(('il', 'mange', 'une', 'baguette'))
         pprint(var_multiple)
 
-        # You can use the method LexItem.to_dict() to produce a dictionary with key/value pairs corresponding to the LexItem
+You can get all the forms of a given word by calling the method Lexique383.get_all_forms(word):
+
+ .. code-block:: python
+
+        all_avoir_forms = LEXIQUE.get_all_forms('avez')
+        print(len(all_avoir_forms))
+
+        print('\n')
+
+        all_vouloir_forms = LEXIQUE.get_all_forms('voulu')
+        print(len(all_vouloir_forms))
+
+
+You can use the method LexItem.to_dict() to produce a dictionary with key/value pairs corresponding to the LexItem
+
+
+ .. code-block:: python
 
         print('\n\n')
         if isinstance(var_1, list):
