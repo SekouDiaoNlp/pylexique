@@ -12,9 +12,9 @@ from dataclasses import dataclass
 from typing import List, Optional, Tuple, Union, ClassVar
 from time import time
 
-if sys.version_info >= (3, 9):
+try:
     from utils import logger
-else:
+except ModuleNotFoundError:
     from .utils import logger
 
 _RESOURCE_PACKAGE = __name__
