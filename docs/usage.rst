@@ -259,7 +259,23 @@ are stored in a list corresponding to th value of the key.
         var_multiple = LEXIQUE.get_lex(('il', 'mange', 'une', 'baguette'))
         pprint(var_multiple)
 
-        # You can use the method LexItem.to_dict() to produce a dictionary with key/value pairs corresponding to the LexItem
+You can get all the forms of a given word by calling the method Lexique383.get_all_forms(word):
+
+ .. code-block:: python
+
+        all_avoir_forms = LEXIQUE.get_all_forms('avez')
+        print(len(all_avoir_forms))
+
+        print('\n')
+
+        all_vouloir_forms = LEXIQUE.get_all_forms('voulu')
+        print(len(all_vouloir_forms))
+
+
+You can use the method LexItem.to_dict() to produce a dictionary with key/value pairs corresponding to the LexItem
+
+
+ .. code-block:: python
 
         print('\n\n')
         if isinstance(var_1, list):
