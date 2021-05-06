@@ -54,42 +54,41 @@ Each lexical item is represented in a LexItem having the following LexEntryType:
         Type information about all the lexical attributes in a LexItem object.
 
         """
-        ortho = str
-        phon = str
-        lemme = str
-        cgram = str
-        genre = str
-        nombre = str
-        freqlemfilms2 = float
-        freqlemlivres = float
-        freqfilms2 = float
-        freqlivres = float
-        infover = str
-        nbhomogr = int
-        nbhomoph = int
-        islem = bool
-        nblettres = int
-        nbphons = int
-        cvcv = str
-        p_cvcv = str
-        voisorth = int
-        voisphon = int
-        puorth = int
-        puphon = int
-        syll = str
-        nbsyll = int
-        cv_cv = str
-        orthrenv = str
-        phonrenv = str
-        orthosyll = str
-        cgramortho = str
-        deflem = float
-        defobs = int
-        old20 = float
-        pld20 = float
-        morphoder = str
-        nbmorph = int
-        id = int
+        ortho: str
+        phon: str
+        lemme: str
+        cgram: str
+        genre: str
+        nombre: str
+        freqlemfilms2: float
+        freqlemlivres: float
+        freqfilms2: float
+        freqlivres: float
+        infover: str
+        nbhomogr: int
+        nbhomoph: int
+        islem: bool
+        nblettres: int
+        nbphons: int
+        cvcv: str
+        p_cvcv: str
+        voisorth: int
+        voisphon: int
+        puorth: int
+        puphon: int
+        syll: str
+        nbsyll: int
+        cv_cv: str
+        orthrenv: str
+        phonrenv: str
+        orthosyll: str
+        cgramortho: str
+        deflem: float
+        defobs: int
+        old20: float
+        pld20: float
+        morphoder: str
+        nbmorph: int
 
 The meanings of the attributes of this object are as follow:
 
