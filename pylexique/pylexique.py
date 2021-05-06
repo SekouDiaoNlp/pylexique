@@ -46,12 +46,13 @@ class Lexique383:
     """
 
     file_name = pkg_resources.resource_filename(_RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)
+    lexique = OrderedDict()
     value_errors = []
     length_errors = []
+    lemmes = defaultdict(list)
 
     def __init__(self, lexique_path: Optional[str] = None) -> None:
         self.lexique_path = lexique_path
-        self.lexique = OrderedDict()
         if lexique_path:
             t0 = time()
             self._parse_lexique(self.lexique_path)
@@ -183,6 +184,10 @@ class Lexique383:
         else:
             raise TypeError
         return results
+
+    def get_all_forms(self, word):
+        pass
+        return
 
     @staticmethod
     def _save_errors(errors, errors_path):
