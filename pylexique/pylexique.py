@@ -6,11 +6,16 @@ from collections import OrderedDict, defaultdict
 from collections.abc import Sequence
 import pkg_resources
 import json
+import sys
 # import faster_than_csv as csv
 from dataclasses import dataclass
 from typing import List, Optional, Tuple, Union, ClassVar
 from time import time
-from utils import logger
+
+if sys.version_info >= (3, 9):
+    from utils import logger
+else:
+    from .utils import logger
 
 _RESOURCE_PACKAGE = __name__
 
@@ -18,7 +23,8 @@ PYLEXIQUE_DATABASE = '/'.join(('Lexique383', 'lexique383.xlsb'))
 HOME_PATH = '/'.join(('Lexique', ''))
 PICKLE_PATH = '/'.join(('Lexique383', 'lexique383.zip'))
 _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
-_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/errors.json')
+_VALUE_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/value_errors.json')
+_LENGTH_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/length_errors.json')
 
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
                           'freqfilms2',
@@ -31,7 +37,7 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
 class Lexique383:
     """
     This is the class handling the lexique database.
-    It provides method for interacting with the Lexique DB
+    It provides methods for interacting with the Lexique DB
     and retrieve lexical items.
     All the lexical items are then stored in an Ordered Dict called
 
@@ -41,8 +47,9 @@ class Lexique383:
 
     file_name = pkg_resources.resource_filename(_RESOURCE_PACKAGE, PYLEXIQUE_DATABASE)
     value_errors = []
+    length_errors = []
 
-    def __init__(self, lexique_path: Optional[str]=None) -> None:
+    def __init__(self, lexique_path: Optional[str] = None) -> None:
         self.lexique_path = lexique_path
         self.lexique = OrderedDict()
         if lexique_path:
@@ -78,13 +85,15 @@ class Lexique383:
             content = csv_file.readlines()
             self._create_db(content)
             if self.value_errors:
-                self._save_errors()
+                self._save_errors(self.value_errors, _VALUE_ERRORS_PATH)
+            if self.length_errors:
+                self._save_errors(self.length_errors, _LENGTH_ERRORS_PATH)
         return
 
     def _create_db(self, lexicon: List[str]) -> None:
         """
-        | Creates an hdf5 table populated with the entries in lexique if it does not exist yet.
-        | It stores the hdf5 database for fast access.
+        | Creates an hash table populated with the entries in lexique if it does not exist yet.
+        | It stores the hash table database for fast access.
 
         :param lexicon: Iterable.
             Iterable containing the lexique383 entries.
@@ -92,14 +101,17 @@ class Lexique383:
         """
         for i, row in enumerate(lexicon[1:]):
             row_fields = row.strip().split('\t')
-            row_fields = self._convert_entries(row_fields)
+            try:
+                row_fields = self._convert_entries(row_fields)
+            except ValueError as e:
+                continue
             if row_fields[0] in self.lexique and not isinstance(self.lexique[row_fields[0]], list):
                 self.lexique[row_fields[0]] = [self.lexique[row_fields[0]]]
-                self.lexique[row_fields[0]].append(LexItem(row_fields))
+                self.lexique[row_fields[0]].append(LexItem(*row_fields))
             elif row_fields[0] in self.lexique and isinstance(self.lexique[row_fields[0]], list):
-                self.lexique[row_fields[0]].append(LexItem(row_fields))
+                self.lexique[row_fields[0]].append(LexItem(*row_fields))
             else:
-                self.lexique[row_fields[0]] = LexItem(row_fields)
+                self.lexique[row_fields[0]] = LexItem(*row_fields)
         return
 
     def _convert_entries(self, row_fields: List[str]) -> List[Union[str, float, int]]:
@@ -137,7 +149,11 @@ class Lexique383:
                         value = value
                         self.value_errors.append(errors)
             converted_row_fields.append(value)
-        row_fields = converted_row_fields
+        if len(converted_row_fields) != 35:
+            self.length_errors.append((converted_row_fields, row_fields))
+            raise ValueError
+        else:
+            row_fields = converted_row_fields
         return row_fields
 
     def get_lex(self, words: Union[Tuple[str], str]) -> OrderedDict:
@@ -168,83 +184,84 @@ class Lexique383:
             raise TypeError
         return results
 
-    def _save_errors(self):
+    @staticmethod
+    def _save_errors(errors, errors_path):
         """
         Saves the mismatched key/values in Lexique383 based on type coercion.
 
         """
-        with open(_ERRORS_PATH, 'w', encoding='utf-8') as json_file:
-            json.dump(self.value_errors, json_file, indent=4)
+        with open(errors_path, 'w', encoding='utf-8') as json_file:
+            json.dump(errors, json_file, indent=4)
         return
 
 
+@dataclass(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=True)
 class LexEntryTypes:
     """
     Type information about all the lexical attributes in a LexItem object.
 
     """
-    ortho = str
-    phon = str
-    lemme = str
-    cgram = str
-    genre = str
-    nombre = str
-    freqlemfilms2 = float
-    freqlemlivres = float
-    freqfilms2 = float
-    freqlivres = float
-    infover = str
-    nbhomogr = int
-    nbhomoph = int
-    islem = bool
-    nblettres = int
-    nbphons = int
-    cvcv = str
-    p_cvcv = str
-    voisorth = int
-    voisphon = int
-    puorth = int
-    puphon = int
-    syll = str
-    nbsyll = int
-    cv_cv = str
-    orthrenv = str
-    phonrenv = str
-    orthosyll = str
-    cgramortho = str
-    deflem = float
-    defobs = int
-    old20 = float
-    pld20 = float
-    morphoder = str
-    nbmorph = int
-    id = int
+    ortho: str
+    phon: str
+    lemme: str
+    cgram: str
+    genre: str
+    nombre: str
+    freqlemfilms2: float
+    freqlemlivres: float
+    freqfilms2: float
+    freqlivres: float
+    infover: str
+    nbhomogr: int
+    nbhomoph: int
+    islem: bool
+    nblettres: int
+    nbphons: int
+    cvcv: str
+    p_cvcv: str
+    voisorth: int
+    voisphon: int
+    puorth: int
+    puphon: int
+    syll: str
+    nbsyll: int
+    cv_cv: str
+    orthrenv: str
+    phonrenv: str
+    orthosyll: str
+    cgramortho: str
+    deflem: float
+    defobs: int
+    old20: float
+    pld20: float
+    morphoder: str
+    nbmorph: int
 
 
-@dataclass(init=False, repr=False, eq=True, order=False, unsafe_hash=False, frozen=False)
-class LexItem:
+@dataclass(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=True)
+class LexItem(LexEntryTypes):
     """
     | This class defines the lexical items in Lexique383.
     | It uses slots for memory efficiency.
 
     :param row_fields:
     """
-    _s: ClassVar[list] = LEXIQUE383_FIELD_NAMES + ['_name_']
+    _s: ClassVar[list] = LEXIQUE383_FIELD_NAMES
     __slots__ = _s
-    _name_: str
-    for attr in LEXIQUE383_FIELD_NAMES:
-        attr: LexEntryTypes
 
-    def __init__(self, row_fields: List[Union[str, float, int]]) -> None:
-        fields = row_fields
-        setattr(self, '_name_', fields[0])
-        for attr, value in zip(LEXIQUE383_FIELD_NAMES, fields):
-            if attr != 'attr':
-                setattr(self, attr, value)
-        return
+    # for attr in LEXIQUE383_FIELD_NAMES:
+    #     attr: LexEntryTypes
+    #
+    # def __init__(self, row_fields: List[Union[str, float, int]]) -> None:
+    #     fields = row_fields
+    #     setattr(self, '_name_', fields[0])
+    #     for attr, value in zip(LEXIQUE383_FIELD_NAMES, fields):
+    #         if attr != 'attr':
+    #             setattr(self, attr, value)
+    #     return
 
     def __repr__(self) -> str:
-        return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.ortho, self.lemme, self.cgram)
+        return '{0}({1}, {2}, {})'.format(self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
     def to_dict(self) -> OrderedDict:
         """
@@ -254,13 +271,12 @@ class LexItem:
         """
         attributes = []
         for attr in self.__slots__:
-            if not attr == "_name_":
-                try:
-                    value = getattr(self, attr)
-                except AttributeError as e:
-                    logger.warning(e)
-                    continue
-                attributes.append((attr, value))
+            try:
+                value = getattr(self, attr)
+            except AttributeError as e:
+                logger.warning(e)
+                continue
+            attributes.append((attr, value))
         result = OrderedDict(attributes)
         return result
 
