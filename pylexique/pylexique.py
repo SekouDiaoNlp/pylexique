@@ -10,7 +10,7 @@ import json
 from dataclasses import dataclass
 from typing import List, Optional, Tuple, Union, ClassVar
 from time import time
-from pylexique.utils import logger
+from utils import logger
 
 _RESOURCE_PACKAGE = __name__
 
