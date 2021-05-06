@@ -1,0 +1,158 @@
+[
+    {
+        "a": [
+            {
+                "nbphons": "V"
+            },
+            {
+                "puphon": "a"
+            },
+            {
+                "nbsyll": "V"
+            }
+        ]
+    },
+    {
+        "a": [
+            {
+                "nbphons": "V"
+            },
+            {
+                "puphon": "a"
+            },
+            {
+                "nbsyll": "V"
+            }
+        ]
+    },
+    {
+        "a": [
+            {
+                "nbphons": "V"
+            },
+            {
+                "puphon": "a"
+            },
+            {
+                "nbsyll": "V"
+            }
+        ]
+    },
+    {
+        "sa": [
+            {
+                "nbphons": "CV"
+            },
+            {
+                "puphon": "sa"
+            },
+            {
+                "nbsyll": "CV"
+            }
+        ]
+    },
+    {
+        "sa": [
+            {
+                "nbphons": "CV"
+            },
+            {
+                "puphon": "sa"
+            },
+            {
+                "nbsyll": "CV"
+            }
+        ]
+    },
+    {
+        "sa": [
+            {
+                "nbphons": "CV"
+            },
+            {
+                "puphon": "sa"
+            },
+            {
+                "nbsyll": "CV"
+            }
+        ]
+    },
+    {
+        "e": [
+            {
+                "nbphons": "V"
+            },
+            {
+                "puphon": "e"
+            },
+            {
+                "nbsyll": "V"
+            }
+        ]
+    },
+    {
+        "e": [
+            {
+                "nbphons": "V"
+            },
+            {
+                "puphon": "e"
+            },
+            {
+                "nbsyll": "V"
+            }
+        ]
+    },
+    {
+        "e": [
+            {
+                "nbphons": "V"
+            },
+            {
+                "puphon": "e"
+            },
+            {
+                "nbsyll": "V"
+            }
+        ]
+    },
+    {
+        "o": [
+            {
+                "nbphons": "V"
+            },
+            {
+                "puphon": "o"
+            },
+            {
+                "nbsyll": "V"
+            }
+        ]
+    },
+    {
+        "o": [
+            {
+                "nbphons": "V"
+            },
+            {
+                "puphon": "o"
+            },
+            {
+                "nbsyll": "V"
+            }
+        ]
+    },
+    {
+        "o": [
+            {
+                "nbphons": "V"
+            },
+            {
+                "puphon": "o"
+            },
+            {
+                "nbsyll": "V"
+            }
+        ]
+    }
+]
