@@ -2,7 +2,7 @@
 History
 =======
 
-1.2.4 (2021-05-06)
+1.2.5 (2021-05-06)
 ------------------
 
 * Now all the attributes of the LexItem objects are immutable for consistency.
