@@ -239,9 +239,9 @@ Notice that item can be either a string or a sequence of strings when using Lexi
 
 
 
-Because in French the world 'a' is very polysemic word, it has several entries in Lexique 383.
+Because in French the world 'a' is a very polysemic word, it has several entries in Lexique 383.
 For this reason the LEXIQUE Dict has the value of the `ortho` property of its LexicalEntry.
-In th case of 'abaissait' there is only one LexicalItem corresponding to this dist key.
+In th case of 'abaissait' there is only one LexicalItem corresponding to this dict key.
 But in the case of 'a' there are several LexItem objects corresponding to this key and then the LexItem objects
 are stored in a list corresponding to th value of the key.
 
