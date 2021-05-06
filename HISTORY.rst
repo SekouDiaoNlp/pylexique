@@ -2,9 +2,10 @@
 History
 =======
 
-1.2.5 (2021-05-06)
+1.2.6 (2021-05-06)
 ------------------
 
+* allows for new style of relative imports.
 * Now all the attributes of the LexItem objects are immutable for consistency.
 * Added new method Lexique383.get_all_forms(word) to get all the lexical variations of a word.
 * This new method returns a list of LexItems having the same root lemma.
