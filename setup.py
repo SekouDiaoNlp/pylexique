@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['joblib', 'colorama', 'tqdm', 'Click>=7.1'] # integrate 'faster_than_csv'
+requirements = ['joblib', 'colorama', 'tqdm', "dataclasses>=0.6; python_version < '3.7'", 'Click>=7.1'] # integrate 'faster_than_csv'
 
 setup_requirements = ['pytest-runner', ]
 
@@ -19,6 +19,7 @@ test_requirements = [
     'pytest-runner',
     'pytest',
     'pytest-cov',
+    "dataclasses>=0.6; python_version < '3.7'",
     'Click>=7.1',
 ]
 
