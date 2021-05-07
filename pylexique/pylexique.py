@@ -14,7 +14,7 @@ from time import time
 
 try:
     from utils import logger
-except ModuleNotFoundError:
+except ModuleNotFoundError or ImportError:
     from .utils import logger
 
 _RESOURCE_PACKAGE = __name__
