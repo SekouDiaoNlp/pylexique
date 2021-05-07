@@ -64,6 +64,7 @@ pylexique
 | It allows to extract lexical information from more than 140 000 French words in an Object Oriented way.
 
 | Each lexical item is represented in a LexItem having the following LexEntryType:
+|
 
 .. code-block:: python
 
