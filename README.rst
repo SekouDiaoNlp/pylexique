@@ -58,6 +58,7 @@ pylexique
 
 
 
+
 | Pylexique is a Python wrapper around Lexique83_.
 
 | It allows to extract lexical information from more than 140 000 French words in an Object Oriented way.
