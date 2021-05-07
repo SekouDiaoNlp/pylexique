@@ -56,7 +56,7 @@ pylexique
         :alt: Conda
 
 
-
+|
 
 
 | Pylexique is a Python wrapper around Lexique83_.
