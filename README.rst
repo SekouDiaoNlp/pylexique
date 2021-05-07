@@ -48,7 +48,7 @@ pylexique
         :alt: Code Vulnerability Status
 
 .. image:: https://img.shields.io/pypi/dm/pylexique?label=PyPi%20Downloads
-        :target: https://pypi.python.org/pypi/pylexique
+        :target: https://pypi.org/project/pylexique/
         :alt: PyPI Downloads
 
 .. image:: https://img.shields.io/conda/dn/conda-forge/pylexique?label=Anaconda%20Total%20Downloads
