@@ -2,6 +2,15 @@
 History
 =======
 
+1.2.7 (2021-05-07)
+------------------
+
+* The new method Lexique383.get_all_forms(word) is now accessible through the cli with option '-a' or '--all_forms'.
+* This new method returns a list of LexItems having the same root lemma.
+* Added sample commands using the new option in the docs.
+* Refactored and expanded the test suite.
+* Updated dependencies.
+
 1.2.6 (2021-05-06)
 ------------------
 

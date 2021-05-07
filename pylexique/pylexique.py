@@ -201,6 +201,8 @@ class Lexique383:
             raise ValueError
         if isinstance(lex_entry, LexItem):
             lemmes = self.lemmes[lex_entry.lemme]
+        elif isinstance(lex_entry, OrderedDict):
+            lemmes = self.lemmes[lex_entry['lemme']]
         elif isinstance(lex_entry, list):
             lemmes = self.lemmes[lex_entry[0].lemme]
         else:

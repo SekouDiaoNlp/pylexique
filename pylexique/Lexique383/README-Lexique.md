@@ -20,18 +20,20 @@ Publications
 -   New, Boris, Christophe Pallier, Marc Brysbaert, and Ludovic
     Ferrand. 2004. "Lexique 2: A New French Lexical Database." *Behavior
     Research Methods, Instruments, & Computers* 36 (3): 516--524.
-    [pdf](New%20et%20al.%20-%202004%20-%20Lexique%202%20A%20new%20French%20lexical%20database.pdf)
+    [DOI](https://doi.org/10.3758/bf03195598).
+    [pdf](https://docs.google.com/viewer?url=http://sites.google.com/site/borisnew/pub/New-et-al2004-BRMIC.pdf?attredirects=0)
 
 -   New, Boris, Christophe Pallier, Ludovic Ferrand, and Rafael
     Matos. 2001. "Une Base de Données Lexicales Du Français Contemporain
     Sur Internet: LEXIQUE" *L'Année Psychologique* 101 (3): 447--462.
-    [pdf](New%20et%20al.%20-%202001%20-%20Une%20base%20de%20données%20lexicales%20du%20français%20contempo.pdf)
+    [DOI](https://doi.org/10.1017/S014271640707035X).
+    [pdf](https://docs.google.com/viewer?url=http://www.lexique.org/outils/Lexique_Annee.pdf)
 
 -   Boris New, Marc Brysbaert, Jean Veronis, and Christophe
     Pallier. 2007. "The Use of Film Subtitles to Estimate Word
     Frequencies." Applied Psycholinguistics 28 (4): 661--77.
-    https://doi.org/10.1017/S014271640707035X.
-    ([pdf](New.Brysbaert.Veronis.Pallier.2007.APU.pdf))
+    [DOI](https://doi.org/10.1017/S014271640707035X).
+    ([pdf](https://drive.google.com/file/d/1uvKrxGqETXkFeRH4PcYaql8ES9FjEdbV/view?usp=sharing))
 
 Contributeurs
 -------------
