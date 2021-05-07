@@ -3,7 +3,7 @@ Welcome to pylexique's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Content
 
    readme
    installation

@@ -59,7 +59,7 @@ pylexique
 |
 
 
-| Pylexique is a Python wrapper around Lexique83_.
+| Pylexique is a Python wrapper around Lexique383_.
 
 | It allows to extract lexical information from more than 140 000 French words in an Object Oriented way.
 
@@ -160,10 +160,10 @@ Credits
 
 Main developer SekouDiaoNlp_.
 
-Lexical corpus: Lexique83_
+Lexical corpus: Lexique383_
 
-About Lexique383:
-=================
+About Lexique383
+================
 
 Lexique3
 ========
@@ -256,6 +256,6 @@ BibTex Entry to cite publications about Lexique383:
     year={2007},
     pages={661–677}}
 
-.. _Lexique83: http://www.lexique.org/
+.. _Lexique383: http://www.lexique.org/
 .. _SekouDiaoNlp: https://github.com/SekouDiaoNlp
 .. _`official documentation of Lexique83`: http://lexique.org/_documentation/Manuel_Lexique.3.2.pdf
