@@ -198,7 +198,6 @@ You can also provide multiple words and/or specify an output file to save the le
     $ pylexique il boit du vin rouge -o path/to/the/output/json/file.json
 
 The output will be similar as previously, with a json entry for each word in the sequence.
-
 |
 
 You can also retrieve all the lexical forms of the provided word/words by using the option -a or --all_forms
@@ -209,6 +208,7 @@ You can also retrieve all the lexical forms of the provided word/words by using 
 
     $ pylexique il boit du vin rouge -o path/to/the/output/json/file.json --all_forms
 
+|
 
 To use pylexique  as a library in your own projects:
 ----------------------------------------------------
