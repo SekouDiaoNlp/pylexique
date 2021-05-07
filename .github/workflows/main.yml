@@ -40,9 +40,9 @@ jobs:
         run: |        
             python setup.py sdist bdist_wheel
             twine check dist/*
-        #   py.test --cov=./mlconjug3/
+            py.test --cov=./pylexique/        
+            codecov --token=2183bef7-69cf-4e8a-beb2-604ba2a1777f
         #    mypy --strict --ignore-missing-imports  mlconjug3/
-        #    codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50
         #   bandit -r mlconjug3/
         #   Put this commands first in the run section.
         #   python setup.py check --restructuredtext -s
@@ -82,9 +82,9 @@ jobs:
               run: |
                   python setup.py sdist bdist_wheel
                   twine check dist/*
-              #   py.test --cov=./mlconjug3/
+                  py.test --cov=./pylexique/        
+                  codecov --token=2183bef7-69cf-4e8a-beb2-604ba2a1777f
               #   mypy --strict --ignore-missing-imports  mlconjug3/
-              #   codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50
               #   bandit -r mlconjug3/
               #   Put this commands first in the run section.
               #   python setup.py check --restructuredtext -s
