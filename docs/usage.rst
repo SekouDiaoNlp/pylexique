@@ -8,6 +8,7 @@ Usage
 
 
 To use pylexique from the command line:
+---------------------------------------
 
 
 .. code-block:: bash
@@ -198,7 +199,20 @@ You can also provide multiple words and/or specify an output file to save the le
 
 The output will be similar as previously, with a json entry for each word in the sequence.
 
+|
+|
+
+You can also retrieve all the lexical forms of the provided word/words by using the option -a or --all_forms
+
+.. code-block:: bash
+
+    $ pylexique il mange une baguette -a
+
+    $ pylexique il boit du vin rouge -o path/to/the/output/json/file.json --all_forms
+
+
 To use pylexique  as a library in your own projects:
+----------------------------------------------------
 
 
 .. code-block:: python
