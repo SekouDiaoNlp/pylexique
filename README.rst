@@ -151,6 +151,7 @@ Features
 --------
 
 * Extract all lexical information from a French  word.
+* Extract all the lexical forms of a French word.
 * Easy to use Api.
 * Easily integrate pylexique in your own projects as an imported library.
 * Can be used as a command line tool.
@@ -168,11 +169,18 @@ About Lexique383
 Lexique3
 ========
 
+Lexique 3.83 is a French lexical database that provides
+for ~ 140,000 words of French: orthographic and phonemics representations,
+associated lemmas, syllabation, grammatical category, gender and number,
+frequencies in a corpus of books and in a body of film subtitles, etc...
+
+|
+
 Lexique 3.83 est une base de données lexicales du français qui fournit
 pour ~140000 mots du français: les représentations orthographiques et
 phonémiques, les lemmes associés, la syllabation, la catégorie
 grammaticale, le genre et le nombre, les fréquences dans un corpus de
-livres et dans un corpus de sous-titres de filems, etc.
+livres et dans un corpus de sous-titres de films, etc...
 
 Table: `Lexique383.zip`_
 
@@ -185,18 +193,21 @@ Publications
 
 -  New, Boris, Christophe Pallier, Marc Brysbaert, and Ludovic Ferrand.
    2004. "Lexique 2: A New French Lexical Database." *Behavior Research
-   Methods, Instruments, & Computers* 36 (3): 516--524. `pdf`_
+   Methods, Instruments, & Computers* 36 (3): 516--524.
+   `DOI <https://doi.org/10.3758/bf03195598>`__.
+   `pdf`_
 
 -  New, Boris, Christophe Pallier, Ludovic Ferrand, and Rafael Matos.
    2001. "Une Base de Données Lexicales Du Français Contemporain Sur
    Internet: LEXIQUE" *L'Année Psychologique* 101 (3): 447--462.
-   `pdf <New%20et%20al.%20-%202001%20-%20Une%20base%20de%20données%20lexicales%20du%20français%20contempo.pdf>`__
+   `DOI <https://doi.org/10.1017/S014271640707035X>`__.
+   `pdf <https://docs.google.com/viewer?url=http://www.lexique.org/outils/Lexique_Annee.pdf>`__
 
 -  Boris New, Marc Brysbaert, Jean Veronis, and Christophe Pallier.
    2007. "The Use of Film Subtitles to Estimate Word Frequencies."
    Applied Psycholinguistics 28 (4): 661--77.
-   https://doi.org/10.1017/S014271640707035X.
-   (`pdf <New.Brysbaert.Veronis.Pallier.2007.APU.pdf>`__)
+   `DOI <https://doi.org/10.1017/S014271640707035X>`__.
+   (`pdf <https://drive.google.com/file/d/1uvKrxGqETXkFeRH4PcYaql8ES9FjEdbV/view?usp=sharing>`__)
 
 Contributors
 ------------
@@ -212,8 +223,8 @@ License
 
 `CC BY SA40.0`_
 
-.. _Lexique383.zip: http://www.lexique.org/databases/Lexique382/Lexique383.zip
-.. _pdf: New%20et%20al.%20-%202004%20-%20Lexique%202%20A%20new%20French%20lexical%20database.pdf
+.. _Lexique383.zip: http://www.lexique.org/databases/Lexique383/Lexique383.zip
+.. _pdf: https://docs.google.com/viewer?url=http://sites.google.com/site/borisnew/pub/New-et-al2004-BRMIC.pdf?attredirects=0
 .. _CC BY SA40.0: LICENSE-CC-BY-SA4.0.txt
 
 
