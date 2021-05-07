@@ -200,7 +200,7 @@ You can also provide multiple words and/or specify an output file to save the le
 The output will be similar as previously, with a json entry for each word in the sequence.
 |
 
-You can also retrieve all the lexical forms of the provided word/words by using the option -a or --all_forms
+You can also retrieve all the lexical forms of the provided word/words by using the option '-a' or '--all_forms'
 
 .. code-block:: bash
 
