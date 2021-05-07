@@ -39,7 +39,7 @@ pylexique
         :target: https://pyup.io/repos/github/SekouDiaoNlp/pylexique/
         :alt: Dependencies status
 
-.. image:: https://codecov.io/gh/SekouDiaoNlp/pylexique/branch/master/graph/badge.svg
+.. image:: https://codecov.io/gh/SekouDiaoNlp/pylexique/branch/master/graph/badge.svg?token=EiEXyUJGpF
         :target: https://codecov.io/gh/SekouDiaoNlp/pylexique
         :alt: Code Coverage Status
 
