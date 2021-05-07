@@ -4,7 +4,7 @@ coverage:
       default:
         # Do not fail PRs if the code coverage drops.
         target: 0%
-        threshold: 40%
+        threshold: 50%
         if_ci_failed: success
         informational: true
 
