@@ -141,7 +141,7 @@ The meanings of the attributes of this object are as follow:
 * orthosyll: syllable orthographic form
 
 
-You can find all the relevant information in the `official documentation of Lexique83`_
+You can find all the relevant information in the `official documentation of Lexique383`_
 
 * Free software: MIT license
 * Documentation: https://pylexique.readthedocs.io.
@@ -269,4 +269,4 @@ BibTex Entry to cite publications about Lexique383:
 
 .. _Lexique383: http://www.lexique.org/
 .. _SekouDiaoNlp: https://github.com/SekouDiaoNlp
-.. _`official documentation of Lexique83`: http://lexique.org/_documentation/Manuel_Lexique.3.2.pdf
+.. _`official documentation of Lexique383`: http://lexique.org/_documentation/Manuel_Lexique.3.2.pdf
