@@ -12,11 +12,14 @@ from collections import defaultdict
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.argument('words', nargs=-1)
+@click.option('-a', '--all_forms',
+              is_flag=True,
+              help="Gets all lexical forms of a given word. Only takes 1 word as an argument.")
 @click.option('-o', '--output',
               default=None,
-              help="Path of the json filename for storing the lexical entries",
+              help="Path of the json filename for storing the lexical entries.",
               type=click.STRING)
-def main(words, output):
+def main(words, all_forms, output):
     """Pylexique is a Python wrapper around Lexique83.
     It allows to extract lexical information from more than 140 000 French words in an Object Oriented way.
 
@@ -38,7 +41,11 @@ def main(words, output):
     LEXIQUE = Lexique383()
     results = defaultdict(list)
     for word in words:
-        results[word].append(LEXIQUE.lexique[word])
+        if all_forms:
+            print('Retrieving all the lexical forms of the supplied words.')
+            results[word].append(LEXIQUE.get_all_forms(word))
+        else:
+            results[word].append(LEXIQUE.lexique[word])
 
         for i, element in enumerate(results[word]):
             if isinstance(element, LexItem):
@@ -49,7 +56,7 @@ def main(words, output):
     if output:
         with open(output, 'w', encoding='utf-8') as file:
             json.dump(results, file, indent=4)
-            print('The Lexical Items have been successfully saved to {0} by pylexique.cli.main.'.format(output))
+            print('The Lexical Items have been successfully saved to {0} by pylexique.'.format(output))
     else:
         print(json.dumps(results, indent=4))
     return
