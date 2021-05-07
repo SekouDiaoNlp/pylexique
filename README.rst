@@ -9,15 +9,15 @@ pylexique
 
 .. image:: https://img.shields.io/badge/maintainer-SekouDiaoNlp-blue
         :target: https://GitHub.com/SekouDiaoNlp/pylexique
-        :alt: Package Maintainer
+        :alt: Package Maintener
 
 .. image:: https://img.shields.io/github/checks-status/SekouDiaoNlp/pylexique/master?label=Build%20status%20on%20Windows%2C%20MacOs%20and%20Linux
         :target: https://img.shields.io/github/checks-status/SekouDiaoNlp/pylexique/master
-        :alt: GitHub branch checks state
+        :alt: Build status on Windows, MacOs and Linux
 
 .. image:: https://img.shields.io/pypi/v/pylexique.svg
         :target: https://pypi.python.org/pypi/pylexique
-        :alt: Python Package Index
+        :alt: Pypi Python Package Index Status
 
 .. image:: https://anaconda.org/conda-forge/pylexique/badges/version.svg
         :target: https://anaconda.org/conda-forge/pylexique
@@ -32,12 +32,28 @@ pylexique
         :alt: Supported platforms
 
 .. image:: https://readthedocs.org/projects/pylexique/badge/?version=latest
-        :target: https://pylexique.readthedocs.io/en/latest/?badge=latest
+        :target: https://pylexique.readthedocs.io/en/latest
         :alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/SekouDiaoNlp/pylexique/shield.svg
-     :target: https://pyup.io/repos/github/SekouDiaoNlp/pylexique/
-     :alt: Updates
+        :target: https://pyup.io/repos/github/SekouDiaoNlp/pylexique/
+        :alt: Dependencies status
+
+.. image:: https://codecov.io/gh/SekouDiaoNlp/pylexique/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/SekouDiaoNlp/pylexique
+        :alt: Code Coverage Status
+
+.. image:: https://snyk-widget.herokuapp.com/badge/pip/pylexique/badge.svg
+        :target: https://snyk.io/test/github/SekouDiaoNlp/pylexique?targetFile=requirements.txt
+        :alt: Code Vulnerability Status
+
+.. image:: https://img.shields.io/pypi/dm/pylexique?label=PyPi%20Downloads
+        :target: https://pypi.python.org/pypi/pylexique
+        :alt: PyPI Downloads
+
+.. image:: https://img.shields.io/conda/dn/conda-forge/pylexique?label=Anaconda%20Total%20Downloads
+        :target: https://anaconda.org/conda-forge/pylexique
+        :alt: Conda
 
 
 
