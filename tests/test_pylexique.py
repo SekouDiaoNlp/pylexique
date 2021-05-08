@@ -12,6 +12,7 @@ import pkg_resources
 from pylexique import Lexique383
 
 from pylexique import pylexique, cli
+from py._path.local import LocalPath
 
 try:
     from pathlib import Path
@@ -23,7 +24,7 @@ lexicon = Lexique383()
 
 
 class TestAll:
-    def test_all(self):
+    def test_all(self) -> None:
         # Assigns resource paths
         _RESOURCE_PACKAGE = 'pylexique'
         _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
@@ -113,7 +114,7 @@ class TestAll:
             pprint(verb.to_dict())
         pass
 
-    def test_content(self):
+    def test_content(self) -> None:
         """Sample pytest test of pylexique."""
         others = []
         x = 'a posteriori'
@@ -130,7 +131,7 @@ class TestAll:
 
 class TestCLI:
 
-    def test_command_line_interface(self):
+    def test_command_line_interface(self) -> None:
         """Test the CLI."""
         word = 'allons'
         runner = CliRunner()
@@ -145,7 +146,7 @@ class TestCLI:
         assert help_result.exit_code == 0
         assert 'Pylexique is a Python wrapper around Lexique83.' in help_result.output
 
-    def test_save_file(self, tmpdir):
+    def test_save_file(self, tmpdir: LocalPath) -> None:
         """
         Tests file saving feature.
 
