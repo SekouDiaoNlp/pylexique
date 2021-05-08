@@ -8,6 +8,7 @@ import pkg_resources
 import json
 # import faster_than_csv as csv
 from dataclasses import dataclass
+from typing import DefaultDict, Dict, List, Optional, Tuple, Union, ClassVar
 from time import time
 
 __all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
@@ -84,17 +85,17 @@ class LexItem(LexEntryTypes):
     | It uses slots for memory efficiency.
 
     """
-    _s                 = LEXIQUE383_FIELD_NAMES
+    _s = LEXIQUE383_FIELD_NAMES
     __slots__ = _s
 
-    def __repr__(self)       :
+    def __repr__(self):
         return '{0}({1}, {2}, {3})'.format(self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
-    def to_dict(self)               :
+    def to_dict(self):
         """
         | Converts the LexItem to a dict containing its attributes and their values
 
-        :return: Dictionary with key/values correspo
+        :return: Dictionary with key/values correspondence
         """
         attributes = []
         for attr in self.__slots__:
@@ -125,7 +126,7 @@ class Lexique383:
     length_errors = []
     lemmes = defaultdict(list)
 
-    def __init__(self, lexique_path                = None)        :
+    def __init__(self, lexique_path=None):
         self.lexique_path = lexique_path
         if lexique_path:
             t0 = time()
@@ -148,7 +149,7 @@ class Lexique383:
     def __len__(self):
         return len(self.lexique)
 
-    def _parse_lexique(self, lexique_path     )        :
+    def _parse_lexique(self, lexique_path):
         """
         | Parses the given lexique file and creates a hdf5 table to store the data.
 
@@ -165,7 +166,7 @@ class Lexique383:
                 self._save_errors(self.length_errors, _LENGTH_ERRORS_PATH)
         return
 
-    def _create_db(self, lexicon           )        :
+    def _create_db(self, lexicon):
         """
         | Creates an hash table populated with the entries in lexique if it does not exist yet.
         | It stores the hash table database for fast access.
@@ -191,7 +192,7 @@ class Lexique383:
                 self.lexique[row_fields[0]] = lexical_entry
         return
 
-    def _convert_entries(self, row_fields           )                                :
+    def _convert_entries(self, row_fields):
         """
         | Convert entries from `strings` to `int` or `float` and generates
         | a new list with typed entries.
@@ -233,7 +234,7 @@ class Lexique383:
             row_fields = converted_row_fields
         return row_fields
 
-    def get_lex(self, words                        )               :
+    def get_lex(self, words):
         """
         Recovers the lexical entries for the words in the sequence
 
@@ -261,7 +262,7 @@ class Lexique383:
             raise TypeError
         return results
 
-    def get_all_forms(self, word     )                 :
+    def get_all_forms(self, word):
         """
         Gets all lexical forms of a given word.
 
@@ -284,7 +285,7 @@ class Lexique383:
         return lemmes
 
     @staticmethod
-    def _save_errors(errors                                                                                                                 , errors_path     )        :
+    def _save_errors(errors, errors_path):
         """
         Saves the mismatched key/values in Lexique383 based on type coercion.
 
@@ -292,8 +293,6 @@ class Lexique383:
         with open(errors_path, 'w', encoding='utf-8') as json_file:
             json.dump(errors, json_file, indent=4)
         return
-
-
 
 
 if __name__ == "__main__":
