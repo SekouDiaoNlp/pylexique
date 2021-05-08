@@ -11,11 +11,11 @@ __license__ = "MIT"
 __maintainer__ = "SekouDiaoNlp"
 __status__ = "Production"
 
+__all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
+
 import pkg_resources
-try:
-    from .pylexique import Lexique383, LexItem
-except ModuleNotFoundError or ImportError:
-    from pylexique import Lexique383, LexItem
+
+from .pylexique import Lexique383, LexItem, LexEntryTypes
 
 _RESOURCE_PACKAGE = 'pylexique'
 _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')

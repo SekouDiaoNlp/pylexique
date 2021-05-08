@@ -6,8 +6,8 @@ import click
 import json
 import logging
 from pylexique import Lexique383, LexItem
-from pprint import pprint
 from collections import defaultdict
+from typing import Sequence
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -19,7 +19,7 @@ from collections import defaultdict
               default=None,
               help="Path of the json filename for storing the lexical entries.",
               type=click.STRING)
-def main(words, all_forms, output):
+def main(words: Sequence[str], all_forms: bool, output: str) -> None:
     """Pylexique is a Python wrapper around Lexique83.
     It allows to extract lexical information from more than 140 000 French words in an Object Oriented way.
 
