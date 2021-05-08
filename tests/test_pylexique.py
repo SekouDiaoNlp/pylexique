@@ -68,6 +68,10 @@ class TestAll:
         var_multiple = lexicon.get_lex(('il', 'mange', 'une', 'baguette'))
         pprint(var_multiple)
 
+        # gets all forms with a common lemma
+        all_forms = lexicon.get_all_forms('allions')
+
+
         # You can use the method LexItem.to_dict() to produce a dictionary with key/value pairs corresponding to the LexItem
 
         print('\n\n')
