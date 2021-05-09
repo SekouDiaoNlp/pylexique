@@ -10,7 +10,7 @@ import pandas as pd
 # import faster_than_csv as csv
 from dataclasses import dataclass
 from time import time
-from typing import DefaultDict, Dict, List, Optional, Tuple, Union
+from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Generator
 
 __all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
 
@@ -160,9 +160,9 @@ class Lexique383:
         :param lexique_path: string.
             Path to the lexique csv file.
         :return:
-        """        
+        """
         # Create a dataframe from csv
-        df = pd.read_csv(lexique_path, delimiter=',')
+        df = pd.read_csv(lexique_path, delimiter='\t')
         self.row_fields = df.columns.to_list()
         content = (list(row) for row in df.values)
         self._create_db(content)
@@ -172,7 +172,7 @@ class Lexique383:
             self._save_errors(self.length_errors, _LENGTH_ERRORS_PATH)
         return
 
-    def _create_db(self, lexicon: List[str]) -> None:
+    def _create_db(self, lexicon: Generator[str]) -> None:
         """
         | Creates an hash table populated with the entries in lexique if it does not exist yet.
         | It stores the hash table database for fast access.
