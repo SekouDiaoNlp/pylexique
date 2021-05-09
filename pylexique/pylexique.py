@@ -183,7 +183,7 @@ class Lexique383:
         """
         for i, row in enumerate(lexicon):
             try:
-                self.row_fields = self._convert_entries(row_fields)
+                self.row_fields = self._convert_entries(self.row_fields)
             except ValueError as e:
                 continue
             lexical_entry = LexItem(*self.row_fields)
