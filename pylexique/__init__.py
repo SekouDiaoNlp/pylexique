@@ -14,6 +14,9 @@ __status__ = "Production"
 __all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
 
 import pkg_resources
+# from pkg_resources import require
+
+# require("faster_than_csv")
 
 from .pylexique import Lexique383, LexItem, LexEntryTypes
 

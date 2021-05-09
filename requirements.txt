@@ -1,5 +1,6 @@
 colorama
 tqdm
+pandas
 # faster_than_csv
 pandas
 Click>=7.1
