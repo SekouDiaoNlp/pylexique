@@ -182,7 +182,7 @@ class Lexique383:
         :return:
         """
         for i, row in enumerate(lexicon):
-            try:
+            # try:
                 # self.row_fields = self._convert_entries(self.row_fields)
             # except ValueError as e:
             #     continue
