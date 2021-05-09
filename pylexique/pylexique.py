@@ -183,9 +183,9 @@ class Lexique383:
         """
         for i, row in enumerate(lexicon):
             try:
-                self.row_fields = self._convert_entries(self.row_fields)
-            except ValueError as e:
-                continue
+                # self.row_fields = self._convert_entries(self.row_fields)
+            # except ValueError as e:
+            #     continue
             lexical_entry = LexItem(*self.row_fields)
             self.lemmes[lexical_entry.lemme].append(lexical_entry)
             if self.row_fields[0] in self.lexique and not isinstance(self.lexique[self.row_fields[0]], list):
