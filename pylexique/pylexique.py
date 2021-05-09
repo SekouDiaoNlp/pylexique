@@ -172,7 +172,7 @@ class Lexique383:
             self._save_errors(self.length_errors, _LENGTH_ERRORS_PATH)
         return
 
-    def _create_db(self, lexicon: Generator[str]) -> None:
+    def _create_db(self, lexicon: Sequence[str]) -> None:
         """
         | Creates an hash table populated with the entries in lexique if it does not exist yet.
         | It stores the hash table database for fast access.
