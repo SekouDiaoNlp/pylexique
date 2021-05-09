@@ -2,6 +2,14 @@
 History
 =======
 
+1.2.8 (2021-05-09)
+------------------
+
+* Loading the library is now much faster using pandas.
+* Beta version uses the package `faster-than-csv` to quicken load times but is on hold until I resolve some MacOs buid issues.
+* Added more tests to the test suite.
+* Updated dependencies.
+
 1.2.7 (2021-05-07)
 ------------------
 
