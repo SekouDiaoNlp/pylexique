@@ -6,11 +6,11 @@ from collections import OrderedDict, defaultdict
 from collections.abc import Sequence
 import pkg_resources
 import json
-import pandas as pd
 # import faster_than_csv as csv
+import pandas as pd
 from dataclasses import dataclass
 from time import time
-from typing import DefaultDict, Dict, List, Optional, Tuple, Union
+from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Generator, Any
 
 __all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
 
@@ -123,13 +123,11 @@ class Lexique383:
     value_errors = []
     length_errors = []
     lemmes = defaultdict(list)
-    row_fields = []
 
     def __init__(self, lexique_path: Optional[str] = None) -> None:
         self.lexique_path = lexique_path
         if lexique_path:
             try:
-                # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
                 self._parse_lexique(self.lexique_path)
             except FileNotFoundError:
                 if isinstance(lexique_path, str):
@@ -160,11 +158,13 @@ class Lexique383:
         :param lexique_path: string.
             Path to the lexique csv file.
         :return:
-        """        
+        """
         # Create a dataframe from csv
-        df = pd.read_csv(lexique_path, delimiter=',')
-        self.row_fields = df.columns.to_list()
+        df = pd.read_csv(lexique_path, delimiter='\t')
+        # User list comprehension to create a list of lists from Dataframe rows
         content = (list(row) for row in df.values)
+        # with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
+        #   content = csv_file.readlines()
         self._create_db(content)
         if self.value_errors:
             self._save_errors(self.value_errors, _VALUE_ERRORS_PATH)
@@ -172,7 +172,7 @@ class Lexique383:
             self._save_errors(self.length_errors, _LENGTH_ERRORS_PATH)
         return
 
-    def _create_db(self, lexicon: List[str]) -> None:
+    def _create_db(self, lexicon: Generator[list, Any, None]) -> None:
         """
         | Creates an hash table populated with the entries in lexique if it does not exist yet.
         | It stores the hash table database for fast access.
@@ -181,20 +181,21 @@ class Lexique383:
             Iterable containing the lexique383 entries.
         :return:
         """
-        for i, row in enumerate(lexicon):
+        for row in lexicon:
+            row_fields = row
             try:
-                self.row_fields = self._convert_entries(row_fields)
+                row_fields = self._convert_entries(row_fields)
             except ValueError as e:
                 continue
-            lexical_entry = LexItem(*self.row_fields)
+            lexical_entry = LexItem(*row_fields)
             self.lemmes[lexical_entry.lemme].append(lexical_entry)
-            if self.row_fields[0] in self.lexique and not isinstance(self.lexique[self.row_fields[0]], list):
-                self.lexique[self.row_fields[0]] = [self.lexique[self.row_fields[0]]]
-                self.lexique[self.row_fields[0]].append(self.lexical_entry)
-            elif self.row_fields[0] in self.lexique and isinstance(self.lexique[self.row_fields[0]], list):
-                self.lexique[self.row_fields[0]].append(lexical_entry)
+            if row_fields[0] in self.lexique and not isinstance(self.lexique[row_fields[0]], list):
+                self.lexique[row_fields[0]] = [self.lexique[row_fields[0]]]
+                self.lexique[row_fields[0]].append(lexical_entry)
+            elif row_fields[0] in self.lexique and isinstance(self.lexique[row_fields[0]], list):
+                self.lexique[row_fields[0]].append(lexical_entry)
             else:
-                self.lexique[self.row_fields[0]] = lexical_entry
+                self.lexique[row_fields[0]] = lexical_entry
         return
 
     def _convert_entries(self, row_fields: List[str]) -> List[Union[str, float, int, bool]]:
