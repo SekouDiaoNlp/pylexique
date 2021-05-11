@@ -41,7 +41,7 @@ jobs:
             python setup.py sdist bdist_wheel
             twine check dist/*
             py.test --cov=./pylexique/        
-            codecov --token=2183bef7-69cf-4e8a-beb2-604ba2a1777f
+            codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
         #    mypy --strict --ignore-missing-imports  mlconjug3/
         #   bandit -r mlconjug3/
         #   Put this commands first in the run section.
@@ -83,7 +83,7 @@ jobs:
                   python setup.py sdist bdist_wheel
                   twine check dist/*
                   py.test --cov=./pylexique/        
-                  codecov --token=2183bef7-69cf-4e8a-beb2-604ba2a1777f
+                  codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
               #   mypy --strict --ignore-missing-imports  mlconjug3/
               #   bandit -r mlconjug3/
               #   Put this commands first in the run section.
