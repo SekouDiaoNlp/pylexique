@@ -2,7 +2,7 @@
 History
 =======
 
-1.2.9 (2021-05-11)
+1.3.0 (2021-05-11)
 ------------------
 
 * Uses pandas for now for faster resource loading.
