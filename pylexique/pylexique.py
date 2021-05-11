@@ -7,6 +7,7 @@ from collections.abc import Sequence
 import pkg_resources
 import json
 import sys
+from math import isnan
 # import faster_than_csv as csv
 
 import pandas as pd
@@ -215,7 +216,7 @@ class Lexique383:
         errors = defaultdict(list)
         converted_row_fields = []
         for attr, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
-            if isinstance(value, float):
+            if isinstance(value, float) and isnan(value):
                 value = ''
             if attr in {'freqlemfilms2', 'freqlemlivres', 'freqfilms2', 'freqlivres', 'old20', 'pld20'}:
                 if (value != '' or value != ' ') and ',' in value:
