@@ -9,7 +9,6 @@ import json
 # import faster_than_csv as csv
 import pandas as pd
 from dataclasses import dataclass
-from time import time
 from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Generator, Any
 
 __all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
@@ -161,10 +160,8 @@ class Lexique383:
         """
         # Create a dataframe from csv
         df = pd.read_csv(lexique_path, delimiter='\t')
-        # User list comprehension to create a list of lists from Dataframe rows
+        # Generator comprehension to create a list of lists from Dataframe rows
         content = (list(row) for row in df.values)
-        # with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
-        #   content = csv_file.readlines()
         self._create_db(content)
         if self.value_errors:
             self._save_errors(self.value_errors, _VALUE_ERRORS_PATH)
@@ -182,25 +179,24 @@ class Lexique383:
         :return:
         """
         for row in lexicon:
-            row_fields = row
             try:
-                row_fields = self._convert_entries(row_fields)
+                converted_row_fields = self._convert_entries(row)
             except ValueError as e:
                 continue
-            lexical_entry = LexItem(*row_fields)
+            lexical_entry = LexItem(*converted_row_fields)
             self.lemmes[lexical_entry.lemme].append(lexical_entry)
-            if row_fields[0] in self.lexique and not isinstance(self.lexique[row_fields[0]], list):
-                self.lexique[row_fields[0]] = [self.lexique[row_fields[0]]]
-                self.lexique[row_fields[0]].append(lexical_entry)
-            elif row_fields[0] in self.lexique and isinstance(self.lexique[row_fields[0]], list):
-                self.lexique[row_fields[0]].append(lexical_entry)
+            if converted_row_fields[0] in self.lexique and not isinstance(self.lexique[converted_row_fields[0]], list):
+                self.lexique[converted_row_fields[0]] = [self.lexique[converted_row_fields[0]]]
+                self.lexique[converted_row_fields[0]].append(lexical_entry)
+            elif converted_row_fields[0] in self.lexique and isinstance(self.lexique[converted_row_fields[0]], list):
+                self.lexique[converted_row_fields[0]].append(lexical_entry)
             else:
-                self.lexique[row_fields[0]] = lexical_entry
+                self.lexique[converted_row_fields[0]] = lexical_entry
         return
 
-    def _convert_entries(self, row_fields: List[str]) -> List[Union[str, float, int, bool]]:
+    def _convert_entries(self, row_fields: Union[List[str], List[Union[str, float, int, bool]]]) -> List[Union[str, float, int, bool]]:
         """
-        | Convert entries from `strings` to `int` or `float` and generates
+        | Convert entries from `strings` to `int`, `bool` or `float` and generates
         | a new list with typed entries.
 
         :param row_fields:
@@ -209,13 +205,16 @@ class Lexique383:
         errors = defaultdict(list)
         converted_row_fields = []
         for attr, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
+            if isinstance(value, float):
+                value = ''
             if attr in {'freqlemfilms2', 'freqlemlivres', 'freqfilms2', 'freqlivres', 'old20', 'pld20'}:
                 if (value != '' or value != ' ') and ',' in value:
                     value = value.replace(',', '.')
                     value = float(value)
             if attr == 'islem':
-                value = value.strip()
-                if value != '' and value not in ('0', '1'):
+                if isinstance(value, str):
+                    value = value.strip()
+                if value != '' and value not in ('0', '1', 0, 1):
                     value = 0
                 try:
                     value = bool(int(value))
