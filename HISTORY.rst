@@ -2,6 +2,14 @@
 History
 =======
 
+1.2.9 (2021-05-11)
+------------------
+
+* Uses pandas for now for faster resource loading.
+* In the process of integrating `faster-than-csv` when MacOs issues get resolved.
+* Refactored and expanded the test suite.
+* Updated dependencies.
+
 1.2.7 (2021-05-07)
 ------------------
 
