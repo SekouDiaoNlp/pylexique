@@ -27,16 +27,11 @@ _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/
 # _RESOURCE_PICKLE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.pkl')
 
 #  Create new Lexique383 instance with a pre-built Lexique383.
-try:
-    lexicon = Lexique383()
-    # Creates a new Lexique383 instance while supplying your own Lexique38X lexicon. The first time it will it will be
-    # slow to parse the file and create a persistent data-store. Next runs should be much faster.
-    LEXIQUE2 = Lexique383(_RESOURCE_PATH)
-except UnicodeDecodeError:
-    print('there was an issue reading unicode characters.')
-    sys.exit(0)
-except:
-    sys.exit(0)
+
+lexicon = Lexique383()
+# Creates a new Lexique383 instance while supplying your own Lexique38X lexicon. The first time it will it will be
+# slow to parse the file and create a persistent data-store. Next runs should be much faster.
+LEXIQUE2 = Lexique383(_RESOURCE_PATH)
 
 
 class TestAll:
