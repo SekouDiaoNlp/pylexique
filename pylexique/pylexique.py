@@ -6,7 +6,7 @@ from collections import OrderedDict, defaultdict
 from collections.abc import Sequence
 import pkg_resources
 import json
-
+import sys
 # import faster_than_csv as csv
 
 import pandas as pd
@@ -130,15 +130,21 @@ class Lexique383:
         if lexique_path:
             try:
                 self._parse_lexique(self.lexique_path)
+            except UnicodeDecodeError:
+                sys.exit(0)
+                raise UnicodeDecodeError(f"Argument 'lexique_path'={lexique_path} has invalid unicode characters")
             except FileNotFoundError:
                 if isinstance(lexique_path, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
                 if not isinstance(lexique_path, str):
-                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(lexique_path)}")
+                    raise TypeError(f"Argument 'lexique_path' must be of type String, not {type(lexique_path)}")
         else:
             try:
                 # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
                 self._parse_lexique(_RESOURCE_PATH)
+            except UnicodeDecodeError:
+                sys.exit(0)
+                raise UnicodeDecodeError(f"Argument 'lexique_path'={lexique_path} has invalid unicode characters")
             except FileNotFoundError:
                 if isinstance(_RESOURCE_PATH, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
@@ -161,7 +167,11 @@ class Lexique383:
         :return:
         """
         # Create a dataframe from csv
-        df = pd.read_csv(lexique_path, delimiter='\t')
+        try:
+            df = pd.read_csv(lexique_path, delimiter='\t')
+        except UnicodeDecodeError:
+            logger.warn('there was an issue while parsing the file {0}'.format(lexique_path))
+            raise UnicodeDecodeError
         # Generator comprehension to create a list of lists from Dataframe rows
         content = (list(row) for row in df.values)
         self._create_db(content)

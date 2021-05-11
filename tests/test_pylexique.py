@@ -8,7 +8,7 @@ import json
 from click.testing import CliRunner
 from pprint import pprint
 import pkg_resources
-
+import sys
 from pylexique import Lexique383
 
 from pylexique import pylexique, cli
@@ -20,23 +20,22 @@ except ImportError:
     from pathlib2 import Path
 
 
+ # Assigns resource paths
+_RESOURCE_PACKAGE = 'pylexique'
+
+_RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
+# _RESOURCE_PICKLE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.pkl')
+
+#  Create new Lexique383 instance with a pre-built Lexique383.
+
 lexicon = Lexique383()
+# Creates a new Lexique383 instance while supplying your own Lexique38X lexicon. The first time it will it will be
+# slow to parse the file and create a persistent data-store. Next runs should be much faster.
+LEXIQUE2 = Lexique383(_RESOURCE_PATH)
 
 
 class TestAll:
     def test_all(self) -> None:
-        # Assigns resource paths
-        _RESOURCE_PACKAGE = 'pylexique'
-        _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
-        _RESOURCE_PICKLE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.pkl')
-
-        #  Create new Lexique383 instance with a pre-built Lexique383.
-
-
-        # Creates a new Lexique383 instance while supplying your own Lexique38X lexicon. The first time it will it will be
-        # slow to parse the file and create a persistent data-store. Next runs should be much faster.
-        # LEXIQUE2 = Lexique383(_RESOURCE_PATH)
-
         # There are 2 ways to access the lexical information of a word:
         # Either use the utility method Lexique383.get_lex(item)
         # Or you an directly access the lexicon directory through lexicon.lexique[item] .
