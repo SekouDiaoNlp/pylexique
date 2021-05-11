@@ -6,10 +6,12 @@ from collections import OrderedDict, defaultdict
 from collections.abc import Sequence
 import pkg_resources
 import json
+
 # import faster_than_csv as csv
+
+import pandas as pd
 from dataclasses import dataclass
-from time import time
-from typing import DefaultDict, Dict, List, Optional, Tuple, Union
+from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Generator, Any
 
 __all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
 
@@ -126,18 +128,22 @@ class Lexique383:
     def __init__(self, lexique_path: Optional[str] = None) -> None:
         self.lexique_path = lexique_path
         if lexique_path:
-            t0 = time()
-            self._parse_lexique(self.lexique_path)
-            t1 = round(time() - t0, 2)
-        else:
             try:
-                # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
-                self._parse_lexique(_RESOURCE_PATH)
+                self._parse_lexique(self.lexique_path)
             except FileNotFoundError:
                 if isinstance(lexique_path, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
                 if not isinstance(lexique_path, str):
                     raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(lexique_path)}")
+        else:
+            try:
+                # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
+                self._parse_lexique(_RESOURCE_PATH)
+            except FileNotFoundError:
+                if isinstance(_RESOURCE_PATH, str):
+                    raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
+                if not isinstance(_RESOURCE_PATH, str):
+                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(_RESOURCE_PATH)}")
         return
 
     def __repr__(self):
@@ -154,16 +160,18 @@ class Lexique383:
             Path to the lexique csv file.
         :return:
         """
-        with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
-            content = csv_file.readlines()
-            self._create_db(content)
-            if self.value_errors:
-                self._save_errors(self.value_errors, _VALUE_ERRORS_PATH)
-            if self.length_errors:
-                self._save_errors(self.length_errors, _LENGTH_ERRORS_PATH)
+        # Create a dataframe from csv
+        df = pd.read_csv(lexique_path, delimiter='\t')
+        # Generator comprehension to create a list of lists from Dataframe rows
+        content = (list(row) for row in df.values)
+        self._create_db(content)
+        if self.value_errors:
+            self._save_errors(self.value_errors, _VALUE_ERRORS_PATH)
+        if self.length_errors:
+            self._save_errors(self.length_errors, _LENGTH_ERRORS_PATH)
         return
 
-    def _create_db(self, lexicon: List[str]) -> None:
+    def _create_db(self, lexicon: Generator[list, Any, None]) -> None:
         """
         | Creates an hash table populated with the entries in lexique if it does not exist yet.
         | It stores the hash table database for fast access.
@@ -172,26 +180,25 @@ class Lexique383:
             Iterable containing the lexique383 entries.
         :return:
         """
-        for i, row in enumerate(lexicon[1:]):
-            row_fields = row.strip().split('\t')
+        for row in lexicon:
             try:
-                row_fields = self._convert_entries(row_fields)
+                converted_row_fields = self._convert_entries(row)
             except ValueError as e:
                 continue
-            lexical_entry = LexItem(*row_fields)
+            lexical_entry = LexItem(*converted_row_fields)
             self.lemmes[lexical_entry.lemme].append(lexical_entry)
-            if row_fields[0] in self.lexique and not isinstance(self.lexique[row_fields[0]], list):
-                self.lexique[row_fields[0]] = [self.lexique[row_fields[0]]]
-                self.lexique[row_fields[0]].append(lexical_entry)
-            elif row_fields[0] in self.lexique and isinstance(self.lexique[row_fields[0]], list):
-                self.lexique[row_fields[0]].append(lexical_entry)
+            if converted_row_fields[0] in self.lexique and not isinstance(self.lexique[converted_row_fields[0]], list):
+                self.lexique[converted_row_fields[0]] = [self.lexique[converted_row_fields[0]]]
+                self.lexique[converted_row_fields[0]].append(lexical_entry)
+            elif converted_row_fields[0] in self.lexique and isinstance(self.lexique[converted_row_fields[0]], list):
+                self.lexique[converted_row_fields[0]].append(lexical_entry)
             else:
-                self.lexique[row_fields[0]] = lexical_entry
+                self.lexique[converted_row_fields[0]] = lexical_entry
         return
 
-    def _convert_entries(self, row_fields: List[str]) -> List[Union[str, float, int, bool]]:
+    def _convert_entries(self, row_fields: Union[List[str], List[Union[str, float, int, bool]]]) -> List[Union[str, float, int, bool]]:
         """
-        | Convert entries from `strings` to `int` or `float` and generates
+        | Convert entries from `strings` to `int`, `bool` or `float` and generates
         | a new list with typed entries.
 
         :param row_fields:
@@ -200,13 +207,16 @@ class Lexique383:
         errors = defaultdict(list)
         converted_row_fields = []
         for attr, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
+            if isinstance(value, float):
+                value = ''
             if attr in {'freqlemfilms2', 'freqlemlivres', 'freqfilms2', 'freqlivres', 'old20', 'pld20'}:
                 if (value != '' or value != ' ') and ',' in value:
                     value = value.replace(',', '.')
                     value = float(value)
             if attr == 'islem':
-                value = value.strip()
-                if value != '' and value not in ('0', '1'):
+                if isinstance(value, str):
+                    value = value.strip()
+                if value != '' and value not in ('0', '1', 0, 1):
                     value = 0
                 try:
                     value = bool(int(value))

@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['joblib', 'colorama', 'tqdm', "dataclasses>=0.6; python_version < '3.7'", 'Click>=7.1'] # integrate 'faster_than_csv'
+requirements = ['joblib', 'colorama', 'tqdm', "dataclasses>=0.6; python_version < '3.7'", 'Click>=7.1', 'pandas'] # integrate 'faster_than_csv'
 
 setup_requirements = ['pytest-runner', ]
 
@@ -65,6 +65,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/SekouDiaoNlp/pylexique',
-    version='1.2.7',
+    version='1.3.0',
     zip_safe=False,
 )

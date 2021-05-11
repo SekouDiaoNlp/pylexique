@@ -1,6 +1,7 @@
 colorama
 tqdm
 # faster_than_csv
+pandas
 Click>=7.1
 setuptools~=49.6.0
 joblib~=1.0.1
