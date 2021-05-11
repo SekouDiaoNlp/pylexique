@@ -132,7 +132,6 @@ class Lexique383:
                 self._parse_lexique(self.lexique_path)
             except UnicodeDecodeError:
                 sys.exit(0)
-                raise UnicodeDecodeError(f"Argument 'lexique_path'={lexique_path} has invalid unicode characters")
             except FileNotFoundError:
                 if isinstance(lexique_path, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
@@ -144,7 +143,6 @@ class Lexique383:
                 self._parse_lexique(_RESOURCE_PATH)
             except UnicodeDecodeError:
                 sys.exit(0)
-                raise UnicodeDecodeError(f"Argument 'lexique_path'={lexique_path} has invalid unicode characters")
             except FileNotFoundError:
                 if isinstance(_RESOURCE_PATH, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
