@@ -34,9 +34,9 @@ try:
     LEXIQUE2 = Lexique383(_RESOURCE_PATH)
 except UnicodeDecodeError:
     print('there was an issue reading unicode characters.')
-    sys.exit()
+    sys.exit(0)
 except:
-    sys.exit()
+    sys.exit(0)
 
 
 class TestAll:
