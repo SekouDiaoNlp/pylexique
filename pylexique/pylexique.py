@@ -161,7 +161,7 @@ class Lexique383:
         :return:
         """
         # Create a dataframe from csv
-        df = pd.read_csv(lexique_path, delimiter='\t')
+        df = pd.read_csv(lexique_path, delimiter='\t', encoding='utf-_')
         # Generator comprehension to create a list of lists from Dataframe rows
         content = (list(row) for row in df.values)
         self._create_db(content)
