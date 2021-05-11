@@ -39,11 +39,8 @@ except:
     pass
 
 
-
 class TestAll:
     def test_all(self) -> None:
-
-
         # There are 2 ways to access the lexical information of a word:
         # Either use the utility method Lexique383.get_lex(item)
         # Or you an directly access the lexicon directory through lexicon.lexique[item] .
