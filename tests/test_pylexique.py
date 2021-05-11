@@ -8,7 +8,7 @@ import json
 from click.testing import CliRunner
 from pprint import pprint
 import pkg_resources
-
+import sys
 from pylexique import Lexique383
 
 from pylexique import pylexique, cli
@@ -34,9 +34,9 @@ try:
     LEXIQUE2 = Lexique383(_RESOURCE_PATH)
 except UnicodeDecodeError:
     print('there was an issue reading unicode characters.')
-    pass
+    sys.exit()
 except:
-    pass
+    sys.exit()
 
 
 class TestAll:
