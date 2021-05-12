@@ -2,6 +2,13 @@
 History
 =======
 
+1.3.1 (2021-05-12)
+------------------
+
+* Uses pandas for now for faster resource loading.
+* Uses xlsb file for storage and faster load times
+* Updated dependencies.
+
 1.3.0 (2021-05-11)
 ------------------
 
