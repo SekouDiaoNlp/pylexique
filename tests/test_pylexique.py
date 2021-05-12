@@ -20,10 +20,10 @@ except ImportError:
     from pathlib2 import Path
 
 
- # Assigns resource paths
+# Assigns resource paths
 _RESOURCE_PACKAGE = 'pylexique'
 
-_RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
+_RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.xlsb')
 # _RESOURCE_PICKLE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.pkl')
 
 #  Create new Lexique383 instance with a pre-built Lexique383.

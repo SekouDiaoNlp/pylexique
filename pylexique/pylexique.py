@@ -7,6 +7,7 @@ from collections.abc import Sequence
 import pkg_resources
 import json
 import sys
+from math import isnan
 # import faster_than_csv as csv
 
 import pandas as pd
@@ -23,7 +24,7 @@ except ModuleNotFoundError or ImportError:
 _RESOURCE_PACKAGE = __name__
 
 HOME_PATH = '/'.join(('Lexique', ''))
-_RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
+_RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.xlsb')
 _VALUE_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/value_errors.json')
 _LENGTH_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/length_errors.json')
 
@@ -132,7 +133,6 @@ class Lexique383:
                 self._parse_lexique(self.lexique_path)
             except UnicodeDecodeError:
                 sys.exit(0)
-                raise UnicodeDecodeError(f"Argument 'lexique_path'={lexique_path} has invalid unicode characters")
             except FileNotFoundError:
                 if isinstance(lexique_path, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
@@ -144,7 +144,6 @@ class Lexique383:
                 self._parse_lexique(_RESOURCE_PATH)
             except UnicodeDecodeError:
                 sys.exit(0)
-                raise UnicodeDecodeError(f"Argument 'lexique_path'={lexique_path} has invalid unicode characters")
             except FileNotFoundError:
                 if isinstance(_RESOURCE_PATH, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
@@ -168,7 +167,7 @@ class Lexique383:
         """
         # Create a dataframe from csv
         try:
-            df = pd.read_csv(lexique_path, delimiter='\t')
+            df = pd.read_excel(lexique_path, engine='pyxlsb')
         except UnicodeDecodeError:
             logger.warn('there was an issue while parsing the file {0}'.format(lexique_path))
             raise UnicodeDecodeError
@@ -217,12 +216,13 @@ class Lexique383:
         errors = defaultdict(list)
         converted_row_fields = []
         for attr, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
-            if isinstance(value, float):
+            if isinstance(value, float) and isnan(value):
                 value = ''
             if attr in {'freqlemfilms2', 'freqlemlivres', 'freqfilms2', 'freqlivres', 'old20', 'pld20'}:
-                if (value != '' or value != ' ') and ',' in value:
-                    value = value.replace(',', '.')
-                    value = float(value)
+                if not isinstance(value, float):
+                    if (value != '' or value != ' ') and ',' in value:
+                        value = value.replace(',', '.')
+                        value = float(value)
             if attr == 'islem':
                 if isinstance(value, str):
                     value = value.strip()
