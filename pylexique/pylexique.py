@@ -24,7 +24,7 @@ except ModuleNotFoundError or ImportError:
 _RESOURCE_PACKAGE = __name__
 
 HOME_PATH = '/'.join(('Lexique', ''))
-_RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
+_RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.xlsb')
 _VALUE_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/value_errors.json')
 _LENGTH_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/length_errors.json')
 
@@ -167,7 +167,7 @@ class Lexique383:
         """
         # Create a dataframe from csv
         try:
-            df = pd.read_csv(lexique_path, delimiter='\t')
+            df = pd.read_excel(lexique_path, engine='pyxlsb')
         except UnicodeDecodeError:
             logger.warn('there was an issue while parsing the file {0}'.format(lexique_path))
             raise UnicodeDecodeError
@@ -219,9 +219,10 @@ class Lexique383:
             if isinstance(value, float) and isnan(value):
                 value = ''
             if attr in {'freqlemfilms2', 'freqlemlivres', 'freqfilms2', 'freqlivres', 'old20', 'pld20'}:
-                if (value != '' or value != ' ') and ',' in value:
-                    value = value.replace(',', '.')
-                    value = float(value)
+                if not isinstance(value, float):
+                    if (value != '' or value != ' ') and ',' in value:
+                        value = value.replace(',', '.')
+                        value = float(value)
             if attr == 'islem':
                 if isinstance(value, str):
                     value = value.strip()
