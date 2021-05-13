@@ -132,7 +132,7 @@ class Lexique383:
             try:
                 self._parse_lexique(self.lexique_path)
             except UnicodeDecodeError:
-                sys.exit(0)
+                raise UnicodeDecodeError(f"There was a unicod error while parsing {type(lexique_path)}.")
             except FileNotFoundError:
                 if isinstance(lexique_path, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
@@ -143,7 +143,7 @@ class Lexique383:
                 # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
                 self._parse_lexique(_RESOURCE_PATH)
             except UnicodeDecodeError:
-                sys.exit(0)
+                raise UnicodeDecodeError(f"There was a unicod error while parsing {type(lexique_path)}.")
             except FileNotFoundError:
                 if isinstance(_RESOURCE_PATH, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
