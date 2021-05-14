@@ -27,6 +27,7 @@ _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/
 _RESOURCE_PATH_csv = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
 
 
+@pytest.mark.skipif(sys.version_info < (3, 7), reason="Random utf-8 errors")
 class Test_Load_Times:
 
     def test_load_times(self):
