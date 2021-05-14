@@ -143,6 +143,7 @@ class TestAll:
                 others.append(x)
 
 
+@pytest.mark.skipif(sys.version_info < (3, 7), reason="Random utf-8 errors")
 class TestCLI:
 
     def test_command_line_interface(self) -> None:
