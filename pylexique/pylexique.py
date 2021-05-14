@@ -127,7 +127,7 @@ class Lexique383:
     length_errors = []
     lemmes = defaultdict(list)
 
-    def __init__(self, lexique_path: Optional[str] = None, f_type: str = 'xlsb') -> None:
+    def __init__(self, lexique_path: Optional[str] = None, f_type: str = 'csv') -> None:
         self.lexique_path = lexique_path
         if f_type not in {'xlsb', 'csv'}:
             raise ValueError(f"The value {f_type} is not permitted. Only 'csv' and 'xlsb' are valid values.")
@@ -144,14 +144,14 @@ class Lexique383:
         else:
             try:
                 # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
-                self._parse_lexique(_RESOURCE_PATH_xlsb, f_type)
+                self._parse_lexique(_RESOURCE_PATH_csv, f_type)
             except UnicodeDecodeError:
-                raise UnicodeDecodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_xlsb)}.")
+                raise UnicodeDecodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_csv)}.")
             except FileNotFoundError:
-                if isinstance(_RESOURCE_PATH_xlsb, str):
+                if isinstance(_RESOURCE_PATH_csv, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
-                if not isinstance(_RESOURCE_PATH_xlsb, str):
-                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(_RESOURCE_PATH_xlsb)}")
+                if not isinstance(_RESOURCE_PATH_csv, str):
+                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(_RESOURCE_PATH_csv)}")
         return
 
     def __repr__(self):

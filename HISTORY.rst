@@ -2,6 +2,13 @@
 History
 =======
 
+1.3.2 (2021-05-14)
+------------------
+
+* Can now use both 'csv' and 'xlsb' files.
+* Uses 'csv' file for storage and faster load times.
+* Updated dependencies.
+
 1.3.1 (2021-05-12)
 ------------------
 
