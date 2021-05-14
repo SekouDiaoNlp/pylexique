@@ -24,7 +24,8 @@ except ModuleNotFoundError or ImportError:
 _RESOURCE_PACKAGE = __name__
 
 HOME_PATH = '/'.join(('Lexique', ''))
-_RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.xlsb')
+_RESOURCE_PATH_csv = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
+_RESOURCE_PATH_xlsb = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.xlsb')
 _VALUE_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/value_errors.json')
 _LENGTH_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/length_errors.json')
 
@@ -126,13 +127,15 @@ class Lexique383:
     length_errors = []
     lemmes = defaultdict(list)
 
-    def __init__(self, lexique_path: Optional[str] = None) -> None:
+    def __init__(self, lexique_path: Optional[str] = None, f_type: str = 'xlsb') -> None:
         self.lexique_path = lexique_path
+        if f_type not in {'xlsb', 'csv'}:
+            raise ValueError(f"The value {f_type} is not permitted. Only 'csv' and 'xlsb' are valid values.")
         if lexique_path:
             try:
-                self._parse_lexique(self.lexique_path)
+                self._parse_lexique(self.lexique_path, f_type)
             except UnicodeDecodeError:
-                raise UnicodeDecodeError(f"There was a unicod error while parsing {type(lexique_path)}.")
+                raise UnicodeDecodeError(f"There was a unicode error while parsing {type(lexique_path)}.")
             except FileNotFoundError:
                 if isinstance(lexique_path, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
@@ -141,14 +144,14 @@ class Lexique383:
         else:
             try:
                 # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
-                self._parse_lexique(_RESOURCE_PATH)
+                self._parse_lexique(_RESOURCE_PATH_xlsb, f_type)
             except UnicodeDecodeError:
-                raise UnicodeDecodeError(f"There was a unicod error while parsing {type(lexique_path)}.")
+                raise UnicodeDecodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_xlsb)}.")
             except FileNotFoundError:
-                if isinstance(_RESOURCE_PATH, str):
+                if isinstance(_RESOURCE_PATH_xlsb, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
-                if not isinstance(_RESOURCE_PATH, str):
-                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(_RESOURCE_PATH)}")
+                if not isinstance(_RESOURCE_PATH_xlsb, str):
+                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(_RESOURCE_PATH_xlsb)}")
         return
 
     def __repr__(self):
@@ -157,17 +160,22 @@ class Lexique383:
     def __len__(self):
         return len(self.lexique)
 
-    def _parse_lexique(self, lexique_path: str) -> None:
+    def _parse_lexique(self, lexique_path: str, f_type: str) -> None:
         """
         | Parses the given lexique file and creates a hdf5 table to store the data.
 
+        :param type: string.
+            Can be either 'csv' or 'xlsb'
         :param lexique_path: string.
             Path to the lexique csv file.
         :return:
         """
         # Create a dataframe from csv
         try:
-            df = pd.read_excel(lexique_path, engine='pyxlsb')
+            if f_type == 'xlsb':
+                df = pd.read_excel(lexique_path, engine='pyxlsb')
+            elif f_type == 'csv':
+                df = pd.read_csv(lexique_path, delimiter='\t')
         except UnicodeDecodeError:
             logger.warn('there was an issue while parsing the file {0}'.format(lexique_path))
             raise UnicodeDecodeError
