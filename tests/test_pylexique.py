@@ -43,6 +43,7 @@ class Test_Load_Times:
         print(f'Parsing csv took {round(t3, 2)} seconds')
 
 
+@pytest.mark.skipif(sys.version_info < (3, 7), reason="Random utf-8 errors")
 class TestAll:
 
     lexicon = Lexique383()
