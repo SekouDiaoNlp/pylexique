@@ -37,7 +37,7 @@ class Test_Load_Times:
         t1 = time() - t0
         print(f'Parsing csv took {round(t1, 2)} seconds')
         # Creates a new Lexique383 instance while supplying your own Lexique38X lexicon. The first time it will it will be
-        # slow to parse the file and create a persistent data-store. Next runs should be much faster.
+
         t2 = time()
         LEXIQUE2 = Lexique383(_RESOURCE_PATH, f_type='xlsb')
         t3 = time() - t2
