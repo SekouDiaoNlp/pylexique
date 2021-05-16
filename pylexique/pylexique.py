@@ -6,10 +6,9 @@ from collections import OrderedDict, defaultdict
 from collections.abc import Sequence
 import pkg_resources
 import json
-import sys
 from math import isnan
 # import faster_than_csv as csv
-
+import csv
 import pandas as pd
 from dataclasses import dataclass
 from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Generator, Any
@@ -120,6 +119,8 @@ class Lexique383:
 
     :param lexique_path: string.
         Path to the lexique csv file.
+    :param parser_type: string.
+        Path to the lexique csv file.
     """
 
     lexique = OrderedDict()
@@ -127,15 +128,16 @@ class Lexique383:
     length_errors = []
     lemmes = defaultdict(list)
 
-    def __init__(self, lexique_path: Optional[str] = None, f_type: str = 'csv') -> None:
+    def __init__(self, lexique_path: Optional[str] = None, parser_type: str = 'std_csv') -> None:
         self.lexique_path = lexique_path
-        if f_type not in {'xlsb', 'csv'}:
-            raise ValueError(f"The value {f_type} is not permitted. Only 'csv' and 'xlsb' are valid values.")
+        if parser_type not in {'xlsb', 'pandas_csv', 'csv', 'std_csv'}:
+            raise ValueError(f"The value {parser_type} is not permitted. Only 'pandas_csv', 'std_csv', 'csv' and "
+                             f"'xlsb' are valid values.")
         if lexique_path:
             try:
-                self._parse_lexique(self.lexique_path, f_type)
-            except UnicodeDecodeError:
-                raise UnicodeDecodeError(f"There was a unicode error while parsing {type(lexique_path)}.")
+                self._parse_lexique(self.lexique_path, parser_type)
+            except UnicodeDecodeError as e:
+                raise UnicodeDecodeError(f"There was a unicode error while parsing {type(lexique_path)}.") from e
             except FileNotFoundError:
                 if isinstance(lexique_path, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
@@ -144,9 +146,9 @@ class Lexique383:
         else:
             try:
                 # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
-                self._parse_lexique(_RESOURCE_PATH_csv, f_type)
-            except UnicodeDecodeError:
-                raise UnicodeDecodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_csv)}.")
+                self._parse_lexique(_RESOURCE_PATH_csv, parser_type)
+            except UnicodeDecodeError as e:
+                raise UnicodeDecodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_csv)}.") from e
             except FileNotFoundError:
                 if isinstance(_RESOURCE_PATH_csv, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
@@ -160,27 +162,47 @@ class Lexique383:
     def __len__(self):
         return len(self.lexique)
 
-    def _parse_lexique(self, lexique_path: str, f_type: str) -> None:
+    @staticmethod
+    def _parse_csv(lexique_path: str) -> Generator[list, Any, None]:
+        """
+
+        :param lexique_path:
+        :return: list of rows:
+        """
+        with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
+            raw_content = csv_file.readlines()
+            content = (row.strip().split('\t') for row in raw_content[1:])
+            return content
+
+    def _parse_lexique(self, lexique_path: str, parser_type: str) -> None:
         """
         | Parses the given lexique file and creates a hdf5 table to store the data.
 
-        :param type: string.
-            Can be either 'csv' or 'xlsb'
+        :param parser_type: string.
+            Can be either 'csv', 'pandas_csv', 'std_csv' or 'xlsb'
         :param lexique_path: string.
             Path to the lexique csv file.
         :return:
         """
-        # Create a dataframe from csv
         try:
-            if f_type == 'xlsb':
+            if parser_type == 'xlsb':
                 df = pd.read_excel(lexique_path, engine='pyxlsb')
-            elif f_type == 'csv':
+                content = (list(row) for row in df.values)
+            elif parser_type == 'pandas_csv':
                 df = pd.read_csv(lexique_path, delimiter='\t')
+                content = (list(row) for row in df.values)
+            elif parser_type == 'csv':
+                content = self._parse_csv(lexique_path)
+            elif parser_type == 'std_csv':
+                raw_content = csv.reader(lexique_path, delimiter='\t')
+                raw_content.__next__()
+                content = raw_content
+            else:
+                content = self._parse_csv(lexique_path)
         except UnicodeDecodeError:
-            logger.warn('there was an issue while parsing the file {0}'.format(lexique_path))
-            raise UnicodeDecodeError
-        # Generator comprehension to create a list of lists from Dataframe rows
-        content = (list(row) for row in df.values)
+            logger.warn(f"there was an issue while parsing the file {lexique_path}."
+                        f" Trying again with built-in csv parser")
+            content = self._parse_csv(lexique_path)
         self._create_db(content)
         if self.value_errors:
             self._save_errors(self.value_errors, _VALUE_ERRORS_PATH)
@@ -200,7 +222,7 @@ class Lexique383:
         for row in lexicon:
             try:
                 converted_row_fields = self._convert_entries(row)
-            except ValueError as e:
+            except ValueError:
                 continue
             lexical_entry = LexItem(*converted_row_fields)
             self.lemmes[lexical_entry.lemme].append(lexical_entry)
@@ -298,7 +320,7 @@ class Lexique383:
             lex_entry = self.lexique[word]
         except ValueError as e:
             logger.warning('The word {} is not in Lexique383\n'.format(word))
-            raise ValueError
+            raise ValueError from e
         if isinstance(lex_entry, LexItem):
             lemmes = self.lemmes[lex_entry.lemme]
         elif isinstance(lex_entry, OrderedDict):
