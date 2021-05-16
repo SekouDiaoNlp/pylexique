@@ -27,7 +27,6 @@ _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/
 _RESOURCE_PATH_csv = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
 
 
-@pytest.mark.skipif(sys.version_info < (3, 7), reason="Random utf-8 errors")
 class Test_Load_Times:
 
     def test_load_times(self):
@@ -35,16 +34,27 @@ class Test_Load_Times:
         t0 = time()
         lexicon = Lexique383()
         t1 = time() - t0
-        print(f'Parsing csv took {round(t1, 2)} seconds')
-        # Creates a new Lexique383 instance while supplying your own Lexique38X lexicon. The first time it will it will be
+        print(f'Parsing csv with standard lib csv parser took {round(t1, 2)} seconds\n')
+        # Creates a new Lexique383 instance while supplying your own Lexique38X lexicon.
+
+        t4 = time()
+        lexicon1 = Lexique383(_RESOURCE_PATH_csv, parser_type='csv')
+        t5 = time() - t4
+        print(f'Parsing csv with built-in csv parser took {round(t5, 2)} seconds\n')
+
+        t6 = time()
+        lexicon2 = Lexique383(_RESOURCE_PATH_csv, parser_type='pandas_csv')
+        t7 = time() - t6
+        print(f'Parsing csv with pandas csv parser took {round(t7, 2)} seconds\n')
 
         t2 = time()
-        LEXIQUE2 = Lexique383(_RESOURCE_PATH, f_type='xlsb')
+        lexicon3 = Lexique383(_RESOURCE_PATH, parser_type='xlsb')
         t3 = time() - t2
-        print(f'Parsing xlsb took {round(t3, 2)} seconds')
+        print(f'Parsing xlsb with pandas+pyxlsb took {round(t3, 2)} seconds\n')
+        print('ok')
+        return
 
 
-@pytest.mark.skipif(sys.version_info < (3, 7), reason="Random utf-8 errors")
 class TestAll:
 
     lexicon = Lexique383()
@@ -52,12 +62,12 @@ class TestAll:
     def test_all(self) -> None:
         # There are 2 ways to access the lexical information of a word:
         # Either use the utility method Lexique383.get_lex(item)
-        # Or you an directly access the lexicon directory through lexicon.lexique[item] .
+        # Or you can directly access the lexicon directory through lexicon.lexique[item] .
         with pytest.raises(ValueError):
-            LEXIQUE = Lexique383('random.csv', f_type='csv')
+            LEXIQUE = Lexique383('random.csv', parser_type='csv')
 
-        with pytest.raises(ValueError):
-            LEXIQUE = Lexique383(42, f_type='csv')
+        with pytest.raises((ValueError, OSError)):
+            LEXIQUE = Lexique383(42, parser_type='csv')
 
         #  Retrieves the lexical information of 'abaissait' and 'a'.
         var_1 = self.lexicon.lexique['abaissait']
@@ -143,7 +153,6 @@ class TestAll:
                 others.append(x)
 
 
-@pytest.mark.skipif(sys.version_info < (3, 7), reason="Random utf-8 errors")
 class TestCLI:
 
     def test_command_line_interface(self) -> None:
