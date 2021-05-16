@@ -2,6 +2,14 @@
 History
 =======
 
+1.3.4 (2021-05-16)
+------------------
+
+* Fixed bug where Lexique383 was not shipped with the distribution.
+* Made csv parsing far faster and more robust.
+* Can now use different parsers : 'pandas_csv' is the pandas csv parser, 'std_csv' is the standard library csv parser, 'csv' is a custom csv parser and 'xlsb' is pandas xlsb parser using pyxlsb engine.
+* Updated dependencies.
+
 1.3.3 (2021-05-16)
 ------------------
 
