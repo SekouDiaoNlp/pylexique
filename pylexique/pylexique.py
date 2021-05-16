@@ -120,7 +120,7 @@ class Lexique383:
     :param lexique_path: string.
         Path to the lexique csv file.
     :param parser_type: string.
-        Path to the lexique csv file.
+        'pandas_csv', 'std_csv', 'csv' and 'xlsb' are valid values.
     """
 
     lexique = OrderedDict()
@@ -138,22 +138,22 @@ class Lexique383:
                 self._parse_lexique(self.lexique_path, parser_type)
             except UnicodeDecodeError as e:
                 raise UnicodeDecodeError(f"There was a unicode error while parsing {type(lexique_path)}.") from e
-            except FileNotFoundError:
+            except FileNotFoundError as e:
                 if isinstance(lexique_path, str):
-                    raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
+                    raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
                 if not isinstance(lexique_path, str):
-                    raise TypeError(f"Argument 'lexique_path' must be of type String, not {type(lexique_path)}")
+                    raise TypeError(f"Argument 'lexique_path' must be of type String, not {type(lexique_path)}") from e
         else:
             try:
                 # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
                 self._parse_lexique(_RESOURCE_PATH_csv, parser_type)
             except UnicodeDecodeError as e:
                 raise UnicodeDecodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_csv)}.") from e
-            except FileNotFoundError:
+            except FileNotFoundError as e:
                 if isinstance(_RESOURCE_PATH_csv, str):
-                    raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383")
+                    raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
                 if not isinstance(_RESOURCE_PATH_csv, str):
-                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(_RESOURCE_PATH_csv)}")
+                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(_RESOURCE_PATH_csv)}") from e
         return
 
     def __repr__(self):
