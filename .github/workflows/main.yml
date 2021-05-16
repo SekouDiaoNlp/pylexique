@@ -16,7 +16,7 @@ jobs:
           path: ~/Library/Caches/pip
         - os: windows-latest
           path: ~\AppData\Local\pip\Cache
-        python-version: [ 3.7, 3.8, 3.9 ]
+        python-version: [ 3.6, 3.7, 3.8, 3.9 ]
 
     steps:
       - uses: actions/checkout@v2
@@ -37,10 +37,10 @@ jobs:
         # env:
         #   CIBW_SOME_OPTION: value
       - name: Run tests with pytest, mypy, coverage, bandit and restructuredtext check
-        run: |        
+        run: |
             python setup.py sdist bdist_wheel
             twine check dist/*
-            py.test -s --cov=./pylexique/        
+            py.test -rP --cov=./pylexique/
             codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
         #    mypy --strict --ignore-missing-imports  mlconjug3/
         #   bandit -r mlconjug3/
@@ -82,7 +82,7 @@ jobs:
               run: |
                   python setup.py sdist bdist_wheel
                   twine check dist/*
-                  py.test --cov=./pylexique/        
+                  py.test --cov=./pylexique/
                   codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
               #   mypy --strict --ignore-missing-imports  mlconjug3/
               #   bandit -r mlconjug3/
