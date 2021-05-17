@@ -10,5 +10,7 @@ twine
 joblib
 pytest
 pytest-runner
+bandit
+mypy
 Click>=7.1
 dataclasses>=0.6; python_version < '3.7'

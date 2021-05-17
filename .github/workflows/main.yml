@@ -42,11 +42,9 @@ jobs:
             twine check dist/*
             py.test -rP --cov=./pylexique/
             codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
-        #    mypy --strict --ignore-missing-imports  mlconjug3/
-        #   bandit -r mlconjug3/
-        #   Put this commands first in the run section.
-        #   python setup.py check --restructuredtext -s
-        #   This command has been deprecated. Use `twine check` instead.
+            bandit -r pylexique/
+        #    mypy --strict --ignore-missing-imports  pylexique/
+
 
   build:
       name: Build source package on ${{ matrix.os }}
@@ -84,8 +82,5 @@ jobs:
                   twine check dist/*
                   py.test --cov=./pylexique/
                   codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
-              #   mypy --strict --ignore-missing-imports  mlconjug3/
-              #   bandit -r mlconjug3/
-              #   Put this commands first in the run section.
-              #   python setup.py check --restructuredtext -s
-              #   This command has been deprecated. Use `twine check` instead.
+                  bandit -r pylexique/
+              #    mypy --strict --ignore-missing-imports  pylexique/
