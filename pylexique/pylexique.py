@@ -216,8 +216,7 @@ class Lexique383:
     def _create_db(self, lexicon: Generator[list, Any, None]) -> None:
         """
         | Creates 2 hash tables populated with the entries in lexique if it does not exist yet.
-        | One hash table holds the LexItems, the other holds the same data but grouped by lemmma to give access to
-        all lexical forms of a word.
+        | One hash table holds the LexItems, the other holds the same data but grouped by lemmma to give access to all lexical forms of a word.
 
         :param lexicon: Iterable.
             Iterable containing the lexique383 entries.
