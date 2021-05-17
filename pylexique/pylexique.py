@@ -116,7 +116,7 @@ class Lexique383:
     This is the class handling the lexique database.
     It provides methods for interacting with the Lexique DB
     and retrieve lexical items.
-    All the lexical items are then stored in an Ordered Dict called
+    All the lexical items are then stored in an Ordered Dict.
 
     :param lexique_path: string.
         Path to the lexique file.
