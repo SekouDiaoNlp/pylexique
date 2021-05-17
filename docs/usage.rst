@@ -198,6 +198,7 @@ You can also provide multiple words and/or specify an output file to save the le
     $ pylexique il boit du vin rouge -o path/to/the/output/json/file.json
 
 The output will be similar as previously, with a json entry for each word in the sequence.
+
 |
 
 You can also retrieve all the lexical forms of the provided word/words by using the option '-a' or '--all_forms'
@@ -218,24 +219,21 @@ To use pylexique  as a library in your own projects:
 
         from pylexique import Lexique383
         from pprint import pprint
-        import pkg_resources
-
-        # Assigns resource paths
-        _RESOURCE_PACKAGE = 'pylexique'
-        _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
-        _RESOURCE_PICKLE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.pkl')
 
         #  Create new Lexique383 instance with a pre-built Lexique383.
         LEXIQUE = Lexique383()
 
         # Creates a new Lexique383 instance while supplying your own Lexique38X lexicon. The first time it will it will be
         # slow to parse the file and create a persistent data-store. Next runs should be much faster.
-        # LEXIQUE2 = Lexique383(_RESOURCE_PATH)
+        RESOURCE_PATH = 'path/to/Lexique38x'
+        # parser_type must be either omitted if RESOURCE_PATH is a csv file and you want to use the default csv parser.
+        # if parser_type is provided it should be either 'xlsb', 'pandas_csv', 'csv', 'std_csv'. 'std_csv' is used by default.
+        LEXIQUE2 = Lexique383(RESOURCE_PATH, parser_type='std_csv')
 
 
 There are 2 ways to access the lexical information of a word:
 Either use the utility method Lexique383.get_lex(item)
-Or you an directly access the lexicon directory through LEXIQUE.lexique[item] .
+Or you can directly access the lexicon directory through LEXIQUE.lexique[item] .
 
 Notice that item can be either a string or a sequence of strings when using Lexique383.get_lex(item) .
 
