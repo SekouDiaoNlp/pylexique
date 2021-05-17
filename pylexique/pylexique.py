@@ -138,7 +138,7 @@ class Lexique383:
             try:
                 self._parse_lexique(self.lexique_path, parser_type)
             except UnicodeDecodeError as e:
-                raise UnicodeDecodeError(f"There was a unicode error while parsing {type(lexique_path)}.") from e
+                raise UnicodeError(f"There was a unicode error while parsing {type(lexique_path)}.") from e
             except FileNotFoundError as e:
                 if isinstance(lexique_path, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
@@ -149,7 +149,7 @@ class Lexique383:
                 # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
                 self._parse_lexique(_RESOURCE_PATH_csv, parser_type)
             except UnicodeDecodeError as e:
-                raise UnicodeDecodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_csv)}.") from e
+                raise UnicodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_csv)}.") from e
             except FileNotFoundError as e:
                 if isinstance(_RESOURCE_PATH_csv, str):
                     raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
@@ -157,10 +157,10 @@ class Lexique383:
                     raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(_RESOURCE_PATH_csv)}") from e
         return
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return '{0}.{1}'.format(__name__, self.__class__.__name__)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.lexique)
 
     @staticmethod
@@ -177,7 +177,7 @@ class Lexique383:
             content = (row.strip().split('\t') for row in raw_content[1:])
             return content
 
-    def _parse_lexique(self, lexique_path: str, parser_type: str) -> None:
+    def _parse_lexique(self, lexique_path: Optional[str], parser_type: str) -> None:
         """
         | Parses the given lexique file and creates 2 hash tables to store the data.
 
