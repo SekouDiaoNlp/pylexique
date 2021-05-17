@@ -63,7 +63,7 @@ pylexique
 
 | It allows to extract lexical information from more than 140 000 French words in an Object Oriented way.
 
-| Each lexical item is represented in a LexItem having the following LexEntryType:
+| Each lexical item is represented as a LexItem having the following LexEntryType:
 |
 
 .. code-block:: python
@@ -120,7 +120,7 @@ The meanings of the attributes of this object are as follow:
 * freqlemfilms: the frequency of the lemma according to the corpus of subtitles (per million occurrences)
 * freqlemlivres: the frequency of the lemma according to the body of books (per million occurrences)
 * freqfilms: the frequency of the word according to the corpus of subtitles (per million occurrences)
-* freqbooks: the frequency of the word according to the body of books (per million occurrences)
+* freqlivres: the frequency of the word according to the body of books (per million occurrences)
 * infover: modes, tenses, and possible people for verbs
 * nbhomogr: number of homographs
 * nbhomoph: number of homophones
@@ -150,7 +150,13 @@ You can find all the relevant information in the `official documentation of Lexi
 Features
 --------
 
-* Extract all lexical information from a French  word.
+* Extract all lexical information from a French  word such as:
+    * orthographic and phonemics representations
+    * associated lemmas
+    * syllabation
+    * grammatical category
+    * gender and number
+    * frequencies in a corpus of books and in a body of film subtitles, etc...
 * Extract all the lexical forms of a French word.
 * Easy to use Api.
 * Easily integrate pylexique in your own projects as an imported library.

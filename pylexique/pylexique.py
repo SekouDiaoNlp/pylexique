@@ -96,7 +96,8 @@ class LexItem(LexEntryTypes):
         """
         | Converts the LexItem to a dict containing its attributes and their values
 
-        :return: Dictionary with key/values correspondence wit LexItem objects
+        :return:
+            Dictionary with key/values correspondence wit LexItem objects.
         """
         attributes = []
         for attr in self.__slots__:
@@ -118,7 +119,7 @@ class Lexique383:
     All the lexical items are then stored in an Ordered Dict called
 
     :param lexique_path: string.
-        Path to the lexique csv file.
+        Path to the lexique file.
     :param parser_type: string.
         'pandas_csv', 'std_csv', 'csv' and 'xlsb' are valid values.
     """
@@ -167,7 +168,9 @@ class Lexique383:
         """
 
         :param lexique_path:
-        :return: list of rows:
+            Path to the lexique file.
+        :return: generator of rows:
+            Content of the Lexique38x database.
         """
         with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
             raw_content = csv_file.readlines()
@@ -176,12 +179,12 @@ class Lexique383:
 
     def _parse_lexique(self, lexique_path: str, parser_type: str) -> None:
         """
-        | Parses the given lexique file and creates a hdf5 table to store the data.
+        | Parses the given lexique file and creates 2 hash tables to store the data.
 
-        :param parser_type: string.
-            Can be either 'csv', 'pandas_csv', 'std_csv' or 'xlsb'
         :param lexique_path: string.
-            Path to the lexique csv file.
+            Path to the lexique file.
+        :param parser_type: string.
+            Can be either 'csv', 'pandas_csv', 'std_csv' or 'xlsb'.
         :return:
         """
         try:
@@ -212,8 +215,9 @@ class Lexique383:
 
     def _create_db(self, lexicon: Generator[list, Any, None]) -> None:
         """
-        | Creates an hash table populated with the entries in lexique if it does not exist yet.
-        | It stores the hash table database for fast access.
+        | Creates 2 hash tables populated with the entries in lexique if it does not exist yet.
+        | One hash table holds the LexItems, the other holds the same data but grouped by lemmma to give access to
+        | all lexical forms of a word.
 
         :param lexicon: Iterable.
             Iterable containing the lexique383 entries.
@@ -241,7 +245,9 @@ class Lexique383:
         | a new list with typed entries.
 
         :param row_fields:
-        :return: converted_row_fields:
+            List of column entries representing a row.
+        :return: typed_row_fields:
+            List of typed column entries representing a typed row.
         """
         errors = defaultdict(list)
         converted_row_fields = []
@@ -281,12 +287,14 @@ class Lexique383:
             row_fields = converted_row_fields
         return row_fields
 
-    def get_lex(self, words: Union[Tuple[str, str, str, str], str]) -> OrderedDict:
+    def get_lex(self, words: Union[Tuple[str], str]) -> OrderedDict:
         """
         Recovers the lexical entries for the words in the sequence
 
         :param words:
-        :return: Dictionary of LexItems:
+            A string or a tuple of multiple strings for getting the LexItems for multiple words.
+        :return:
+            Dictionary of LexItems.
         """
         results = OrderedDict()
         if isinstance(words, str):
@@ -314,7 +322,9 @@ class Lexique383:
         Gets all lexical forms of a given word.
 
         :param word:
-        :return: List of LexItem objects sharing the same root lemma.
+            String.
+        :return:
+            List of LexItem objects sharing the same root lemma.
         """
         try:
             lex_entry = self.lexique[word]
@@ -337,6 +347,12 @@ class Lexique383:
                      errors_path: str) -> None:
         """
         Saves the mismatched key/values in Lexique383 based on type coercion.
+
+        :param errors:
+            List of errors encountered while parsing Lexique38x
+        :param errors_path:
+            Path to save the errors.
+        :return:
 
         """
         with open(errors_path, 'w', encoding='utf-8') as json_file:
