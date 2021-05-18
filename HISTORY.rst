@@ -2,6 +2,12 @@
 History
 =======
 
+1.3.5 (2021-05-18)
+------------------
+
+* Uses str.lower() to normalize inputs.
+* Updated the Documentation and the docstrings.
+
 1.3.4 (2021-05-16)
 ------------------
 
