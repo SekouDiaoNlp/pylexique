@@ -4,7 +4,7 @@
 
 __author__ = """SekouDiaoNlp"""
 __email__ = 'diao.sekou.nlp@gmail.com'
-__version__ = '1.3.4'
+__version__ = '1.3.5'
 __copyright__ = "Copyright (c) 2021, SekouDiaoNlp"
 __credits__ = ("Lexique383",)
 __license__ = "MIT"
