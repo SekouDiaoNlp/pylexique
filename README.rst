@@ -125,7 +125,7 @@ The meanings of the attributes of this object are as follow:
 * nbhomogr: number of homographs
 * nbhomoph: number of homophones
 * islem: indicates if it is a lemma or not
-* nbletters: the number of letters
+* nblettres: the number of letters
 * nbphons: number of phonemes
 * cvcv: the orthographic structure
 * p-cvcv: the phonological structure
@@ -139,6 +139,13 @@ The meanings of the attributes of this object are as follow:
 * orthrenv: reverse orthographic form
 * phonrenv: reversed phonological form
 * orthosyll: syllable orthographic form
+* cgramortho: the different grammatical category for a given orthographic representation
+* deflem: the percentage of people who said they knew the lemma of the word
+* defobs: the size of the sample from which 'deflem' is derived
+* old20:  orthographic Levenshtein Distance
+* pld20: phonological Levenshtein Distance
+* morphoder: inflectional morphology
+* nbmorph: the number of morphemes directly computed from 'morphoder'
 
 
 You can find all the relevant information in the `official documentation of Lexique383`_
