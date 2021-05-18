@@ -298,14 +298,14 @@ class Lexique383:
         results = OrderedDict()
         if isinstance(words, str):
             try:
-                results[words] = self.lexique[words]
+                results[words] = self.lexique[words.lower()]
             except AttributeError:
                 logger.warning('the word {} is not in Lexique383'.format(words))
         elif isinstance(words, Sequence):
             for word in words:
                 if isinstance(word, str):
                     try:
-                        results[word] = self.lexique[word]
+                        results[word] = self.lexique[word.lower()]
                     except AttributeError:
                         logger.warning('The word {} is not in Lexique383\n'.format(word))
                         continue
@@ -326,7 +326,7 @@ class Lexique383:
             List of LexItem objects sharing the same root lemma.
         """
         try:
-            lex_entry = self.lexique[word]
+            lex_entry = self.lexique[word.lower()]
         except ValueError as e:
             logger.warning('The word {} is not in Lexique383\n'.format(word))
             raise ValueError from e
