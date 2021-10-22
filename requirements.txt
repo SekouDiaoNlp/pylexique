@@ -3,7 +3,7 @@ tqdm
 pyxlsb
 # faster_than_csv
 pandas
-Click>=7.1
+Click>=8.0.3
 setuptools~=49.6.0
 joblib~=1.0.1
 dataclasses>=0.6; python_version < '3.7'

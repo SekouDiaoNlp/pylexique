@@ -12,5 +12,5 @@ pytest
 pytest-runner
 bandit
 mypy
-Click>=7.1
+Click>=8.0.3
 dataclasses>=0.6; python_version < '3.7'
