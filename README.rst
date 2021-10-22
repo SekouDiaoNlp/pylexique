@@ -11,8 +11,8 @@ pylexique
         :target: https://GitHub.com/SekouDiaoNlp/pylexique
         :alt: Package Maintener
 
-.. image:: https://img.shields.io/github/checks-status/SekouDiaoNlp/pylexique/master?label=Build%20status%20on%20Windows%2C%20MacOs%20and%20Linux
-        :target: https://img.shields.io/github/checks-status/SekouDiaoNlp/pylexique/master
+.. image:: https://img.shields.io/github/checks-status/SekouDiaoNlp/mlconjug3/master?label=Build%20status%20on%20Windows%2C%20MacOs%20and%20Linux
+        :target: https://github.com/SekouDiaoNlp/pylexique/actions/workflows/main.yml
         :alt: Build status on Windows, MacOs and Linux
 
 .. image:: https://img.shields.io/pypi/v/pylexique.svg
