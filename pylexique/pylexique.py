@@ -129,7 +129,7 @@ class Lexique383:
     length_errors = []
     lemmes = defaultdict(list)
 
-    def __init__(self, lexique_path: Optional[str] = None, parser_type: str = 'std_csv') -> None:
+    def __init__(self, lexique_path: Optional[str] = None, parser_type: str = 'csv') -> None:
         self.lexique_path = lexique_path
         if parser_type not in {'xlsb', 'pandas_csv', 'csv', 'std_csv'}:
             raise ValueError(f"The value {parser_type} is not permitted. Only 'pandas_csv', 'std_csv', 'csv' and "
