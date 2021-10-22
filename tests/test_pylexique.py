@@ -47,6 +47,11 @@ class Test_Load_Times:
         t7 = time() - t6
         print(f'Parsing csv with pandas csv parser took {round(t7, 2)} seconds\n')
 
+        t8 = time()
+        lexicon2 = Lexique383(_RESOURCE_PATH_csv, parser_type='std_csv')
+        t9 = time() - t8
+        print(f'Parsing csv with standard csv parser took {round(t9, 2)} seconds\n')
+
         t2 = time()
         lexicon3 = Lexique383(_RESOURCE_PATH, parser_type='xlsb')
         t3 = time() - t2
