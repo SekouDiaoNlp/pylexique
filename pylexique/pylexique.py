@@ -97,7 +97,7 @@ class LexItem(LexEntryTypes):
     def __repr__(self) -> str:
         return '{0}({1}, {2}, {3})'.format(self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
-    def to_dict(self) -> OrderedDict:
+    def to_dict(self) -> Dict[str, Union[str, float, int, bool]]:
         """
         | Converts the LexItem to a dict containing its attributes and their values
 
@@ -129,10 +129,10 @@ class Lexique383:
         'pandas_csv', 'csv' and 'xlsb' are valid values. 'csv' is the default value.
     """
 
-    lexique: OrderedDict = OrderedDict()
+    lexique: Dict[str, Any] = OrderedDict()
     value_errors: List[Any] = []
     length_errors: List[Any] = []
-    lemmes: Dict[str, Any] = defaultdict(list)
+    lemmes: Dict[str, List[LexItem]] = defaultdict(list)
 
     def __init__(self, lexique_path: Optional[str] = None, parser_type: str = 'csv') -> None:
         self.lexique_path = lexique_path
@@ -165,7 +165,7 @@ class Lexique383:
         return len(self.lexique)
 
     @staticmethod
-    def _parse_csv(lexique_path: str) -> Generator[list, Any, None]:
+    def _parse_csv(lexique_path: str) -> Generator[list, Any, None]:    #type: ignore[type-arg]
         """
 
         :param lexique_path: string.
@@ -210,7 +210,7 @@ class Lexique383:
             self._save_errors(self.length_errors, _LENGTH_ERRORS_PATH)
         return
 
-    def _create_db(self, lexicon: Generator[list, Any, None]) -> None:
+    def _create_db(self, lexicon: Generator[list, Any, None]) -> None:  #type: ignore[type-arg]
         """
         | Creates 2 hash tables populated with the entries in lexique if it does not exist yet.
         | One hash table holds the LexItems, the other holds the same data but grouped by lemmma to give access to all lexical forms of a word.
@@ -281,7 +281,7 @@ class Lexique383:
             raise ValueError
         return converted_row_fields  # type: ignore[return-value]
 
-    def get_lex(self, words: Union[Tuple[str, ...], str]) -> OrderedDict:
+    def get_lex(self, words: Union[Tuple[str, ...], str]) -> Dict[str, Union[LexItem, List[LexItem]]]:
         """
         Recovers the lexical entries for the words in the sequence
 
