@@ -36,6 +36,10 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'voisorth', 'voisphon', 'puorth', 'puphon', 'syll', 'nbsyll', 'cv_cv', 'orthrenv', 'phonrenv',
                           'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20', 'morphoder', 'nbmorph']
 
+ConvertedRow = Tuple[str, str, str, str, str, str, float, float, float, float, str, int, int, bool,
+                     int, int, str, str, int, int, int, int, str, int, str, str, str, str, str, float,
+                     int, float, float, str, int]
+
 
 @dataclass(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=True)
 class LexEntryTypes:
@@ -231,7 +235,7 @@ class Lexique383:
                 self.lexique[converted_row_fields[0]] = lexical_entry
         return
 
-    def _convert_entries(self, row_fields: Union[List[str], List[Union[str, float, int, bool]]]) -> List[Union[str, float, int, bool]]:
+    def _convert_entries(self, row_fields: Union[List[str], List[Union[str, float, int, bool]]]) -> ConvertedRow:
         """
         | Convert entries from `strings` to `int`, `bool` or `float` and generates
         | a new list with typed entries.
@@ -275,7 +279,7 @@ class Lexique383:
         if len(converted_row_fields) != 35:
             self.length_errors.append((converted_row_fields, row_fields))
             raise ValueError
-        return converted_row_fields
+        return converted_row_fields  # type: ignore[return-value]
 
     def get_lex(self, words: Union[Tuple[str, ...], str]) -> OrderedDict:
         """
