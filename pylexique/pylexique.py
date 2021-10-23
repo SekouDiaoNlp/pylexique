@@ -9,9 +9,10 @@ import json
 from math import isnan
 # import faster_than_csv as csv
 import csv
+from csv import reader
 import pandas as pd
 from dataclasses import dataclass
-from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Generator, Any
+from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Generator, Any, Iterator
 
 __all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
 
@@ -121,29 +122,28 @@ class Lexique383:
     :param lexique_path: string.
         Path to the lexique file.
     :param parser_type: string.
-        'pandas_csv', 'std_csv', 'csv' and 'xlsb' are valid values.
+        'pandas_csv', 'csv' and 'xlsb' are valid values. 'csv' is the default value.
     """
 
-    lexique = OrderedDict()
-    value_errors = []
-    length_errors = []
-    lemmes = defaultdict(list)
+    lexique: OrderedDict = OrderedDict()
+    value_errors: List[Any] = []
+    length_errors: List[Any] = []
+    lemmes: Dict[str, Any] = defaultdict(list)
 
     def __init__(self, lexique_path: Optional[str] = None, parser_type: str = 'csv') -> None:
         self.lexique_path = lexique_path
-        if parser_type not in {'xlsb', 'pandas_csv', 'csv', 'std_csv'}:
+        if parser_type not in {'xlsb', 'pandas_csv', 'csv'}:
             raise ValueError(f"The value {parser_type} is not permitted. Only 'pandas_csv', 'std_csv', 'csv' and "
                              f"'xlsb' are valid values.")
         if lexique_path:
+            if not isinstance(lexique_path, str):
+                raise TypeError(f"Argument 'lexique_path' must be of type String, not {type(lexique_path)}")
             try:
-                self._parse_lexique(self.lexique_path, parser_type)
+                self._parse_lexique(lexique_path, parser_type)
             except UnicodeDecodeError as e:
                 raise UnicodeError(f"There was a unicode error while parsing {type(lexique_path)}.") from e
             except FileNotFoundError as e:
-                if isinstance(lexique_path, str):
-                    raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
-                if not isinstance(lexique_path, str):
-                    raise TypeError(f"Argument 'lexique_path' must be of type String, not {type(lexique_path)}") from e
+                raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
         else:
             try:
                 # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
@@ -151,10 +151,7 @@ class Lexique383:
             except UnicodeDecodeError as e:
                 raise UnicodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_csv)}.") from e
             except FileNotFoundError as e:
-                if isinstance(_RESOURCE_PATH_csv, str):
-                    raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
-                if not isinstance(_RESOURCE_PATH_csv, str):
-                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(_RESOURCE_PATH_csv)}") from e
+                raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
         return
 
     def __repr__(self) -> str:
@@ -177,7 +174,7 @@ class Lexique383:
             content = (row.strip().split('\t') for row in raw_content[1:])
             return content
 
-    def _parse_lexique(self, lexique_path: Optional[str], parser_type: str) -> None:
+    def _parse_lexique(self, lexique_path: str, parser_type: str) -> None:
         """
         | Parses the given lexique file and creates 2 hash tables to store the data.
 
@@ -196,10 +193,6 @@ class Lexique383:
                 content = (list(row) for row in df.values)
             elif parser_type == 'csv':
                 content = self._parse_csv(lexique_path)
-            elif parser_type == 'std_csv':
-                raw_content = csv.reader(lexique_path, delimiter='\t')
-                raw_content.__next__()
-                content = raw_content
             else:
                 content = self._parse_csv(lexique_path)
         except UnicodeDecodeError:
@@ -282,11 +275,9 @@ class Lexique383:
         if len(converted_row_fields) != 35:
             self.length_errors.append((converted_row_fields, row_fields))
             raise ValueError
-        else:
-            row_fields = converted_row_fields
-        return row_fields
+        return converted_row_fields
 
-    def get_lex(self, words: Union[Tuple[str], str]) -> OrderedDict:
+    def get_lex(self, words: Union[Tuple[str, ...], str]) -> OrderedDict:
         """
         Recovers the lexical entries for the words in the sequence
 
