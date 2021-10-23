@@ -330,7 +330,10 @@ class Lexique383:
         elif isinstance(lex_entry, OrderedDict):
             lemmes = self.lemmes[lex_entry['lemme']]
         elif isinstance(lex_entry, list):
-            lemmes = self.lemmes[lex_entry[0].lemme]
+            distinct = {elmt.lemme for elmt in lex_entry}
+            lemmes = []
+            for lemme in distinct:
+                lemmes.extend(self.lemmes[lemme])
         else:
             raise TypeError
         return lemmes
