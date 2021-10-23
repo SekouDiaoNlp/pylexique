@@ -40,6 +40,7 @@ def main(words: Sequence[str], all_forms: bool, output: str) -> None:
 
     LEXIQUE = Lexique383()
     results = defaultdict(list)
+    dict = defaultdict(list)
     for word in words:
         if all_forms:
             print('Retrieving all the lexical forms of the supplied words.')
@@ -47,18 +48,18 @@ def main(words: Sequence[str], all_forms: bool, output: str) -> None:
         else:
             results[word].append(LEXIQUE.lexique[word])
 
-        for i, element in enumerate(results[word]):
+        for element in results[word]:
             if isinstance(element, LexItem):
-                results[word][i] = element.to_dict()
+                dict[word].append(element.to_dict())
                 continue
-            for index, item in enumerate(element):
-                results[word][i][index] = item.to_dict()
+            for item in element:
+                dict[word].append(item.to_dict())
     if output:
         with open(output, 'w', encoding='utf-8') as file:
-            json.dump(results, file, indent=4)
+            json.dump(dict, file, indent=4)
             print('The Lexical Items have been successfully saved to {0} by pylexique.'.format(output))
     else:
-        print(json.dumps(results, indent=4))
+        print(json.dumps(dict, indent=4))
     return
 
 
