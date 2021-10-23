@@ -9,9 +9,10 @@ import json
 from math import isnan
 # import faster_than_csv as csv
 import csv
+from csv import reader
 import pandas as pd
 from dataclasses import dataclass
-from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Generator, Any
+from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Generator, Any, Iterator
 
 __all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
 
@@ -34,6 +35,10 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'p_cvcv',
                           'voisorth', 'voisphon', 'puorth', 'puphon', 'syll', 'nbsyll', 'cv_cv', 'orthrenv', 'phonrenv',
                           'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20', 'morphoder', 'nbmorph']
+
+ConvertedRow = Tuple[str, str, str, str, str, str, float, float, float, float, str, int, int, bool,
+                     int, int, str, str, int, int, int, int, str, int, str, str, str, str, str, float,
+                     int, float, float, str, int]
 
 
 @dataclass(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=True)
@@ -92,11 +97,11 @@ class LexItem(LexEntryTypes):
     def __repr__(self) -> str:
         return '{0}({1}, {2}, {3})'.format(self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
-    def to_dict(self) -> OrderedDict:
+    def to_dict(self) -> Dict[str, Union[str, float, int, bool]]:
         """
         | Converts the LexItem to a dict containing its attributes and their values
 
-        :return:
+        :return: OrderedDict.
             Dictionary with key/values correspondence wit LexItem objects.
         """
         attributes = []
@@ -121,29 +126,28 @@ class Lexique383:
     :param lexique_path: string.
         Path to the lexique file.
     :param parser_type: string.
-        'pandas_csv', 'std_csv', 'csv' and 'xlsb' are valid values.
+        'pandas_csv', 'csv' and 'xlsb' are valid values. 'csv' is the default value.
     """
 
-    lexique = OrderedDict()
-    value_errors = []
-    length_errors = []
-    lemmes = defaultdict(list)
+    lexique: Dict[str, Any] = OrderedDict()
+    value_errors: List[Any] = []
+    length_errors: List[Any] = []
+    lemmes: Dict[str, List[LexItem]] = defaultdict(list)
 
-    def __init__(self, lexique_path: Optional[str] = None, parser_type: str = 'std_csv') -> None:
+    def __init__(self, lexique_path: Optional[str] = None, parser_type: str = 'csv') -> None:
         self.lexique_path = lexique_path
-        if parser_type not in {'xlsb', 'pandas_csv', 'csv', 'std_csv'}:
+        if parser_type not in {'xlsb', 'pandas_csv', 'csv'}:
             raise ValueError(f"The value {parser_type} is not permitted. Only 'pandas_csv', 'std_csv', 'csv' and "
                              f"'xlsb' are valid values.")
         if lexique_path:
+            if not isinstance(lexique_path, str):
+                raise TypeError(f"Argument 'lexique_path' must be of type String, not {type(lexique_path)}")
             try:
-                self._parse_lexique(self.lexique_path, parser_type)
+                self._parse_lexique(lexique_path, parser_type)
             except UnicodeDecodeError as e:
                 raise UnicodeError(f"There was a unicode error while parsing {type(lexique_path)}.") from e
             except FileNotFoundError as e:
-                if isinstance(lexique_path, str):
-                    raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
-                if not isinstance(lexique_path, str):
-                    raise TypeError(f"Argument 'lexique_path' must be of type String, not {type(lexique_path)}") from e
+                raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
         else:
             try:
                 # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
@@ -151,10 +155,7 @@ class Lexique383:
             except UnicodeDecodeError as e:
                 raise UnicodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_csv)}.") from e
             except FileNotFoundError as e:
-                if isinstance(_RESOURCE_PATH_csv, str):
-                    raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
-                if not isinstance(_RESOURCE_PATH_csv, str):
-                    raise TypeError(f"Argument 'lexique_path'must be of type String, not {type(_RESOURCE_PATH_csv)}") from e
+                raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
         return
 
     def __repr__(self) -> str:
@@ -164,10 +165,10 @@ class Lexique383:
         return len(self.lexique)
 
     @staticmethod
-    def _parse_csv(lexique_path: str) -> Generator[list, Any, None]:
+    def _parse_csv(lexique_path: str) -> Generator[list, Any, None]:    #type: ignore[type-arg]
         """
 
-        :param lexique_path:
+        :param lexique_path: string.
             Path to the lexique file.
         :return: generator of rows:
             Content of the Lexique38x database.
@@ -177,7 +178,7 @@ class Lexique383:
             content = (row.strip().split('\t') for row in raw_content[1:])
             return content
 
-    def _parse_lexique(self, lexique_path: Optional[str], parser_type: str) -> None:
+    def _parse_lexique(self, lexique_path: str, parser_type: str) -> None:
         """
         | Parses the given lexique file and creates 2 hash tables to store the data.
 
@@ -196,10 +197,6 @@ class Lexique383:
                 content = (list(row) for row in df.values)
             elif parser_type == 'csv':
                 content = self._parse_csv(lexique_path)
-            elif parser_type == 'std_csv':
-                raw_content = csv.reader(lexique_path, delimiter='\t')
-                raw_content.__next__()
-                content = raw_content
             else:
                 content = self._parse_csv(lexique_path)
         except UnicodeDecodeError:
@@ -213,7 +210,7 @@ class Lexique383:
             self._save_errors(self.length_errors, _LENGTH_ERRORS_PATH)
         return
 
-    def _create_db(self, lexicon: Generator[list, Any, None]) -> None:
+    def _create_db(self, lexicon: Generator[list, Any, None]) -> None:  #type: ignore[type-arg]
         """
         | Creates 2 hash tables populated with the entries in lexique if it does not exist yet.
         | One hash table holds the LexItems, the other holds the same data but grouped by lemmma to give access to all lexical forms of a word.
@@ -238,14 +235,14 @@ class Lexique383:
                 self.lexique[converted_row_fields[0]] = lexical_entry
         return
 
-    def _convert_entries(self, row_fields: Union[List[str], List[Union[str, float, int, bool]]]) -> List[Union[str, float, int, bool]]:
+    def _convert_entries(self, row_fields: Union[List[str], List[Union[str, float, int, bool]]]) -> ConvertedRow:
         """
         | Convert entries from `strings` to `int`, `bool` or `float` and generates
         | a new list with typed entries.
 
         :param row_fields:
             List of column entries representing a row.
-        :return: typed_row_fields:
+        :return: ConvertedRow:
             List of typed column entries representing a typed row.
         """
         errors = defaultdict(list)
@@ -282,11 +279,9 @@ class Lexique383:
         if len(converted_row_fields) != 35:
             self.length_errors.append((converted_row_fields, row_fields))
             raise ValueError
-        else:
-            row_fields = converted_row_fields
-        return row_fields
+        return converted_row_fields  # type: ignore[return-value]
 
-    def get_lex(self, words: Union[Tuple[str], str]) -> OrderedDict:
+    def get_lex(self, words: Union[Tuple[str, ...], str]) -> Dict[str, Union[LexItem, List[LexItem]]]:
         """
         Recovers the lexical entries for the words in the sequence
 
@@ -335,7 +330,10 @@ class Lexique383:
         elif isinstance(lex_entry, OrderedDict):
             lemmes = self.lemmes[lex_entry['lemme']]
         elif isinstance(lex_entry, list):
-            lemmes = self.lemmes[lex_entry[0].lemme]
+            distinct = {elmt.lemme for elmt in lex_entry}
+            lemmes = []
+            for lemme in distinct:
+                lemmes.extend(self.lemmes[lemme])
         else:
             raise TypeError
         return lemmes

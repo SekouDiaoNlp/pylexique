@@ -11,17 +11,26 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['joblib', 'colorama', 'tqdm', 'pyxlsb', "dataclasses>=0.6; python_version < '3.7'", 'Click>=7.1', 'pandas'] # integrate 'faster_than_csv'
+try:
+    with open('requirements.txt') as f:
+        requirements = f.read().splitlines()
+except FileNotFoundError:
+    requirements = ['joblib', 'colorama', 'tqdm', 'pyxlsb', "dataclasses>=0.6; python_version < '3.7'",
+                    'Click>=8.0.3', 'pandas']
 
 setup_requirements = ['pytest-runner', ]
 
-test_requirements = [
-    'pytest-runner',
-    'pytest',
-    'pytest-cov',
-    "dataclasses>=0.6; python_version < '3.7'",
-    'Click>=7.1',
-]
+try:
+    with open('requirements_dev.txt') as f:
+        test_requirements = f.read().splitlines()
+except FileNotFoundError:
+    test_requirements = [
+        'pytest-runner',
+        'pytest',
+        'pytest-cov',
+        "dataclasses>=0.6; python_version < '3.7'",
+        'Click>=8.0.3',
+    ]
 
 setup(
     author="SekouDiaoNlp",
@@ -42,6 +51,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
     ],
     description="Pylexique is a Python wrapper around Lexique83",
     entry_points={
@@ -65,6 +75,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/SekouDiaoNlp/pylexique',
-    version='1.3.5',
+    version='1.4.0',
     zip_safe=False,
 )
