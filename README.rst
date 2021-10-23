@@ -69,13 +69,15 @@ pylexique
 
 | Cette librairie permet d'extraire l'information lexicale de plus de 140 000 mots Français de manière Orientée Objet.
 
+|
+|
 
 * Free software: MIT license
 * PyLexique Documentation: https://pylexique.readthedocs.io
 
 | Each lexical item is represented as a LexItem having the following LexEntryType:
 |
-|
+
 | Chaque entrée lexicale est représentée par un LexItem de type LexEntryType:
 |
 
