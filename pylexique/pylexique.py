@@ -101,7 +101,7 @@ class LexItem(LexEntryTypes):
         """
         | Converts the LexItem to a dict containing its attributes and their values
 
-        :return:
+        :return: OrderedDict.
             Dictionary with key/values correspondence wit LexItem objects.
         """
         attributes = []
@@ -168,7 +168,7 @@ class Lexique383:
     def _parse_csv(lexique_path: str) -> Generator[list, Any, None]:
         """
 
-        :param lexique_path:
+        :param lexique_path: string.
             Path to the lexique file.
         :return: generator of rows:
             Content of the Lexique38x database.
@@ -242,7 +242,7 @@ class Lexique383:
 
         :param row_fields:
             List of column entries representing a row.
-        :return: typed_row_fields:
+        :return: ConvertedRow:
             List of typed column entries representing a typed row.
         """
         errors = defaultdict(list)
