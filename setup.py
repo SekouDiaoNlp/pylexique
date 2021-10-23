@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['joblib', 'colorama', 'tqdm', 'pyxlsb', "dataclasses>=0.6; python_version < '3.7'", 'Click>=7.1', 'pandas'] # integrate 'faster_than_csv'
+requirements = ['joblib', 'colorama', 'tqdm', 'pyxlsb', "dataclasses>=0.6; python_version < '3.7'", 'Click>=8.0.3', 'pandas']
 
 setup_requirements = ['pytest-runner', ]
 
@@ -20,7 +20,7 @@ test_requirements = [
     'pytest',
     'pytest-cov',
     "dataclasses>=0.6; python_version < '3.7'",
-    'Click>=7.1',
+    'Click>=8.0.3',
 ]
 
 setup(
@@ -42,6 +42,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
     ],
     description="Pylexique is a Python wrapper around Lexique83",
     entry_points={
