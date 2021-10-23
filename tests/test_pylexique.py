@@ -37,20 +37,20 @@ class Test_Load_Times:
         print(f'Parsing csv with standard lib csv parser took {round(t1, 2)} seconds\n')
         # Creates a new Lexique383 instance while supplying your own Lexique38X lexicon.
 
-        t4 = time()
-        lexicon1 = Lexique383(_RESOURCE_PATH_csv, parser_type='csv')
-        t5 = time() - t4
-        print(f'Parsing csv with built-in csv parser took {round(t5, 2)} seconds\n')
+        # t4 = time()
+        # lexicon1 = Lexique383(_RESOURCE_PATH_csv, parser_type='csv')
+        # t5 = time() - t4
+        # print(f'Parsing csv with built-in csv parser took {round(t5, 2)} seconds\n')
 
         t6 = time()
         lexicon2 = Lexique383(_RESOURCE_PATH_csv, parser_type='pandas_csv')
         t7 = time() - t6
         print(f'Parsing csv with pandas csv parser took {round(t7, 2)} seconds\n')
 
-        t8 = time()
-        lexicon2 = Lexique383(_RESOURCE_PATH_csv, parser_type='std_csv')
-        t9 = time() - t8
-        print(f'Parsing csv with standard csv parser took {round(t9, 2)} seconds\n')
+        # t8 = time()
+        # lexicon4 = Lexique383(_RESOURCE_PATH_csv, parser_type='std_csv')
+        # t9 = time() - t8
+        # print(f'Parsing csv with standard csv parser took {round(t9, 2)} seconds\n')
 
         t2 = time()
         lexicon3 = Lexique383(_RESOURCE_PATH, parser_type='xlsb')
@@ -71,7 +71,7 @@ class TestAll:
         with pytest.raises(ValueError):
             LEXIQUE = Lexique383('random.csv', parser_type='csv')
 
-        with pytest.raises((ValueError, OSError)):
+        with pytest.raises((TypeError, ValueError, OSError)):
             LEXIQUE = Lexique383(42, parser_type='csv')
 
         #  Retrieves the lexical information of 'abaissait' and 'a'.
