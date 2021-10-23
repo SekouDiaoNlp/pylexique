@@ -2,6 +2,16 @@
 History
 =======
 
+1.4.0 (2021-10-23)
+------------------
+
+* The library is now completely type annotated and type-checked.
+* The method get_all_forms() now checks if the word has multiple lemmas in case of homonymy, eg: 'souris'.
+* Fixed parsing bug when using 'std-csv' parser.
+* Fixed formatting issue when saving the output of the CLI to a file.
+* Updated the Documentation and the docstrings.
+* Updated dependencies.
+
 1.3.5 (2021-05-18)
 ------------------
 
