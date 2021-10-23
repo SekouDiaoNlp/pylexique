@@ -61,14 +61,27 @@ pylexique
 
 | Pylexique is a Python wrapper around Lexique383_.
 
-| It allows to extract lexical information from more than 140 000 French words in an Object Oriented way.
+| It allows the extraction of lexical information from more than 140 000 French words in an Object Oriented way.
+
+|
+
+| Pylexique est une librairie Python encapsulant Lexique383_.
+
+| Cette librairie permet d'extraire l'information lexicale de plus de 140 000 mots Français de manière Orientée Objet.
+
+
+* Free software: MIT license
+* PyLexique Documentation: https://pylexique.readthedocs.io
 
 | Each lexical item is represented as a LexItem having the following LexEntryType:
+|
+|
+| Chaque entrée lexicale est représentée par un LexItem de type LexEntryType:
 |
 
 .. code-block:: python
 
-        class LexEntryTypes:
+        class LexEntryType:
         """
         Type information about all the lexical attributes in a LexItem object.
 
@@ -148,10 +161,7 @@ The meanings of the attributes of this object are as follow:
 * nbmorph: the number of morphemes directly computed from 'morphoder'
 
 
-You can find all the relevant information in the `official documentation of Lexique383`_
-
-* Free software: MIT license
-* Documentation: https://pylexique.readthedocs.io.
+You can find all the relevant information in the `official documentation of Lexique383`_ (French).
 
 
 Features
@@ -279,6 +289,21 @@ BibTex Entry to cite publications about Lexique383:
     publisher={Cambridge University Press},
     year={2007},
     pages={661–677}}
+
+BibTeX
+------
+
+If you want to cite pylexique in an academic publication use this citation format:
+
+.. code:: bibtex
+
+   @article{pylexique,
+     title={pylexique},
+     author={Sekou Diao},
+     journal={GitHub. Note: https://github.com/SekouDiaoNlp/pylexique Cited by},
+     year={2021}
+   }
+
 
 .. _Lexique383: http://www.lexique.org/
 .. _SekouDiaoNlp: https://github.com/SekouDiaoNlp
