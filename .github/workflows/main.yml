@@ -43,6 +43,7 @@ jobs:
             py.test -rP --cov=./pylexique/
             codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
             bandit -r pylexique/
+            mypy --install-types
             mypy --strict --ignore-missing-imports --show-error-codes pylexique/
 
 
@@ -83,4 +84,5 @@ jobs:
                   py.test --cov=./pylexique/
                   codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
                   bandit -r pylexique/
+                  mypy --install-types
                   mypy --strict --ignore-missing-imports --show-error-codes pylexique/
