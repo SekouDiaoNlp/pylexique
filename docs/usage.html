@@ -1,117 +1,540 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Usage &#8212; pylexique 1.0.1 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Usage &mdash; pylexique 1.4.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within pylexique 1.4.0 documentation"
+          href="_static/opensearch.xml"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Contributing" href="contributing.html" />
-    <link rel="prev" title="Installation" href="installation.html" />
+    <link rel="next" title="Package Api Documentation for pylexique" href="modules.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
    
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
           
 
-          <div class="body" role="main">
+          
+            <a href="index.html" class="icon icon-home"> pylexique
+          
+
+          
+          </a>
+
+          
             
-  <div class="section" id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>To use pylexique in a project:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pylexique</span>
-</pre></div>
-</div>
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
 
-
-          </div>
           
         </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">pylexique</a></h1>
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Content</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme.html">pylexique</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#to-use-pylexique-from-the-command-line">To use pylexique from the command line:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#to-use-pylexique-as-a-library-in-your-own-projects">To use pylexique  as a library in your own projects:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Package Api Documentation for pylexique</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
 </ul>
 
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
-      <li>Next: <a href="contributing.html" title="next chapter">Contributing</a></li>
-  </ul></li>
-</ul>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pylexique</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Usage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The language of the lexical entries is French.
+The Lexical Corpus is based on <a class="reference internal" href="#lexique383">Lexique383</a>.
+Also note that pylexique only works on Python 3.X.</p>
+</div>
+<section id="to-use-pylexique-from-the-command-line">
+<h2>To use pylexique from the command line:<a class="headerlink" href="#to-use-pylexique-from-the-command-line" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pylexique manger
+</pre></div>
+</div>
+<p>The output will be a json representation of the LexItem objects:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+    &quot;manger&quot;: [
+        [
+            {
+                &quot;ortho&quot;: &quot;manger&quot;,
+                &quot;phon&quot;: &quot;m@Ze&quot;,
+                &quot;lemme&quot;: &quot;manger&quot;,
+                &quot;cgram&quot;: &quot;NOM&quot;,
+                &quot;genre&quot;: &quot;m&quot;,
+                &quot;nombre&quot;: &quot;s&quot;,
+                &quot;freqlemfilms2&quot;: 5.62,
+                &quot;freqlemlivres&quot;: 4.05,
+                &quot;freqfilms2&quot;: 5.62,
+                &quot;freqlivres&quot;: 4.05,
+                &quot;infover&quot;: &quot;&quot;,
+                &quot;nbhomogr&quot;: 2,
+                &quot;nbhomoph&quot;: 7,
+                &quot;islem&quot;: True,
+                &quot;nblettres&quot;: 6,
+                &quot;nbphons&quot;: 4,
+                &quot;cvcv&quot;: &quot;CVCCVC&quot;,
+                &quot;p_cvcv&quot;: &quot;CVCV&quot;,
+                &quot;voisorth&quot;: 9,
+                &quot;voisphon&quot;: 12,
+                &quot;puorth&quot;: 6,
+                &quot;puphon&quot;: 4,
+                &quot;syll&quot;: &quot;m@-Ze&quot;,
+                &quot;nbsyll&quot;: 2,
+                &quot;cv_cv&quot;: &quot;CV-CV&quot;,
+                &quot;orthrenv&quot;: &quot;regnam&quot;,
+                &quot;phonrenv&quot;: &quot;eZ@m&quot;,
+                &quot;orthosyll&quot;: &quot;man-ger&quot;,
+                &quot;cgramortho&quot;: &quot;NOM,VER&quot;,
+                &quot;deflem&quot;: &quot;100&quot;,
+                &quot;defobs&quot;: &quot;33&quot;,
+                &quot;old20&quot;: 1.35,
+                &quot;pld20&quot;: 1.25,
+                &quot;morphoder&quot;: &quot;manger&quot;,
+                &quot;nbmorph&quot;: &quot;1&quot;
+            },
+            {
+                &quot;ortho&quot;: &quot;manger&quot;,
+                &quot;phon&quot;: &quot;m@Ze&quot;,
+                &quot;lemme&quot;: &quot;manger&quot;,
+                &quot;cgram&quot;: &quot;VER&quot;,
+                &quot;genre&quot;: &quot;&quot;,
+                &quot;nombre&quot;: &quot;&quot;,
+                &quot;freqlemfilms2&quot;: 467.82,
+                &quot;freqlemlivres&quot;: 280.61,
+                &quot;freqfilms2&quot;: 207.63,
+                &quot;freqlivres&quot;: 134.26,
+                &quot;infover&quot;: &quot;\&quot;inf;;\&quot;&quot;,
+                &quot;nbhomogr&quot;: 2,
+                &quot;nbhomoph&quot;: 7,
+                &quot;islem&quot;: True,
+                &quot;nblettres&quot;: 6,
+                &quot;nbphons&quot;: 4,
+                &quot;cvcv&quot;: &quot;CVCCVC&quot;,
+                &quot;p_cvcv&quot;: &quot;CVCV&quot;,
+                &quot;voisorth&quot;: 9,
+                &quot;voisphon&quot;: 12,
+                &quot;puorth&quot;: 6,
+                &quot;puphon&quot;: 4,
+                &quot;syll&quot;: &quot;m@-Ze&quot;,
+                &quot;nbsyll&quot;: 2,
+                &quot;cv_cv&quot;: &quot;CV-CV&quot;,
+                &quot;orthrenv&quot;: &quot;regnam&quot;,
+                &quot;phonrenv&quot;: &quot;eZ@m&quot;,
+                &quot;orthosyll&quot;: &quot;man-ger&quot;,
+                &quot;cgramortho&quot;: &quot;NOM,VER&quot;,
+                &quot;deflem&quot;: &quot;100&quot;,
+                &quot;defobs&quot;: &quot;20&quot;,
+                &quot;old20&quot;: 1.35,
+                &quot;pld20&quot;: 1.25,
+                &quot;morphoder&quot;: &quot;manger&quot;,
+                &quot;nbmorph&quot;: &quot;1&quot;
+            }
+        ]
+    ]
+}
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pylexique boire
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+    &quot;boire&quot;: [
+        [
+            {
+                &quot;ortho&quot;: &quot;boire&quot;,
+                &quot;phon&quot;: &quot;bwaR&quot;,
+                &quot;lemme&quot;: &quot;boire&quot;,
+                &quot;cgram&quot;: &quot;NOM&quot;,
+                &quot;genre&quot;: &quot;m&quot;,
+                &quot;nombre&quot;: &quot;s&quot;,
+                &quot;freqlemfilms2&quot;: 2.67,
+                &quot;freqlemlivres&quot;: 2.03,
+                &quot;freqfilms2&quot;: 2.67,
+                &quot;freqlivres&quot;: 2.03,
+                &quot;infover&quot;: &quot;&quot;,
+                &quot;nbhomogr&quot;: 2,
+                &quot;nbhomoph&quot;: 2,
+                &quot;islem&quot;: True,
+                &quot;nblettres&quot;: 5,
+                &quot;nbphons&quot;: 4,
+                &quot;cvcv&quot;: &quot;CVVCV&quot;,
+                &quot;p_cvcv&quot;: &quot;CYVC&quot;,
+                &quot;voisorth&quot;: 9,
+                &quot;voisphon&quot;: 14,
+                &quot;puorth&quot;: 4,
+                &quot;puphon&quot;: 4,
+                &quot;syll&quot;: &quot;bwaR&quot;,
+                &quot;nbsyll&quot;: 1,
+                &quot;cv_cv&quot;: &quot;CYVC&quot;,
+                &quot;orthrenv&quot;: &quot;eriob&quot;,
+                &quot;phonrenv&quot;: &quot;Rawb&quot;,
+                &quot;orthosyll&quot;: &quot;boi-re&quot;,
+                &quot;cgramortho&quot;: &quot;NOM,VER&quot;,
+                &quot;deflem&quot;: &quot;96&quot;,
+                &quot;defobs&quot;: &quot;30&quot;,
+                &quot;old20&quot;: 1.4,
+                &quot;pld20&quot;: &quot;1&quot;,
+                &quot;morphoder&quot;: &quot;boire&quot;,
+                &quot;nbmorph&quot;: &quot;1&quot;
+            },
+            {
+                &quot;ortho&quot;: &quot;boire&quot;,
+                &quot;phon&quot;: &quot;bwaR&quot;,
+                &quot;lemme&quot;: &quot;boire&quot;,
+                &quot;cgram&quot;: &quot;VER&quot;,
+                &quot;genre&quot;: &quot;&quot;,
+                &quot;nombre&quot;: &quot;&quot;,
+                &quot;freqlemfilms2&quot;: 339.05,
+                &quot;freqlemlivres&quot;: 274.32,
+                &quot;freqfilms2&quot;: 142.15,
+                &quot;freqlivres&quot;: 100.27,
+                &quot;infover&quot;: &quot;\&quot;inf;;\&quot;&quot;,
+                &quot;nbhomogr&quot;: 2,
+                &quot;nbhomoph&quot;: 2,
+                &quot;islem&quot;: True,
+                &quot;nblettres&quot;: 5,
+                &quot;nbphons&quot;: 4,
+                &quot;cvcv&quot;: &quot;CVVCV&quot;,
+                &quot;p_cvcv&quot;: &quot;CYVC&quot;,
+                &quot;voisorth&quot;: 9,
+                &quot;voisphon&quot;: 14,
+                &quot;puorth&quot;: 4,
+                &quot;puphon&quot;: 4,
+                &quot;syll&quot;: &quot;bwaR&quot;,
+                &quot;nbsyll&quot;: 1,
+                &quot;cv_cv&quot;: &quot;CYVC&quot;,
+                &quot;orthrenv&quot;: &quot;eriob&quot;,
+                &quot;phonrenv&quot;: &quot;Rawb&quot;,
+                &quot;orthosyll&quot;: &quot;boi-re&quot;,
+                &quot;cgramortho&quot;: &quot;NOM,VER&quot;,
+                &quot;deflem&quot;: &quot;100&quot;,
+                &quot;defobs&quot;: &quot;30&quot;,
+                &quot;old20&quot;: 1.4,
+                &quot;pld20&quot;: &quot;1&quot;,
+                &quot;morphoder&quot;: &quot;boire&quot;,
+                &quot;nbmorph&quot;: &quot;1&quot;
+            }
+        ]
+    ]
+}
+</pre></div>
+</div>
+<p>You can also provide multiple words and/or specify an output file to save the lexical information in a json file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pylexique il mange une baguette
+
+$ pylexique il boit du vin rouge -o path/to/the/output/json/file.json
+</pre></div>
+</div>
+<p>The output will be similar as previously, with a json entry for each word in the sequence.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>You can also retrieve all the lexical forms of the provided word/words by using the option ‘-a’ or ‘–all_forms’</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pylexique il mange une baguette -a
+
+$ pylexique il boit du vin rouge -o path/to/the/output/json/file.json --all_forms
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="to-use-pylexique-as-a-library-in-your-own-projects">
+<h2>To use pylexique  as a library in your own projects:<a class="headerlink" href="#to-use-pylexique-as-a-library-in-your-own-projects" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylexique</span> <span class="kn">import</span> <span class="n">Lexique383</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1">#  Create new Lexique383 instance with a pre-built Lexique383.</span>
+<span class="n">LEXIQUE</span> <span class="o">=</span> <span class="n">Lexique383</span><span class="p">()</span>
+
+<span class="c1"># Creates a new Lexique383 instance while supplying your own Lexique38X lexicon. The first time it will it will be</span>
+<span class="c1"># slow to parse the file and create a persistent data-store. Next runs should be much faster.</span>
+<span class="n">RESOURCE_PATH</span> <span class="o">=</span> <span class="s1">&#39;path/to/Lexique38x&#39;</span>
+<span class="c1"># parser_type must be either omitted if RESOURCE_PATH is a csv file and you want to use the default csv parser.</span>
+<span class="c1"># if parser_type is provided it should be either &#39;xlsb&#39;, &#39;pandas_csv&#39;, &#39;csv&#39;, &#39;std_csv&#39;. &#39;std_csv&#39; is used by default.</span>
+<span class="n">LEXIQUE2</span> <span class="o">=</span> <span class="n">Lexique383</span><span class="p">(</span><span class="n">RESOURCE_PATH</span><span class="p">,</span> <span class="n">parser_type</span><span class="o">=</span><span class="s1">&#39;std_csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are 2 ways to access the lexical information of a word:
+Either use the utility method Lexique383.get_lex(item)
+Or you can directly access the lexicon directory through LEXIQUE.lexique[item] .</p>
+<p>Notice that item can be either a string or a sequence of strings when using Lexique383.get_lex(item) .</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#  Retrieves the lexical information of &#39;abaissait&#39; and &#39;a&#39;.</span>
+<span class="n">var_1</span> <span class="o">=</span> <span class="n">LEXIQUE</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="s1">&#39;abaissait&#39;</span><span class="p">]</span>
+<span class="n">var_1_bis</span> <span class="o">=</span> <span class="n">LEXIQUE</span><span class="o">.</span><span class="n">get_lex</span><span class="p">(</span><span class="s1">&#39;abaissait&#39;</span><span class="p">)</span>
+
+<span class="c1"># Check both objects are the same</span>
+<span class="n">var_1_equality</span> <span class="o">=</span> <span class="n">var_1</span> <span class="o">==</span> <span class="n">var_1_bis</span><span class="p">[</span><span class="s1">&#39;abaissait&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">var_1_equality</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Because in French the world ‘a’ is a very polysemic word, it has several entries in Lexique 383.
+For this reason the LEXIQUE Dict has the value of the <cite>ortho</cite> property of its LexicalEntry.
+In th case of ‘abaissait’ there is only one LexicalItem corresponding to this dict key.
+But in the case of ‘a’ there are several LexItem objects corresponding to this key and then the LexItem objects
+are stored in a list corresponding to th value of the key.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">var_2</span> <span class="o">=</span> <span class="n">LEXIQUE</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span>
+<span class="n">var_2_bis</span> <span class="o">=</span> <span class="n">LEXIQUE</span><span class="o">.</span><span class="n">get_lex</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+
+<span class="c1"># Check both objects are the same</span>
+<span class="n">var_2_equality</span> <span class="o">=</span> <span class="n">var_2</span> <span class="o">==</span> <span class="n">var_2_bis</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">var_2_equality</span><span class="p">)</span>
+
+<span class="c1"># Retrieving the lexical information of several words by passing a Sequence of strings</span>
+
+<span class="n">var_multiple</span> <span class="o">=</span> <span class="n">LEXIQUE</span><span class="o">.</span><span class="n">get_lex</span><span class="p">((</span><span class="s1">&#39;il&#39;</span><span class="p">,</span> <span class="s1">&#39;mange&#39;</span><span class="p">,</span> <span class="s1">&#39;une&#39;</span><span class="p">,</span> <span class="s1">&#39;baguette&#39;</span><span class="p">))</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">var_multiple</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>You can get all the forms of a given word by calling the method Lexique383.get_all_forms(word):</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">all_avoir_forms</span> <span class="o">=</span> <span class="n">LEXIQUE</span><span class="o">.</span><span class="n">get_all_forms</span><span class="p">(</span><span class="s1">&#39;avez&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">all_avoir_forms</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">all_vouloir_forms</span> <span class="o">=</span> <span class="n">LEXIQUE</span><span class="o">.</span><span class="n">get_all_forms</span><span class="p">(</span><span class="s1">&#39;voulu&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">all_vouloir_forms</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>You can use the method LexItem.to_dict() to produce a dictionary with key/value pairs corresponding to the LexItem</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var_1</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">elmt</span> <span class="ow">in</span> <span class="n">var_1</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">elmt</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">pprint</span><span class="p">(</span><span class="n">var_1</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var_2</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">elmt</span> <span class="ow">in</span> <span class="n">var_2</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">elmt</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">pprint</span><span class="p">(</span><span class="n">var_2</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get all verbs in the DataSet. Because some words have the same orthography, some keys of the dictionary</span>
+<span class="c1"># don&#39;t have a unique LexItem object as their value, but a list of those.</span>
+<span class="n">verbs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">LEXIQUE</span><span class="o">.</span><span class="n">lexique</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="n">y</span><span class="o">.</span><span class="n">cgram</span> <span class="o">==</span> <span class="s1">&#39;VER&#39;</span><span class="p">:</span>
+                <span class="n">verbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">cgram</span> <span class="o">==</span> <span class="s1">&#39;VER&#39;</span><span class="p">:</span>
+        <span class="n">verbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Printing the first 5 verbs found in the preceding search:&#39;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">verbs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># Print the first 5 verbs with full lexical information.</span>
+<span class="k">for</span> <span class="n">verb</span> <span class="ow">in</span> <span class="n">verbs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="n">pprint</span><span class="p">(</span><span class="n">verb</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Documentation for
+<span class="target" id="lexique383">Lexique383</span>: <a class="reference external" href="http://www.lexique.org">http://www.lexique.org</a></p>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="modules.html" class="btn btn-neutral float-right" title="Package Api Documentation for pylexique" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
 
+  <hr/>
 
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, SekouDiaoNlp.
+      <span class="lastupdated">
+        Last updated on Oct 23, 2021.
+      </span>
 
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-
-
-
-
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2018, SekouDiaoNlp.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/usage.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
 
-    
+    </section>
 
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
     
-  </body>
+   
+
+</body>
 </html>

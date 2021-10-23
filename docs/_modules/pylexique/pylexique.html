@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pylexique.pylexique &mdash; pylexique 1.4.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within pylexique 1.4.0 documentation"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pylexique
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">pylexique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Package Api Documentation for pylexique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pylexique</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pylexique.pylexique</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pylexique.pylexique</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Main module of pylexique.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">isnan</span>
+<span class="c1"># import faster_than_csv as csv</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">DefaultDict</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterator</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lexique383&#39;</span><span class="p">,</span> <span class="s1">&#39;LexItem&#39;</span><span class="p">,</span> <span class="s1">&#39;LexEntryTypes&#39;</span><span class="p">]</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="ow">or</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">logger</span>
+
+<span class="n">_RESOURCE_PACKAGE</span> <span class="o">=</span> <span class="vm">__name__</span>
+
+<span class="n">HOME_PATH</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;Lexique&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+<span class="n">_RESOURCE_PATH_csv</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="n">_RESOURCE_PACKAGE</span><span class="p">,</span> <span class="s1">&#39;Lexique383/Lexique383.txt&#39;</span><span class="p">)</span>
+<span class="n">_RESOURCE_PATH_xlsb</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="n">_RESOURCE_PACKAGE</span><span class="p">,</span> <span class="s1">&#39;Lexique383/Lexique383.xlsb&#39;</span><span class="p">)</span>
+<span class="n">_VALUE_ERRORS_PATH</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="n">_RESOURCE_PACKAGE</span><span class="p">,</span> <span class="s1">&#39;errors/value_errors.json&#39;</span><span class="p">)</span>
+<span class="n">_LENGTH_ERRORS_PATH</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="n">_RESOURCE_PACKAGE</span><span class="p">,</span> <span class="s1">&#39;errors/length_errors.json&#39;</span><span class="p">)</span>
+
+<span class="n">LEXIQUE383_FIELD_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ortho&#39;</span><span class="p">,</span> <span class="s1">&#39;phon&#39;</span><span class="p">,</span> <span class="s1">&#39;lemme&#39;</span><span class="p">,</span> <span class="s1">&#39;cgram&#39;</span><span class="p">,</span> <span class="s1">&#39;genre&#39;</span><span class="p">,</span> <span class="s1">&#39;nombre&#39;</span><span class="p">,</span> <span class="s1">&#39;freqlemfilms2&#39;</span><span class="p">,</span> <span class="s1">&#39;freqlemlivres&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;freqfilms2&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;freqlivres&#39;</span><span class="p">,</span> <span class="s1">&#39;infover&#39;</span><span class="p">,</span> <span class="s1">&#39;nbhomogr&#39;</span><span class="p">,</span> <span class="s1">&#39;nbhomoph&#39;</span><span class="p">,</span> <span class="s1">&#39;islem&#39;</span><span class="p">,</span> <span class="s1">&#39;nblettres&#39;</span><span class="p">,</span> <span class="s1">&#39;nbphons&#39;</span><span class="p">,</span> <span class="s1">&#39;cvcv&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;p_cvcv&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;voisorth&#39;</span><span class="p">,</span> <span class="s1">&#39;voisphon&#39;</span><span class="p">,</span> <span class="s1">&#39;puorth&#39;</span><span class="p">,</span> <span class="s1">&#39;puphon&#39;</span><span class="p">,</span> <span class="s1">&#39;syll&#39;</span><span class="p">,</span> <span class="s1">&#39;nbsyll&#39;</span><span class="p">,</span> <span class="s1">&#39;cv_cv&#39;</span><span class="p">,</span> <span class="s1">&#39;orthrenv&#39;</span><span class="p">,</span> <span class="s1">&#39;phonrenv&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;orthosyll&#39;</span><span class="p">,</span> <span class="s1">&#39;cgramortho&#39;</span><span class="p">,</span> <span class="s1">&#39;deflem&#39;</span><span class="p">,</span> <span class="s1">&#39;defobs&#39;</span><span class="p">,</span> <span class="s1">&#39;old20&#39;</span><span class="p">,</span> <span class="s1">&#39;pld20&#39;</span><span class="p">,</span> <span class="s1">&#39;morphoder&#39;</span><span class="p">,</span> <span class="s1">&#39;nbmorph&#39;</span><span class="p">]</span>
+
+<span class="n">ConvertedRow</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span>
+                     <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span>
+                     <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="LexEntryTypes"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.LexEntryTypes">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">eq</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unsafe_hash</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">LexEntryTypes</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Type information about all the lexical attributes in a LexItem object.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ortho</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">phon</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">lemme</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">cgram</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">genre</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">nombre</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">freqlemfilms2</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">freqlemlivres</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">freqfilms2</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">freqlivres</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">infover</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">nbhomogr</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">nbhomoph</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">islem</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">nblettres</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">nbphons</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">cvcv</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">p_cvcv</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">voisorth</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">voisphon</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">puorth</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">puphon</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">syll</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">nbsyll</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">cv_cv</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">orthrenv</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">phonrenv</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">orthosyll</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">cgramortho</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">deflem</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">defobs</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">old20</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">pld20</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">morphoder</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">nbmorph</span><span class="p">:</span> <span class="nb">int</span></div>
+
+
+<div class="viewcode-block" id="LexItem"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.LexItem">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">eq</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unsafe_hash</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">LexItem</span><span class="p">(</span><span class="n">LexEntryTypes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    | This class defines the lexical items in Lexique383.</span>
+<span class="sd">    | It uses slots for memory efficiency.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_s</span> <span class="o">=</span> <span class="n">LEXIQUE383_FIELD_NAMES</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="n">_s</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">(</span><span class="si">{1}</span><span class="s1">, </span><span class="si">{2}</span><span class="s1">, </span><span class="si">{3}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ortho</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lemme</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cgram</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LexItem.to_dict"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.LexItem.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Converts the LexItem to a dict containing its attributes and their values</span>
+
+<span class="sd">        :return: OrderedDict.</span>
+<span class="sd">            Dictionary with key/values correspondence wit LexItem objects.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">attributes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__slots__</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div></div>
+
+
+<div class="viewcode-block" id="Lexique383"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.Lexique383">[docs]</a><span class="k">class</span> <span class="nc">Lexique383</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is the class handling the lexique database.</span>
+<span class="sd">    It provides methods for interacting with the Lexique DB</span>
+<span class="sd">    and retrieve lexical items.</span>
+<span class="sd">    All the lexical items are then stored in an Ordered Dict.</span>
+
+<span class="sd">    :param lexique_path: string.</span>
+<span class="sd">        Path to the lexique file.</span>
+<span class="sd">    :param parser_type: string.</span>
+<span class="sd">        &#39;pandas_csv&#39;, &#39;csv&#39; and &#39;xlsb&#39; are valid values. &#39;csv&#39; is the default value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">lexique</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="n">value_errors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">length_errors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lemmes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">LexItem</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lexique_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">parser_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;csv&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lexique_path</span> <span class="o">=</span> <span class="n">lexique_path</span>
+        <span class="k">if</span> <span class="n">parser_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;xlsb&#39;</span><span class="p">,</span> <span class="s1">&#39;pandas_csv&#39;</span><span class="p">,</span> <span class="s1">&#39;csv&#39;</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The value </span><span class="si">{</span><span class="n">parser_type</span><span class="si">}</span><span class="s2"> is not permitted. Only &#39;pandas_csv&#39;, &#39;std_csv&#39;, &#39;csv&#39; and &quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;&#39;xlsb&#39; are valid values.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">lexique_path</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Argument &#39;lexique_path&#39; must be of type String, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_parse_lexique</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">,</span> <span class="n">parser_type</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">UnicodeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There was a unicode error while parsing </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+            <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Argument &#39;lexique_path&#39; must be a valid path to Lexique383&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_parse_lexique</span><span class="p">(</span><span class="n">_RESOURCE_PATH_csv</span><span class="p">,</span> <span class="n">parser_type</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">UnicodeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There was a unicode error while parsing </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">_RESOURCE_PATH_csv</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+            <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Argument &#39;lexique_path&#39; must be a valid path to Lexique383&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Lexique383._parse_csv"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.Lexique383._parse_csv">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_csv</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>    <span class="c1">#type: ignore[type-arg]</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param lexique_path: string.</span>
+<span class="sd">            Path to the lexique file.</span>
+<span class="sd">        :return: generator of rows:</span>
+<span class="sd">            Content of the Lexique38x database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csv_file</span><span class="p">:</span>
+            <span class="n">raw_content</span> <span class="o">=</span> <span class="n">csv_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">raw_content</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="k">return</span> <span class="n">content</span></div>
+
+<div class="viewcode-block" id="Lexique383._parse_lexique"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.Lexique383._parse_lexique">[docs]</a>    <span class="k">def</span> <span class="nf">_parse_lexique</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lexique_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">parser_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Parses the given lexique file and creates 2 hash tables to store the data.</span>
+
+<span class="sd">        :param lexique_path: string.</span>
+<span class="sd">            Path to the lexique file.</span>
+<span class="sd">        :param parser_type: string.</span>
+<span class="sd">            Can be either &#39;csv&#39;, &#39;pandas_csv&#39;, &#39;std_csv&#39; or &#39;xlsb&#39;.</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">parser_type</span> <span class="o">==</span> <span class="s1">&#39;xlsb&#39;</span><span class="p">:</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;pyxlsb&#39;</span><span class="p">)</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">parser_type</span> <span class="o">==</span> <span class="s1">&#39;pandas_csv&#39;</span><span class="p">:</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">parser_type</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_csv</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_csv</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">UnicodeDecodeError</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;there was an issue while parsing the file </span><span class="si">{</span><span class="n">lexique_path</span><span class="si">}</span><span class="s2">.&quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot; Trying again with built-in csv parser&quot;</span><span class="p">)</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_csv</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_db</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_errors</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_errors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value_errors</span><span class="p">,</span> <span class="n">_VALUE_ERRORS_PATH</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length_errors</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_errors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length_errors</span><span class="p">,</span> <span class="n">_LENGTH_ERRORS_PATH</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Lexique383._create_db"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.Lexique383._create_db">[docs]</a>    <span class="k">def</span> <span class="nf">_create_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lexicon</span><span class="p">:</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1">#type: ignore[type-arg]</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Creates 2 hash tables populated with the entries in lexique if it does not exist yet.</span>
+<span class="sd">        | One hash table holds the LexItems, the other holds the same data but grouped by lemmma to give access to all lexical forms of a word.</span>
+
+<span class="sd">        :param lexicon: Iterable.</span>
+<span class="sd">            Iterable containing the lexique383 entries.</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">lexicon</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">converted_row_fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_entries</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">lexical_entry</span> <span class="o">=</span> <span class="n">LexItem</span><span class="p">(</span><span class="o">*</span><span class="n">converted_row_fields</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lemmes</span><span class="p">[</span><span class="n">lexical_entry</span><span class="o">.</span><span class="n">lemme</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lexical_entry</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lexical_entry</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lexical_entry</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">lexical_entry</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Lexique383._convert_entries"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.Lexique383._convert_entries">[docs]</a>    <span class="k">def</span> <span class="nf">_convert_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row_fields</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="n">ConvertedRow</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Convert entries from `strings` to `int`, `bool` or `float` and generates</span>
+<span class="sd">        | a new list with typed entries.</span>
+
+<span class="sd">        :param row_fields:</span>
+<span class="sd">            List of column entries representing a row.</span>
+<span class="sd">        :return: ConvertedRow:</span>
+<span class="sd">            List of typed column entries representing a typed row.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="n">converted_row_fields</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">LEXIQUE383_FIELD_NAMES</span><span class="p">,</span> <span class="n">row_fields</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="n">isnan</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">if</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;freqlemfilms2&#39;</span><span class="p">,</span> <span class="s1">&#39;freqlemlivres&#39;</span><span class="p">,</span> <span class="s1">&#39;freqfilms2&#39;</span><span class="p">,</span> <span class="s1">&#39;freqlivres&#39;</span><span class="p">,</span> <span class="s1">&#39;old20&#39;</span><span class="p">,</span> <span class="s1">&#39;pld20&#39;</span><span class="p">}:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">!=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;,&#39;</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">attr</span> <span class="o">==</span> <span class="s1">&#39;islem&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="n">errors</span><span class="p">[</span><span class="n">row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">attr</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">value_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;nbhomogr&#39;</span><span class="p">,</span> <span class="s1">&#39;nbhomoph&#39;</span><span class="p">,</span> <span class="s1">&#39;nblettres&#39;</span><span class="p">,</span> <span class="s1">&#39;nbphons&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;voisorth&#39;</span><span class="p">,</span> <span class="s1">&#39;voisphon&#39;</span><span class="p">,</span> <span class="s1">&#39;puorth&#39;</span><span class="p">,</span> <span class="s1">&#39;puphon&#39;</span><span class="p">,</span> <span class="s1">&#39;nbsyll&#39;</span><span class="p">}:</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">!=</span> <span class="s1">&#39; &#39;</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="n">errors</span><span class="p">[</span><span class="n">row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">attr</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">value_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+            <span class="n">converted_row_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">converted_row_fields</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">35</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">length_errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">converted_row_fields</span><span class="p">,</span> <span class="n">row_fields</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="k">return</span> <span class="n">converted_row_fields</span>  <span class="c1"># type: ignore[return-value]</span></div>
+
+<div class="viewcode-block" id="Lexique383.get_lex"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.Lexique383.get_lex">[docs]</a>    <span class="k">def</span> <span class="nf">get_lex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">LexItem</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">LexItem</span><span class="p">]]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Recovers the lexical entries for the words in the sequence</span>
+
+<span class="sd">        :param words:</span>
+<span class="sd">            A string or a tuple of multiple strings for getting the LexItems for multiple words.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            Dictionary of LexItems.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">results</span><span class="p">[</span><span class="n">words</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">words</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;the word </span><span class="si">{}</span><span class="s1"> is not in Lexique383&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">results</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+                    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;The word </span><span class="si">{}</span><span class="s1"> is not in Lexique383</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+                        <span class="k">continue</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> is not a valid string&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+
+<div class="viewcode-block" id="Lexique383.get_all_forms"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.Lexique383.get_all_forms">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_forms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">LexItem</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets all lexical forms of a given word.</span>
+
+<span class="sd">        :param word:</span>
+<span class="sd">            String.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            List of LexItem objects sharing the same root lemma.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">lex_entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;The word </span><span class="si">{}</span><span class="s1"> is not in Lexique383</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lex_entry</span><span class="p">,</span> <span class="n">LexItem</span><span class="p">):</span>
+            <span class="n">lemmes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lemmes</span><span class="p">[</span><span class="n">lex_entry</span><span class="o">.</span><span class="n">lemme</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lex_entry</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">):</span>
+            <span class="n">lemmes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lemmes</span><span class="p">[</span><span class="n">lex_entry</span><span class="p">[</span><span class="s1">&#39;lemme&#39;</span><span class="p">]]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lex_entry</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">distinct</span> <span class="o">=</span> <span class="p">{</span><span class="n">elmt</span><span class="o">.</span><span class="n">lemme</span> <span class="k">for</span> <span class="n">elmt</span> <span class="ow">in</span> <span class="n">lex_entry</span><span class="p">}</span>
+            <span class="n">lemmes</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">lemme</span> <span class="ow">in</span> <span class="n">distinct</span><span class="p">:</span>
+                <span class="n">lemmes</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lemmes</span><span class="p">[</span><span class="n">lemme</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span>
+        <span class="k">return</span> <span class="n">lemmes</span></div>
+
+<div class="viewcode-block" id="Lexique383._save_errors"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.Lexique383._save_errors">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_save_errors</span><span class="p">(</span><span class="n">errors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+        <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span> <span class="n">List</span><span class="p">[</span><span class="n">DefaultDict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]]],</span>
+                     <span class="n">errors_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves the mismatched key/values in Lexique383 based on type coercion.</span>
+
+<span class="sd">        :param errors:</span>
+<span class="sd">            List of errors encountered while parsing Lexique38x</span>
+<span class="sd">        :param errors_path:</span>
+<span class="sd">            Path to save the errors.</span>
+<span class="sd">        :return:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">errors_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">errors</span><span class="p">,</span> <span class="n">json_file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="k">return</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, SekouDiaoNlp.
+      <span class="lastupdated">
+        Last updated on Oct 23, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
