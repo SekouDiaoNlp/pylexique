@@ -1,0 +1,41 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "pylexique"
+version = "1.4.0"
+description = "Pylexique is a Python wrapper around Lexique383"
+authors = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
+license = "MIT license"
+keywords = ["pylexique"]
+classifiers = ["Development Status :: 5 - Production/Stable", "Topic :: Software Development :: Libraries :: Python Modules", "Topic :: Education", "Topic :: Scientific/Engineering :: Artificial Intelligence", "Topic :: Utilities", "Intended Audience :: Developers", "Intended Audience :: End Users/Desktop", "Intended Audience :: Education", "Intended Audience :: Science/Research", "License :: OSI Approved :: MIT License", "Natural Language :: English", "Natural Language :: French", "Operating System :: OS Independent", "Programming Language :: Python :: 3.6", "Programming Language :: Python :: 3.7", "Programming Language :: Python :: 3.8", "Programming Language :: Python :: 3.9", "Programming Language :: Python :: 3.10"]
+homepage = "https://github.com/SekouDiaoNlp/pylexique"
+readme = "README.rst"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+click = ">=8.0.3"
+colorama = "*"
+dataclasses = {version = ">=0.6", python = "<3.7"}
+joblib = "^1.0.1"
+pandas = "*"
+pyxlsb = "*"
+setuptools = "==49.6.*,>=49.6.0"
+tqdm = "*"
+
+[tool.poetry.dev-dependencies]
+pip = "^21.3.1"
+wheel = "^0.37.0"
+bumpversion = "^0.6.0"
+watchdog = "^2.1.6"
+flake8 = "^4.0.1"
+tox = "^3.24.4"
+coverage = "^6.0.2"
+Sphinx = "^4.2.0"
+twine = "^3.4.2"
+joblib = "^1.1.0"
+pytest = "^6.2.5"
+pytest-runner = "^5.3.1"
+bandit = "^1.7.0"
+mypy = "^0.910"
