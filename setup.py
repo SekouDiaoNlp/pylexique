@@ -36,7 +36,8 @@ setup(
     author="SekouDiaoNlp",
     author_email='diao.sekou.nlp@gmail.com',
     classifiers=[
-        'Development Status :: 5 - Production/Stable','Topic :: Software Development :: Libraries :: Python Modules',
+        'Development Status :: 5 - Production/Stable',
+        'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Education',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Utilities',
@@ -54,7 +55,7 @@ setup(
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
     ],
-    description="Pylexique is a Python wrapper around Lexique83",
+    description="Pylexique is a Python wrapper around Lexique383",
     entry_points={
         'console_scripts': [
             'pylexique=pylexique.cli:main',
