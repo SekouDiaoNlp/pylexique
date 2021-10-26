@@ -7,10 +7,13 @@ name = "pylexique"
 version = "1.4.0"
 description = "Pylexique is a Python wrapper around Lexique383"
 authors = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
+maintainers = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
 license = "MIT license"
 keywords = ["pylexique"]
 classifiers = ["Development Status :: 5 - Production/Stable", "Topic :: Software Development :: Libraries :: Python Modules", "Topic :: Education", "Topic :: Scientific/Engineering :: Artificial Intelligence", "Topic :: Utilities", "Intended Audience :: Developers", "Intended Audience :: End Users/Desktop", "Intended Audience :: Education", "Intended Audience :: Science/Research", "License :: OSI Approved :: MIT License", "Natural Language :: English", "Natural Language :: French", "Operating System :: OS Independent", "Programming Language :: Python :: 3.6", "Programming Language :: Python :: 3.7", "Programming Language :: Python :: 3.8", "Programming Language :: Python :: 3.9", "Programming Language :: Python :: 3.10"]
 homepage = "https://github.com/SekouDiaoNlp/pylexique"
+repository = "https://github.com/SekouDiaoNlp/pylexique"
+documentation = "https://pylexique.readthedocs.io/en/latest/readme.html"
 readme = "README.rst"
 
 [tool.poetry.scripts]
