@@ -1,9 +1,14 @@
-colorama
-tqdm
-pyxlsb
-# faster_than_csv
-pandas
-Click>=8.0.3
-setuptools~=49.6.0
-joblib~=1.0.1
-dataclasses>=0.6; python_version < '3.7'
+click==8.0.3; python_version >= "3.6"
+colorama==0.4.4; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
+dataclasses==0.8; python_version < "3.7"
+importlib-metadata==4.2.0; python_version < "3.8" and python_version >= "3.6"
+joblib==1.1.0; python_version >= "3.6"
+numpy==1.19.5; python_version >= "3.6" and python_full_version >= "3.5.3"
+pandas==0.25.3; python_full_version >= "3.5.3"
+python-dateutil==2.8.2; python_full_version >= "3.5.3"
+pytz==2021.3; python_full_version >= "3.5.3"
+pyxlsb==1.0.8
+six==1.16.0; python_full_version >= "3.5.3"
+tqdm==4.62.3; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.4.0")
+typing-extensions==3.10.0.2; python_version < "3.8" and python_version >= "3.6"
+zipp==3.6.0; python_version < "3.8" and python_version >= "3.6"
