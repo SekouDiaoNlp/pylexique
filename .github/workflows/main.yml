@@ -38,8 +38,7 @@ jobs:
         #   CIBW_SOME_OPTION: value
       - name: Run tests with pytest, mypy, coverage, bandit and restructuredtext check
         run: |
-            python setup.py sdist bdist_wheel
-            twine check dist/*
+            twine check DEST_DIR/*
             py.test -rP --cov=./pylexique/
             codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
             bandit -r pylexique/
@@ -78,8 +77,7 @@ jobs:
                   pip install -r requirements_dev.txt
           -   name: Run tests with pytest, mypy, coverage, bandit and restructuredtext check
               run: |
-                  python setup.py sdist bdist_wheel
-                  twine check dist/*
+                  twine check DEST_DIR/*
                   py.test --cov=./pylexique/
                   codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
                   bandit -r pylexique/
