@@ -48,7 +48,7 @@ jobs:
             -   name: Run Bandit
                 run: poetry run bandit -r pylexique/
             -   name: Run Type Checker
-                run: poetry run mypy --strict --ignore-missing-imports --show-error-codes
+                run: poetry run mypy --strict --ignore-missing-imports --show-error-codes pylexique/
 
 
 
