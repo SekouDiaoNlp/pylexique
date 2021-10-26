@@ -42,7 +42,7 @@ jobs:
             -   name: Install library
                 run: poetry install --no-interaction
             -   name: Build Package
-                run: poetry run -r pylexique/
+                run: poetry build
             -   name: Check PyTest version
                 run: |
                     source $VENV
@@ -50,7 +50,7 @@ jobs:
             -   name: Run Pytest
                 run: poetry run pytest -rP --cov=./pylexique/
             -   name: Run Bandit
-                run: poetry run -r pylexique/
+                run: poetry run bandit -r pylexique/
             -   name: Run Type Checker
                 run: poetry run mypy --strict --ignore-missing-imports --show-error-codes
 
