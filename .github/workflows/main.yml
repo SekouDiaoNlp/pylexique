@@ -49,7 +49,7 @@ jobs:
                 run: poetry run bandit -r pylexique/
             -   name: Run Type Checker
                 run: |
-                    pip install types-setuptools
+                    poetry install types-setuptools
                     poetry run mypy --strict --ignore-missing-imports --show-error-codes pylexique/
 
 
