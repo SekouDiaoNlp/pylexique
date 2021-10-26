@@ -13,6 +13,9 @@ classifiers = ["Development Status :: 5 - Production/Stable", "Topic :: Software
 homepage = "https://github.com/SekouDiaoNlp/pylexique"
 readme = "README.rst"
 
+[tool.poetry.scripts]
+pylexique = 'pylexique.cli:main'
+
 [tool.poetry.dependencies]
 python = "^3.6"
 click = ">=8.0.3"
