@@ -4,7 +4,7 @@ on: [ push, pull_request ]
 
 jobs:
     build_wheels_with_setuptools:
-        name: Build wheels on ${{ matrix.os }}
+        name: Build setuptool packages on ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
