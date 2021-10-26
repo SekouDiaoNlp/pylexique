@@ -15,6 +15,17 @@ homepage = "https://github.com/SekouDiaoNlp/pylexique"
 repository = "https://github.com/SekouDiaoNlp/pylexique"
 documentation = "https://pylexique.readthedocs.io/en/latest/readme.html"
 readme = "README.rst"
+packages = [
+    { include = 'pylexique' },
+    { include = 'tests' }
+]
+include = [
+    { path = '*.rst', format = 'sdist' },
+    { path = 'docs/*.*', format = 'sdist' },
+]
+exclude = [
+    { path = '*.rst', format = 'wheel' },
+]
 
 [tool.poetry.scripts]
 pylexique = 'pylexique.cli:main'
