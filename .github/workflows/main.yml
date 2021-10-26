@@ -48,7 +48,7 @@ jobs:
                     source $VENV
                     pytest --version
             -   name: Run Pytest
-                run: poetry run pytest -rP --cov=./pylexique/
+                run: poetry run pytest --cov=./pylexique/
             -   name: Run Bandit
                 run: poetry run bandit -r pylexique/
             -   name: Run Type Checker
