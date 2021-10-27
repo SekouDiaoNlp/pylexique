@@ -17,7 +17,7 @@ documentation = "https://pylexique.readthedocs.io/en/latest/readme.html"
 readme = "README.rst"
 packages = [
     { include = 'pylexique' },
-    { include = 'tests' }
+    { include = 'tests' },
 ]
 include = [
     { path = '*.rst', format = 'sdist' },
