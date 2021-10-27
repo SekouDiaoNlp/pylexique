@@ -60,3 +60,10 @@ Cython = "^0.29.24"
 
 [tool.bandit]
 skips = ["B311", ]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
