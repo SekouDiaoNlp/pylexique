@@ -53,4 +53,4 @@ jobs:
                 run: poetry run pytest --cov=./pylexique/
             -   name: Upload coverage artifacts to codecov
                 run: poetry run codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
-                if: ${{ matrix.python-version != '3.10.0' }} # codecov is not yet compatible with python 3.10.0
+                if: ${{ matrix.python-version != '3.10' }} # codecov is not yet compatible with python 3.10.0
