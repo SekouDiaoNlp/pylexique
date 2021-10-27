@@ -57,3 +57,6 @@ pytest-runner = "^5.3.1"
 bandit = "^1.7.0"
 mypy = "^0.910"
 Cython = "^0.29.24"
+
+[tool.bandit]
+skips = ["B311", ]
