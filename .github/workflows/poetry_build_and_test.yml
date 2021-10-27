@@ -44,7 +44,7 @@ jobs:
             -   name: Build Package
                 run: poetry build
             -   name: Run Bandit
-                run: poetry run bandit -r pylexique/
+                run: poetry run bandit -r pylexique/ -c .bandit.yml
             -   name: Run Type Checker
                 run: |
                     poetry run pip install types-setuptools
