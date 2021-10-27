@@ -52,11 +52,11 @@ class Test_Load_Times:
         # t9 = time() - t8
         # print(f'Parsing csv with standard csv parser took {round(t9, 2)} seconds\n')
 
-        # t2 = time()
-        # lexicon3 = Lexique383(_RESOURCE_PATH, parser_type='xlsb')
-        # t3 = time() - t2
-        # print(f'Parsing xlsb with pandas+pyxlsb took {round(t3, 2)} seconds\n')
-        # print('ok')
+        t2 = time()
+        lexicon3 = Lexique383(_RESOURCE_PATH, parser_type='xlsb')
+        t3 = time() - t2
+        print(f'Parsing xlsb with pandas+pyxlsb took {round(t3, 2)} seconds\n')
+        print('ok')
         return
 
 
