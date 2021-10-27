@@ -58,6 +58,7 @@ bandit = "^1.7.0"
 mypy = "^0.910"
 Cython = "^0.29.24"
 pytest-cov = "^3.0.0"
+codecov = "^2.1.12"
 
 [tool.bandit]
 skips = ["B311", ]
@@ -68,3 +69,10 @@ addopts = "-ra -q"
 testpaths = [
     "tests",
 ]
+
+[tool.mypy]
+warn_unused_configs = true
+strict = true
+ignore_missing_imports = true
+show_error_codes = true
+files = "pylexique/"
