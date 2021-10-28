@@ -126,7 +126,7 @@ class Lexique383:
     :param lexique_path: string.
         Path to the lexique file.
     :param parser_type: string.
-        'pandas_csv', 'csv' and 'xlsb' are valid values. 'csv' is the default value.
+        'pandas_csv' and 'csv' are valid values. 'csv' is the default value.
     """
 
     lexique: Dict[str, Any] = OrderedDict()
@@ -137,9 +137,8 @@ class Lexique383:
 
     def __init__(self, lexique_path: Optional[str] = None, parser_type: str = 'csv') -> None:
         self.lexique_path = lexique_path
-        if parser_type not in {'xlsb', 'pandas_csv', 'csv'}:
-            raise ValueError(f"The value {parser_type} is not permitted. Only 'pandas_csv', 'std_csv', 'csv' and "
-                             f"'xlsb' are valid values.")
+        if parser_type not in {'pandas_csv', 'csv'}:
+            raise ValueError(f"The value {parser_type} is not permitted. Only 'pandas_csv' and 'csv' are valid values.")
         if lexique_path:
             if not isinstance(lexique_path, str):
                 raise TypeError(f"Argument 'lexique_path' must be of type String, not {type(lexique_path)}")
@@ -186,14 +185,11 @@ class Lexique383:
         :param lexique_path: string.
             Path to the lexique file.
         :param parser_type: string.
-            Can be either 'csv', 'pandas_csv', 'std_csv' or 'xlsb'.
+            Can be either 'csv', 'pandas_csv'.
         :return:
         """
         try:
-            if parser_type == 'xlsb':
-                df = pd.read_excel(lexique_path, engine='pyxlsb')
-                content = (list(row) for row in df.values)
-            elif parser_type == 'pandas_csv':
+            if parser_type == 'pandas_csv':
                 df = pd.read_csv(lexique_path, delimiter='\t')
                 content = (list(row) for row in df.values)
             elif parser_type == 'csv':
