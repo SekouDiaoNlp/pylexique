@@ -270,6 +270,16 @@ are stored in a list corresponding to th value of the key.
         var_multiple = LEXIQUE.get_lex(('il', 'mange', 'une', 'baguette'))
         pprint(var_multiple)
 
+
+You can get all the anagrams of a given word by using the get_anagrams() method.
+
+ .. code-block:: python
+
+        var_3 = lexicon.get_anagrams('abaisser')
+
+        pprint(var_3)
+
+
 You can get all the forms of a given word by calling the method Lexique383.get_all_forms(word):
 
  .. code-block:: python
