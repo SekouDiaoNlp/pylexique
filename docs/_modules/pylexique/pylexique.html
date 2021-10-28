@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pylexique.pylexique &mdash; pylexique 1.4.0 documentation</title>
+  <title>pylexique.pylexique &mdash; pylexique 1.5.0 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
 
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within pylexique 1.4.0 documentation"
+          title="Search within pylexique 1.5.0 documentation"
           href="../../_static/opensearch.xml"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -194,7 +194,6 @@
 
 <span class="n">HOME_PATH</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;Lexique&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
 <span class="n">_RESOURCE_PATH_csv</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="n">_RESOURCE_PACKAGE</span><span class="p">,</span> <span class="s1">&#39;Lexique383/Lexique383.txt&#39;</span><span class="p">)</span>
-<span class="n">_RESOURCE_PATH_xlsb</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="n">_RESOURCE_PACKAGE</span><span class="p">,</span> <span class="s1">&#39;Lexique383/Lexique383.xlsb&#39;</span><span class="p">)</span>
 <span class="n">_VALUE_ERRORS_PATH</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="n">_RESOURCE_PACKAGE</span><span class="p">,</span> <span class="s1">&#39;errors/value_errors.json&#39;</span><span class="p">)</span>
 <span class="n">_LENGTH_ERRORS_PATH</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="n">_RESOURCE_PACKAGE</span><span class="p">,</span> <span class="s1">&#39;errors/length_errors.json&#39;</span><span class="p">)</span>
 
@@ -272,6 +271,7 @@
 
 <span class="sd">        :return: OrderedDict.</span>
 <span class="sd">            Dictionary with key/values correspondence wit LexItem objects.</span>
+<span class="sd">        :raises: AttributeError.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">attributes</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__slots__</span><span class="p">:</span>
@@ -295,19 +295,22 @@
 <span class="sd">    :param lexique_path: string.</span>
 <span class="sd">        Path to the lexique file.</span>
 <span class="sd">    :param parser_type: string.</span>
-<span class="sd">        &#39;pandas_csv&#39;, &#39;csv&#39; and &#39;xlsb&#39; are valid values. &#39;csv&#39; is the default value.</span>
+<span class="sd">        &#39;pandas_csv&#39; and &#39;csv&#39; are valid values. &#39;csv&#39; is the default value.</span>
+<span class="sd">    :cvar lexique: Dictionary containing all the LexicalItem objects indexed by orthography.</span>
+<span class="sd">    :cvar lemmes: Dictionary containing all the LexicalItem objects indexed by lemma.</span>
+<span class="sd">    :cvar anagrams: Dictionary containing all the LexicalItem objects indexed by anagram form.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">lexique</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
     <span class="n">value_errors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">length_errors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">lemmes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">LexItem</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">anagrams</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">LexItem</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lexique_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">parser_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;csv&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lexique_path</span> <span class="o">=</span> <span class="n">lexique_path</span>
-        <span class="k">if</span> <span class="n">parser_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;xlsb&#39;</span><span class="p">,</span> <span class="s1">&#39;pandas_csv&#39;</span><span class="p">,</span> <span class="s1">&#39;csv&#39;</span><span class="p">}:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The value </span><span class="si">{</span><span class="n">parser_type</span><span class="si">}</span><span class="s2"> is not permitted. Only &#39;pandas_csv&#39;, &#39;std_csv&#39;, &#39;csv&#39; and &quot;</span>
-                             <span class="sa">f</span><span class="s2">&quot;&#39;xlsb&#39; are valid values.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parser_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;pandas_csv&#39;</span><span class="p">,</span> <span class="s1">&#39;csv&#39;</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The value </span><span class="si">{</span><span class="n">parser_type</span><span class="si">}</span><span class="s2"> is not permitted. Only &#39;pandas_csv&#39; and &#39;csv&#39; are valid values.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">lexique_path</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Argument &#39;lexique_path&#39; must be of type String, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -354,14 +357,11 @@
 <span class="sd">        :param lexique_path: string.</span>
 <span class="sd">            Path to the lexique file.</span>
 <span class="sd">        :param parser_type: string.</span>
-<span class="sd">            Can be either &#39;csv&#39;, &#39;pandas_csv&#39;, &#39;std_csv&#39; or &#39;xlsb&#39;.</span>
+<span class="sd">            Can be either &#39;csv&#39;, &#39;pandas_csv&#39;.</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">parser_type</span> <span class="o">==</span> <span class="s1">&#39;xlsb&#39;</span><span class="p">:</span>
-                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;pyxlsb&#39;</span><span class="p">)</span>
-                <span class="n">content</span> <span class="o">=</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">parser_type</span> <span class="o">==</span> <span class="s1">&#39;pandas_csv&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">parser_type</span> <span class="o">==</span> <span class="s1">&#39;pandas_csv&#39;</span><span class="p">:</span>
                 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">lexique_path</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="n">content</span> <span class="o">=</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">parser_type</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
@@ -395,6 +395,8 @@
                 <span class="k">continue</span>
             <span class="n">lexical_entry</span> <span class="o">=</span> <span class="n">LexItem</span><span class="p">(</span><span class="o">*</span><span class="n">converted_row_fields</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">lemmes</span><span class="p">[</span><span class="n">lexical_entry</span><span class="o">.</span><span class="n">lemme</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lexical_entry</span><span class="p">)</span>
+            <span class="n">sorted_form</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">lexical_entry</span><span class="o">.</span><span class="n">ortho</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">anagrams</span><span class="p">[</span><span class="n">sorted_form</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lexical_entry</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="nb">list</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">converted_row_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lexical_entry</span><span class="p">)</span>
@@ -458,6 +460,7 @@
 <span class="sd">            A string or a tuple of multiple strings for getting the LexItems for multiple words.</span>
 <span class="sd">        :return:</span>
 <span class="sd">            Dictionary of LexItems.</span>
+<span class="sd">        :raises: TypeError.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">results</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -488,6 +491,8 @@
 <span class="sd">            String.</span>
 <span class="sd">        :return:</span>
 <span class="sd">            List of LexItem objects sharing the same root lemma.</span>
+<span class="sd">        :raises: ValueError.</span>
+<span class="sd">        :raises: TypeError.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">lex_entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
@@ -506,6 +511,36 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span>
         <span class="k">return</span> <span class="n">lemmes</span></div>
+
+<div class="viewcode-block" id="Lexique383.get_anagrams"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.Lexique383.get_anagrams">[docs]</a>    <span class="k">def</span> <span class="nf">get_anagrams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">LexItem</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets all lexical forms of a given word.</span>
+
+<span class="sd">        :param word:</span>
+<span class="sd">            String.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            List of LexItem objects which are anagrams of the given word.</span>
+<span class="sd">        :raises: ValueError.</span>
+<span class="sd">        :raises: TypeError.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">lex_entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lexique</span><span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;The word </span><span class="si">{}</span><span class="s1"> is not in Lexique383</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lex_entry</span><span class="p">,</span> <span class="n">LexItem</span><span class="p">):</span>
+            <span class="n">sorted_form</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">lex_entry</span><span class="o">.</span><span class="n">ortho</span><span class="p">))</span>
+            <span class="n">anagrams</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anagrams</span><span class="p">[</span><span class="n">sorted_form</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lex_entry</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">):</span>
+            <span class="n">sorted_form</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">lex_entry</span><span class="p">[</span><span class="s1">&#39;ortho&#39;</span><span class="p">]))</span>
+            <span class="n">anagrams</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anagrams</span><span class="p">[</span><span class="n">sorted_form</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lex_entry</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">sorted_form</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">lex_entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ortho</span><span class="p">))</span>
+            <span class="n">anagrams</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anagrams</span><span class="p">[</span><span class="n">sorted_form</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span>
+        <span class="n">final_anagrams</span> <span class="o">=</span> <span class="p">[</span><span class="n">lex_item</span> <span class="k">for</span> <span class="n">lex_item</span> <span class="ow">in</span> <span class="n">anagrams</span> <span class="k">if</span> <span class="n">lex_item</span><span class="o">.</span><span class="n">ortho</span> <span class="o">!=</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="n">final_anagrams</span></div>
 
 <div class="viewcode-block" id="Lexique383._save_errors"><a class="viewcode-back" href="../../modules.html#pylexique.pylexique.Lexique383._save_errors">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_save_errors</span><span class="p">(</span><span class="n">errors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
@@ -541,7 +576,7 @@
     <p>
         &#169; Copyright 2021, SekouDiaoNlp.
       <span class="lastupdated">
-        Last updated on Oct 23, 2021.
+        Last updated on Oct 29, 2021.
       </span>
 
     </p>

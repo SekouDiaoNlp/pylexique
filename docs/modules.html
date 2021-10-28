@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Package Api Documentation for pylexique &mdash; pylexique 1.4.0 documentation</title>
+  <title>Package Api Documentation for pylexique &mdash; pylexique 1.5.0 documentation</title>
   
 
   
@@ -41,7 +41,7 @@
 
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within pylexique 1.4.0 documentation"
+          title="Search within pylexique 1.5.0 documentation"
           href="_static/opensearch.xml"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                1.4.0
+                1.5.0
               </div>
             
           
@@ -194,7 +194,14 @@ All the lexical items are then stored in an Ordered Dict.</p>
 <li><p><strong>lexique_path</strong> – string.
 Path to the lexique file.</p></li>
 <li><p><strong>parser_type</strong> – string.
-‘pandas_csv’, ‘csv’ and ‘xlsb’ are valid values. ‘csv’ is the default value.</p></li>
+‘pandas_csv’ and ‘csv’ are valid values. ‘csv’ is the default value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>lexique</strong> – Dictionary containing all the LexicalItem objects indexed by orthography.</p></li>
+<li><p><strong>lemmes</strong> – Dictionary containing all the LexicalItem objects indexed by lemma.</p></li>
+<li><p><strong>anagrams</strong> – Dictionary containing all the LexicalItem objects indexed by anagram form.</p></li>
 </ul>
 </dd>
 </dl>
@@ -225,7 +232,7 @@ Content of the Lexique38x database.</p>
 <li><p><strong>lexique_path</strong> – string.
 Path to the lexique file.</p></li>
 <li><p><strong>parser_type</strong> – string.
-Can be either ‘csv’, ‘pandas_csv’, ‘std_csv’ or ‘xlsb’.</p></li>
+Can be either ‘csv’, ‘pandas_csv’.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -281,6 +288,9 @@ List of typed column entries representing a typed row.</p>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Dictionary of LexItems.</p>
 </dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>TypeError.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -294,6 +304,32 @@ List of typed column entries representing a typed row.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>List of LexItem objects sharing the same root lemma.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>ValueError.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>TypeError.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pylexique.pylexique.Lexique383.get_anagrams">
+<span class="sig-name descname"><span class="pre">get_anagrams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pylexique.pylexique.LexItem" title="pylexique.pylexique.LexItem"><span class="pre">pylexique.pylexique.LexItem</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pylexique/pylexique.html#Lexique383.get_anagrams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylexique.pylexique.Lexique383.get_anagrams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all lexical forms of a given word.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>word</strong> – String.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of LexItem objects which are anagrams of the given word.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>ValueError.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>TypeError.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -336,6 +372,9 @@ List of typed column entries representing a typed row.</p>
 <dd class="field-odd"><p>OrderedDict.
 Dictionary with key/values correspondence wit LexItem objects.</p>
 </dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>AttributeError.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -370,7 +409,7 @@ Dictionary with key/values correspondence wit LexItem objects.</p>
     <p>
         &#169; Copyright 2021, SekouDiaoNlp.
       <span class="lastupdated">
-        Last updated on Oct 23, 2021.
+        Last updated on Oct 29, 2021.
       </span>
 
     </p>

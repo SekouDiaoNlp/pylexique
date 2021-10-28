@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
   <ShortName>pylexique</ShortName>
-  <Description>Search pylexique 1.4.0 documentation</Description>
+  <Description>Search pylexique 1.5.0 documentation</Description>
   <InputEncoding>utf-8</InputEncoding>
   <Url type="text/html" method="get"
        template="https://pylexique.readthedocs.io/en/latest//search.html?q={searchTerms}"/>
-  <LongName>pylexique 1.4.0 documentation</LongName>
+  <LongName>pylexique 1.5.0 documentation</LongName>
   
 </OpenSearchDescription>
