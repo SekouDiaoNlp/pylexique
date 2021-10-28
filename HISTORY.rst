@@ -2,6 +2,16 @@
 History
 =======
 
+1.5.0 (2021-10-28)
+------------------
+
+* Added new method 'Lexique383.get_anagrams()' to get the list of all the anagrams of a given word.
+* Removed support for xlsb file format..
+* Migrated the project build configuration to pyproject.toml.
+* Migrated build backend to poetry.
+* Updated the Documentation and the docstrings.
+* Updated dependencies.
+
 1.4.0 (2021-10-23)
 ------------------
 
