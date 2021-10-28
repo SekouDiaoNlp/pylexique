@@ -133,6 +133,7 @@ class Lexique383:
     value_errors: List[Any] = []
     length_errors: List[Any] = []
     lemmes: Dict[str, List[LexItem]] = defaultdict(list)
+    anagrams: Dict[str, List[LexItem]] = defaultdict(list)
 
     def __init__(self, lexique_path: Optional[str] = None, parser_type: str = 'csv') -> None:
         self.lexique_path = lexique_path
@@ -226,6 +227,8 @@ class Lexique383:
                 continue
             lexical_entry = LexItem(*converted_row_fields)
             self.lemmes[lexical_entry.lemme].append(lexical_entry)
+            sorted_form = ''.join(sorted(lexical_entry.ortho))
+            self.anagrams[sorted_form].append(lexical_entry)
             if converted_row_fields[0] in self.lexique and not isinstance(self.lexique[converted_row_fields[0]], list):
                 self.lexique[converted_row_fields[0]] = [self.lexique[converted_row_fields[0]]]
                 self.lexique[converted_row_fields[0]].append(lexical_entry)
@@ -319,6 +322,8 @@ class Lexique383:
             String.
         :return:
             List of LexItem objects sharing the same root lemma.
+        :raises: ValueError.
+        :raises: TypeError.
         """
         try:
             lex_entry = self.lexique[word.lower()]
@@ -337,6 +342,36 @@ class Lexique383:
         else:
             raise TypeError
         return lemmes
+
+    def get_anagrams(self, word: str) -> List[LexItem]:
+        """
+        Gets all lexical forms of a given word.
+
+        :param word:
+            String.
+        :return:
+            List of LexItem objects which are anagrams of the given word.
+        :raises: ValueError.
+        :raises: TypeError.
+        """
+        try:
+            lex_entry = self.lexique[word.lower()]
+        except ValueError as e:
+            logger.warning('The word {} is not in Lexique383\n'.format(word))
+            raise ValueError from e
+        if isinstance(lex_entry, LexItem):
+            sorted_form = ''.join(sorted(lex_entry.ortho))
+            anagrams = self.anagrams[sorted_form]
+        elif isinstance(lex_entry, OrderedDict):
+            sorted_form = ''.join(sorted(lex_entry['ortho']))
+            anagrams = self.anagrams[sorted_form]
+        elif isinstance(lex_entry, list):
+            sorted_form = ''.join(sorted(lex_entry[0].ortho))
+            anagrams = self.anagrams[sorted_form]
+        else:
+            raise TypeError
+        final_anagrams = [lex_item for lex_item in anagrams if lex_item.ortho != word.lower()]
+        return final_anagrams
 
     @staticmethod
     def _save_errors(errors: Union[

@@ -78,6 +78,11 @@ class TestAll:
         var_1 = self.lexicon.lexique['abaissait']
         var_1_bis = self.lexicon.get_lex('abaissait')
 
+        var_1_ter = self.lexicon.get_anagrams('abaisse')
+        var_1_quart = self.lexicon.get_anagrams('abaisser')
+        assert len(var_1_ter) == 0
+        assert len(var_1_quart) == 5
+
         # Check both objects are the same
         var_1_equality = var_1 == var_1_bis['abaissait']
         print(var_1_equality)
