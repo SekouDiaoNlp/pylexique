@@ -103,6 +103,7 @@ class LexItem(LexEntryTypes):
 
         :return: OrderedDict.
             Dictionary with key/values correspondence wit LexItem objects.
+        :raises: AttributeError.
         """
         attributes = []
         for attr in self.__slots__:
@@ -127,6 +128,9 @@ class Lexique383:
         Path to the lexique file.
     :param parser_type: string.
         'pandas_csv' and 'csv' are valid values. 'csv' is the default value.
+    :cvar lexique: Dictionary containing all the LexicalItem objects indexed by orthography.
+    :cvar lemmes: Dictionary containing all the LexicalItem objects indexed by lemma.
+    :cvar anagrams: Dictionary containing all the LexicalItem objects indexed by anagram form.
     """
 
     lexique: Dict[str, Any] = OrderedDict()
@@ -288,6 +292,7 @@ class Lexique383:
             A string or a tuple of multiple strings for getting the LexItems for multiple words.
         :return:
             Dictionary of LexItems.
+        :raises: TypeError.
         """
         results = OrderedDict()
         if isinstance(words, str):
