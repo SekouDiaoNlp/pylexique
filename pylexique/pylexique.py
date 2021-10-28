@@ -25,7 +25,6 @@ _RESOURCE_PACKAGE = __name__
 
 HOME_PATH = '/'.join(('Lexique', ''))
 _RESOURCE_PATH_csv = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
-_RESOURCE_PATH_xlsb = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.xlsb')
 _VALUE_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/value_errors.json')
 _LENGTH_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/length_errors.json')
 
