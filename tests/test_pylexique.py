@@ -52,11 +52,11 @@ class Test_Load_Times:
         # t9 = time() - t8
         # print(f'Parsing csv with standard csv parser took {round(t9, 2)} seconds\n')
 
-        t2 = time()
-        lexicon3 = Lexique383(_RESOURCE_PATH, parser_type='xlsb')
-        t3 = time() - t2
-        print(f'Parsing xlsb with pandas+pyxlsb took {round(t3, 2)} seconds\n')
-        print('ok')
+        # t2 = time()
+        # lexicon3 = Lexique383(_RESOURCE_PATH, parser_type='xlsb')
+        # t3 = time() - t2
+        # print(f'Parsing xlsb with pandas+pyxlsb took {round(t3, 2)} seconds\n')
+        # print('ok')
         return
 
 
@@ -77,6 +77,11 @@ class TestAll:
         #  Retrieves the lexical information of 'abaissait' and 'a'.
         var_1 = self.lexicon.lexique['abaissait']
         var_1_bis = self.lexicon.get_lex('abaissait')
+
+        var_1_ter = self.lexicon.get_anagrams('abaisse')
+        var_1_quart = self.lexicon.get_anagrams('abaisser')
+        assert len(var_1_ter) == 0
+        assert len(var_1_quart) >= 5
 
         # Check both objects are the same
         var_1_equality = var_1 == var_1_bis['abaissait']

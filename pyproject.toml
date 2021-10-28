@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "pylexique"
-version = "1.4.0"
+version = "1.5.0"
 description = "Pylexique is a Python wrapper around Lexique383"
 authors = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
 maintainers = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
@@ -37,7 +37,6 @@ colorama = "*"
 dataclasses = {version = ">=0.6", python = "<3.7"}
 joblib = "^1.0.1"
 pandas = "^1.3.4"
-pyxlsb = "*"
 setuptools = "==49.6.*,>=49.6.0"
 tqdm = "*"
 
