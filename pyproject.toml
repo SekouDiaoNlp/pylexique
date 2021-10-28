@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "pylexique"
-version = "1.4.0"
+version = "1.5.0"
 description = "Pylexique is a Python wrapper around Lexique383"
 authors = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
 maintainers = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
