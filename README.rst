@@ -67,7 +67,7 @@ pylexique
 |
 
 * Free software: MIT license
-* PyLexique Documentation: https://pylexique.readthedocs.io (en) -- https://pylexique.readthedocs.io/fr/ (fr)
+* PyLexique Documentation: https://pylexique.readthedocs.io (en) -- https://sekoudiaonlp.github.io/pylexique/fr_FR/ (fr)
 
 | Each lexical item is represented as a LexItem having the following LexEntryType:
 |
