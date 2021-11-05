@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, SekouDiaoNlp
+# This file is distributed under the same license as the pylexique package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Sekou Diao, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pylexique 1.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-04 14:47+0100\n"
+"PO-Revision-Date: 2021-11-04 17:55+0000\n"
+"Last-Translator: Sekou Diao, 2021\n"
+"Language-Team: French (France) (https://www.transifex.com/sekoudiaonlp/teams/127155/fr_FR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../../usage.rst:3 b1b8a8757ea14ff9b9d589aa8a31f924
+msgid "Usage"
+msgstr "Guide d'utilisation"
+
+#: ../../usage.rst:5 3e64c6da6af74770bbeb4d27126dbd43
+msgid ""
+"The language of the lexical entries is French. The Lexical Corpus is based "
+"on `Lexique383`_. Also note that pylexique only works on Python 3.X."
+msgstr ""
+"La langue des entrées lexicales est le français. Le corpus lexical est basé "
+"sur `Lexique383`_. Notez également que pylexique ne fonctionne que sur "
+"Python 3.X."
+
+#: ../../usage.rst:11 716c3fe2517747fc92dd0ec52f483865
+msgid "To use pylexique from the command line:"
+msgstr "Pour utiliser pylexique à partir de la ligne de commande :"
+
+#: ../../usage.rst:18 e547300551184619b5fa1b07a734b5dd
+msgid "The output will be a json representation of the LexItem objects:"
+msgstr "Le résultat sera une représentation json des objets LexItem :"
+
+#: ../../usage.rst:192 48e21f316dbb4c9c98338475129bdbfe
+msgid ""
+"You can also provide multiple words and/or specify an output file to save "
+"the lexical information in a json file."
+msgstr ""
+"Vous pouvez également fournir plusieurs mots et/ou spécifier un fichier de "
+"sortie pour enregistrer les informations lexicales dans un fichier json."
+
+#: ../../usage.rst:200 bc2c64773ffe48a285f852ede874b9cc
+msgid ""
+"The output will be similar as previously, with a json entry for each word in"
+" the sequence."
+msgstr ""
+"Le résultat sera similaire au précédent, avec une entrée json pour chaque "
+"mot de la séquence."
+
+#: ../../usage.rst:204 8d2b5ece2d6c41289056f137a49d7bb1
+msgid ""
+"You can also retrieve all the lexical forms of the provided word/words by "
+"using the option '-a' or '--all_forms'"
+msgstr ""
+"Vous pouvez également récupérer toutes les formes lexicales du ou des mots "
+"fournis en utilisant l'option '-a' ou '--all_forms'."
+
+#: ../../usage.rst:215 c099f3e0cb61489aa7cfb1656ab45c46
+msgid "To use pylexique  as a library in your own projects:"
+msgstr ""
+"Pour utiliser pylexique comme une bibliothèque dans vos propres projets :"
+
+#: ../../usage.rst:234 0d2b1f2ba9d243519007933e85670311
+msgid ""
+"There are 2 ways to access the lexical information of a word: Either use the"
+" utility method Lexique383.get_lex(item) Or you can directly access the "
+"lexicon directory through LEXIQUE.lexique[item] ."
+msgstr ""
+"Il y a 2 façons d'accéder à l'information lexicale d'un mot : Soit vous "
+"utilisez la méthode Lexique383.get_lex(item) Soit vous accédez directement "
+"au répertoire du lexique par LEXIQUE.lexique[item] ."
+
+#: ../../usage.rst:238 0dc59cd2b7944d7b9f0bd313f6fc9618
+msgid ""
+"Notice that item can be either a string or a sequence of strings when using "
+"Lexique383.get_lex(item) ."
+msgstr ""
+"Notez que item peut être soit une chaîne de caractères, soit une séquence de"
+" chaînes de caractères lorsque vous utilisez Lexique383.get_lex(item) ."
+
+#: ../../usage.rst:253 4f182221cfc047ea81448053896c3148
+msgid ""
+"Because in French the world 'a' is a very polysemic word, it has several "
+"entries in Lexique 383. For this reason the LEXIQUE Dict has the value of "
+"the `ortho` property of its LexicalEntry. In th case of 'abaissait' there is"
+" only one LexicalItem corresponding to this dict key. But in the case of 'a'"
+" there are several LexItem objects corresponding to this key and then the "
+"LexItem objects are stored in a list corresponding to th value of the key."
+msgstr ""
+"Comme en français le mot 'a' est un mot très polysémique, il a plusieurs "
+"entrées dans le Lexique 383. Pour cette raison, le Dict LEXIQUE a pour clés "
+"la valeur de la propriété `ortho` de son entrée lexicale. Dans le cas de "
+"'abaissait', il n'y a qu'un seul élément lexical correspondant à cette clé "
+"de dictionnaire. Mais dans le cas de 'a', il y a plusieurs objets LexItem "
+"correspondant à cette clé et les objets LexItem sont stockés dans une liste "
+"correspondant à la valeur de la clé."
+
+#: ../../usage.rst:274 78b9087b709d4d12995bb77ffe2759df
+msgid ""
+"You can get all the anagrams of a given word by using the get_anagrams() "
+"method."
+msgstr ""
+"Vous pouvez obtenir tous les anagrammes d'un mot donné en utilisant la "
+"méthode get_anagrams()."
+
+#: ../../usage.rst:283 fbaa456f0fa0473091b65fd741a1bc68
+msgid ""
+"You can get all the forms of a given word by calling the method "
+"Lexique383.get_all_forms(word):"
+msgstr ""
+"Vous pouvez obtenir toutes les formes d'un mot donné en appelant la méthode "
+"Lexique383.get_all_forms(word) :"
+
+#: ../../usage.rst:296 becf602d5ffd48aa91595508ea308110
+msgid ""
+"You can use the method LexItem.to_dict() to produce a dictionary with "
+"key/value pairs corresponding to the LexItem"
+msgstr ""
+"Vous pouvez utiliser la méthode LexItem.to_dict() pour produire un "
+"dictionnaire avec des paires clé/valeur correspondant au LexItem"
+
+#: ../../usage.rst:340 74b88f1e2fb645d08f6353e015effafd
+msgid "Documentation for _`Lexique383`: http://www.lexique.org"
+msgstr "Documentation pour _`Lexicon383` : http://www.lexique.org"

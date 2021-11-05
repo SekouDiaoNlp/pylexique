@@ -1,0 +1,372 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, SekouDiaoNlp
+# This file is distributed under the same license as the pylexique package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Sekou Diao, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pylexique 1.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-04 14:47+0100\n"
+"PO-Revision-Date: 2021-11-04 17:55+0000\n"
+"Last-Translator: Sekou Diao, 2021\n"
+"Language-Team: French (France) (https://www.transifex.com/sekoudiaonlp/teams/127155/fr_FR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../../modules.rst:3 4bf1582adf2a4e77a67946ce387e01bc
+msgid "Package Api Documentation for pylexique"
+msgstr "Documentation de l'Api de pylexique"
+
+#: ../../modules.rst:7 c2b081ba71934cd2aec3b33c51ca46d7
+msgid "API Reference for the classes in pylexique.pylexique.py"
+msgstr "Référence de l'API pour les classes de pylexique.pylexique.py"
+
+#: ../../../pylexique/pylexique.pydocstring of pylexique.pylexique:1
+#: e7ce7dce6453404b90257b6b02b999a2
+msgid "Main module of pylexique."
+msgstr "Module principal de pylexique."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383:1 ../../../pylexique/pylexique.pydocstring
+#: of pylexique.pylexique.LexEntryTypes:1 9d4775c91f264336b330fdfa458cd75b
+#: 0d4f7d6c87f24e9bb4df1dc74a24d7c7
+msgid "Bases: :class:`object`"
+msgstr "Bases: :class:`object`"
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383:1 43537d3fe01443f28e905268038343a5
+msgid ""
+"This is the class handling the lexique database. It provides methods for "
+"interacting with the Lexique DB and retrieve lexical items. All the lexical "
+"items are then stored in an Ordered Dict."
+msgstr ""
+"C'est la classe qui gère la base de données lexicale. Elle fournit des "
+"méthodes pour interagir avec la base de données lexicale et récupérer les "
+"éléments lexicaux. Tous les éléments lexicaux sont ensuite stockés dans un "
+"Dict ordonné."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383:0 ../../../pylexique/pylexique.pydocstring
+#: of pylexique.pylexique.Lexique383._parse_csv:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._parse_lexique:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._create_db:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._convert_entries:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_lex:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_all_forms:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_anagrams:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._save_errors:0
+#: 37042736b1044091be7c30b9427055dd 6fe337c054b840af976c5aa7fcc8608a
+#: 0faa6c52163045bc8b206fb1d4cce698 0987cb0eda9e4d91bca4de69dec9a070
+#: cd904191a39d470a8b1cf9dc70c10de3 d652c42f906048e8a9d89567e5bc9f11
+#: 05205b1643b546929d9b2334de4f9a7e cde4fa2cc726416f95e019d208085159
+#: 9ba8c82a8a8d4b558642bff4e808c380
+msgid "Parameters"
+msgstr "Paramètres"
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383:6 ../../../pylexique/pylexique.pydocstring
+#: of pylexique.pylexique.Lexique383._parse_csv:1
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._parse_lexique:3
+#: 92894292092049b0941adf5208210635 2914cbcef130471c822f56d0a78eb6aa
+#: b3e2c8c59fc04a89b95ddab352036299
+msgid "string. Path to the lexique file."
+msgstr "string. Chemin vers le fichier lexique."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383:8 2f43faf76ec84313a4dc3fd428520e61
+msgid ""
+"string. 'pandas_csv' and 'csv' are valid values. 'csv' is the default value."
+msgstr ""
+"string. \"pandas_csv \" et \" csv \" sont des valeurs valides. La valeur par"
+" défaut est \"csv\"."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383:0 ebf2c92356b747f18364d0bee3b2e7e1
+msgid "Variables"
+msgstr "Variables"
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383:10 be1d5c25adc54bacbec18ceb3d1aafa0
+msgid ""
+"Dictionary containing all the LexicalItem objects indexed by orthography."
+msgstr ""
+"Dictionnaire contenant tous les objets LexicalItem indexés par orthographe."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383:11 ccb4fc8824744c7796cb0f4658e652bd
+msgid "Dictionary containing all the LexicalItem objects indexed by lemma."
+msgstr "Dictionnaire contenant tous les objets LexicalItem indexés par lemme."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383:12 f66ab057e90841a0a0976247f57e6892
+msgid ""
+"Dictionary containing all the LexicalItem objects indexed by anagram form."
+msgstr ""
+"Dictionnaire contenant tous les objets LexicalItem indexés par forme "
+"d'anagramme."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._parse_csv:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._parse_lexique:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._create_db:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._convert_entries:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_lex:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_all_forms:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_anagrams:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._save_errors:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.LexItem.to_dict:0 12c6295095f0419c8434417d7aa7d7d6
+#: c004a2e6e9ee48f08fc4e2229b18c54d 1ce51c5f42764782acdde017e1ad676e
+#: b3b1a0ad4a3443a0a3ef8db6e9b2fd8c 2d9bd55a9d79467c9ca5a7d7dbb84360
+#: c3e3d7465cf74bc6b0b107e883c9e2d4 2549c7ff95a0499db39bdc600f9b2cba
+#: 557619067270484ea230556111b29525 9de944dfa8bc4badb677ed03e6b0da1d
+msgid "Returns"
+msgstr "Renvoie"
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._parse_csv:3
+#: bb9a044c75cd46c1bf2a1c76d7da98a1
+msgid "generator of rows: Content of the Lexique38x database."
+msgstr "générateur de lignes : Contenu de la base de données Lexique38x."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._parse_lexique:1
+#: d5269978b5b849f9933098f528dd3c73
+msgid ""
+"Parses the given lexique file and creates 2 hash tables to store the data."
+msgstr ""
+"Analyse le fichier lexique donné et crée 2 tables de hachage pour stocker "
+"les données."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._parse_lexique:5
+#: ded448eb44054f258abae31f55ee9606
+msgid "string. Can be either 'csv', 'pandas_csv'."
+msgstr "string. Peut être 'csv' ou 'pandas_csv'."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._create_db:1
+#: 72c11d4f402a4f1b92db2a234a8315b9
+msgid ""
+"Creates 2 hash tables populated with the entries in lexique if it does not "
+"exist yet."
+msgstr ""
+"Crée 2 tables de hachage remplies avec les entrées de lexique si celui-ci "
+"n'existe pas encore."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._create_db:2
+#: 316485f67cdd4edb81b141a593d4ba42
+msgid ""
+"One hash table holds the LexItems, the other holds the same data but grouped"
+" by lemmma to give access to all lexical forms of a word."
+msgstr ""
+"Une table de hachage contient les LexItems, l'autre contient les mêmes "
+"données mais regroupées par lemme pour donner accès à toutes les formes "
+"lexicales d'un mot."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._create_db:4
+#: ba443adf655c47e89f4be22f4d32bd90
+msgid "Iterable. Iterable containing the lexique383 entries."
+msgstr "Iterable. Iterable contenant les entrées du lexique383."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._convert_entries:1
+#: c45fbd82a6f6404da7320ccf9c112f5c
+msgid ""
+"Convert entries from `strings` to `int`, `bool` or `float` and generates"
+msgstr ""
+"Convertit les entrées de `strings` en `int`, `bool` ou `float` et génère"
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._convert_entries:2
+#: 47d40fb5c53841c3b2581b9e2f424278
+msgid "a new list with typed entries."
+msgstr "une nouvelle liste avec des entrées typées."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._convert_entries:4
+#: f118f4b8497b4fbea27d0fea10aeee13
+msgid "List of column entries representing a row."
+msgstr "Liste d'entrées de colonnes représentant une ligne."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._convert_entries:6
+#: 4ddf5a9286774ee890937c9745c0fafb
+msgid "ConvertedRow: List of typed column entries representing a typed row."
+msgstr ""
+"ConvertedRow : Liste d'entrées de colonnes typées représentant une ligne "
+"typée."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_lex:1 c23d6d7a772a4db488ea129bf07e09ab
+msgid "Recovers the lexical entries for the words in the sequence"
+msgstr "Récupère les entrées lexicales pour les mots de la séquence"
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_lex:3 6578bca62170403eb9cdb46ac3f300de
+msgid ""
+"A string or a tuple of multiple strings for getting the LexItems for "
+"multiple words."
+msgstr ""
+"Une chaîne de caractères ou un tuple de plusieurs chaînes de caractères pour"
+" obtenir les LexItems de plusieurs mots."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_lex:5 fc8dc8a8917645ccb0679db4399e2e95
+msgid "Dictionary of LexItems."
+msgstr "Dictionnaire de LexItems."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_lex:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_all_forms:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_all_forms:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_anagrams:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_anagrams:0
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.LexItem.to_dict:0 ae7b49f31e224742aa1e2900bedce1a6
+#: d87e583e21174390a0b75c2ea1a7e72e 2ecdc606fc384e0da591c004dc13902c
+#: 82d62f947cee436a8bb43e9a7368f468 7d32916b3f8d46edb5392385da350bf1
+#: 929f70132f9e4caaaad6535f04722008
+msgid "raises"
+msgstr "raises"
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_lex:7
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_all_forms:8
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_anagrams:8
+#: 904fea5607774dddba1ce0467c51fb30 4b33f21cc88e4383aa3a6a8345dafe79
+#: 558c5fe7dccf4efbb45b36c07bef6951
+msgid "TypeError."
+msgstr "TypeError."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_all_forms:1
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_anagrams:1
+#: 08490647059948da851071d81c4929f9 c518b6f1c8524974831ad40e0edf2e20
+msgid "Gets all lexical forms of a given word."
+msgstr "Récupère toutes les formes lexicales d'un mot donné."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_all_forms:3
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_anagrams:3
+#: 48ee1eb039754b8f804fab3569a40e9b 054897485c644ed699400b916b8527fb
+msgid "String."
+msgstr "String."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_all_forms:5
+#: 1b8315a7b8654556a3c58aa69677c48e
+msgid "List of LexItem objects sharing the same root lemma."
+msgstr "Liste d'objets LexItem partageant le même lemme racine."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_all_forms:7
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_anagrams:7
+#: 99805c3a83b64a79a0f55429d4b5f29b a272afa63cb448c39a15cde6137c6804
+msgid "ValueError."
+msgstr "ValueError."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383.get_anagrams:5
+#: 1d6f0cdfab284cbaaff40c34b3acd16f
+msgid "List of LexItem objects which are anagrams of the given word."
+msgstr "Liste des objets LexItem qui sont des anagrammes du mot donné."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._save_errors:1
+#: 70997c5a514344729a46e8fc89b0c78f
+msgid "Saves the mismatched key/values in Lexique383 based on type coercion."
+msgstr ""
+"Sauvegarde les clés/valeurs non concordantes dans Lexique383 en se basant "
+"sur la coercition de type."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._save_errors:3
+#: daa7f2cc313a408dafe6c6d7532c708d
+msgid "List of errors encountered while parsing Lexique38x"
+msgstr "Liste des erreurs rencontrées lors de l'analyse du Lexique38x"
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.Lexique383._save_errors:5
+#: d586dc1e38e34a7aae2430a2995b3b7c
+msgid "Path to save the errors."
+msgstr "Chemin pour sauvegarder les erreurs."
+
+#: ../../../pylexique/pylexique.pydocstring of pylexique.pylexique.LexItem:1
+#: a83d9aca2d9249c3a62c8885dcd5a674
+msgid "Bases: :class:`pylexique.pylexique.LexEntryTypes`"
+msgstr "Bases: :class:`pylexique.pylexique.LexEntryTypes`"
+
+#: ../../../pylexique/pylexique.pydocstring of pylexique.pylexique.LexItem:1
+#: 2f4f31c5b3ee4206aec653dd3099b3ad
+msgid "This class defines the lexical items in Lexique383."
+msgstr "Cette classe définit les éléments lexicaux dans Lexique383."
+
+#: ../../../pylexique/pylexique.pydocstring of pylexique.pylexique.LexItem:2
+#: aec51e5866ed4b21a618a9d86b54b506
+msgid "It uses slots for memory efficiency."
+msgstr "Elle utilise les 'slots' pour optimiser l'utilisation de la mémoire."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.LexItem.to_dict:1 67af1e6bc8ea415f85aa4c7386f1f94a
+msgid ""
+"Converts the LexItem to a dict containing its attributes and their values"
+msgstr ""
+"Convertit le LexItem en un dict contenant ses attributs et leurs valeurs"
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.LexItem.to_dict:3 664dac31ecdb422cb7b3ed2e1bec6130
+msgid ""
+"OrderedDict. Dictionary with key/values correspondence wit LexItem objects."
+msgstr ""
+"OrderedDict. Dictionnaire avec correspondance clé/valeur avec les objets "
+"LexItem."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.LexItem.to_dict:5 f1f5d9f642334074ba3e5f816a8b187f
+msgid "AttributeError."
+msgstr "AttributeError."
+
+#: ../../../pylexique/pylexique.pydocstring of
+#: pylexique.pylexique.LexEntryTypes:1 087d602eb88a4dce91d79cd2a70a0c7a
+msgid "Type information about all the lexical attributes in a LexItem object."
+msgstr ""
+"Informations sur le type de tous les attributs lexicaux d'un objet LexItem."
+
+#: ../../modules.rst:17 fcdfc0a2263346cb9f2271ce869d7e01
+msgid "API Reference for the classes in pylexique.utils.py"
+msgstr "Référence d'API pour les classes dans pylexique.utils.py"
