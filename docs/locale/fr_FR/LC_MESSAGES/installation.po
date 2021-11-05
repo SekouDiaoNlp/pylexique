@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, SekouDiaoNlp
+# This file is distributed under the same license as the pylexique package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Sekou Diao, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pylexique 1.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-04 14:47+0100\n"
+"PO-Revision-Date: 2021-11-04 17:55+0000\n"
+"Last-Translator: Sekou Diao, 2021\n"
+"Language-Team: French (France) (https://www.transifex.com/sekoudiaonlp/teams/127155/fr_FR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../../installation.rst:5 5d651d7a86e14c25b90398653d902377
+msgid "Installation"
+msgstr "Installation"
+
+#: ../../installation.rst:9 5d64750e13d045f4a038a3d9e8b89ffe
+msgid "Stable release"
+msgstr "Version stable"
+
+#: ../../installation.rst:11 adfa6ad5f15648a4a141aed4249927ad
+msgid "To install pylexique, run this command in your terminal:"
+msgstr ""
+"Pour installer pylexique, exécutez cette commande dans votre terminal :"
+
+#: ../../installation.rst:17 6f6566c9efe54c09ba4264fda558e513
+msgid ""
+"This is the preferred method to install pylexique, as it will always install"
+" the most recent stable release."
+msgstr ""
+"C'est la méthode recommandée pour installer pylexique, car elle installera "
+"toujours la version stable la plus récente."
+
+#: ../../installation.rst:19 86ed4a26fed5441db6a2ba2a3567a6bd
+msgid ""
+"If you don't have `pip`_ installed, this `Python installation guide`_ can "
+"guide you through the process."
+msgstr ""
+"Si vous n'avez pas installé `pip`_, ce `guide d'installation de Python`_ "
+"peut vous guider dans le processus."
+
+#: ../../installation.rst:22 cfbd1440cc834b3798b53ecb63328e6e
+msgid ""
+"You can also install pylexique by using Anaconda_ or Miniconda_ instead of "
+"`pip`_ ."
+msgstr ""
+"Vous pouvez également installer pylexique en utilisant Anaconda_ ou "
+"Miniconda_ au lieu de `pip`_ ."
+
+#: ../../installation.rst:24 0956ae499a46472481e2a255210bffb7
+msgid ""
+"To install Anaconda_ or Miniconda_, please follow the installation "
+"instructions on their respective websites. After having installed Anaconda_ "
+"or Miniconda_, run these commands in your terminal:"
+msgstr ""
+"Pour installer Anaconda_ ou Miniconda_, veuillez suivre les instructions "
+"d'installation sur leurs sites web respectifs. Après avoir installé "
+"Anaconda_ ou Miniconda_, exécutez ces commandes dans votre terminal :"
+
+#: ../../installation.rst:33 ab543623680f47409795bb18970e9b1c
+msgid ""
+"If you already have Anaconda_ or Miniconda_ available on your system, just "
+"type this in your terminal:"
+msgstr ""
+"Si vous avez déjà Anaconda_ ou Miniconda_ disponible sur votre système, "
+"tapez simplement ceci dans votre terminal :"
+
+#: ../../installation.rst:39 12706354560c43a2bdc84c604717e9bb
+msgid ""
+"If you intend to install pylexique on a Apple Macbook with an Apple M1 "
+"processor, it is advised that you install pylexique by using the conda "
+"installation method as all dependencies will be pre-compiled."
+msgstr ""
+"Si vous avez l'intention d'installer pylexique sur un Apple Macbook avec un "
+"processeur Apple M1, il est conseillé d'installer pylexique en utilisant la "
+"méthode d'installation conda car toutes les dépendances seront précompilées."
+
+#: ../../installation.rst:49 316f8af2b5b5433c936a2534b3a354f8
+msgid "From sources"
+msgstr "Depuis le code source"
+
+#: ../../installation.rst:51 1cd7f6c21dee49eb97218ba48a3cadfc
+msgid "The sources for pylexique can be downloaded from the `Github repo`_."
+msgstr ""
+"Le code source de pylexique peut être téléchargé depuis le `dépôt Github`_."
+
+#: ../../installation.rst:53 9804e55cfc9146e9877541bfb41503c1
+msgid "You can either clone the public repository:"
+msgstr "Vous pouvez soit cloner le dépôt public :"
+
+#: ../../installation.rst:59 c2b78781cb8f46479149e336b1c0caf2
+msgid "Or download the `tarball`_:"
+msgstr "Ou téléchargez le fichier `tarball`_ :"
+
+#: ../../installation.rst:65 a5cc68f3dd334a8faa870cd348493d46
+msgid "Once you have a copy of the source, you can install it with:"
+msgstr ""
+"Une fois que vous avez une copie du code source, vous pouvez l'installer "
+"avec :"

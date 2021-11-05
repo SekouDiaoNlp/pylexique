@@ -64,22 +64,14 @@ pylexique
 | It allows the extraction of lexical information from more than 140 000 French words in an Object Oriented way.
 
 |
-
-| Pylexique est une librairie Python encapsulant Lexique383_.
-
-| Cette librairie permet d'extraire l'information lexicale de plus de 140 000 mots Français de manière Orientée Objet.
-
-|
 |
 
 * Free software: MIT license
-* PyLexique Documentation: https://pylexique.readthedocs.io
+* PyLexique Documentation: https://pylexique.readthedocs.io (en) -- https://pylexique.readthedocs.io/fr/ (fr)
 
 | Each lexical item is represented as a LexItem having the following LexEntryType:
 |
 
-| Chaque entrée lexicale est représentée par un LexItem de type LexEntryType:
-|
 
 .. code-block:: python
 
@@ -200,12 +192,6 @@ associated lemmas, syllabation, grammatical category, gender and number,
 frequencies in a corpus of books and in a body of film subtitles, etc...
 
 |
-
-Lexique 3.83 est une base de données lexicales du français qui fournit
-pour ~140000 mots du français: les représentations orthographiques et
-phonémiques, les lemmes associés, la syllabation, la catégorie
-grammaticale, le genre et le nombre, les fréquences dans un corpus de
-livres et dans un corpus de sous-titres de films, etc...
 
 Table: `Lexique383.zip`_
 

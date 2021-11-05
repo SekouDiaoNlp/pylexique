@@ -1,0 +1,267 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, SekouDiaoNlp
+# This file is distributed under the same license as the pylexique package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Sekou Diao, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pylexique 1.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-04 14:47+0100\n"
+"PO-Revision-Date: 2021-11-04 17:55+0000\n"
+"Last-Translator: Sekou Diao, 2021\n"
+"Language-Team: French (France) (https://www.transifex.com/sekoudiaonlp/teams/127155/fr_FR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../../../CONTRIBUTING.rst:5 72f845a5d9a145c4b3f4dc653a7c43b7
+msgid "Contributing"
+msgstr "Contribuer"
+
+#: ../../../CONTRIBUTING.rst:7 2b5b7cb5663f461496ce79879201a2c2
+msgid ""
+"Contributions are welcome, and they are greatly appreciated! Every little "
+"bit helps, and credit will always be given."
+msgstr ""
+"Les contributions sont les bienvenues, et elles sont grandement appréciées !"
+" Chaque petit geste compte, et le crédit sera toujours accordé."
+
+#: ../../../CONTRIBUTING.rst:10 60fc6191857f4be187225e02038d9ae6
+msgid "You can contribute in many ways:"
+msgstr "Vous pouvez contribuer de plusieurs manières :"
+
+#: ../../../CONTRIBUTING.rst:13 f85875f2ea924e6c9c2020a86ca8c41d
+msgid "Types of Contributions"
+msgstr "Types de contributions"
+
+#: ../../../CONTRIBUTING.rst:16 04121374f0344a4386712bfc21182393
+msgid "Report Bugs"
+msgstr "Signaler des bugs"
+
+#: ../../../CONTRIBUTING.rst:18 9fd06c710f2f43bb9aceca63d6d7ee2c
+msgid "Report bugs at https://github.com/SekouDiaoNlp/pylexique/issues."
+msgstr "Signalez les bugs à https://github.com/SekouDiaoNlp/pylexique/issues."
+
+#: ../../../CONTRIBUTING.rst:20 d505492311914d3ba657434b510fa3bc
+msgid "If you are reporting a bug, please include:"
+msgstr "Si vous signalez un bug, veuillez inclure :"
+
+#: ../../../CONTRIBUTING.rst:22 7e6f8457e3854fd3baafababd13f803e
+msgid "Your operating system name and version."
+msgstr "Le nom et la version de votre système d'exploitation."
+
+#: ../../../CONTRIBUTING.rst:23 2fc533c9b0144bd3926b32b5a783ec2b
+msgid ""
+"Any details about your local setup that might be helpful in troubleshooting."
+msgstr ""
+"Tout détail sur votre installation locale qui pourrait être utile pour le "
+"dépannage."
+
+#: ../../../CONTRIBUTING.rst:24 9b4666da5c2947f4a0a23650f471b404
+msgid "Detailed steps to reproduce the bug."
+msgstr "Les étapes détaillées de la reproduction du bug."
+
+#: ../../../CONTRIBUTING.rst:27 eea328afb471436fa4ae223dc54b676a
+msgid "Fix Bugs"
+msgstr "Corriger des bugs"
+
+#: ../../../CONTRIBUTING.rst:29 dd473e4849624231a5191ccf05eea1be
+msgid ""
+"Look through the GitHub issues for bugs. Anything tagged with \"bug\" and "
+"\"help wanted\" is open to whoever wants to implement it."
+msgstr ""
+"Jetez un œil sur la section \"issues\" sur GitHub pour les bugs. Tout ce qui"
+" est étiqueté avec \"bug\" et \"help wanted\" est ouvert à quiconque veut "
+"l'implémenter."
+
+#: ../../../CONTRIBUTING.rst:33 30f45902e0df4831bf499ef939ea5eaa
+msgid "Implement Features"
+msgstr "Ajouter des fonctionnalités"
+
+#: ../../../CONTRIBUTING.rst:35 6b5f07726fe24a4987165f32d7c03af8
+msgid ""
+"Look through the GitHub issues for features. Anything tagged with "
+"\"enhancement\" and \"help wanted\" is open to whoever wants to implement "
+"it."
+msgstr ""
+"Consultez les \"issues\" sur GitHub pour trouver des propositions d'ajout ou"
+" d'amélioration des fonctionnalités. Tout ce qui est étiqueté "
+"\"amélioration\" et \"demande d'aide\" est ouvert à tous ceux qui veulent "
+"l'implémenter."
+
+#: ../../../CONTRIBUTING.rst:39 f43341dc02a64147822da27d847fedef
+msgid "Write Documentation"
+msgstr "Rédiger de la documentation"
+
+#: ../../../CONTRIBUTING.rst:41 4b390ff719cd4b72bf0da06575e46a42
+msgid ""
+"pylexique could always use more documentation, whether as part of the "
+"official pylexique docs, in docstrings, or even on the web in blog posts, "
+"articles, and such."
+msgstr ""
+"pylexique a toujours besoin de plus de documentation, que ce soit dans le "
+"cadre de la documentation officielle de pylexique, dans les docstrings, ou "
+"même sur le web dans des billets de blog, des articles et autres."
+
+#: ../../../CONTRIBUTING.rst:46 9591f3dd5f47457aa3c311dc10bab9ee
+msgid "Submit Feedback"
+msgstr "Soumettre des commentaires"
+
+#: ../../../CONTRIBUTING.rst:48 7796602f189d44f4bc4887f16a037c8f
+msgid ""
+"The best way to send feedback is to file an issue at "
+"https://github.com/SekouDiaoNlp/pylexique/issues."
+msgstr ""
+"La meilleure façon d'envoyer des commentaires est d'ouvrir un ticket de "
+"support à l'adresse https://github.com/SekouDiaoNlp/pylexique/issues."
+
+#: ../../../CONTRIBUTING.rst:50 d5ce48a1b3cc42739235a10724d3be85
+msgid "If you are proposing a feature:"
+msgstr "Si vous proposez une fonctionnalité :"
+
+#: ../../../CONTRIBUTING.rst:52 668bba3d386b4a5598b0e3bdb84f74d5
+msgid "Explain in detail how it would work."
+msgstr "Expliquez en détail comment cela fonctionnerait."
+
+#: ../../../CONTRIBUTING.rst:53 b677f7d24d504626aed8daad4f8647ab
+msgid "Keep the scope as narrow as possible, to make it easier to implement."
+msgstr ""
+"Gardez le champ d'application aussi étroit que possible, pour faciliter la "
+"mise en œuvre."
+
+#: ../../../CONTRIBUTING.rst:54 4e897b1ed9a742a9a97b024b8eec53be
+msgid ""
+"Remember that this is a volunteer-driven project, and that contributions are"
+" welcome :)"
+msgstr ""
+"N'oubliez pas que ce projet est mené par des bénévoles et que les "
+"contributions sont les bienvenues :)"
+
+#: ../../../CONTRIBUTING.rst:58 7c098f15b2464c27b9c403e1be3dab20
+msgid "Get Started!"
+msgstr "Démarrez !"
+
+#: ../../../CONTRIBUTING.rst:60 6369acb16cbb4fc3a4637519f06e98e1
+msgid ""
+"Ready to contribute? Here's how to set up `pylexique` for local development."
+msgstr ""
+"Prêt à contribuer ? Voici comment configurer `pylexique` pour le "
+"développement local."
+
+#: ../../../CONTRIBUTING.rst:62 b76ca3dd6fe34ebd802b1bfca7225ad6
+msgid "Fork the `pylexique` repo on GitHub."
+msgstr "Créez un fork du dépôt `pylexique` sur GitHub."
+
+#: ../../../CONTRIBUTING.rst:63 5e5ab298e2f04c59b0c8767b05595b63
+msgid "Clone your fork locally::"
+msgstr "Clonez votre fork localement: :"
+
+#: ../../../CONTRIBUTING.rst:67 28853247162c46068cea56ee28a45db5
+msgid ""
+"Install your local copy into a virtualenv. Assuming you have "
+"virtualenvwrapper installed, this is how you set up your fork for local "
+"development::"
+msgstr ""
+"Installez votre copie locale dans un environnement virtuel. En supposant que"
+" vous avez installé virtualenvwrapper, voici comment configurer votre fork "
+"pour le développement local: :"
+
+#: ../../../CONTRIBUTING.rst:73 e40c373385bf4bbcb7598d2c9bef5886
+msgid "Create a branch for local development::"
+msgstr "Créer une branche pour le développement local : :"
+
+#: ../../../CONTRIBUTING.rst:77 26f775092de3479b8d14b604862fb9fc
+msgid "Now you can make your changes locally."
+msgstr "Vous pouvez maintenant effectuer vos modifications localement."
+
+#: ../../../CONTRIBUTING.rst:79 a5a1feb2285942608a392faf792c998c
+msgid ""
+"When you're done making changes, check that your changes pass flake8 and the"
+" tests, including testing other Python versions with tox::"
+msgstr ""
+"Lorsque vous avez fini d'effectuer des modifications, vérifiez que vos "
+"modifications passent bien flake8 et la suite de tests, notamment en testant"
+" d'autres versions de Python avec tox: :"
+
+#: ../../../CONTRIBUTING.rst:86 619cec0ad17d4122b3596f7bf9c684b0
+msgid "To get flake8 and tox, just pip install them into your virtualenv."
+msgstr ""
+"Pour obtenir flake8 et tox, il suffit de les installer par pip dans votre "
+"virtualenv."
+
+#: ../../../CONTRIBUTING.rst:88 a81fb602e04044a0af6e893c41ed4b38
+msgid "Commit your changes and push your branch to GitHub::"
+msgstr "Valider vos changements et pousser votre branche sur GitHub: :"
+
+#: ../../../CONTRIBUTING.rst:94 c64e23a00206434ab5f35ae705cbb4cc
+msgid "Submit a pull request through the GitHub website."
+msgstr "Soumettez une \"pull request\" via le site Web GitHub."
+
+#: ../../../CONTRIBUTING.rst:97 9673dda2be594424820e5dd0d8dad073
+msgid "Pull Request Guidelines"
+msgstr "Directives pour les Pull Requests "
+
+#: ../../../CONTRIBUTING.rst:99 9872c0dad883496c804d3f52e2610f42
+msgid ""
+"Before you submit a pull request, check that it meets these guidelines:"
+msgstr ""
+"Avant de soumettre une pull request, vérifiez qu'elle respecte ces "
+"directives :"
+
+#: ../../../CONTRIBUTING.rst:101 a13f43147aa44ae5adf4cc9f1f422a7b
+msgid "The pull request should include tests."
+msgstr "La pull request doit inclure des tests."
+
+#: ../../../CONTRIBUTING.rst:102 fd13e07c1b4e445bb58daad65aae951b
+msgid ""
+"If the pull request adds functionality, the docs should be updated. Put your"
+" new functionality into a function with a docstring, and add the feature to "
+"the list in README.rst."
+msgstr ""
+"Si la pull request ajoute une fonctionnalité, la documentation doit être "
+"mise à jour. Mettez votre nouvelle fonctionnalité dans une fonction avec une"
+" docstring, et ajoutez la fonctionnalité à la liste dans README.rst."
+
+#: ../../../CONTRIBUTING.rst:105 aedcccb284e543789b4cc1fffdb961ca
+msgid ""
+"The pull request should work for Python 3.6, 3.7, 3.8 3.9 and for PyPy. "
+"Check https://github.com/SekouDiaoNlp/pylexique/actions and make sure that "
+"the tests pass for all supported Python versions."
+msgstr ""
+"La pull request devrait fonctionner pour Python 3.6, 3.7, 3.8 3.9 et pour "
+"PyPy. Vérifiez https://github.com/SekouDiaoNlp/pylexique/actions et assurez-"
+"vous que les tests passent pour toutes les versions de Python supportées."
+
+#: ../../../CONTRIBUTING.rst:110 4407c435e460431595c6510a226c1bbb
+msgid "Tips"
+msgstr "Conseils"
+
+#: ../../../CONTRIBUTING.rst:112 be8c4d73fe1546579a0d0eb875936936
+msgid "To run a subset of tests::"
+msgstr "Pour exécuter un sous-ensemble des tests: :"
+
+#: ../../../CONTRIBUTING.rst:118 a178442216d748ea8f58242e7261d265
+msgid "Deploying"
+msgstr "Déploiement"
+
+#: ../../../CONTRIBUTING.rst:120 3308537d15f84983a95921c34b96d245
+msgid ""
+"A reminder for the maintainers on how to deploy. Make sure all your changes "
+"are committed (including an entry in HISTORY.rst). Then run::"
+msgstr ""
+"Un rappel pour les mainteneurs sur la façon de déployer. Assurez-vous que "
+"toutes vos modifications sont validées (y compris une entrée dans "
+"HISTORY.rst). Ensuite, exécutez : :"
+
+#: ../../../CONTRIBUTING.rst:128 48a5af8d2f184dd0b0372fe48412ff14
+msgid "GitHub Actions will then deploy to PyPI if tests pass."
+msgstr ""
+"Les packes générés par les actions GitHub seront ensuite déployées vers PyPI"
+" si les tests sont réussis."

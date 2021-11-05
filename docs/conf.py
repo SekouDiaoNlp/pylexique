@@ -100,6 +100,7 @@ todo_include_todos = False
 # Localization settings
 locale_dirs = ['locale/']
 gettext_compact = False
+gettext_uuid = True
 
 # -- Options for HTML output -------------------------------------------
 

@@ -1,0 +1,386 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, SekouDiaoNlp
+# This file is distributed under the same license as the pylexique package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Sekou Diao, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pylexique 1.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-04 14:47+0100\n"
+"PO-Revision-Date: 2021-11-04 17:55+0000\n"
+"Last-Translator: Sekou Diao, 2021\n"
+"Language-Team: French (France) (https://www.transifex.com/sekoudiaonlp/teams/127155/fr_FR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../../../HISTORY.rst:3 761ee3f7420448f096938c3f86af132b
+msgid "History"
+msgstr "History"
+
+#: ../../../HISTORY.rst:6 2fbfbf46c28a49f2b364ab6bacb2c251
+msgid "1.5.0 (2021-10-28)"
+msgstr "1.5.0 (2021-10-28)"
+
+#: ../../../HISTORY.rst:8 2b70591beaf341fb8f70ddf3f05500a1
+msgid ""
+"Added new method 'Lexique383.get_anagrams()' to get the list of all the "
+"anagrams of a given word."
+msgstr ""
+"Added new method 'Lexique383.get_anagrams()' to get the list of all the "
+"anagrams of a given word."
+
+#: ../../../HISTORY.rst:9 cfd911d2a59140d9a86385327dc11ce7
+msgid "Removed support for xlsb file format.."
+msgstr "Removed support for xlsb file format.."
+
+#: ../../../HISTORY.rst:10 060184129e9b41d384d876693a2a78a5
+msgid "Migrated the project build configuration to pyproject.toml."
+msgstr "Migrated the project build configuration to pyproject.toml."
+
+#: ../../../HISTORY.rst:11 fe0595225cae48eca5c62961b8c7effe
+msgid "Migrated build backend to poetry."
+msgstr "Migrated build backend to poetry."
+
+#: ../../../HISTORY.rst:12 ../../../HISTORY.rst:22 ../../../HISTORY.rst:29
+#: 4d011f5057c949898bb06decb143cc87 9d56e598b891431bab6cccb911d256ea
+#: d39ab2c2dacf48ca93611c7494fb12d1
+msgid "Updated the Documentation and the docstrings."
+msgstr "Updated the Documentation and the docstrings."
+
+#: ../../../HISTORY.rst:13 ../../../HISTORY.rst:23 ../../../HISTORY.rst:37
+#: ../../../HISTORY.rst:44 ../../../HISTORY.rst:51 ../../../HISTORY.rst:58
+#: ../../../HISTORY.rst:66 ../../../HISTORY.rst:75 ../../../HISTORY.rst:85
+#: ../../../HISTORY.rst:92 ../../../HISTORY.rst:100
+#: 1b048386a455417e9b6d1dc21472a091 a5395a058d9e4fb280ad127883c2145d
+#: 2d81400d729648ccaf3bd4301ee34731 663cedfa3ad4497d84f71cb0e654e47c
+#: 4c832f2e1f8f4e34841678d9098baa21 dc3acdd2483a47008bfc285a022be512
+#: 6f0575dc99f24ab399be7d24c2ebbfc9 030d2fd05d604fedaafc85b2ce7ba4b2
+#: fb68f10fe3f44cd4a5db0a8035bc7466 bf6dab1cab9b4d8b8b61865d323fad3b
+#: bef10ee7853a4165a19be6b1af4af605
+msgid "Updated dependencies."
+msgstr "Updated dependencies."
+
+#: ../../../HISTORY.rst:16 07ac3bde122f4dfd888ef0dedce7a8a2
+msgid "1.4.0 (2021-10-23)"
+msgstr "1.4.0 (2021-10-23)"
+
+#: ../../../HISTORY.rst:18 fdf81d9054c04fad8a97f2f94b3d175a
+msgid "The library is now completely type annotated and type-checked."
+msgstr "The library is now completely type annotated and type-checked."
+
+#: ../../../HISTORY.rst:19 c942cec855314accbaaad79832671b08
+msgid ""
+"The method get_all_forms() now checks if the word has multiple lemmas in "
+"case of homonymy, eg: 'souris'."
+msgstr ""
+"The method get_all_forms() now checks if the word has multiple lemmas in "
+"case of homonymy, eg: 'souris'."
+
+#: ../../../HISTORY.rst:20 89564fdb6db0445ea1d872ea4b968232
+msgid "Fixed parsing bug when using 'std-csv' parser."
+msgstr "Fixed parsing bug when using 'std-csv' parser."
+
+#: ../../../HISTORY.rst:21 ade3d4ab687f4750a7a8999add8f0e79
+msgid "Fixed formatting issue when saving the output of the CLI to a file."
+msgstr "Fixed formatting issue when saving the output of the CLI to a file."
+
+#: ../../../HISTORY.rst:26 595da1b0a2bf417eab57ede026c096a9
+msgid "1.3.5 (2021-05-18)"
+msgstr "1.3.5 (2021-05-18)"
+
+#: ../../../HISTORY.rst:28 012c75a07e9a42df956f140f2c5e95cd
+msgid "Uses str.lower() to normalize inputs."
+msgstr "Uses str.lower() to normalize inputs."
+
+#: ../../../HISTORY.rst:32 6fad26c3ab75442488feef768875c37d
+msgid "1.3.4 (2021-05-16)"
+msgstr "1.3.4 (2021-05-16)"
+
+#: ../../../HISTORY.rst:34 20184b287a874b7490f6386f97a203c7
+msgid "Fixed bug where Lexique383 was not shipped with the distribution."
+msgstr "Fixed bug where Lexique383 was not shipped with the distribution."
+
+#: ../../../HISTORY.rst:35 e45bb5d2ffbf4489a6735d23153323f2
+msgid "Made csv parsing far faster and more robust."
+msgstr "Made csv parsing far faster and more robust."
+
+#: ../../../HISTORY.rst:36 ../../../HISTORY.rst:43
+#: 719f3095921b4b4692d7cbf32ac51c55 98f83c59cff44db39b61e23e53ea226e
+msgid ""
+"Can now use different parsers : 'pandas_csv' is the pandas csv parser, "
+"'std_csv' is the standard library csv parser, 'csv' is a custom csv parser "
+"and 'xlsb' is pandas xlsb parser using pyxlsb engine."
+msgstr ""
+"Can now use different parsers : 'pandas_csv' is the pandas csv parser, "
+"'std_csv' is the standard library csv parser, 'csv' is a custom csv parser "
+"and 'xlsb' is pandas xlsb parser using pyxlsb engine."
+
+#: ../../../HISTORY.rst:40 2566a8806b8e4303a8cc2f7b510b9a1b
+msgid "1.3.3 (2021-05-16)"
+msgstr "1.3.3 (2021-05-16)"
+
+#: ../../../HISTORY.rst:42 c2bf0e68553841af9ffdc452a6aaa940
+msgid "Made csv parsing faster and more robust."
+msgstr "Made csv parsing faster and more robust."
+
+#: ../../../HISTORY.rst:47 0478c0056a444eaa9d3a88178e7125bf
+msgid "1.3.2 (2021-05-14)"
+msgstr "1.3.2 (2021-05-14)"
+
+#: ../../../HISTORY.rst:49 e3bdac9349ac49f2b297e9977dc11eb2
+msgid "Can now use both 'csv' and 'xlsb' files."
+msgstr "Can now use both 'csv' and 'xlsb' files."
+
+#: ../../../HISTORY.rst:50 bf855794262c43c7b3f909cc761df912
+msgid "Uses 'csv' file for storage and faster load times."
+msgstr "Uses 'csv' file for storage and faster load times."
+
+#: ../../../HISTORY.rst:54 aa5897b11e224385839512f0d79fec01
+msgid "1.3.1 (2021-05-12)"
+msgstr "1.3.1 (2021-05-12)"
+
+#: ../../../HISTORY.rst:56 ../../../HISTORY.rst:63
+#: b1a366dc785647d48121416ad5fecc2a a643b4ec2fd940c2b20f93b26097a1fa
+msgid "Uses pandas for now for faster resource loading."
+msgstr "Uses pandas for now for faster resource loading."
+
+#: ../../../HISTORY.rst:57 86219fd293e64589a494b68faa36da34
+msgid "Uses xlsb file for storage and faster load times"
+msgstr "Uses xlsb file for storage and faster load times"
+
+#: ../../../HISTORY.rst:61 08cd61cb2fbd4cb98203962cd0232188
+msgid "1.3.0 (2021-05-11)"
+msgstr "1.3.0 (2021-05-11)"
+
+#: ../../../HISTORY.rst:64 d2b39772f37d4acfbc013911cbd73b18
+msgid ""
+"In the process of integrating `faster-than-csv` when MacOs issues get "
+"resolved."
+msgstr ""
+"In the process of integrating `faster-than-csv` when MacOs issues get "
+"resolved."
+
+#: ../../../HISTORY.rst:65 ../../../HISTORY.rst:74
+#: 7fd07087f0c64d6093e6475838793f8c 4ac047656dc144dbb92c74708566a518
+msgid "Refactored and expanded the test suite."
+msgstr "Refactored and expanded the test suite."
+
+#: ../../../HISTORY.rst:69 45a8ae8865dd48c38a5a498e297e3c8b
+msgid "1.2.7 (2021-05-07)"
+msgstr "1.2.7 (2021-05-07)"
+
+#: ../../../HISTORY.rst:71 a2bd23b5538848f886cdea688b557bc2
+msgid ""
+"The new method Lexique383.get_all_forms(word) is now accessible through the "
+"cli with option '-a' or '--all_forms'."
+msgstr ""
+"The new method Lexique383.get_all_forms(word) is now accessible through the "
+"cli with option '-a' or '--all_forms'."
+
+#: ../../../HISTORY.rst:72 ../../../HISTORY.rst:83
+#: e4e50cf599264f14987d8fcaf258599f 9b8e82510a1c484aaf246a03d912b455
+msgid "This new method returns a list of LexItems having the same root lemma."
+msgstr ""
+"This new method returns a list of LexItems having the same root lemma."
+
+#: ../../../HISTORY.rst:73 a5efe5ddf5eb4f7eac37e179a97b9999
+msgid "Added sample commands using the new option in the docs."
+msgstr "Added sample commands using the new option in the docs."
+
+#: ../../../HISTORY.rst:78 f62b84de9a174f8b86d78871a000e82e
+msgid "1.2.6 (2021-05-06)"
+msgstr "1.2.6 (2021-05-06)"
+
+#: ../../../HISTORY.rst:80 4d879b8b0efd4f1b805938d80453a8fc
+msgid "allows for new style of relative imports."
+msgstr "allows for new style of relative imports."
+
+#: ../../../HISTORY.rst:81 3294060b51d24ce09c2fed301c49cd19
+msgid ""
+"Now all the attributes of the LexItem objects are immutable for consistency."
+msgstr ""
+"Now all the attributes of the LexItem objects are immutable for consistency."
+
+#: ../../../HISTORY.rst:82 e251e1dff33c4872b99fece17f311250
+msgid ""
+"Added new method Lexique383.get_all_forms(word) to get all the lexical "
+"variations of a word."
+msgstr ""
+"Added new method Lexique383.get_all_forms(word) to get all the lexical "
+"variations of a word."
+
+#: ../../../HISTORY.rst:84 ../../../HISTORY.rst:91 ../../../HISTORY.rst:99
+#: ../../../HISTORY.rst:108 ../../../HISTORY.rst:116 ../../../HISTORY.rst:127
+#: 471d58ce25054cad86c3815844ccd48d 76e8980ae61a42a4ae3822c732ba824f
+#: 51699fc302054bb1847b1a43431e9b7a 0f8b518a6ad74e069bdf45ec0d13ed27
+#: af6432b6ab004930bef1557492c26eb3 8833b6c6669f4a578ba783907f535068
+msgid "Expanded sample usage of the software in the docs."
+msgstr "Expanded sample usage of the software in the docs."
+
+#: ../../../HISTORY.rst:88 a67157706b41444181ca4fff14f09bae
+msgid "1.2.3 (2021-05-04)"
+msgstr "1.2.3 (2021-05-04)"
+
+#: ../../../HISTORY.rst:90 682ae4e0c44a4c5190eb37646ae5ce33
+msgid ""
+"Enhanced behaviour of output to stdout to not conflict with the logging "
+"strategy of users importing the library in their own projects."
+msgstr ""
+"Enhanced behaviour of output to stdout to not conflict with the logging "
+"strategy of users importing the library in their own projects."
+
+#: ../../../HISTORY.rst:95 fbde5f9cc4e44f0da91fe0e382cfef5b
+msgid "1.2.2 (2021-05-04)"
+msgstr "1.2.2 (2021-05-04)"
+
+#: ../../../HISTORY.rst:97 98b38b350abc4386a9f25e94bdcbf878
+msgid "Enhanced Type Hinting for main module."
+msgstr "Enhanced Type Hinting for main module."
+
+#: ../../../HISTORY.rst:98 d9f138d44d4b472790480d86e8c7f055
+msgid ""
+"Changed the property LexItem.islem to boolean instead of a binary choice "
+"0/1."
+msgstr ""
+"Changed the property LexItem.islem to boolean instead of a binary choice "
+"0/1."
+
+#: ../../../HISTORY.rst:103 70929c0b115b40c0a3d0dc3ccb173e7d
+msgid "1.2.1 (2021-04-30)"
+msgstr "1.2.1 (2021-04-30)"
+
+#: ../../../HISTORY.rst:105 95426dc251ab42c6ac393e823b78e674
+msgid "Implemented Type Hinting for main module."
+msgstr "Implemented Type Hinting for main module."
+
+#: ../../../HISTORY.rst:106 848f5cd17deb432f861ecbd4a33c8216
+msgid ""
+"Added a new method to the class Lexique383. The method is "
+"Lexique383._save_errors() ."
+msgstr ""
+"Added a new method to the class Lexique383. The method is "
+"Lexique383._save_errors() ."
+
+#: ../../../HISTORY.rst:107 0346aa94efee4809a29c5db70f92e38c
+msgid ""
+"This new method checks that the value of each field in a LexItem is of the "
+"right type. If it finds errors it will record the mismatched value/type and "
+"save it in ./erros/errors.json"
+msgstr ""
+"This new method checks that the value of each field in a LexItem is of the "
+"right type. If it finds errors it will record the mismatched value/type and "
+"save it in ./erros/errors.json"
+
+#: ../../../HISTORY.rst:109 8365e21cbe484c2eb15590a04b9eb700
+msgid ""
+"Much better documentation including links to Lexique383 pages and manuals."
+msgstr ""
+"Much better documentation including links to Lexique383 pages and manuals."
+
+#: ../../../HISTORY.rst:112 3500c522bb9744b1a8faf454c3248b27
+msgid "1.2.0 (2021-04-30)"
+msgstr "1.2.0 (2021-04-30)"
+
+#: ../../../HISTORY.rst:114 0e35c4038f4448759363ec6181f19836
+msgid ""
+"Added a new method to the class Lexique383. The method is "
+"Lexique383.get_lex() ."
+msgstr ""
+"Added a new method to the class Lexique383. The method is "
+"Lexique383.get_lex() ."
+
+#: ../../../HISTORY.rst:115 67638527a08d4f6686f0f0890463fa08
+msgid ""
+"This new method accepts either a single word as a string or an iterable of "
+"strings and will return the asked lexical information."
+msgstr ""
+"This new method accepts either a single word as a string or an iterable of "
+"strings and will return the asked lexical information."
+
+#: ../../../HISTORY.rst:117 ../../../HISTORY.rst:128
+#: d4edf63f6f954129a5e9e2a457166dcb 7508a43dec4242fda35bfe0072503f97
+msgid "Substantial update to the code and docs."
+msgstr "Substantial update to the code and docs."
+
+#: ../../../HISTORY.rst:118 54b4b92c9ed84cc69eac15d24d68d866
+msgid ""
+"Removed unneeded dependencies as I reimplement some functionality myself."
+msgstr ""
+"Removed unneeded dependencies as I reimplement some functionality myself."
+
+#: ../../../HISTORY.rst:121 17d842341ee84c13bc2fa3ae04d17f4b
+msgid "1.1.1 (2021-04-28)"
+msgstr "1.1.1 (2021-04-28)"
+
+#: ../../../HISTORY.rst:123 a96638a1b049409094660a8bcd5c07f0
+msgid ""
+"Added a new method to the class LexItem. The method is LexItem.to_dict() ."
+msgstr ""
+"Added a new method to the class LexItem. The method is LexItem.to_dict() ."
+
+#: ../../../HISTORY.rst:124 c4eef71f26074a4f906cb98605695254
+msgid ""
+"This new method allows the LexItem objects to be converted into dicts with "
+"key/value pairs corresponding to the LexItem."
+msgstr ""
+"This new method allows the LexItem objects to be converted into dicts with "
+"key/value pairs corresponding to the LexItem."
+
+#: ../../../HISTORY.rst:125 0c9a6dfe49a944d2933e005b45af938c
+msgid ""
+"This method allows easy display or serialization of the LexItem objects."
+msgstr ""
+"This method allows easy display or serialization of the LexItem objects."
+
+#: ../../../HISTORY.rst:126 ../../../HISTORY.rst:134
+#: af2d6fcbc02f419f8769a249463f25eb fbf99a97b5214bebbdeabf727453521c
+msgid ""
+"Lexical Items having the same orthography are stored in a list at the word's"
+" orthography key to the LEXIQUE dict."
+msgstr ""
+"Lexical Items having the same orthography are stored in a list at the word's"
+" orthography key to the LEXIQUE dict."
+
+#: ../../../HISTORY.rst:131 0ca59a8d64414d7c86e0611a8b8d932e
+msgid "1.1.0 (2021-04-28)"
+msgstr "1.1.0 (2021-04-28)"
+
+#: ../../../HISTORY.rst:133 001ff8b2bdf34caebaa687254d39661f
+msgid ""
+"Drastically reduced dependencies by ditching HDF5 and bolcs as the package "
+"is now smaller, faster an easier to build."
+msgstr ""
+"Drastically reduced dependencies by ditching HDF5 and bolcs as the package "
+"is now smaller, faster an easier to build."
+
+#: ../../../HISTORY.rst:135 c64f9b855b4f4ce0a6c2a73df0bbb9b1
+msgid ""
+"Implemented the \"FlyWheel\" pattern for light Lexical entries rsiding "
+"entirely in memory at run time."
+msgstr ""
+"Implemented the \"FlyWheel\" pattern for light Lexical entries rsiding "
+"entirely in memory at run time."
+
+#: ../../../HISTORY.rst:136 2c72a8704ad943fa8a65e2181a757137
+msgid "Added sample usage of the software in the docs."
+msgstr "Added sample usage of the software in the docs."
+
+#: ../../../HISTORY.rst:137 e62b1ecc76814b3d976b0b5acdc5f8d8
+msgid "General update to the code and docs."
+msgstr "General update to the code and docs."
+
+#: ../../../HISTORY.rst:140 0e2303460b75447387f058173a27ba10
+msgid "1.0.7 (2021-04-27)"
+msgstr "1.0.7 (2021-04-27)"
+
+#: ../../../HISTORY.rst:142 23f01e702605481c802628d79e434642
+msgid "First release on PyPI."
+msgstr "First release on PyPI."

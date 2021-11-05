@@ -1,0 +1,427 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021, SekouDiaoNlp
+# This file is distributed under the same license as the pylexique package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Sekou Diao, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pylexique 1.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-04 18:32+0100\n"
+"PO-Revision-Date: 2021-11-04 17:55+0000\n"
+"Last-Translator: Sekou Diao, 2021\n"
+"Language-Team: French (France) (https://www.transifex.com/sekoudiaonlp/teams/127155/fr_FR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../../../README.rst:3 c54a9d4d25674ba4a9b9e037b7d7fff2
+msgid "pylexique"
+msgstr "pylexique"
+
+#: ../../../README.rst:62 1bb1033fd565401bb68801633c8466ec
+msgid "Pylexique is a Python wrapper around Lexique383_."
+msgstr "Pylexique est une librairie Python encapsulant Lexique383_."
+
+#: ../../../README.rst:64 61afff0beb4f40198813f68e75bc809a
+msgid ""
+"It allows the extraction of lexical information from more than 140 000 "
+"French words in an Object Oriented way."
+msgstr ""
+"Elle permet l'extraction d'informations lexicales de plus de 140 000 mots "
+"français de manière orientée objet."
+
+#: ../../../README.rst:69 c5b0ed12081c45b39a53f58f17f365be
+msgid "Free software: MIT license"
+msgstr "Logiciel libre : licence MIT"
+
+#: ../../../README.rst:70 f84d4b4fe6b64425afdf0673ff24ed46
+msgid ""
+"PyLexique Documentation: https://pylexique.readthedocs.io (en) -- "
+"https://pylexique.readthedocs.io/fr/ (fr)"
+msgstr ""
+"Documentation de PyLexique: https://pylexique.readthedocs.io (en) -- "
+"https://pylexique.readthedocs.io/fr/ (fr)"
+
+#: ../../../README.rst:72 1463ad4a0b0e453bbf5d593eccb29e4b
+msgid ""
+"Each lexical item is represented as a LexItem having the following "
+"LexEntryType:"
+msgstr ""
+"Chaque élément lexical est représenté par un LexItem ayant le LexEntryType "
+"suivant :"
+
+#: ../../../README.rst:119 0c7d69ed4d544988b9bc019d40214393
+msgid "The meanings of the attributes of this object are as follow:"
+msgstr "Les significations des attributs de cet objet sont les suivantes :"
+
+#: ../../../README.rst:121 a9e2898c63da493096ad00df4d4d60ac
+msgid "ortho: the word"
+msgstr "ortho : le mot"
+
+#: ../../../README.rst:122 da52fab1e9a1427ab90a26846c71fc5d
+msgid "phon: the phonological forms of the word"
+msgstr "phon : les formes phonologiques du mot"
+
+#: ../../../README.rst:123 8c1d21ee2dbd45bea92f3dc8f4886b6c
+msgid "lemme: the lemmas of this word"
+msgstr "lemme : les lemmes de ce mot"
+
+#: ../../../README.rst:124 a6ea715ab5f74b2b9ac799038a66f0a5
+msgid "cgram: the grammatical categories of this word"
+msgstr "cgram : les catégories grammaticales de ce mot"
+
+#: ../../../README.rst:125 8728bb19b92a455e9f9d95690184fa50
+msgid "genre: the gender"
+msgstr "genre : le genre"
+
+#: ../../../README.rst:126 b6483231b4ae430ab94992f22efbe9fa
+msgid "nombre: the number"
+msgstr "nombre : le nombre"
+
+#: ../../../README.rst:127 1152326345dc440686170b2351cc783e
+msgid ""
+"freqlemfilms: the frequency of the lemma according to the corpus of "
+"subtitles (per million occurrences)"
+msgstr ""
+"freqlemfilms : la fréquence du lemme selon le corpus de sous-titres (par "
+"million d'occurrences)"
+
+#: ../../../README.rst:128 dcd31d5243cf46ac88a91a6998a822b7
+msgid ""
+"freqlemlivres: the frequency of the lemma according to the body of books "
+"(per million occurrences)"
+msgstr ""
+"freqlemlivres : la fréquence du lemme selon le corpus de livres (par million"
+" d'occurrences)"
+
+#: ../../../README.rst:129 3be0f1d2ac604f0f8121acc313c047f1
+msgid ""
+"freqfilms: the frequency of the word according to the corpus of subtitles "
+"(per million occurrences)"
+msgstr ""
+"freqfilms : la fréquence du mot selon le corpus de sous-titres (par million "
+"d'occurrences)"
+
+#: ../../../README.rst:130 d6867e16d04b46808ec36d5c0fdb3f9b
+msgid ""
+"freqlivres: the frequency of the word according to the body of books (per "
+"million occurrences)"
+msgstr ""
+"freqlivres : la fréquence du mot selon le corpus de livres (par million "
+"d'occurrences)"
+
+#: ../../../README.rst:131 ae83157c8b0b43a49c989478db8be01f
+msgid "infover: modes, tenses, and possible people for verbs"
+msgstr "infover : modes, temps et personnes possibles pour les verbes"
+
+#: ../../../README.rst:132 470d0f493cdd40a5bd4e7e07d84327d3
+msgid "nbhomogr: number of homographs"
+msgstr "nbhomogr : nombre d'homographes"
+
+#: ../../../README.rst:133 f64ccd3926bc46d2a9ec7e14273e8775
+msgid "nbhomoph: number of homophones"
+msgstr "nbhomoph : nombre d'homophones"
+
+#: ../../../README.rst:134 0d24511255a64c8196e478b3d0bd4316
+msgid "islem: indicates if it is a lemma or not"
+msgstr "islem : indique si c'est un lemme ou non"
+
+#: ../../../README.rst:135 2ef73aad823e49deb8feab6b90eed997
+msgid "nblettres: the number of letters"
+msgstr "nblettres : le nombre de lettres"
+
+#: ../../../README.rst:136 c4952805d75d4c9190b9c1c43a7a85ec
+msgid "nbphons: number of phonemes"
+msgstr "nbphons : nombre de phonèmes"
+
+#: ../../../README.rst:137 e6149ff65cc9444ca5ef9f213af5cee7
+msgid "cvcv: the orthographic structure"
+msgstr "cvcv : la structure orthographique"
+
+#: ../../../README.rst:138 7bd7d3401de8457caf844274bdf041c5
+msgid "p-cvcv: the phonological structure"
+msgstr "p-cvcv : la structure phonologique"
+
+#: ../../../README.rst:139 bcea7d173fe24ddf907a2e54b3e3164c
+msgid "voisorth: number of orthographic neighbors"
+msgstr "voisorth : nombre de voisins orthographiques"
+
+#: ../../../README.rst:140 8fbaedc9b9654134852143b0b5b223f5
+msgid "voisphon: number of phonological neighbors"
+msgstr "voisphon : nombre de voisins phonologiques"
+
+#: ../../../README.rst:141 c60bd5881b384a78804e3902615df2b0
+msgid "puorth: point of spelling uniqueness"
+msgstr "puorth : point d'unicité orthographique"
+
+#: ../../../README.rst:142 2270a168b07b4942b722aa75fc421033
+msgid "puphon: point of phonological uniqueness"
+msgstr "puphon : point d'unicité phonologique"
+
+#: ../../../README.rst:143 a07b37ec7b6d4b73a3928e833c61643e
+msgid "syll: syllable phonological form"
+msgstr "syllabe : forme phonologique des syllabes"
+
+#: ../../../README.rst:144 8f9472d7f64e4794a4bea518eaf5f7bf
+msgid "nbsyll: number of syllables"
+msgstr "nbsyll : nombre de syllabes"
+
+#: ../../../README.rst:145 53797f1433184a2987c0ac28abdb7e1f
+msgid "cv-cv: syllable phonological structure"
+msgstr "cv-cv : structure phonologique des syllabes"
+
+#: ../../../README.rst:146 95da0199c8164940a687eda02adfe6e9
+msgid "orthrenv: reverse orthographic form"
+msgstr "orthrenv : forme orthographique inversée"
+
+#: ../../../README.rst:147 c850533290a84cb2af50a2439a481d13
+msgid "phonrenv: reversed phonological form"
+msgstr "phonrenv : forme phonologique inversée"
+
+#: ../../../README.rst:148 88bfbcb27c554e7b9c179f3c0e162931
+msgid "orthosyll: syllable orthographic form"
+msgstr "orthosyll : forme orthographique des syllabes"
+
+#: ../../../README.rst:149 f7cb2b2d9bcb49d98dfc83a8cab97386
+msgid ""
+"cgramortho: the different grammatical category for a given orthographic "
+"representation"
+msgstr ""
+"cgramortho : les différentes catégories grammaticales pour une "
+"représentation orthographique donnée"
+
+#: ../../../README.rst:150 bfdc6fc720674edab4fa4d07f74ab356
+msgid ""
+"deflem: the percentage of people who said they knew the lemma of the word"
+msgstr ""
+"deflem : le pourcentage de personnes qui ont déclaré connaître le lemme du "
+"mot."
+
+#: ../../../README.rst:151 2b428ce0dcbe4023b2e60677adfe85a4
+msgid "defobs: the size of the sample from which 'deflem' is derived"
+msgstr "defobs : la taille de l'échantillon d'où est tiré 'deflem'."
+
+#: ../../../README.rst:152 90df4a93cae0415faf50579ebb378b80
+msgid "old20:  orthographic Levenshtein Distance"
+msgstr "old20 : distance de Levenshtein orthographique"
+
+#: ../../../README.rst:153 27824bd2b1e14283ad3a1fd977776e00
+msgid "pld20: phonological Levenshtein Distance"
+msgstr "pld20 : distance de Levenshtein phonologique"
+
+#: ../../../README.rst:154 34f475d0e2ee44dcb37cb42aab3dd740
+msgid "morphoder: inflectional morphology"
+msgstr "morphoder : morphologie flexionnelle"
+
+#: ../../../README.rst:155 fbf8e0a2d94440bcb04d58d64b77d06b
+msgid "nbmorph: the number of morphemes directly computed from 'morphoder'"
+msgstr ""
+"nbmorph : le nombre de morphèmes directement calculé à partir de "
+"'morphoder'."
+
+#: ../../../README.rst:158 84eed155bced47a1b05aa873c1ce8fa3
+msgid ""
+"You can find all the relevant information in the `official documentation of "
+"Lexique383`_ (French)."
+msgstr ""
+"Vous pouvez trouver toutes les informations pertinentes dans la "
+"`documentation officielle de Lexique383`_ (français)."
+
+#: ../../../README.rst:162 f2bfc4da780f468291d13d2155c9d124
+msgid "Features"
+msgstr "Caractéristiques"
+
+#: ../../../README.rst:169 3aeefcef3b4c42e3acf5b1cf71272f78
+msgid "Extract all lexical information from a French  word such as:"
+msgstr ""
+"Extraire toutes les informations lexicales d'un mot français telles que :"
+
+#: ../../../README.rst:165 6bfb0ad5b59c44068022c9408262e375
+msgid "orthographic and phonemics representations"
+msgstr "les représentations orthographiques et phonémiques"
+
+#: ../../../README.rst:166 a3ab57d2d99944e6b6f3f456b185f9a2
+msgid "associated lemmas"
+msgstr "les lemmes associés"
+
+#: ../../../README.rst:167 0df1046ea0064d109301c5bdf74665bc
+msgid "syllabation"
+msgstr "syllabation"
+
+#: ../../../README.rst:168 861bb267ad2f4e1ca8084d66cf3f99a8
+msgid "grammatical category"
+msgstr "la catégorie grammaticale"
+
+#: ../../../README.rst:169 affc1d4743664d15b78c5cb59d6fb4d5
+msgid "gender and number"
+msgstr "le genre et le nombre"
+
+#: ../../../README.rst:170 3faab7c5037e49599404be3d429dcede
+msgid ""
+"frequencies in a corpus of books and in a body of film subtitles, etc..."
+msgstr ""
+"les fréquences d'apparition dans un corpus de livres et dans un corpus de "
+"sous-titres de films, etc..."
+
+#: ../../../README.rst:171 8c21ab5435c24d0bb60755858faaf046
+msgid "Extract all the lexical forms of a French word."
+msgstr "Extraire toutes les formes lexicales d'un mot français."
+
+#: ../../../README.rst:172 5bc0b1f6032d4039a003d31a7184048f
+msgid "Easy to use Api."
+msgstr "Api simple d'utilisation."
+
+#: ../../../README.rst:173 c3b57503b77b434a955ed774ed6227e4
+msgid ""
+"Easily integrate pylexique in your own projects as an imported library."
+msgstr ""
+"Intégrez facilement pylexique dans vos propres projets en tant que "
+"bibliothèque importée."
+
+#: ../../../README.rst:174 4620c69ffc7b409b9d76229f46ea25df
+msgid "Can be used as a command line tool."
+msgstr "Peut être utilisé comme un outil de ligne de commande."
+
+#: ../../../README.rst:177 dccb5d8d1683452987638acd5696b860
+msgid "Credits"
+msgstr "Crédits"
+
+#: ../../../README.rst:179 34bc8d722a3d40a3b3bb551120875b54
+msgid "Main developer SekouDiaoNlp_."
+msgstr "Développeur principal SekouDiaoNlp_."
+
+#: ../../../README.rst:181 21d49cc3e35b43cbaa616527ce375c08
+msgid "Lexical corpus: Lexique383_"
+msgstr "Corpus lexical : Lexique383_"
+
+#: ../../../README.rst:184 b861e72bc62742e98cd56783fab796f1
+msgid "About Lexique383"
+msgstr "À propos de Lexique383"
+
+#: ../../../README.rst:187 217e197c0bf94511ad429d9e1600ee59
+msgid "Lexique3"
+msgstr "Lexique3"
+
+#: ../../../README.rst:189 667c31a5bf084a8d8f68e6408f994470
+msgid ""
+"Lexique 3.83 is a French lexical database that provides for ~ 140,000 words "
+"of French: orthographic and phonemics representations, associated lemmas, "
+"syllabation, grammatical category, gender and number, frequencies in a "
+"corpus of books and in a body of film subtitles, etc..."
+msgstr ""
+"Lexique 3.83 est une base de données lexicale française qui fournit pour ~ "
+"140 000 mots du français : représentations orthographique et phonémique, "
+"lemmes associés, syllabation, catégorie grammaticale, genre et nombre, "
+"fréquences dans un corpus de livres et dans un corpus de sous-titres de "
+"films, etc..."
+
+#: ../../../README.rst:196 7f69a9c1c0564fa08cac17da7b7cc8f9
+msgid "Table: `Lexique383.zip`_"
+msgstr "Données tabulaires: `Lexique383.zip`_"
+
+#: ../../../README.rst:198 922aaf9ae8e544db90368a1312e1473b
+msgid "Web site: http://www.lexique.org"
+msgstr "Site web : http://www.lexique.org"
+
+#: ../../../README.rst:200 3b6d5f3873f64144bd8b3c7d369c6427
+msgid "Online: http://www.lexique.org/shiny/lexique"
+msgstr "Online: http://www.lexique.org/shiny/lexique"
+
+#: ../../../README.rst:203 6b2e2bd7ec5540e7a7a2c9e49020be9c
+msgid "Publications"
+msgstr "Publications"
+
+#: ../../../README.rst:205 ac08f38db047417a8311dd6d62fffe9e
+msgid ""
+"New, Boris, Christophe Pallier, Marc Brysbaert, and Ludovic Ferrand. 2004. "
+"\"Lexique 2: A New French Lexical Database.\" *Behavior Research Methods, "
+"Instruments, & Computers* 36 (3): 516--524. `DOI "
+"<https://doi.org/10.3758/bf03195598>`__. `pdf`_"
+msgstr ""
+"New, Boris, Christophe Pallier, Marc Brysbaert, and Ludovic Ferrand. 2004. "
+"\"Lexique 2: A New French Lexical Database.\" *Behavior Research Methods, "
+"Instruments, & Computers* 36 (3): 516--524. `DOI "
+"<https://doi.org/10.3758/bf03195598>`__. `pdf`_"
+
+#: ../../../README.rst:211 8774b65c69da426583f434f2a9f21bdc
+msgid ""
+"New, Boris, Christophe Pallier, Ludovic Ferrand, and Rafael Matos. 2001. "
+"\"Une Base de Données Lexicales Du Français Contemporain Sur Internet: "
+"LEXIQUE\" *L'Année Psychologique* 101 (3): 447--462. `DOI "
+"<https://doi.org/10.1017/S014271640707035X>`__. `pdf "
+"<https://docs.google.com/viewer?url=http://www.lexique.org/outils/Lexique_Annee.pdf>`__"
+msgstr ""
+"New, Boris, Christophe Pallier, Ludovic Ferrand, and Rafael Matos. 2001. "
+"\"Une Base de Données Lexicales Du Français Contemporain Sur Internet: "
+"LEXIQUE\" *L'Année Psychologique* 101 (3): 447--462. `DOI "
+"<https://doi.org/10.1017/S014271640707035X>`__. `pdf "
+"<https://docs.google.com/viewer?url=http://www.lexique.org/outils/Lexique_Annee.pdf>`__"
+
+#: ../../../README.rst:217 a027cc84c7b64aed98e964b0a27acb83
+msgid ""
+"Boris New, Marc Brysbaert, Jean Veronis, and Christophe Pallier. 2007. \"The"
+" Use of Film Subtitles to Estimate Word Frequencies.\" Applied "
+"Psycholinguistics 28 (4): 661--77. `DOI "
+"<https://doi.org/10.1017/S014271640707035X>`__. (`pdf "
+"<https://drive.google.com/file/d/1uvKrxGqETXkFeRH4PcYaql8ES9FjEdbV/view?usp=sharing>`__)"
+msgstr ""
+"Boris New, Marc Brysbaert, Jean Veronis, and Christophe Pallier. 2007. \"The"
+" Use of Film Subtitles to Estimate Word Frequencies.\" Applied "
+"Psycholinguistics 28 (4): 661--77. `DOI "
+"<https://doi.org/10.1017/S014271640707035X>`__. (`pdf "
+"<https://drive.google.com/file/d/1uvKrxGqETXkFeRH4PcYaql8ES9FjEdbV/view?usp=sharing>`__)"
+
+#: ../../../README.rst:224 2328a36354d4469bbe9a25dc4cee722a
+msgid "Contributors"
+msgstr "Contributeurs"
+
+#: ../../../README.rst:226 4b205586a25244e2b8f7029ef303d674
+msgid "Boris New & Christophe Pallier"
+msgstr "Boris New & Christophe Pallier"
+
+#: ../../../README.rst:227 2288a4ab3bed4907aea6d7cdd3a316cb
+msgid "Ronald Peereman"
+msgstr "Ronald Peereman"
+
+#: ../../../README.rst:228 6643bb640aec4e1690a29fd6c300940b
+msgid "Sophie Dufour"
+msgstr "Sophie Dufour"
+
+#: ../../../README.rst:229 dcb84672b34e45a4909f42d348f52f05
+msgid "Christian Lachaud"
+msgstr "Christian Lachaud"
+
+#: ../../../README.rst:230 b7c0f06a03a94078a61ebd597bb0bf41
+msgid "and many others... (contact us to be listed)"
+msgstr "et bien d'autres encore... (contactez-nous pour être listé)"
+
+#: ../../../README.rst:233 ad8a6af45bb14a0485ad6feeace1dd12
+msgid "License"
+msgstr "Licence"
+
+#: ../../../README.rst:235 9817401e7dab4f9ea84129511b4ab49b
+msgid "`CC BY SA40.0`_"
+msgstr "`CC BY SA40.0`_"
+
+#: ../../../README.rst:242 5b91d26bf9344646b129517b5c4acb88
+msgid "BibTex Entry to cite publications about Lexique383:"
+msgstr "Entrée BibTex pour citer les publications sur Lexique383 :"
+
+#: ../../../README.rst:282 744b632726ae41728b1bc2fc77057b4e
+msgid "BibTeX"
+msgstr "BibTeX"
+
+#: ../../../README.rst:284 97337ddb9c8c45fa8cfa5f697fb1deed
+msgid ""
+"If you want to cite pylexique in an academic publication use this citation "
+"format:"
+msgstr ""
+"Si vous souhaitez citer pylexique dans une publication universitaire, "
+"utilisez ce format de citation :"
