@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr-FR" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pylexique &mdash; Documentation pylexique 1.5.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Recherchez dans Documentation pylexique 1.5.0"
+          href="_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Bienvenue dans la documentation de pylexique!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pylexique
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenu</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pylexique</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#features">Caractéristiques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#credits">Crédits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#about-lexique383">À propos de Lexique383</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lexique3">Lexique3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#publications">Publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributors">Contributeurs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license">Licence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bibtex">BibTeX</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Guide d’utilisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Documentation de l’Api de pylexique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contribuer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Crédits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pylexique</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>pylexique</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/readme.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pylexique">
+<h1>pylexique<a class="headerlink" href="#pylexique" title="Lien permanent vers ce titre">¶</a></h1>
+<a class="reference external image-reference" href="https://GitHub.com/SekouDiaoNlp/pylexique/graphs/commit-activity"><img alt="Package Maintenance Status" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" /></a>
+<a class="reference external image-reference" href="https://GitHub.com/SekouDiaoNlp/pylexique"><img alt="Package Maintener" src="https://img.shields.io/badge/maintainer-SekouDiaoNlp-blue" /></a>
+<a class="reference external image-reference" href="https://github.com/SekouDiaoNlp/pylexique/actions/workflows/main.yml"><img alt="Build status on Windows, MacOs and Linux" src="https://img.shields.io/github/checks-status/SekouDiaoNlp/mlconjug3/master?label=Build%20status%20on%20Windows%2C%20MacOs%20and%20Linux" /></a>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/pylexique"><img alt="Pypi Python Package Index Status" src="https://img.shields.io/pypi/v/pylexique.svg" /></a>
+<a class="reference external image-reference" href="https://anaconda.org/conda-forge/pylexique"><img alt="Anaconda Package Index Status" src="https://anaconda.org/conda-forge/pylexique/badges/version.svg" /></a>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/pylexique"><img alt="Compatible Python versions" src="https://img.shields.io/pypi/pyversions/pylexique" /></a>
+<a class="reference external image-reference" href="https://anaconda.org/conda-forge/pylexique"><img alt="Supported platforms" src="https://img.shields.io/conda/pn/conda-forge/pylexique?color=dark%20green&amp;label=Supported%20platforms" /></a>
+<a class="reference external image-reference" href="https://pylexique.readthedocs.io/en/latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/pylexique/badge/?version=latest" /></a>
+<a class="reference external image-reference" href="https://pyup.io/repos/github/SekouDiaoNlp/pylexique/"><img alt="Dependencies status" src="https://pyup.io/repos/github/SekouDiaoNlp/pylexique/shield.svg" /></a>
+<a class="reference external image-reference" href="https://codecov.io/gh/SekouDiaoNlp/pylexique"><img alt="Code Coverage Status" src="https://codecov.io/gh/SekouDiaoNlp/pylexique/branch/master/graph/badge.svg?token=EiEXyUJGpF" /></a>
+<a class="reference external image-reference" href="https://snyk.io/test/github/SekouDiaoNlp/pylexique?targetFile=requirements.txt"><img alt="Code Vulnerability Status" src="https://snyk-widget.herokuapp.com/badge/pip/pylexique/badge.svg" /></a>
+<a class="reference external image-reference" href="https://pypi.org/project/pylexique/"><img alt="PyPI Downloads" src="https://img.shields.io/pypi/dm/pylexique?label=PyPi%20Downloads" /></a>
+<a class="reference external image-reference" href="https://anaconda.org/conda-forge/pylexique"><img alt="Conda" src="https://img.shields.io/conda/dn/conda-forge/pylexique?label=Anaconda%20Total%20Downloads" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line">Pylexique est une librairie Python encapsulant <a class="reference external" href="http://www.lexique.org/">Lexique383</a>.</div>
+</div>
+<div class="line-block">
+<div class="line">Elle permet l’extraction d’informations lexicales de plus de 140 000 mots français de manière orientée objet.</div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p>Logiciel libre : licence MIT</p></li>
+<li><p>Documentation de PyLexique: <a class="reference external" href="https://pylexique.readthedocs.io">https://pylexique.readthedocs.io</a> (en) – <a class="reference external" href="https://pylexique.readthedocs.io/fr/">https://pylexique.readthedocs.io/fr/</a> (fr)</p></li>
+</ul>
+<div class="line-block">
+<div class="line">Chaque élément lexical est représenté par un LexItem ayant le LexEntryType suivant :</div>
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LexEntryType</span><span class="p">:</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Type information about all the lexical attributes in a LexItem object.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">ortho</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">phon</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">lemme</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">cgram</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">genre</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">nombre</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">freqlemfilms2</span><span class="p">:</span> <span class="nb">float</span>
+<span class="n">freqlemlivres</span><span class="p">:</span> <span class="nb">float</span>
+<span class="n">freqfilms2</span><span class="p">:</span> <span class="nb">float</span>
+<span class="n">freqlivres</span><span class="p">:</span> <span class="nb">float</span>
+<span class="n">infover</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">nbhomogr</span><span class="p">:</span> <span class="nb">int</span>
+<span class="n">nbhomoph</span><span class="p">:</span> <span class="nb">int</span>
+<span class="n">islem</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="n">nblettres</span><span class="p">:</span> <span class="nb">int</span>
+<span class="n">nbphons</span><span class="p">:</span> <span class="nb">int</span>
+<span class="n">cvcv</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">p_cvcv</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">voisorth</span><span class="p">:</span> <span class="nb">int</span>
+<span class="n">voisphon</span><span class="p">:</span> <span class="nb">int</span>
+<span class="n">puorth</span><span class="p">:</span> <span class="nb">int</span>
+<span class="n">puphon</span><span class="p">:</span> <span class="nb">int</span>
+<span class="n">syll</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">nbsyll</span><span class="p">:</span> <span class="nb">int</span>
+<span class="n">cv_cv</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">orthrenv</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">phonrenv</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">orthosyll</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">cgramortho</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">deflem</span><span class="p">:</span> <span class="nb">float</span>
+<span class="n">defobs</span><span class="p">:</span> <span class="nb">int</span>
+<span class="n">old20</span><span class="p">:</span> <span class="nb">float</span>
+<span class="n">pld20</span><span class="p">:</span> <span class="nb">float</span>
+<span class="n">morphoder</span><span class="p">:</span> <span class="nb">str</span>
+<span class="n">nbmorph</span><span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>Les significations des attributs de cet objet sont les suivantes :</p>
+<ul class="simple">
+<li><p>ortho : le mot</p></li>
+<li><p>phon : les formes phonologiques du mot</p></li>
+<li><p>lemme : les lemmes de ce mot</p></li>
+<li><p>cgram : les catégories grammaticales de ce mot</p></li>
+<li><p>genre : le genre</p></li>
+<li><p>nombre : le nombre</p></li>
+<li><p>freqlemfilms : la fréquence du lemme selon le corpus de sous-titres (par million d’occurrences)</p></li>
+<li><p>freqlemlivres : la fréquence du lemme selon le corpus de livres (par million d’occurrences)</p></li>
+<li><p>freqfilms : la fréquence du mot selon le corpus de sous-titres (par million d’occurrences)</p></li>
+<li><p>freqlivres : la fréquence du mot selon le corpus de livres (par million d’occurrences)</p></li>
+<li><p>infover : modes, temps et personnes possibles pour les verbes</p></li>
+<li><p>nbhomogr : nombre d’homographes</p></li>
+<li><p>nbhomoph : nombre d’homophones</p></li>
+<li><p>islem : indique si c’est un lemme ou non</p></li>
+<li><p>nblettres : le nombre de lettres</p></li>
+<li><p>nbphons : nombre de phonèmes</p></li>
+<li><p>cvcv : la structure orthographique</p></li>
+<li><p>p-cvcv : la structure phonologique</p></li>
+<li><p>voisorth : nombre de voisins orthographiques</p></li>
+<li><p>voisphon : nombre de voisins phonologiques</p></li>
+<li><p>puorth : point d’unicité orthographique</p></li>
+<li><p>puphon : point d’unicité phonologique</p></li>
+<li><p>syllabe : forme phonologique des syllabes</p></li>
+<li><p>nbsyll : nombre de syllabes</p></li>
+<li><p>cv-cv : structure phonologique des syllabes</p></li>
+<li><p>orthrenv : forme orthographique inversée</p></li>
+<li><p>phonrenv : forme phonologique inversée</p></li>
+<li><p>orthosyll : forme orthographique des syllabes</p></li>
+<li><p>cgramortho : les différentes catégories grammaticales pour une représentation orthographique donnée</p></li>
+<li><p>deflem : le pourcentage de personnes qui ont déclaré connaître le lemme du mot.</p></li>
+<li><p>defobs : la taille de l’échantillon d’où est tiré “deflem”.</p></li>
+<li><p>old20 : distance de Levenshtein orthographique</p></li>
+<li><p>pld20 : distance de Levenshtein phonologique</p></li>
+<li><p>morphoder : morphologie flexionnelle</p></li>
+<li><p>nbmorph : le nombre de morphèmes directement calculé à partir de “morphoder”.</p></li>
+</ul>
+<p>Vous pouvez trouver toutes les informations pertinentes dans la <a class="reference external" href="http://lexique.org/_documentation/Manuel_Lexique.3.2.pdf">documentation officielle de Lexique383</a> (français).</p>
+<div class="section" id="features">
+<h2>Caractéristiques<a class="headerlink" href="#features" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Extraire toutes les informations lexicales d’un mot français telles que :</dt><dd><ul>
+<li><p>les représentations orthographiques et phonémiques</p></li>
+<li><p>les lemmes associés</p></li>
+<li><p>syllabation</p></li>
+<li><p>la catégorie grammaticale</p></li>
+<li><p>le genre et le nombre</p></li>
+<li><p>les fréquences d’apparition dans un corpus de livres et dans un corpus de sous-titres de films, etc…</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Extraire toutes les formes lexicales d’un mot français.</p></li>
+<li><p>Api simple d’utilisation.</p></li>
+<li><p>Intégrez facilement pylexique dans vos propres projets en tant que bibliothèque importée.</p></li>
+<li><p>Peut être utilisé comme un outil de ligne de commande.</p></li>
+</ul>
+</div>
+<div class="section" id="credits">
+<h2>Crédits<a class="headerlink" href="#credits" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Développeur principal <a class="reference external" href="https://github.com/SekouDiaoNlp">SekouDiaoNlp</a>.</p>
+<p>Corpus lexical : <a class="reference external" href="http://www.lexique.org/">Lexique383</a></p>
+<div class="section" id="about-lexique383">
+<h3>À propos de Lexique383<a class="headerlink" href="#about-lexique383" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
+<div class="section" id="lexique3">
+<h3>Lexique3<a class="headerlink" href="#lexique3" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Lexique 3.83 est une base de données lexicale française qui fournit pour ~ 140 000 mots du français : représentations orthographique et phonémique, lemmes associés, syllabation, catégorie grammaticale, genre et nombre, fréquences dans un corpus de livres et dans un corpus de sous-titres de films, etc…</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Données tabulaires: <a class="reference external" href="http://www.lexique.org/databases/Lexique383/Lexique383.zip">Lexique383.zip</a></p>
+<p>Site web : <a class="reference external" href="http://www.lexique.org">http://www.lexique.org</a></p>
+<p>Online: <a class="reference external" href="http://www.lexique.org/shiny/lexique">http://www.lexique.org/shiny/lexique</a></p>
+</div>
+</div>
+<div class="section" id="publications">
+<h2>Publications<a class="headerlink" href="#publications" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><p>New, Boris, Christophe Pallier, Marc Brysbaert, and Ludovic Ferrand.
+2004. « Lexique 2: A New French Lexical Database. » <em>Behavior Research
+Methods, Instruments, &amp; Computers</em> 36 (3): 516–524.
+<a class="reference external" href="https://doi.org/10.3758/bf03195598">DOI</a>.
+<a class="reference external" href="https://docs.google.com/viewer?url=http://sites.google.com/site/borisnew/pub/New-et-al2004-BRMIC.pdf?attredirects=0">pdf</a></p></li>
+<li><p>New, Boris, Christophe Pallier, Ludovic Ferrand, and Rafael Matos.
+2001. « Une Base de Données Lexicales Du Français Contemporain Sur
+Internet: LEXIQUE » <em>L’Année Psychologique</em> 101 (3): 447–462.
+<a class="reference external" href="https://doi.org/10.1017/S014271640707035X">DOI</a>.
+<a class="reference external" href="https://docs.google.com/viewer?url=http://www.lexique.org/outils/Lexique_Annee.pdf">pdf</a></p></li>
+<li><p>Boris New, Marc Brysbaert, Jean Veronis, and Christophe Pallier.
+2007. « The Use of Film Subtitles to Estimate Word Frequencies. »
+Applied Psycholinguistics 28 (4): 661–77.
+<a class="reference external" href="https://doi.org/10.1017/S014271640707035X">DOI</a>.
+(<a class="reference external" href="https://drive.google.com/file/d/1uvKrxGqETXkFeRH4PcYaql8ES9FjEdbV/view?usp=sharing">pdf</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h2>Contributeurs<a class="headerlink" href="#contributors" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><p>Boris New &amp; Christophe Pallier</p></li>
+<li><p>Ronald Peereman</p></li>
+<li><p>Sophie Dufour</p></li>
+<li><p>Christian Lachaud</p></li>
+<li><p>et bien d’autres encore… (contactez-nous pour être listé)</p></li>
+</ul>
+</div>
+<div class="section" id="license">
+<h2>Licence<a class="headerlink" href="#license" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="LICENSE-CC-BY-SA4.0.txt">CC BY SA40.0</a></p>
+<p>Entrée BibTex pour citer les publications sur Lexique383 :</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">npbf04</span><span class="p">,</span>
+<span class="na">author</span> <span class="p">=</span> <span class="s">{New, B. and Pallier, C. and Brysbaert, M. and Ferrand, L.}</span><span class="p">,</span>
+<span class="na">journal</span> <span class="p">=</span> <span class="s">{ehavior Research Methods, Instruments, &amp; Computers}</span><span class="p">,</span>
+<span class="na">number</span> <span class="p">=</span> <span class="s">{3}</span><span class="p">,</span>
+<span class="na">pages</span> <span class="p">=</span> <span class="s">{516-524}</span><span class="p">,</span>
+<span class="na">title</span> <span class="p">=</span> <span class="s">{Lexique 2 : A New French Lexical Database}</span><span class="p">,</span>
+<span class="na">volume</span> <span class="p">=</span> <span class="s">{36}</span><span class="p">,</span>
+<span class="na">year</span> <span class="p">=</span> <span class="s">{2004}</span><span class="p">,</span>
+<span class="na">eprint</span> <span class="p">=</span> <span class="s">{http://www.lexique.org/?page_id=294}</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">npfm01</span><span class="p">,</span>
+<span class="na">author</span> <span class="p">=</span> <span class="s">{New, B. and Pallier, C. and Ferrand, L. and Matos, R.}</span><span class="p">,</span>
+<span class="na">journal</span> <span class="p">=</span> <span class="s">{L&#39;Ann{\&#39;e}e Pschologique}</span><span class="p">,</span>
+<span class="na">number</span> <span class="p">=</span> <span class="s">{447-462}</span><span class="p">,</span>
+<span class="na">pages</span> <span class="p">=</span> <span class="s">{1396-2}</span><span class="p">,</span>
+<span class="na">title</span> <span class="p">=</span> <span class="s">{Une base de donn{\&#39;e}es lexicales du fran\c{c}ais contemporain sur internet: LEXIQUE}</span><span class="p">,</span>
+<span class="na">volume</span> <span class="p">=</span> <span class="s">{101}</span><span class="p">,</span>
+<span class="na">year</span> <span class="p">=</span> <span class="s">{2001}</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">new_brysbaert_veronis_pallier_2007</span><span class="p">,</span>
+<span class="na">author</span><span class="p">=</span><span class="s">{NEW, BORIS and BRYSBAERT, MARC and VERONIS, JEAN and PALLIER, CHRISTOPHE}</span><span class="p">,</span>
+<span class="na">title</span><span class="p">=</span><span class="s">{The use of film subtitles to estimate word frequencies}</span><span class="p">,</span>
+<span class="na">volume</span><span class="p">=</span><span class="s">{28}</span><span class="p">,</span> <span class="na">DOI</span><span class="p">=</span><span class="s">{10.1017/S014271640707035X}</span><span class="p">,</span>
+<span class="na">number</span><span class="p">=</span><span class="s">{4}</span><span class="p">,</span> <span class="na">journal</span><span class="p">=</span><span class="s">{Applied Psycholinguistics}</span><span class="p">,</span>
+<span class="na">publisher</span><span class="p">=</span><span class="s">{Cambridge University Press}</span><span class="p">,</span>
+<span class="na">year</span><span class="p">=</span><span class="s">{2007}</span><span class="p">,</span>
+<span class="na">pages</span><span class="p">=</span><span class="s">{661–677}</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bibtex">
+<h2>BibTeX<a class="headerlink" href="#bibtex" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Si vous souhaitez citer pylexique dans une publication universitaire, utilisez ce format de citation :</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">pylexique</span><span class="p">,</span>
+  <span class="na">title</span><span class="p">=</span><span class="s">{pylexique}</span><span class="p">,</span>
+  <span class="na">author</span><span class="p">=</span><span class="s">{Sekou Diao}</span><span class="p">,</span>
+  <span class="na">journal</span><span class="p">=</span><span class="s">{GitHub. Note: https://github.com/SekouDiaoNlp/pylexique Cited by}</span><span class="p">,</span>
+  <span class="na">year</span><span class="p">=</span><span class="s">{2021}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Bienvenue dans la documentation de pylexique!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, SekouDiaoNlp.
+      <span class="lastupdated">
+        Mis à jour le nov. 05, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
