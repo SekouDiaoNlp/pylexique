@@ -31,7 +31,11 @@ exclude = [
 pylexique = 'pylexique.cli:main'
 
 [tool.poetry.dependencies]
+<<<<<<< HEAD
 python = ">=3.7.0,<4"
+=======
+python = ">=3.8,<4"
+>>>>>>> master
 click = ">=8.0.3"
 colorama = "*"
 dataclasses = {version = ">=0.6", python = "<3.7"}
@@ -42,7 +46,7 @@ tqdm = "*"
 [tool.poetry.dev-dependencies]
 pip = "^21.3.1"
 wheel = "^0.37.0"
-setuptools = "==49.6.*,>=49.6.0"
+setuptools = "==68.1.*,>=68.1.2"
 bumpversion = "^0.6.0"
 watchdog = "^2.1.6"
 flake8 = "^4.0.1"
@@ -58,7 +62,7 @@ bandit = "^1.7.0"
 mypy = "^0.910"
 Cython = "^0.29.24"
 pytest-cov = "^3.0.0"
-codecov = "^2.1.12"
+codecov = "^2.1.13"
 
 [tool.bandit]
 skips = ["B311", ]

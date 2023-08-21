@@ -18,7 +18,7 @@ __all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
 
 try:
     from utils import logger
-except ModuleNotFoundError or ImportError:
+except (ModuleNotFoundError, ImportError):
     from .utils import logger
 
 _RESOURCE_PACKAGE = __name__
