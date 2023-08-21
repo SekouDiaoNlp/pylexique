@@ -124,9 +124,9 @@ The meanings of the attributes of this object are as follow:
 * cgram: the grammatical categories of this word
 * genre: the gender
 * nombre: the number
-* freqlemfilms: the frequency of the lemma according to the corpus of subtitles (per million occurrences)
+* freqlemfilms2: the frequency of the lemma according to the corpus of subtitles (per million occurrences)
 * freqlemlivres: the frequency of the lemma according to the body of books (per million occurrences)
-* freqfilms: the frequency of the word according to the corpus of subtitles (per million occurrences)
+* freqfilms2: the frequency of the word according to the corpus of subtitles (per million occurrences)
 * freqlivres: the frequency of the word according to the body of books (per million occurrences)
 * infover: modes, tenses, and possible people for verbs
 * nbhomogr: number of homographs
