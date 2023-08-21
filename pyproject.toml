@@ -31,11 +31,7 @@ exclude = [
 pylexique = 'pylexique.cli:main'
 
 [tool.poetry.dependencies]
-<<<<<<< HEAD
-python = ">=3.7.0,<4"
-=======
 python = ">=3.8,<4"
->>>>>>> master
 click = ">=8.0.3"
 colorama = "*"
 dataclasses = {version = ">=0.6", python = "<3.7"}
