@@ -56,10 +56,10 @@ def main(words: Sequence[str], all_forms: bool, output: str) -> None:
                 dict[word].append(item.to_dict())
     if output:
         with open(output, 'w', encoding='utf-8') as file:
-            json.dump(dict, file, indent=4)
+            json.dump(dict, file, indent=4, ensure_ascii=False)
             print('The Lexical Items have been successfully saved to {0} by pylexique.'.format(output))
     else:
-        print(json.dumps(dict, indent=4))
+        print(json.dumps(dict, indent=4, ensure_ascii=False))
     return
 
 

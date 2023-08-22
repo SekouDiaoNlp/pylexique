@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Main module of pylexique."""
 
 from collections import OrderedDict, defaultdict
@@ -176,7 +174,7 @@ class Lexique383:
         :return: generator of rows:
             Content of the Lexique38x database.
         """
-        with open(lexique_path, 'r', encoding='utf-8', errors='ignore') as csv_file:
+        with open(lexique_path, 'r', encoding='iso-8859-1') as csv_file:
             raw_content = csv_file.readlines()
             content = (row.strip().split('\t') for row in raw_content[1:])
             return content
