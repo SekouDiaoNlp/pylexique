@@ -9,7 +9,7 @@ from rich.console import Console
 from rich.table import Table
 from pylexique import Lexique383, LexItem
 from collections import defaultdict
-from typing import Sequence
+from typing import Sequence, Dict
 
 
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
@@ -18,7 +18,7 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'cv_cv', 'orthrenv', 'phonrenv', 'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20',
                           'pld20', 'morphoder', 'nbmorph']
 
-def convert_to_dict(obj):
+def convert_to_dict(obj: LexItem) -> :
     if isinstance(obj, LexItem):
         return obj.to_dict()
     return obj
@@ -88,7 +88,7 @@ def main(words: Sequence[str], all_forms: bool, output: str) -> None:
 
     if output:
         with open(output, 'w', encoding='utf-8') as file:
-            json.dump(results, file, indent=4, ensure_ascii=False, default=convert_to_dict) # type: ignore
+            json.dump(results, file, indent=4, ensure_ascii=False, default=convert_to_dict)
             console.print(f"The Lexical Items have been successfully saved to {output} by pylexique.")
 
 if __name__ == "__main__":
