@@ -84,7 +84,7 @@ def main(words: Sequence[str], all_forms: bool, output: str) -> None:
 
     if output:
         with open(output, 'w', encoding='utf-8') as file:
-            json.dump(results, file, indent=4, ensure_ascii=False, default=convert_to_dict)
+            json.dump(results, file, indent=4, ensure_ascii=False, default=convert_to_dict) # type: ignore
             console.print(f"The Lexical Items have been successfully saved to {output} by pylexique.")
 
 if __name__ == "__main__":
