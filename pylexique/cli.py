@@ -9,7 +9,7 @@ from rich.console import Console
 from rich.table import Table
 from pylexique import Lexique383, LexItem
 from collections import defaultdict
-from typing import Sequence, Dict
+from typing import Sequence, Dict, Union
 
 
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
@@ -18,7 +18,7 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'cv_cv', 'orthrenv', 'phonrenv', 'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20',
                           'pld20', 'morphoder', 'nbmorph']
 
-def convert_to_dict(obj: LexItem) -> Dict[str, str]:
+def convert_to_dict(obj: LexItem) -> Dict[str, Union[str, float, int, bool]]:
     if isinstance(obj, LexItem):
         return obj.to_dict()
     return obj
