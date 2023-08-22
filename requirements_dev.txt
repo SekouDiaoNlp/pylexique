@@ -43,7 +43,7 @@ py==1.11.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_
 pycodestyle==2.8.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 pycparser==2.20; python_version >= "3.6" and python_full_version < "3.0.0" and sys_platform == "linux" or sys_platform == "linux" and python_version >= "3.6" and python_full_version >= "3.4.0"
 pyflakes==2.4.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
-pygments==2.10.0; python_version >= "3.6"
+pygments>=2.10.0; python_version >= "3.6"
 pyparsing==3.0.3; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 pytest-cov==4.1.0; python_version >= "3.6"
 pytest-runner==6.0.0; python_version >= "3.6"
