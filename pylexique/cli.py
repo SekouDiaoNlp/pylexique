@@ -5,9 +5,18 @@ import sys
 import click
 import json
 import logging
+from rich.console import Console
+from rich.table import Table
 from pylexique import Lexique383, LexItem
 from collections import defaultdict
 from typing import Sequence
+
+
+LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
+                          'freqfilms2', 'freqlivres', 'infover', 'nbhomogr', 'nbhomoph', 'islem', 'nblettres',
+                          'nbphons', 'cvcv', 'p_cvcv', 'voisorth', 'voisphon', 'puorth', 'puphon', 'syll', 'nbsyll',
+                          'cv_cv', 'orthrenv', 'phonrenv', 'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20',
+                          'pld20', 'morphoder', 'nbmorph']
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -40,28 +49,43 @@ def main(words: Sequence[str], all_forms: bool, output: str) -> None:
 
     LEXIQUE = Lexique383()
     results = defaultdict(list)
-    dict = defaultdict(list)
     for word in words:
         if all_forms:
-            print('Retrieving all the lexical forms of the supplied words.')
             results[word].append(LEXIQUE.get_all_forms(word))
         else:
             results[word].append(LEXIQUE.lexique[word])
 
-        for element in results[word]:
+    console = Console()
+
+    for word, elements in results.items():
+        table = Table(title=f"Lexical Information for '{word}'", show_header=True)
+        table.add_column("Attribute", style="bold")
+
+        num_columns = 1  # Initialize the number of columns
+        for element in elements:
             if isinstance(element, LexItem):
-                dict[word].append(element.to_dict())
-                continue
-            for item in element:
-                dict[word].append(item.to_dict())
+                num_columns += 1
+                table.add_column(element.lemme, justify="center")  # Add a column for each LexItem
+                element_dict = element.to_dict()
+                for field in LEXIQUE383_FIELD_NAMES:
+                    value = element_dict.get(field, "")
+                    table.add_row(field, str(value), *[None] * (num_columns - 2))  # Add None values for other columns
+            else:
+                for item in element:
+                    if isinstance(item, LexItem):
+                        num_columns += 1
+                        table.add_column(item.lemme, justify="center")  # Add a column for each LexItem
+                        item_dict = item.to_dict()
+                        for field in LEXIQUE383_FIELD_NAMES:
+                            value = item_dict.get(field, "")
+                            table.add_row(field, *[None] * (num_columns - 2), str(value))  # Add None values for other columns
+
+        console.print(table)
+
     if output:
         with open(output, 'w', encoding='utf-8') as file:
-            json.dump(dict, file, indent=4, ensure_ascii=False)
-            print('The Lexical Items have been successfully saved to {0} by pylexique.'.format(output))
-    else:
-        print(json.dumps(dict, indent=4, ensure_ascii=False))
-    return
-
+            json.dump(results, file, indent=4, ensure_ascii=False)
+            console.print(f"The Lexical Items have been successfully saved to {output} by pylexique.")
 
 if __name__ == "__main__":
     main()  # pragma: no cover
