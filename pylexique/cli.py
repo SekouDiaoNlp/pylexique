@@ -18,7 +18,7 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'cv_cv', 'orthrenv', 'phonrenv', 'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20',
                           'pld20', 'morphoder', 'nbmorph']
 
-def convert_to_dict(obj: LexItem) -> :
+def convert_to_dict(obj: LexItem) -> Dict:
     if isinstance(obj, LexItem):
         return obj.to_dict()
     return obj
