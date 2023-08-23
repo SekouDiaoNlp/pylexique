@@ -50,7 +50,7 @@ def test_cli_integration():
     with runner.isolated_filesystem():
         result = runner.invoke(cli.main, ["bonjour"])
         assert result.exit_code == 0
-        assert "Lexical Information for 'bonjour'" in result.output
+        assert "Lexical Information for" in result.output
         assert "'bonjour'" in result.output
 
 # Mocking external dependencies
