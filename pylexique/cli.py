@@ -94,13 +94,19 @@ def main(words: Sequence[str], all_forms: bool, output: str, interactive: bool) 
 def _run_interactive_mode(lexique: Lexique383, output: str) -> None:
     """Run the interactive mode for pylexique."""
     console = Console()
+    cached_results: Dict[str, DefaultDict[str, List[Union[LexItem, List[LexItem]]]]] = {}
 
     while True:
         word = click.prompt("Enter a word (or press Ctrl+C to quit):", type=str)
         
         try:
-            all_forms = click.confirm("Get all forms of the word?")
-            results = _get_results(lexique, [word], all_forms)
+            if word in cached_results:
+                results = cached_results[word]
+            else:
+                all_forms = click.confirm("Get all forms of the word?")
+                results = _get_results(lexique, [word], all_forms)
+                cached_results[word] = results
+
             _display_results(console, results, output)
         except KeyboardInterrupt:
             console.print("\nExiting interactive mode.")

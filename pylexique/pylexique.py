@@ -231,15 +231,18 @@ class Lexique383:
             Iterable containing the lexique383 entries.
         :return:
         """
+        lemmes = defaultdict(list)
+        anagrams = defaultdict(list)
+
         for row in lexicon:
             try:
                 converted_row_fields = self._convert_entries(row)
             except ValueError:
                 continue
             lexical_entry = LexItem(*converted_row_fields)
-            self.lemmes[lexical_entry.lemme].append(lexical_entry)
+            lemmes[lexical_entry.lemme].append(lexical_entry)
             sorted_form = ''.join(sorted(lexical_entry.ortho))
-            self.anagrams[sorted_form].append(lexical_entry)
+            anagrams[sorted_form].append(lexical_entry)
             if converted_row_fields[0] in self.lexique and not isinstance(self.lexique[converted_row_fields[0]], list):
                 self.lexique[converted_row_fields[0]] = [self.lexique[converted_row_fields[0]]]
                 self.lexique[converted_row_fields[0]].append(lexical_entry)
@@ -247,7 +250,9 @@ class Lexique383:
                 self.lexique[converted_row_fields[0]].append(lexical_entry)
             else:
                 self.lexique[converted_row_fields[0]] = lexical_entry
-        return
+
+        self.lemmes = lemmes
+        self.anagrams = anagrams
 
     def _convert_entries(self, row_fields: Union[List[str], List[Union[str, float, int, bool]]]) -> ConvertedRow:
         """
