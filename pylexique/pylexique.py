@@ -3,6 +3,7 @@
 from collections import OrderedDict, defaultdict
 from collections.abc import Sequence
 import pkg_resources
+import pickle
 import json
 from math import isnan
 # import faster_than_csv as csv
@@ -23,6 +24,7 @@ _RESOURCE_PACKAGE = __name__
 
 HOME_PATH = '/'.join(('Lexique', ''))
 _RESOURCE_PATH_csv = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
+_CACHE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.pkl')
 _VALUE_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/value_errors.json')
 _LENGTH_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/length_errors.json')
 
@@ -38,7 +40,7 @@ ConvertedRow = Tuple[str, str, str, str, str, str, float, float, float, float, s
                      int, float, float, str, int]
 
 
-@dataclass(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True, repr=False, eq=True, order=False, unsafe_hash=False)
 class LexEntryTypes:
     """
     Type information about all the lexical attributes in a LexItem object.
@@ -81,7 +83,7 @@ class LexEntryTypes:
     nbmorph: int
 
 
-@dataclass(init=True, repr=False, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True, repr=False, eq=True, order=False, unsafe_hash=False)
 class LexItem(LexEntryTypes):
     """
     | This class defines the lexical items in Lexique383.
@@ -136,28 +138,40 @@ class Lexique383:
     lemmes: Dict[str, List[LexItem]] = defaultdict(list)
     anagrams: Dict[str, List[LexItem]] = defaultdict(list)
 
-    def __init__(self, lexique_path: Optional[str] = None, parser_type: str = 'csv') -> None:
+    def __init__(self, lexique_path: Optional[str] = _RESOURCE_PATH_csv, parser_type: str = 'csv') -> None:
         self.lexique_path = lexique_path
-        if parser_type not in {'pandas_csv', 'csv'}:
-            raise ValueError(f"The value {parser_type} is not permitted. Only 'pandas_csv' and 'csv' are valid values.")
-        if lexique_path:
-            if not isinstance(lexique_path, str):
-                raise TypeError(f"Argument 'lexique_path' must be of type String, not {type(lexique_path)}")
-            try:
-                self._parse_lexique(lexique_path, parser_type)
-            except UnicodeDecodeError as e:
-                raise UnicodeError(f"There was a unicode error while parsing {type(lexique_path)}.") from e
-            except FileNotFoundError as e:
-                raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
-        else:
-            try:
-                # Tries to load the pre-shipped Lexique38X if no path file to the lexicon is provided.
-                self._parse_lexique(_RESOURCE_PATH_csv, parser_type)
-            except UnicodeDecodeError as e:
-                raise UnicodeError(f"There was a unicode error while parsing {type(_RESOURCE_PATH_csv)}.") from e
-            except FileNotFoundError as e:
-                raise ValueError(f"Argument 'lexique_path' must be a valid path to Lexique383") from e
-        return
+
+        try:
+            self.load_cache()
+        except FileNotFoundError:
+            logger.info("Cached Lexique383 not found. Parsing the lexique file...")
+            self._parse_lexique(lexique_path, parser_type)
+            self.save_cache()
+
+    def load_cache(self) -> None:
+        """Load cached Lexique383 from disk."""
+        try:
+            with open(_CACHE_PATH, "rb") as cache_file:
+                cached_lexique = pickle.load(cache_file)
+                self.lexique.update(cached_lexique["lexique"])
+                self.lemmes.update(cached_lexique["lemmes"])
+                self.anagrams.update(cached_lexique["anagrams"])
+                self.value_errors.extend(cached_lexique["value_errors"])
+                self.length_errors.extend(cached_lexique["length_errors"])
+        except FileNotFoundError:
+            raise
+
+    def save_cache(self) -> None:
+        """Save Lexique383 to cache on disk."""
+        cached_lexique = {
+            "lexique": self.lexique,
+            "lemmes": self.lemmes,
+            "anagrams": self.anagrams,
+            "value_errors": self.value_errors,
+            "length_errors": self.length_errors
+        }
+        with open(_CACHE_PATH, "wb") as cache_file:
+            pickle.dump(cached_lexique, cache_file)
 
     def __repr__(self) -> str:
         return '{0}.{1}'.format(__name__, self.__class__.__name__)
