@@ -9,7 +9,7 @@ from rich.console import Console
 from rich.table import Table
 from pylexique import Lexique383, LexItem
 from collections import defaultdict
-from typing import Sequence, Dict, Union, List
+from typing import Sequence, Dict, Union, List, DefaultDict
 
 
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
@@ -23,7 +23,7 @@ def convert_to_dict(obj: LexItem) -> Dict[str, Union[str, float, int, bool]]:
         return obj.to_dict()
     return obj
 
-def _display_results(console: Console, results: defaultdict[str, List[Union[LexItem, List[LexItem]]]], output: str) -> None:
+def _display_results(console: Console, results: DefaultDict[str, List[Union[LexItem, List[LexItem]]]], output: str) -> None:
     """Display lexical results using rich tables."""
     for word, elements in results.items():
         table = Table(title=f"Lexical Information for '{word}'", show_header=True)
@@ -112,9 +112,9 @@ def _run_batch_mode(lexique: Lexique383, words: Sequence[str], all_forms: bool, 
     results = _get_results(lexique, words, all_forms)
     _display_results(console, results, output)
 
-def _get_results(lexique: Lexique383, words: Sequence[str], all_forms: bool) -> defaultdict[str, List[Union[LexItem, List[LexItem]]]]:
+def _get_results(lexique: Lexique383, words: Sequence[str], all_forms: bool) -> DefaultDict[str, List[Union[LexItem, List[LexItem]]]]:
     """Get lexical results for the provided words."""
-    results: defaultdict[str, List[Union[LexItem, List[LexItem]]]] = defaultdict(list)
+    results: defaultdict[str, List[Union[LexItem, List[LexItem]]]] = DefaultDict(list)
     for word in words:
         if all_forms:
             results[word].append(lexique.get_all_forms(word))
