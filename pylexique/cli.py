@@ -23,7 +23,7 @@ def convert_to_dict(obj: LexItem) -> Dict[str, Union[str, float, int, bool]]:
         return obj.to_dict()
     return obj
 
-def _display_results(console: Console, results: Dict[str, Sequence[Union[LexItem, Sequence[LexItem]]]], output: str) -> None:
+def _display_results(console: Console, results: defaultdict[str, List[Union[LexItem, List[LexItem]]]], output: str) -> None:
     """Display lexical results using rich tables."""
     for word, elements in results.items():
         table = Table(title=f"Lexical Information for '{word}'", show_header=True)
