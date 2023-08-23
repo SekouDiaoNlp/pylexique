@@ -2,6 +2,12 @@
 History
 =======
 
+1.5.1 (2023-08-23)
+------------------
+
+* Fixed issue with certain words not being displayed properly.
+* Updated dependencies.
+
 1.5.0 (2021-10-28)
 ------------------
 
