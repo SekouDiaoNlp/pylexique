@@ -9,7 +9,7 @@ from rich.console import Console
 from rich.table import Table
 from pylexique import Lexique383, LexItem
 from collections import defaultdict
-from typing import Sequence, Dict, Union
+from typing import Sequence, Dict, Union, List
 
 
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
@@ -96,13 +96,15 @@ def _run_interactive_mode(lexique: Lexique383, output: str) -> None:
     console = Console()
 
     while True:
-        word = click.prompt("Enter a word (or 'exit' to quit):", type=str)
-        if word.lower() == 'exit':
+        word = click.prompt("Enter a word (or press Ctrl+C to quit):", type=str)
+        
+        try:
+            all_forms = click.confirm("Get all forms of the word?")
+            results = _get_results(lexique, [word], all_forms)
+            _display_results(console, results, output)
+        except KeyboardInterrupt:
+            console.print("\nExiting interactive mode.")
             break
-
-        all_forms = click.confirm("Get all forms of the word?")
-        results = _get_results(lexique, [word], all_forms)
-        _display_results(console, results, output)
 
 def _run_batch_mode(lexique: Lexique383, words: Sequence[str], all_forms: bool, output: str) -> None:
     """Run the batch mode for pylexique."""
@@ -110,9 +112,9 @@ def _run_batch_mode(lexique: Lexique383, words: Sequence[str], all_forms: bool, 
     results = _get_results(lexique, words, all_forms)
     _display_results(console, results, output)
 
-def _get_results(lexique: Lexique383, words: Sequence[str], all_forms: bool) -> defaultdict[str, Sequence[Union[LexItem, Sequence[LexItem]]]]:
+def _get_results(lexique: Lexique383, words: Sequence[str], all_forms: bool) -> defaultdict[str, List[Union[LexItem, List[LexItem]]]]:
     """Get lexical results for the provided words."""
-    results = defaultdict(list)
+    results: defaultdict[str, List[Union[LexItem, List[LexItem]]]] = defaultdict(list)
     for word in words:
         if all_forms:
             results[word].append(lexique.get_all_forms(word))
