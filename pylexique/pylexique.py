@@ -138,7 +138,7 @@ class Lexique383:
     lemmes: Dict[str, List[LexItem]] = defaultdict(list)
     anagrams: Dict[str, List[LexItem]] = defaultdict(list)
 
-    def __init__(self, lexique_path: Optional[str] = _RESOURCE_PATH_csv, parser_type: str = 'csv') -> None:
+    def __init__(self, lexique_path: str = _RESOURCE_PATH_csv, parser_type: str = 'csv') -> None:
         self.lexique_path = lexique_path
 
         try:
