@@ -2,6 +2,7 @@ import pytest
 import json
 from pylexique import Lexique383, LexItem
 from pylexique import _get_results, _display_results
+from pylexique import cli
 from click.testing import CliRunner
 
 # Basic unit tests for pylexique.py
@@ -37,7 +38,9 @@ def test_get_results():
     assert "amour" in results
 
 def test_display_results(capsys):
-    results = {"bonjour": [LexItem(ortho="bonjour", lemme="bonjour", cgram="NOM")]}
+    lexique = Lexique383()
+    words = ["bonjour"]
+    results = _get_results(lexique, words, all_forms=False)
     _display_results(results, output=None)
     captured = capsys.readouterr()
     assert "Lexical Information for 'bonjour'" in captured.out
@@ -45,7 +48,7 @@ def test_display_results(capsys):
 def test_cli_integration():
     runner = CliRunner()
     with runner.isolated_filesystem():
-        result = runner.invoke(_cli.main, ["bonjour"])
+        result = runner.invoke(cli.main, ["bonjour"])
         assert result.exit_code == 0
         assert "Lexical Information for 'bonjour'" in result.output
 
@@ -61,14 +64,14 @@ def test_mocked_get_results(mock_lexique):
     assert "amour" in results
 
 # Testing JSON output
-def test_json_output(tmp_path, mock_lexique):
+def test_json_output(tmp_path):
+    lexique = Lexique383()
     output_path = tmp_path / "output.json"
     words = ["bonjour", "amour"]
-    results = _get_results(mock_lexique, words, all_forms=False)
-    
-    with patch("builtins.open", side_effect=lambda p, m: open(p, m)) as mock_open:
-        _display_results(results, str(output_path))
-        
+    results = _get_results(lexique, words, all_forms=False)
+
+    _display_results(results, str(output_path))
+
     with open(output_path, "r") as f:
         json_data = json.load(f)
         assert "bonjour" in json_data
