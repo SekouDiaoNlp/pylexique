@@ -11,11 +11,12 @@ __license__ = "MIT"
 __maintainer__ = "SekouDiaoNlp"
 __status__ = "Production"
 
-__all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
+__all__ = ['Lexique383', 'LexItem', 'LexEntryTypes', '_get_results', '_display_results']
 
 import pkg_resources
 
 from .pylexique import Lexique383, LexItem, LexEntryTypes
+from .cli import _get_results, _display_results
 
 _RESOURCE_PACKAGE = 'pylexique'
 _RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
