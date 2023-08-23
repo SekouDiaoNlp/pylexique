@@ -47,10 +47,6 @@ pylexique
         :target: https://snyk.io/test/github/SekouDiaoNlp/pylexique?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
-.. image:: https://img.shields.io/pypi/dm/pylexique?label=PyPi%20Downloads
-        :target: https://pypi.org/project/pylexique/
-        :alt: PyPI Downloads
-
 .. image:: https://img.shields.io/conda/dn/conda-forge/pylexique?label=Anaconda%20Total%20Downloads
         :target: https://anaconda.org/conda-forge/pylexique
         :alt: Conda
