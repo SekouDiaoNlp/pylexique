@@ -159,7 +159,7 @@ class Lexique383:
         cursor = self._conn.cursor()
         cursor.execute('''
             CREATE TABLE lexicon (
-                ortho TEXT PRIMARY KEY,
+                ortho TEXT,
                 phon TEXT,
                 lemme TEXT,
                 cgram TEXT,
@@ -196,13 +196,16 @@ class Lexique383:
                 nbmorph INTEGER
             )
         ''')
+        cursor.execute('''
+            CREATE INDEX idx_ortho ON lexicon (ortho)
+        ''')
         cursor.close()
 
     def _insert_entry(self, row_fields: ConvertedRow) -> None:
         """Insert a row into the lexicon table."""
         cursor = self._conn.cursor()
         cursor.execute('''
-            INSERT INTO lexicon VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO lexicon VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', row_fields)
         cursor.close()
 
@@ -230,7 +233,7 @@ class Lexique383:
         disk_conn = sqlite3.connect(self._cache_path)
         cursor = disk_conn.cursor()
         cursor.execute("ATTACH DATABASE ':memory:' AS inmemory")
-        cursor.execute("CREATE TABLE inmemory.lexicon AS SELECT * FROM main.lexicon")
+        cursor.execute("CREATE TABLE inmemory.lexicon AS SELECT * FROM lexicon")
         cursor.execute("DETACH DATABASE inmemory")
         disk_conn.commit()
         cursor.close()
