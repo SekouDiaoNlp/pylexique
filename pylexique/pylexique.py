@@ -2,6 +2,7 @@
 
 from collections import OrderedDict, defaultdict
 from collections.abc import Sequence
+from enum import Enum
 import pkg_resources
 import pickle
 import json
@@ -40,18 +41,24 @@ ConvertedRow = Tuple[str, str, str, str, str, str, float, float, float, float, s
                      int, float, float, str, int]
 
 
+class Genre(Enum):
+    MASCULIN = 'm'
+    FEMININ = 'f'
+
+
+class Nombre(Enum):
+    SINGULIER = 's'
+    PLURIEL = 'p'
+
+
 @dataclass(init=True, repr=False, eq=True, order=False, unsafe_hash=False)
 class LexEntryTypes:
-    """
-    Type information about all the lexical attributes in a LexItem object.
-
-    """
     ortho: str
     phon: str
     lemme: str
     cgram: str
-    genre: str
-    nombre: str
+    genre: Genre  # Use the Genre enum
+    nombre: Nombre  # Use the Nombre enum
     freqlemfilms2: float
     freqlemlivres: float
     freqfilms2: float
@@ -59,7 +66,7 @@ class LexEntryTypes:
     infover: str
     nbhomogr: int
     nbhomoph: int
-    islem: bool
+    islem: int  # Use int for boolean attribute
     nblettres: int
     nbphons: int
     cvcv: str
@@ -76,7 +83,7 @@ class LexEntryTypes:
     orthosyll: str
     cgramortho: str
     deflem: float
-    defobs: int
+    defobs: int  # Use int for boolean attribute
     old20: float
     pld20: float
     morphoder: str
@@ -85,25 +92,13 @@ class LexEntryTypes:
 
 @dataclass(init=True, repr=False, eq=True, order=False, unsafe_hash=False)
 class LexItem(LexEntryTypes):
-    """
-    | This class defines the lexical items in Lexique383.
-    | It uses slots for memory efficiency.
-
-    """
     _s = LEXIQUE383_FIELD_NAMES
     __slots__ = _s
 
     def __repr__(self) -> str:
         return '{0}({1}, {2}, {3})'.format(self.__class__.__name__, self.ortho, self.lemme, self.cgram)
 
-    def to_dict(self) -> Dict[str, Union[str, float, int, bool]]:
-        """
-        | Converts the LexItem to a dict containing its attributes and their values
-
-        :return: OrderedDict.
-            Dictionary with key/values correspondence wit LexItem objects.
-        :raises: AttributeError.
-        """
+    def to_dict(self) -> Dict[str, Union[str, float, int]]:
         attributes = []
         for attr in self.__slots__:
             try:
