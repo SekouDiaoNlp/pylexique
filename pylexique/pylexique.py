@@ -3,9 +3,8 @@
 from collections import OrderedDict, defaultdict
 from collections.abc import Sequence
 from enum import Enum
-import os
 import pkg_resources
-import sqlite3
+import pickle
 import json
 from math import isnan
 # import faster_than_csv as csv
@@ -26,7 +25,7 @@ _RESOURCE_PACKAGE = __name__
 
 HOME_PATH = '/'.join(('Lexique', ''))
 _RESOURCE_PATH_csv = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
-_CACHE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.db')
+_CACHE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.pkl')
 _VALUE_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/value_errors.json')
 _LENGTH_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/length_errors.json')
 
@@ -136,108 +135,38 @@ class Lexique383:
 
     def __init__(self, lexique_path: str = _RESOURCE_PATH_csv, parser_type: str = 'csv') -> None:
         self.lexique_path = lexique_path
-        self.conn = sqlite3.connect(':memory:')  # Create an in-memory SQLite database
-        self._initialize_database()
-        self._cache_path = _CACHE_PATH
 
-        if os.path.exists(self._cache_path):
-            try:
-                self.load_cache()
-                return
-            except:
-                # Error loading from cache, fallback to parsing from the text file
-                logger.warning("Error loading from cache. Parsing the lexique file...")
-                pass
-
-        logger.info("Cached Lexique383 not found. Parsing the lexique file...")
-        self._parse_lexique(lexique_path, parser_type)
-        self.save_cache()
-
-    def _initialize_database(self) -> None:
-        """Initialize the in-memory SQLite database and create the lexicon table."""
-        self._conn = sqlite3.connect(":memory:")
-        cursor = self._conn.cursor()
-        cursor.execute('''
-            CREATE TABLE lexicon (
-                ortho TEXT,
-                phon TEXT,
-                lemme TEXT,
-                cgram TEXT,
-                genre TEXT,
-                nombre TEXT,
-                freqlemfilms2 REAL,
-                freqlemlivres REAL,
-                freqfilms2 REAL,
-                freqlivres REAL,
-                infover TEXT,
-                nbhomogr INTEGER,
-                nbhomoph INTEGER,
-                islem INTEGER,
-                nblettres INTEGER,
-                nbphons INTEGER,
-                cvcv TEXT,
-                p_cvcv TEXT,
-                voisorth INTEGER,
-                voisphon INTEGER,
-                puorth INTEGER,
-                puphon INTEGER,
-                syll TEXT,
-                nbsyll INTEGER,
-                cv_cv TEXT,
-                orthrenv TEXT,
-                phonrenv TEXT,
-                orthosyll TEXT,
-                cgramortho TEXT,
-                deflem REAL,
-                defobs INTEGER,
-                old20 REAL,
-                pld20 REAL,
-                morphoder TEXT,
-                nbmorph INTEGER
-            )
-        ''')
-        cursor.execute('''
-            CREATE INDEX idx_ortho ON lexicon (ortho)
-        ''')
-        cursor.close()
-
-    def _insert_entry(self, row_fields: ConvertedRow) -> None:
-        """Insert a row into the lexicon table."""
-        cursor = self._conn.cursor()
-        cursor.execute('''
-            INSERT INTO lexicon VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', row_fields)
-        cursor.close()
+        try:
+            self.load_cache()
+        except FileNotFoundError:
+            logger.info("Cached Lexique383 not found. Parsing the lexique file...")
+            self._parse_lexique(lexique_path, parser_type)
+            self.save_cache()
 
     def load_cache(self) -> None:
-        """Load cached Lexique383 from the on-disk SQLite database."""
-        disk_conn = sqlite3.connect(self._cache_path)
-        memory_conn = self._conn  # Use the existing in-memory connection
-
-        with disk_conn, memory_conn:
-            disk_conn.backup(memory_conn)
-            memory_conn.commit()
-
-        disk_conn.close()
+        """Load cached Lexique383 from disk."""
+        try:
+            with open(_CACHE_PATH, "rb") as cache_file:
+                cached_lexique = pickle.load(cache_file)
+                self.lexique.update(cached_lexique["lexique"])
+                self.lemmes.update(cached_lexique["lemmes"])
+                self.anagrams.update(cached_lexique["anagrams"])
+                self.value_errors.extend(cached_lexique["value_errors"])
+                self.length_errors.extend(cached_lexique["length_errors"])
+        except FileNotFoundError:
+            raise
 
     def save_cache(self) -> None:
-        """Save Lexique383 to the on-disk SQLite database."""
-        disk_conn = sqlite3.connect(self._cache_path)
-        memory_conn = self._conn  # Use the existing in-memory connection
-
-        with memory_conn, disk_conn:
-            memory_conn.backup(disk_conn)
-            disk_conn.commit()
-
-        disk_conn.close()
-
-    def _convert_to_lexitem(self, row_fields: Tuple) -> LexItem: # type: ignore[type-arg]
-        """Convert a row from the SQLite database to a LexItem object."""
-        return LexItem(*row_fields)
-
-    def _convert_from_lexitem(self, lexitem: LexItem) -> ConvertedRow:
-        """Convert a LexItem object to a tuple for insertion into the SQLite database."""
-        return tuple(getattr(lexitem, attr) for attr in LEXIQUE383_FIELD_NAMES) # type: ignore[return-value]
+        """Save Lexique383 to cache on disk."""
+        cached_lexique = {
+            "lexique": self.lexique,
+            "lemmes": self.lemmes,
+            "anagrams": self.anagrams,
+            "value_errors": self.value_errors,
+            "length_errors": self.length_errors
+        }
+        with open(_CACHE_PATH, "wb") as cache_file:
+            pickle.dump(cached_lexique, cache_file)
 
     def __repr__(self) -> str:
         return '{0}.{1}'.format(__name__, self.__class__.__name__)
@@ -290,7 +219,8 @@ class Lexique383:
 
     def _create_db(self, lexicon: Generator[list, Any, None]) -> None:  #type: ignore[type-arg]
         """
-        | Creates the lexicon table in the in-memory database and populates it with the entries.
+        | Creates 2 hash tables populated with the entries in lexique if it does not exist yet.
+        | One hash table holds the LexItems, the other holds the same data but grouped by lemmma to give access to all lexical forms of a word.
 
         :param lexicon: Iterable.
             Iterable containing the lexique383 entries.
@@ -299,20 +229,22 @@ class Lexique383:
         lemmes = defaultdict(list)
         anagrams = defaultdict(list)
 
-        # Create the lexicon table
-        self._initialize_database()
-
         for row in lexicon:
             try:
                 converted_row_fields = self._convert_entries(row)
             except ValueError:
                 continue
-            self._insert_entry(converted_row_fields)  # Insert the entry into the in-memory database
-
             lexical_entry = LexItem(*converted_row_fields) # type: ignore[arg-type]
             lemmes[lexical_entry.lemme].append(lexical_entry)
             sorted_form = ''.join(sorted(lexical_entry.ortho))
             anagrams[sorted_form].append(lexical_entry)
+            if converted_row_fields[0] in self.lexique and not isinstance(self.lexique[converted_row_fields[0]], list):
+                self.lexique[converted_row_fields[0]] = [self.lexique[converted_row_fields[0]]]
+                self.lexique[converted_row_fields[0]].append(lexical_entry)
+            elif converted_row_fields[0] in self.lexique and isinstance(self.lexique[converted_row_fields[0]], list):
+                self.lexique[converted_row_fields[0]].append(lexical_entry)
+            else:
+                self.lexique[converted_row_fields[0]] = lexical_entry
 
         self.lemmes = lemmes
         self.anagrams = anagrams
