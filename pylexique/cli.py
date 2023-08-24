@@ -26,6 +26,9 @@ def convert_to_dict(obj: LexItem) -> Dict[str, Union[str, float, int, bool]]:
 def _display_results(console: Console, results: DefaultDict[str, List[Union[LexItem, List[LexItem]]]], output: str) -> None:
     """Display lexical results using rich tables."""
     for word, elements in results.items():
+        if not elements:
+            console.print(f"The word {word} was not found in Lexique383.")
+            continue
         table = Table(title=f"Lexical Information for '{word}'", show_header=True)
         table.add_column("Attribute", style="bold")
 
@@ -122,10 +125,13 @@ def _get_results(lexique: Lexique383, words: Sequence[str], all_forms: bool) -> 
     """Get lexical results for the provided words."""
     results: defaultdict[str, List[Union[LexItem, List[LexItem]]]] = DefaultDict(list)
     for word in words:
-        if all_forms:
-            results[word].append(lexique.get_all_forms(word))
+        if word in lexique.lexique:
+            if all_forms:
+                results[word].append(lexique.get_all_forms(word))
+            else:
+                results[word].append(lexique.lexique[word])
         else:
-            results[word].append(lexique.lexique[word])
+            results[word] = False
     return results
 
 if __name__ == "__main__":
