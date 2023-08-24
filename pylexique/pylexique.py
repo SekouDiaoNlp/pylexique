@@ -26,7 +26,7 @@ _RESOURCE_PACKAGE = __name__
 
 HOME_PATH = '/'.join(('Lexique', ''))
 _RESOURCE_PATH_csv = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
-_CACHE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.pkl')
+_CACHE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.db')
 _VALUE_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/value_errors.json')
 _LENGTH_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/length_errors.json')
 
@@ -212,31 +212,23 @@ class Lexique383:
     def load_cache(self) -> None:
         """Load cached Lexique383 from the on-disk SQLite database."""
         disk_conn = sqlite3.connect(self._cache_path)
-        cursor = disk_conn.cursor()
-        cursor.execute("ATTACH DATABASE ':memory:' AS inmemory")
-        cursor.execute("CREATE TABLE inmemory.lexicon AS SELECT * FROM main.lexicon")
-        cursor.execute("DETACH DATABASE inmemory")
-        cursor.execute("SELECT * FROM lexicon")
-        for row in cursor.fetchall():
-            converted_row_fields = tuple(row)
-            ortho = converted_row_fields[0]
-            self.lexique[ortho] = self._convert_to_lexitem(converted_row_fields)
-            lemme = converted_row_fields[2]
-            self.lemmes[lemme].append(self._convert_to_lexitem(converted_row_fields))
-            sorted_form = ''.join(sorted(ortho))
-            self.anagrams[sorted_form].append(self._convert_to_lexitem(converted_row_fields))
-        cursor.close()
+        memory_conn = self._conn  # Use the existing in-memory connection
+
+        with disk_conn, memory_conn:
+            disk_conn.backup(memory_conn)
+            memory_conn.commit()
+
         disk_conn.close()
 
     def save_cache(self) -> None:
         """Save Lexique383 to the on-disk SQLite database."""
         disk_conn = sqlite3.connect(self._cache_path)
-        cursor = disk_conn.cursor()
-        cursor.execute("ATTACH DATABASE ':memory:' AS inmemory")
-        cursor.execute("CREATE TABLE inmemory.lexicon AS SELECT * FROM lexicon")
-        cursor.execute("DETACH DATABASE inmemory")
-        disk_conn.commit()
-        cursor.close()
+        memory_conn = self._conn  # Use the existing in-memory connection
+
+        with memory_conn, disk_conn:
+            memory_conn.backup(disk_conn)
+            disk_conn.commit()
+
         disk_conn.close()
 
     def _convert_to_lexitem(self, row_fields: Tuple) -> LexItem:
