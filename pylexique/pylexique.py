@@ -234,7 +234,7 @@ class Lexique383:
                 converted_row_fields = self._convert_entries(row)
             except ValueError:
                 continue
-            lexical_entry = LexItem(*converted_row_fields)
+            lexical_entry = LexItem(*converted_row_fields) # type: ignore[arg-type]
             lemmes[lexical_entry.lemme].append(lexical_entry)
             sorted_form = ''.join(sorted(lexical_entry.ortho))
             anagrams[sorted_form].append(lexical_entry)
