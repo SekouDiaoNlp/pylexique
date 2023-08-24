@@ -231,13 +231,13 @@ class Lexique383:
 
         disk_conn.close()
 
-    def _convert_to_lexitem(self, row_fields: Tuple) -> LexItem:
+    def _convert_to_lexitem(self, row_fields: Tuple) -> LexItem: # type: ignore[type-arg]
         """Convert a row from the SQLite database to a LexItem object."""
         return LexItem(*row_fields)
 
     def _convert_from_lexitem(self, lexitem: LexItem) -> ConvertedRow:
         """Convert a LexItem object to a tuple for insertion into the SQLite database."""
-        return tuple(getattr(lexitem, attr) for attr in LEXIQUE383_FIELD_NAMES)
+        return tuple(getattr(lexitem, attr) for attr in LEXIQUE383_FIELD_NAMES) # type: ignore[return-value]
 
     def __repr__(self) -> str:
         return '{0}.{1}'.format(__name__, self.__class__.__name__)
