@@ -131,7 +131,7 @@ def _get_results(lexique: Lexique383, words: Sequence[str], all_forms: bool) -> 
             else:
                 results[word].append(lexique.lexique[word])
         else:
-            results[word] = False
+            results[word] = []
     return results
 
 if __name__ == "__main__":
