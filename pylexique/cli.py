@@ -125,11 +125,12 @@ def _get_results(lexique: Lexique383, words: Sequence[str], all_forms: bool) -> 
     """Get lexical results for the provided words."""
     results: defaultdict[str, List[Union[LexItem, List[LexItem]]]] = DefaultDict(list)
     for word in words:
-        if word in lexique.lexique:
+        lex_items = lexique.get_lex(word).get(word, [])
+        if lex_items:
             if all_forms:
                 results[word].append(lexique.get_all_forms(word))
             else:
-                results[word].append(lexique.lexique[word])
+                results[word].append(lex_items)
         else:
             results[word] = []
     return results

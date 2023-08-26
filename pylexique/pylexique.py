@@ -4,7 +4,7 @@ from collections import OrderedDict, defaultdict
 from collections.abc import Sequence
 from enum import Enum
 import pkg_resources
-import pickle
+import sqlite3
 import json
 from math import isnan
 # import faster_than_csv as csv
@@ -24,8 +24,7 @@ except (ModuleNotFoundError, ImportError):
 _RESOURCE_PACKAGE = __name__
 
 HOME_PATH = '/'.join(('Lexique', ''))
-_RESOURCE_PATH_csv = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.txt')
-_CACHE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.pkl')
+_RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.db')
 _VALUE_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/value_errors.json')
 _LENGTH_ERRORS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'errors/length_errors.json')
 
@@ -126,282 +125,75 @@ class Lexique383:
     :cvar lemmes: Dictionary containing all the LexicalItem objects indexed by lemma.
     :cvar anagrams: Dictionary containing all the LexicalItem objects indexed by anagram form.
     """
-
-    lexique: Dict[str, Any] = OrderedDict()
-    value_errors: List[Any] = []
-    length_errors: List[Any] = []
-    lemmes: Dict[str, List[LexItem]] = defaultdict(list)
-    anagrams: Dict[str, List[LexItem]] = defaultdict(list)
-
-    def __init__(self, lexique_path: str = _RESOURCE_PATH_csv, parser_type: str = 'csv') -> None:
+    def __init__(self, lexique_path: str = _RESOURCE_PATH) -> None:
         self.lexique_path = lexique_path
-
-        try:
-            self.load_cache()
-        except FileNotFoundError:
-            logger.info("Cached Lexique383 not found. Parsing the lexique file...")
-            self._parse_lexique(lexique_path, parser_type)
-            self.save_cache()
-
-    def load_cache(self) -> None:
-        """Load cached Lexique383 from disk."""
-        try:
-            with open(_CACHE_PATH, "rb") as cache_file:
-                cached_lexique = pickle.load(cache_file)
-                self.lexique.update(cached_lexique["lexique"])
-                self.lemmes.update(cached_lexique["lemmes"])
-                self.anagrams.update(cached_lexique["anagrams"])
-                self.value_errors.extend(cached_lexique["value_errors"])
-                self.length_errors.extend(cached_lexique["length_errors"])
-        except FileNotFoundError:
-            raise
-
-    def save_cache(self) -> None:
-        """Save Lexique383 to cache on disk."""
-        cached_lexique = {
-            "lexique": self.lexique,
-            "lemmes": self.lemmes,
-            "anagrams": self.anagrams,
-            "value_errors": self.value_errors,
-            "length_errors": self.length_errors
-        }
-        with open(_CACHE_PATH, "wb") as cache_file:
-            pickle.dump(cached_lexique, cache_file)
+        self.db_conn = sqlite3.connect(lexique_path)
+        self.db_cursor = self.db_conn.cursor()
 
     def __repr__(self) -> str:
         return '{0}.{1}'.format(__name__, self.__class__.__name__)
 
-    def __len__(self) -> int:
-        return len(self.lexique)
-
-    @staticmethod
-    def _parse_csv(lexique_path: str) -> Generator[list, Any, None]:    #type: ignore[type-arg]
-        """
-
-        :param lexique_path: string.
-            Path to the lexique file.
-        :return: generator of rows:
-            Content of the Lexique38x database.
-        """
-        with open(lexique_path, 'r', encoding='iso-8859-1') as csv_file:
-            raw_content = csv_file.readlines()
-            content = (row.strip().split('\t') for row in raw_content[1:])
-            return content
-
-    def _parse_lexique(self, lexique_path: str, parser_type: str) -> None:
-        """
-        | Parses the given lexique file and creates 2 hash tables to store the data.
-
-        :param lexique_path: string.
-            Path to the lexique file.
-        :param parser_type: string.
-            Can be either 'csv', 'pandas_csv'.
-        :return:
-        """
-        try:
-            if parser_type == 'pandas_csv':
-                df = pd.read_csv(lexique_path, delimiter='\t')
-                content = (list(row) for row in df.values)
-            elif parser_type == 'csv':
-                content = self._parse_csv(lexique_path)
-            else:
-                content = self._parse_csv(lexique_path)
-        except UnicodeDecodeError:
-            logger.warn(f"there was an issue while parsing the file {lexique_path}."
-                        f" Trying again with built-in csv parser")
-            content = self._parse_csv(lexique_path)
-        self._create_db(content)
-        if self.value_errors:
-            self._save_errors(self.value_errors, _VALUE_ERRORS_PATH)
-        if self.length_errors:
-            self._save_errors(self.length_errors, _LENGTH_ERRORS_PATH)
-        return
-
-    def _create_db(self, lexicon: Generator[list, Any, None]) -> None:  #type: ignore[type-arg]
-        """
-        | Creates 2 hash tables populated with the entries in lexique if it does not exist yet.
-        | One hash table holds the LexItems, the other holds the same data but grouped by lemmma to give access to all lexical forms of a word.
-
-        :param lexicon: Iterable.
-            Iterable containing the lexique383 entries.
-        :return:
-        """
-        lemmes = defaultdict(list)
-        anagrams = defaultdict(list)
-
-        for row in lexicon:
-            try:
-                converted_row_fields = self._convert_entries(row)
-            except ValueError:
-                continue
-            lexical_entry = LexItem(*converted_row_fields) # type: ignore[arg-type]
-            lemmes[lexical_entry.lemme].append(lexical_entry)
-            sorted_form = ''.join(sorted(lexical_entry.ortho))
-            anagrams[sorted_form].append(lexical_entry)
-            if converted_row_fields[0] in self.lexique and not isinstance(self.lexique[converted_row_fields[0]], list):
-                self.lexique[converted_row_fields[0]] = [self.lexique[converted_row_fields[0]]]
-                self.lexique[converted_row_fields[0]].append(lexical_entry)
-            elif converted_row_fields[0] in self.lexique and isinstance(self.lexique[converted_row_fields[0]], list):
-                self.lexique[converted_row_fields[0]].append(lexical_entry)
-            else:
-                self.lexique[converted_row_fields[0]] = lexical_entry
-
-        self.lemmes = lemmes
-        self.anagrams = anagrams
-
-    def _convert_entries(self, row_fields: Union[List[str], List[Union[str, float, int, bool]]]) -> ConvertedRow:
-        """
-        | Convert entries from `strings` to `int`, `bool` or `float` and generates
-        | a new list with typed entries.
-
-        :param row_fields:
-            List of column entries representing a row.
-        :return: ConvertedRow:
-            List of typed column entries representing a typed row.
-        """
-        errors = defaultdict(list)
-        converted_row_fields = []
-        for attr, value in zip(LEXIQUE383_FIELD_NAMES, row_fields):
-            if isinstance(value, float) and isnan(value):
-                value = ''
-            if attr in {'freqlemfilms2', 'freqlemlivres', 'freqfilms2', 'freqlivres', 'old20', 'pld20'}:
-                if not isinstance(value, float):
-                    if (value != '' or value != ' ') and ',' in value:
-                        value = value.replace(',', '.')
-                        value = float(value)
-            if attr == 'islem':
-                if isinstance(value, str):
-                    value = value.strip()
-                if value != '' and value not in ('0', '1', 0, 1):
-                    value = 0
-                try:
-                    value = bool(int(value))
-                except ValueError:
-                    errors[row_fields[0]].append({attr: value})
-                    value = value
-                    self.value_errors.append(errors)
-            if attr in {'nbhomogr', 'nbhomoph', 'nblettres', 'nbphons',
-                        'voisorth', 'voisphon', 'puorth', 'puphon', 'nbsyll'}:
-                if value != '' or value != ' ':
-                    try:
-                        value = int(value)
-                    except ValueError:
-                        errors[row_fields[0]].append({attr: value})
-                        value = value
-                        self.value_errors.append(errors)
-            converted_row_fields.append(value)
-        if len(converted_row_fields) != 35:
-            self.length_errors.append((converted_row_fields, row_fields))
-            raise ValueError
-        return converted_row_fields  # type: ignore[return-value]
+    def __del__(self):
+        self.db_conn.close()
 
     def get_lex(self, words: Union[Tuple[str, ...], str]) -> Dict[str, Union[LexItem, List[LexItem]]]:
-        """
-        Recovers the lexical entries for the words in the sequence
+        results = {}
 
-        :param words:
-            A string or a tuple of multiple strings for getting the LexItems for multiple words.
-        :return:
-            Dictionary of LexItems.
-        :raises: TypeError.
-        """
-        results = OrderedDict()
         if isinstance(words, str):
-            try:
-                results[words] = self.lexique[words.lower()]
-            except AttributeError:
-                logger.warning('the word {} is not in Lexique383'.format(words))
+            results[words] = self._fetch_lex_items_by_ortho(words.lower())
         elif isinstance(words, Sequence):
             for word in words:
                 if isinstance(word, str):
-                    try:
-                        results[word] = self.lexique[word.lower()]
-                    except AttributeError:
-                        logger.warning('The word {} is not in Lexique383\n'.format(word))
-                        continue
+                    results[word] = self._fetch_lex_items_by_ortho(word.lower())
                 else:
                     logger.warning('{} is not a valid string'.format(word))
                     raise TypeError
         else:
             raise TypeError
+
         return results
 
     def get_all_forms(self, word: str) -> List[LexItem]:
-        """
-        Gets all lexical forms of a given word.
-
-        :param word:
-            String.
-        :return:
-            List of LexItem objects sharing the same root lemma.
-        :raises: ValueError.
-        :raises: TypeError.
-        """
-        try:
-            lex_entry = self.lexique[word.lower()]
-        except ValueError as e:
-            logger.warning('The word {} is not in Lexique383\n'.format(word))
-            raise ValueError from e
-        if isinstance(lex_entry, LexItem):
-            lemmes = self.lemmes[lex_entry.lemme]
-        elif isinstance(lex_entry, OrderedDict):
-            lemmes = self.lemmes[lex_entry['lemme']]
-        elif isinstance(lex_entry, list):
-            distinct = {elmt.lemme for elmt in lex_entry}
-            lemmes = []
-            for lemme in distinct:
-                lemmes.extend(self.lemmes[lemme])
-        else:
-            raise TypeError
-        return lemmes
+        return self._fetch_lex_items_by_lemme(word.lower())
 
     def get_anagrams(self, word: str) -> List[LexItem]:
-        """
-        Gets all lexical forms of a given word.
+        return self._fetch_anagrams(word.lower())
 
-        :param word:
-            String.
-        :return:
-            List of LexItem objects which are anagrams of the given word.
-        :raises: ValueError.
-        :raises: TypeError.
-        """
-        try:
-            lex_entry = self.lexique[word.lower()]
-        except ValueError as e:
-            logger.warning('The word {} is not in Lexique383\n'.format(word))
-            raise ValueError from e
-        if isinstance(lex_entry, LexItem):
-            sorted_form = ''.join(sorted(lex_entry.ortho))
-            anagrams = self.anagrams[sorted_form]
-        elif isinstance(lex_entry, OrderedDict):
-            sorted_form = ''.join(sorted(lex_entry['ortho']))
-            anagrams = self.anagrams[sorted_form]
-        elif isinstance(lex_entry, list):
-            sorted_form = ''.join(sorted(lex_entry[0].ortho))
-            anagrams = self.anagrams[sorted_form]
+    def _fetch_lex_items_by_ortho(self, ortho: str) -> Union[LexItem, List[LexItem]]:
+        query = "SELECT * FROM lexique WHERE ortho = ?"
+        self.db_cursor.execute(query, (ortho,))
+        rows = self.db_cursor.fetchall()
+        return self._create_lex_items(rows)
+
+    def _fetch_lex_items_by_lemme(self, lemme: str) -> List[LexItem]:
+        lemmes_query = "SELECT lemme FROM lexique WHERE ortho = ?"
+        self.db_cursor.execute(lemmes_query, (lemme,))
+        lemmes = self.db_cursor.fetchall()
+    
+        if not lemmes:
+            return []
+    
+        lemmes = [row[0] for row in lemmes]
+    
+        query = "SELECT * FROM lexique WHERE lemme IN ({})".format(', '.join('?' for _ in lemmes))
+        self.db_cursor.execute(query, lemmes)
+        rows = self.db_cursor.fetchall()
+        return self._create_lex_items(rows)
+
+    def _fetch_anagrams(self, ortho: str) -> List[LexItem]:
+        sorted_ortho = ''.join(sorted(ortho))
+        query = "SELECT * FROM lexique WHERE sorted_ortho = ?"
+        self.db_cursor.execute(query, (sorted_ortho, ))
+        rows = self.db_cursor.fetchall()
+        return self._create_lex_items(rows)
+
+    def _create_lex_items(self, rows) -> Union[LexItem, List[LexItem]]:
+        if len(rows) == 0:
+            return []
+        elif len(rows) == 1:
+            return LexItem(*rows[0][:-1])
         else:
-            raise TypeError
-        final_anagrams = [lex_item for lex_item in anagrams if lex_item.ortho != word.lower()]
-        return final_anagrams
-
-    @staticmethod
-    def _save_errors(errors: Union[
-        List[Tuple[List[Union[str, float, int, bool]], List[str]]], List[DefaultDict[str, List[Dict[str, str]]]]],
-                     errors_path: str) -> None:
-        """
-        Saves the mismatched key/values in Lexique383 based on type coercion.
-
-        :param errors:
-            List of errors encountered while parsing Lexique38x
-        :param errors_path:
-            Path to save the errors.
-        :return:
-
-        """
-        with open(errors_path, 'w', encoding='utf-8') as json_file:
-            json.dump(errors, json_file, indent=4)
-        return
+            return [LexItem(*row[:-1]) for row in rows]
 
 
 if __name__ == "__main__":
