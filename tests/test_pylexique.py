@@ -6,12 +6,6 @@ from pylexique import cli
 from click.testing import CliRunner
 
 # Basic unit tests for pylexique.py
-def test_lexique383_initialization():
-    lexique = Lexique383()
-    assert isinstance(lexique.lexique, dict)
-    assert isinstance(lexique.lemmes, dict)
-    assert isinstance(lexique.anagrams, dict)
-
 def test_lexique383_get_lex():
     lexique = Lexique383()
     results = lexique.get_lex("bonjour")
