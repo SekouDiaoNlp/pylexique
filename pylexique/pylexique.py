@@ -131,7 +131,7 @@ class Lexique383:
     def __repr__(self) -> str:
         return '{0}.{1}'.format(__name__, self.__class__.__name__)
 
-    def __del__(self):
+    def __del__(self) -> None:
         self.db_conn.close()
 
     def get_lex(self, words: Union[Tuple[str, ...], str]) -> Dict[str, Union[LexItem, List[LexItem]]]:
@@ -151,10 +151,10 @@ class Lexique383:
 
         return results
 
-    def get_all_forms(self, word: str) -> List[LexItem]:
+    def get_all_forms(self, word: str) -> Union[LexItem, List[LexItem]]:
         return self._fetch_lex_items_by_lemme(word.lower())
 
-    def get_anagrams(self, word: str) -> List[LexItem]:
+    def get_anagrams(self, word: str) -> Union[LexItem, List[LexItem]]:
         return self._fetch_anagrams(word.lower())
 
     def _fetch_lex_items_by_ortho(self, ortho: str) -> Union[LexItem, List[LexItem]]:
@@ -163,7 +163,7 @@ class Lexique383:
         rows = self.db_cursor.fetchall()
         return self._create_lex_items(rows)
 
-    def _fetch_lex_items_by_lemme(self, lemme: str) -> List[LexItem]:
+    def _fetch_lex_items_by_lemme(self, lemme: str) -> Union[LexItem, List[LexItem]]:
         lemmes_query = "SELECT lemme FROM lexique WHERE ortho = ?"
         self.db_cursor.execute(lemmes_query, (lemme,))
         lemmes = self.db_cursor.fetchall()
@@ -178,14 +178,14 @@ class Lexique383:
         rows = self.db_cursor.fetchall()
         return self._create_lex_items(rows)
 
-    def _fetch_anagrams(self, ortho: str) -> List[LexItem]:
+    def _fetch_anagrams(self, ortho: str) -> Union[LexItem, List[LexItem]]:
         sorted_ortho = ''.join(sorted(ortho))
         query = "SELECT * FROM lexique WHERE sorted_ortho = ?"
         self.db_cursor.execute(query, (sorted_ortho, ))
         rows = self.db_cursor.fetchall()
         return self._create_lex_items(rows)
 
-    def _create_lex_items(self, rows) -> Union[LexItem, List[LexItem]]:
+    def _create_lex_items(self, rows: List[Tuple]) -> Union[LexItem, List[LexItem]]: # type: ignore[type-arg]
         if len(rows) == 0:
             return []
         elif len(rows) == 1:
