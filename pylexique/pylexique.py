@@ -9,8 +9,6 @@ import json
 from math import isnan
 # import faster_than_csv as csv
 import csv
-from csv import reader
-import pandas as pd
 from dataclasses import dataclass
 from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Generator, Any, Iterator
 
