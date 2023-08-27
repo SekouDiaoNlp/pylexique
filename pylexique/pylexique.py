@@ -8,7 +8,7 @@ from sqlalchemy import create_engine, Column, Integer, Float, String, Enum as SA
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import class_mapper
-from typing import DefaultDict, Dict, List, Optional, Tuple, Union
+from typing import DefaultDict, Dict, List, Optional, Tuple, Union, Sequence
 
 __all__ = ['Lexique383', 'LexItem', 'LexEntryTypes']
 
@@ -28,7 +28,7 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'orthrenv', 'phonrenv', 'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20',
                           'morphoder', 'nbmorph', 'sorted_ortho']
 
-Base = declarative_base()
+Base = declarative_base() # type: ignore[misc]
 
 class LexEntryTypes(Base):
     """
@@ -107,7 +107,7 @@ class LexItem(LexEntryTypes):
         return result
     
     @classmethod
-    def from_orm(cls, row) -> 'LexItem':
+    def from_orm(cls, row: LexEntryTypes) -> 'LexItem':
         """
         Create a LexItem instance from an ORM row.
         
@@ -136,7 +136,7 @@ class Lexique383:
         self.engine = create_engine(f'sqlite:///{lexique_path}')
         self.Session = sessionmaker(bind=self.engine)
 
-    def __del__(self):
+    def __del__(self) -> None:
         self.engine.dispose()
 
     def get_lex(self, words: Union[Tuple[str, ...], str]) -> Dict[str, Union[LexItem, List[LexItem]]]:
@@ -234,7 +234,7 @@ class Lexique383:
             rows = session.query(LexEntryTypes).filter_by(sorted_ortho=sorted_ortho).all()
         return self._create_lex_items(rows)
 
-    def _create_lex_items(self, rows) -> Union[LexItem, List[LexItem]]:
+    def _create_lex_items(self, rows: List[LexEntryTypes]) -> Union[LexItem, List[LexItem]]:
         """
         Create LexItem instances from rows.
         
