@@ -122,7 +122,7 @@ def _run_batch_mode(lexique: Lexique383, words: Sequence[str], all_forms: bool, 
 
 def _get_results(lexique: Lexique383, words: Sequence[str], all_forms: bool) -> DefaultDict[str, List[Union[LexItem, List[LexItem]]]]:
     """Get lexical results for the provided words."""
-    results: defaultdict[str, List[Union[LexItem, List[LexItem]]]] = DefaultDict(list)
+    results: DefaultDict[str, List[Union[LexItem, List[LexItem]]]] = DefaultDict(list)
     for word in words:
         lex_items = lexique.get_lex(word).get(word, [])
         if lex_items:
