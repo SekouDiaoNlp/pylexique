@@ -57,16 +57,16 @@ def _display_results(console: Console, results: DefaultDict[str, List[Union[LexI
             json.dump(results, file, indent=4, ensure_ascii=False, default=convert_to_dict)
             console.print(f"The Lexical Items have been successfully saved to {output} by pylexique.")
 
-@click.command(context_settings=dict(help_option_names=["-h", "--help"]))
-@click.argument('words', nargs=-1)
-@click.option('-a', '--all_forms',
+@click.command(context_settings=dict(help_option_names=["-h", "--help"])) #type: ignore
+@click.argument('words', nargs=-1) #type: ignore
+@click.option('-a', '--all_forms', #type: ignore
               is_flag=True,
               help="Gets all lexical forms of a given word. Only takes 1 word as an argument.")
-@click.option('-o', '--output',
+@click.option('-o', '--output', #type: ignore
               default=None,
               help="Path of the json filename for storing the lexical entries.",
               type=click.STRING)
-@click.option('-i', '--interactive', is_flag=True, help="Enter interactive mode to input words and options interactively.")
+@click.option('-i', '--interactive', is_flag=True, help="Enter interactive mode to input words and options interactively.") #type: ignore
 def main(words: Sequence[str], all_forms: bool, output: str, interactive: bool) -> None:
     """Pylexique is a Python wrapper around Lexique83.
     It allows to extract lexical information from more than 140 000 French words in an Object Oriented way.
