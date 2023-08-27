@@ -28,9 +28,9 @@ LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 
                           'orthrenv', 'phonrenv', 'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20',
                           'morphoder', 'nbmorph', 'sorted_ortho']
 
-Base = declarative_base() # type: ignore[misc]
+Base = declarative_base()
 
-class LexEntryTypes(Base):
+class LexEntryTypes(Base): # type: ignore[valid-type]
     """
     SQLAlchemy ORM class representing the 'lexique' table with 'id' column excluded from queries.
     """
