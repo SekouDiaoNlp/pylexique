@@ -20,7 +20,7 @@ except (ModuleNotFoundError, ImportError):
 _RESOURCE_PACKAGE = __name__
 
 HOME_PATH = '/'.join(('Lexique', ''))
-RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383.db')
+RESOURCE_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'Lexique383/Lexique383_id.db')
 
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
                           'freqfilms2',
@@ -45,8 +45,11 @@ class Nombre(Enum):
 
 class LexEntryTypes(Base):
     __tablename__ = 'lexique'
-    
-    id = Column(Integer, primary_key=True)
+    mapper_args__ = {
+        "exclude_properties": [id],  # Exclude id column from queries
+    }
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
     ortho = Column(String)
     phon = Column(String)
     lemme = Column(String)
