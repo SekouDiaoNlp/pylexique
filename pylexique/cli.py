@@ -11,13 +11,12 @@ from pylexique import Lexique383, LexItem
 from collections import defaultdict
 from typing import Sequence, Dict, Union, List, DefaultDict
 
-
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
-                          'freqfilms2', 'freqlivres', 'infover', 'nbhomogr', 'nbhomoph', 'islem', 'nblettres',
-                          'nbphons', 'cvcv', 'p_cvcv', 'voisorth', 'voisphon', 'puorth', 'puphon', 'syll', 'nbsyll',
-                          'cv_cv', 'orthrenv', 'phonrenv', 'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20',
-                          'pld20', 'morphoder', 'nbmorph']
-
+                          'freqfilms2',
+                          'freqlivres', 'infover', 'nbhomogr', 'nbhomoph', 'islem', 'nblettres', 'nbphons', 'cvcv',
+                          'p_cvcv',
+                          'voisorth', 'voisphon', 'puorth', 'puphon', 'syll', 'nbsyll', 'cv_cv', 'orthrenv', 'phonrenv',
+                          'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20', 'morphoder', 'nbmorph', 'sorted_ortho']
 def convert_to_dict(obj: LexItem) -> Dict[str, Union[str, float, int, bool]]:
     if isinstance(obj, LexItem):
         return obj.to_dict()
