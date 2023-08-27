@@ -35,14 +35,6 @@ ConvertedRow = Tuple[str, str, str, str, str, str, float, float, float, float, s
 
 Base = declarative_base()
 
-class Genre(Enum):
-    MASCULIN = 'm'
-    FEMININ = 'f'
-
-class Nombre(Enum):
-    SINGULIER = 's'
-    PLURIEL = 'p'
-
 class LexEntryTypes(Base):
     __tablename__ = 'lexique'
     mapper_args__ = {
@@ -54,8 +46,8 @@ class LexEntryTypes(Base):
     phon = Column(String)
     lemme = Column(String)
     cgram = Column(String)
-    genre = Column(SAEnum(Genre))
-    nombre = Column(SAEnum(Nombre))
+    genre = Column(String)
+    nombre = Column(String)
     freqlemfilms2 = Column(Float)
     freqlemlivres = Column(Float)
     freqfilms2 = Column(Float)
