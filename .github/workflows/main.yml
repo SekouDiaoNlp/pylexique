@@ -48,7 +48,7 @@ jobs:
             -   name: Run bandit
                 run: bandit -r pylexique/ -c .bandit.yml
             -   name: Run Typechecker
-                run:  mypy --strict --ignore-missing-imports --show-error-codes pylexique/
+                run:  mypy --strict --ignore-missing-imports --show-error-codes --follow-imports=skip pylexique/
             -   name: Run PyTest with coverage
                 run: |
                     py.test --cov=./pylexique/

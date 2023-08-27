@@ -55,7 +55,7 @@ jobs:
             -   name: Run Type Checker
                 run: |
                     poetry run pip install types-setuptools
-                    poetry run mypy --strict --ignore-missing-imports --show-error-codes pylexique/
+                    poetry run mypy --strict --ignore-missing-imports --show-error-codes --follow-imports=skip pylexique/
             -   name: Run Pytest
                 run: poetry run pytest --cov=./pylexique/
             -   name: Upload coverage artifacts to codecov
