@@ -12,11 +12,10 @@ from collections import defaultdict
 from typing import Sequence, Dict, Union, List, DefaultDict
 
 LEXIQUE383_FIELD_NAMES = ['ortho', 'phon', 'lemme', 'cgram', 'genre', 'nombre', 'freqlemfilms2', 'freqlemlivres',
-                          'freqfilms2',
-                          'freqlivres', 'infover', 'nbhomogr', 'nbhomoph', 'islem', 'nblettres', 'nbphons', 'cvcv',
-                          'p_cvcv',
-                          'voisorth', 'voisphon', 'puorth', 'puphon', 'syll', 'nbsyll', 'cv_cv', 'orthrenv', 'phonrenv',
+                          'freqfilms2', 'freqlivres', 'infover', 'nbhomogr', 'nbhomoph', 'islem', 'nblettres', 'nbphons', 'cvcv',
+                          'p_cvcv', 'voisorth', 'voisphon', 'puorth', 'puphon', 'syll', 'nbsyll', 'cv_cv', 'orthrenv', 'phonrenv',
                           'orthosyll', 'cgramortho', 'deflem', 'defobs', 'old20', 'pld20', 'morphoder', 'nbmorph', 'sorted_ortho']
+
 def convert_to_dict(obj: LexItem) -> Dict[str, Union[str, float, int, bool]]:
     if isinstance(obj, LexItem):
         return obj.to_dict()
@@ -96,19 +95,13 @@ def main(words: Sequence[str], all_forms: bool, output: str, interactive: bool) 
 def _run_interactive_mode(lexique: Lexique383, output: str) -> None:
     """Run the interactive mode for pylexique."""
     console = Console()
-    cached_results: Dict[str, DefaultDict[str, List[Union[LexItem, List[LexItem]]]]] = {}
 
     while True:
         word = click.prompt("Enter a word (or press Ctrl+C to quit):", type=str)
         
         try:
-            if word in cached_results:
-                results = cached_results[word]
-            else:
-                all_forms = click.confirm("Get all forms of the word?")
-                results = _get_results(lexique, [word], all_forms)
-                cached_results[word] = results
-
+            all_forms = click.confirm("Get all forms of the word?")
+            results = _get_results(lexique, [word], all_forms)
             _display_results(console, results, output)
         except KeyboardInterrupt:
             console.print("\nExiting interactive mode.")

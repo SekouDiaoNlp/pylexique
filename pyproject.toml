@@ -39,6 +39,9 @@ joblib = "^1.0.1"
 tqdm = "*"
 rich = "^13.5.2"
 sqlalchemy = "^2.0.20"
+aiohttp = "^3.8.5"
+beautifulsoup4 = "^4.12.2"
+aiosqlite = "^0.19.0"
 
 [tool.poetry.dev-dependencies]
 pip = "^23.2.1"
