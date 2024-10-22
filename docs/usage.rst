@@ -275,7 +275,7 @@ You can get all the anagrams of a given word by using the get_anagrams() method.
 
  .. code-block:: python
 
-        var_3 = lexicon.get_anagrams('abaisser')
+        var_3 = LEXIQUE.get_anagrams('abaisser')
 
         pprint(var_3)
 
